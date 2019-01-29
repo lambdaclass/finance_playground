@@ -75,7 +75,7 @@ class Portfolio:
         total_allocation = self.current_position["cash"] * kelly
         return math.floor(total_allocation / price)
 
-    def create_equity_curve_dataframe(self):
+    def create_equity_curve(self):
         """
         Creates a pandas DataFrame from the all_balances
         list of dictionaries.
