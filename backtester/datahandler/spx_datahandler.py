@@ -5,7 +5,7 @@ from ..event import MarketEvent
 
 
 class SPXDataHandler(DataHandler):
-    """Handler for SPX test data 2008-2018"""
+    """Handler for SPX test data"""
 
     def __init__(self, data_path, events):
         self._data = pd.read_csv(

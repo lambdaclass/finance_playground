@@ -3,14 +3,18 @@
 from queue import Queue
 from .datahandler import SPXDataHandler
 from .strategy import Benchmark
-from .portfolio import Portfolio
+from .portfolio import SimplePortfolio
 
 
-def run(data_path, data_handler=SPXDataHandler, strat=Benchmark):
+def run(data_path,
+        data_handler=SPXDataHandler,
+        port_class=SimplePortfolio,
+        strat_class=Benchmark,
+        **strat_args):
     events = Queue()
-    bars = SPXDataHandler(data_path, events)
-    port = Portfolio(bars, events)
-    strategy = strat(bars, events)
+    bars = data_handler(data_path, events)
+    port = port_class(bars, events)
+    strat = strat_class(bars, events, **strat_args)
 
     while True:
         bars.update_bars()
@@ -22,7 +26,7 @@ def run(data_path, data_handler=SPXDataHandler, strat=Benchmark):
                 break
             event = events.get()
             if event.type == "MARKET":
-                strategy.generate_signals(event)
+                strat.generate_signals(event)
                 port.update_timeindex(event)
             elif event.type == "SIGNAL":
                 port.update_signal(event)
