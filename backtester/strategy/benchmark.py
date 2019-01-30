@@ -13,6 +13,6 @@ class Benchmark(Strategy):
     def generate_signals(self, event):
         if not self._bought:
             buy_signal = SignalEvent(
-                symbol="SPY", direction="BUY", strength=(1.0, 100))
+                symbol="SPX", direction="BUY", strength=(1.0, 100))
             self.events.put(buy_signal)
             self._bought = True
