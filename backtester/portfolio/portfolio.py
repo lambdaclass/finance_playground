@@ -78,7 +78,7 @@ class Portfolio(metaclass=ABCMeta):
             price = current_bar["bid"].values[0]
         return (price, direction)
 
-    def create_equity_curve(self):
+    def create_report(self):
         """Creates a pandas DataFrame from all_balances."""
         curve = pd.DataFrame(self.all_balances)
         curve = curve.transpose()
