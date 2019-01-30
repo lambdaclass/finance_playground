@@ -1,15 +1,7 @@
 import os
+from datetime import date, timedelta
 import pandas as pd
-
-
-def get_spx_data_dir():
-    if "OPTIONS_DATA_PATH" in os.environ:
-        data_dir = os.path.expanduser(os.environ["OPTIONS_DATA_PATH"])
-    else:
-        data_dir = "data"
-        os.mkdir(data_dir)
-
-    return data_dir
+from ..utils import get_data_dir
 
 
 def create_test_data(data_dir):
@@ -29,6 +21,24 @@ def create_test_data(data_dir):
             test_file, mode="a", columns=["underlying_last"], header=False)
 
 
+def create_synthetic_data(data_dir):
+    """Create an synthetic data set with known statistics.
+    Price goes from 1 to 2000.
+    Mean = 1000.5
+    % Price = 1999"""
+
+    synth_file = os.path.join(data_dir, "synthetic_data.csv")
+
+    day = date(1970, 1, 1)
+    with open(synth_file, "w+") as f:
+        f.write("date,price\n")
+        for i in range(1, 2001):
+            line = "{},{}\n".format(day.strftime("%m/%d/%Y"), i)
+            f.write(line)
+            day += timedelta(days=1)
+
+
 if __name__ == "__main__":
-    data_dir = get_spx_data_dir()
+    data_dir = get_data_dir()
     create_test_data(data_dir)
+    create_synthetic_data(data_dir)
