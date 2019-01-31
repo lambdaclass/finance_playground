@@ -16,7 +16,7 @@ class Portfolio(metaclass=ABCMeta):
         self.all_balances = {}
 
     @abstractmethod
-    def _get_allocation(self, strength, price):
+    def _get_allocation(self, signal, price):
         """Calculates symbol allocation"""
         raise NotImplementedError("Portfolio must implement _get_allocation()")
 
@@ -28,11 +28,18 @@ class Portfolio(metaclass=ABCMeta):
         self.current_position = self.all_positions[date]
 
         (price, direction) = self._get_price(signal)
-        qty = self._get_allocation(signal.strength, price)
+        qty = self._get_allocation(signal, price)
         (current_amount, current_open_price) = self.current_position.get(
             signal.symbol, (0, 0))
-        new_open_price = (current_open_price * current_amount +
-                          direction * price * qty) / (current_amount + qty)
+
+        if qty == 0:
+            new_open_price = current_open_price
+        elif current_amount == 0:
+            new_open_price = price
+        else:
+            new_open_price = current_open_price / (
+                1 + qty) + direction * price / (current_amount + 1)
+
         self.current_position[signal.symbol] = (
             current_amount + direction * qty, new_open_price)
         self.current_position["Cash"] -= direction * price * qty
