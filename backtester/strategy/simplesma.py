@@ -16,11 +16,14 @@ class SimpleSMA(Strategy):
     def generate_signals(self, event):
         period_bars = self.data_handler.get_latest_bars(
             self.symbol, N=self.period)
-        is_greater = period_bars["ask"].iloc[-1] >= period_bars["ask"].mean()
-        if is_greater:
+        if period_bars["ask"].count() < self.period:
+            return
+
+        sma = period_bars["ask"].mean()
+        if period_bars["ask"].iloc[-1] >= sma:
             signal = SignalEvent(
-                symbol=self.symbol, direction="BUY", strength=(1.0, 100))
+                symbol=self.symbol, direction="BUY", strength=(1.0, sma))
         else:
             signal = SignalEvent(
-                symbol=self.symbol, direction="SELL", strength=(1.0, 100))
+                symbol=self.symbol, direction="SELL", strength=(1.0, sma))
         self.events.put(signal)

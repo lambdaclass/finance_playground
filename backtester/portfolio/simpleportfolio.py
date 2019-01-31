@@ -16,16 +16,19 @@ class SimplePortfolio(Portfolio):
 
     def _get_allocation(self, signal, price):
         """Allocates all capital to the given signal"""
+        win_pct, sma = signal.strength
         if signal.direction == "SELL":
             amount, open_price = self.current_position.get(
                 signal.symbol, (0, 0))
             if amount > 0:
-                logging.debug("%s - SELL amount: %d",
-                              self.data_handler.current_date, amount)
+                logging.debug("%s - SELL amount: %d - SMA: %f - Spot: %f",
+                              self.data_handler.current_date, amount, sma,
+                              price)
             return amount
         else:
             amount = math.floor(self.current_position["Cash"] / price)
             if amount > 0:
-                logging.debug("%s - BUY amount: %d",
-                              self.data_handler.current_date, amount)
+                logging.debug("%s - BUY amount: %d - SMA: %f - Spot: %f",
+                              self.data_handler.current_date, amount, sma,
+                              price)
             return amount
