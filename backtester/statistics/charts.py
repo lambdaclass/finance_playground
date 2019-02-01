@@ -4,24 +4,52 @@ import altair as alt
 
 
 def returns_chart(report):
-    selection = alt.selection(type="interval", encodings=["x"])
+    # Time interval selector
+    time_interval = alt.selection(type="interval", encodings=["x"])
 
-    chart = alt.Chart().mark_area(point="transparent").encode(
-        alt.X("index:T", scale={"domain": selection.ref()}),
-        y="% Price:Q",
-        tooltip=["% Price:Q"]).properties(
-            width=600, height=200)
+    # Area plot
+    areas = alt.Chart().mark_area(opacity=0.6).encode(
+        x=alt.X(
+            "index:T",
+            axis=alt.Axis(title="Date"),
+            scale={"domain": time_interval.ref()}),
+        y=alt.Y("% Price:Q", axis=alt.Axis(format="%")))
 
-    lower = chart.properties(height=60).add_selection(selection)
+    # Nearest point selector
+    nearest = alt.selection(
+        type="single",
+        nearest=True,
+        on="mouseover",
+        fields=["index"],
+        empty="none")
 
-    return alt.vconcat(chart, lower, data=report.reset_index())
+    points = areas.mark_point().encode(
+        opacity=alt.condition(nearest, alt.value(1), alt.value(0)))
 
-
-def portfolio_composition(report):
-    alt.Chart(report.reset_index()).mark_area(opacity=0.3).encode(
+    # Transparent date selector
+    selectors = alt.Chart().mark_point().encode(
         x="index:T",
-        y=alt.Y("Total Portfolio:Q", stack=None),
-        color="source:N")
+        opacity=alt.value(0),
+    ).add_selection(nearest)
+
+    text = areas.mark_text(
+        align="left", dx=5, dy=-5).encode(
+            text=alt.condition(nearest, "% Price:Q", alt.value(" ")))
+
+    layered = alt.layer(
+        areas,
+        selectors,
+        points,
+        text,
+        width=700,
+        height=350,
+        title="Returns over time")
+
+    lower = areas.properties(width=700, height=70).add_selection(time_interval)
+
+    chart = alt.vconcat(layered, lower, data=report.reset_index())
+
+    return chart
 
 
 def returns_histogram(report):
@@ -40,8 +68,13 @@ def monthly_returns_heatmap(report):
     monthly_returns.columns = ["Date", "Monthly Returns"]
 
     chart = alt.Chart(monthly_returns).mark_rect().encode(
-        alt.X("Date:T", bin=alt.Bin(maxbins=60)),
-        alt.Y("Monthly Returns", bin=alt.Bin(maxbins=40)),
-        alt.Color("Monthly Returns:Q", scale=alt.Scale(scheme="greenblue")))
+        alt.X("year(Date):O", title="Year"),
+        alt.Y("month(Date):O", title="Month"),
+        alt.Color(
+            "mean(Monthly Returns)",
+            title="Return",
+            scale=alt.Scale(scheme="greenblue")),
+        alt.Tooltip("mean(Monthly Returns)",
+                    format=".2f")).properties(title="Average Monthly Returns")
 
     return chart
