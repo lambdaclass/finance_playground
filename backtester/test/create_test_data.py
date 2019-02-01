@@ -1,7 +1,7 @@
 import os
 from datetime import date, timedelta
 import pandas as pd
-from ..utils import get_data_dir
+from backtester.utils import get_data_dir
 
 
 def create_test_data(data_dir):
