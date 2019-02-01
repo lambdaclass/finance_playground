@@ -73,7 +73,7 @@ def monthly_returns_heatmap(report):
         alt.Color(
             "mean(Monthly Returns)",
             title="Return",
-            scale=alt.Scale(scheme="greenblue")),
+            scale=alt.Scale(scheme="redyellowgreen")),
         alt.Tooltip("mean(Monthly Returns)",
                     format=".2f")).properties(title="Average Monthly Returns")
 
