@@ -1,4 +1,3 @@
-from datetime import timedelta
 import pandas as pd
 from .datahandler import DataHandler
 from ..event import MarketEvent
@@ -14,8 +13,7 @@ class HistoricDataHandler(DataHandler):
 
         columns = {"quotedate": "date", "optionroot": "symbol"}
         self._data.rename(columns=columns, inplace=True)
-        self.current_date = self._data["date"].min() - timedelta(days=1)
-        self._end_date = self._data["date"].max()
+        self._data_index = 0
         self.events = events
         self.continue_backtest = True
 
@@ -29,8 +27,9 @@ class HistoricDataHandler(DataHandler):
 
     def update_bars(self):
         """Add new data bar to self.data"""
-        if self.current_date < self._end_date:
-            self.current_date += timedelta(days=1)
+        if self._data_index < len(self._data):
+            self.current_date = self._data["date"][self._data_index]
             self.events.put(MarketEvent())
+            self._data_index += 1
         else:
             self.continue_backtest = False

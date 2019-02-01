@@ -1,4 +1,3 @@
-from datetime import timedelta
 import pandas as pd
 from .datahandler import DataHandler
 from ..event import MarketEvent
@@ -13,7 +12,6 @@ class SPXDataHandler(DataHandler):
 
         self._data.rename(columns={"price": "ask"}, inplace=True)
         self._data["bid"] = self._data["ask"]
-        self.current_date = self._data["date"].min() - timedelta(days=1)
         self._data_index = 0
         self.events = events
         self.continue_backtest = True
