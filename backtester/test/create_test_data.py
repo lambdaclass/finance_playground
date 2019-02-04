@@ -21,6 +21,23 @@ def create_test_data(data_dir):
             test_file, mode="a", columns=["underlying_last"], header=False)
 
 
+def create_full_spx_data(data_dir):
+    """Create test data set with SPX prices between 1990-2018"""
+
+    spx_dir = os.path.join(data_dir, "allspx")
+    full_spx_file = os.path.join(data_dir, "SPX_1990-2018.csv")
+
+    with open(full_spx_file, "w+") as f:
+        f.write("date,price\n")
+
+    for year in range(1990, 2019):
+        filename = "SPX_{}.csv".format(year)
+        year_df = pd.read_csv(os.path.join(spx_dir, filename))
+        grouped = year_df.groupby("quotedate").first()
+        grouped.to_csv(
+            full_spx_file, mode="a", columns=["underlying_last"], header=False)
+
+
 def create_synthetic_data(data_dir):
     """Create an synthetic data set with known statistics.
     Price goes from 1 to 2000.
@@ -40,5 +57,6 @@ def create_synthetic_data(data_dir):
 
 if __name__ == "__main__":
     data_dir = get_data_dir()
-    create_test_data(data_dir)
     create_synthetic_data(data_dir)
+    create_test_data(data_dir)
+    create_full_spx_data(data_dir)

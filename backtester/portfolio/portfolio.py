@@ -37,7 +37,7 @@ class Portfolio(metaclass=ABCMeta):
             current_amount + direction * qty, new_open_price)
         self.current_position["Cash"] -= direction * price * qty
 
-    def update_timeindex(self, event):
+    def update_timeindex(self):
         """Calculates new balance for the current timeindex.
         Appends current position to all_positions list."""
         date = self.data_handler.current_date
