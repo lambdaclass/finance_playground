@@ -1,19 +1,30 @@
 """Event based backtester"""
 
 from queue import Queue
-from .datahandler import SPXDataHandler
-from .strategy import Benchmark
-from .portfolio import SimplePortfolio
+from .datahandler import BalancedDataHandler
+from .strategy import Balanced
+from .portfolio import BalancedPortfolio
 
 
 def run(data_path,
-        data_handler=SPXDataHandler,
-        port_class=SimplePortfolio,
-        strat_class=Benchmark,
+        data_handler=BalancedDataHandler,
+        port_class=BalancedPortfolio,
+        strat_class=Balanced,
         **strat_args):
     events = Queue()
     bars = data_handler(data_path, events)
-    port = port_class(bars, events)
+
+    weights = {
+        "VOO": 0.3,
+        "GLD": 0.1,
+        "VNQ": 0.05,
+        "VNQI": 0.05,
+        "TLT": 0.2,
+        "TIP": 0.1,
+        "BNDX": 0.1,
+        "RJI": 0.1
+    }
+    port = port_class(bars, events, weights=weights)
     strat = strat_class(bars, events, **strat_args)
 
     while True:

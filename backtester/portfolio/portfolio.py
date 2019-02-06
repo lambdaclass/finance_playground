@@ -28,7 +28,7 @@ class Portfolio(metaclass=ABCMeta):
         self.current_position = self.all_positions[date]
 
         (price, direction) = self._get_price(signal)
-        qty = self._get_allocation(signal.strength, price)
+        qty = self._get_allocation(signal, price)
         (current_amount, current_open_price) = self.current_position.get(
             signal.symbol, (0, 0))
         new_open_price = (current_open_price * current_amount +
@@ -53,9 +53,9 @@ class Portfolio(metaclass=ABCMeta):
             (amount, open_price) = values
             current_bar = self.data_handler.get_latest_bars(symbol)
             if amount < 0:
-                price = current_bar["ask"].values[0]
+                price = current_bar["ask"]
             else:
-                price = current_bar["bid"].values[0]
+                price = current_bar["bid"]
             market_value = amount * price
             self.current_balance[symbol + " Amount"] = amount
             self.current_balance[symbol + " Open"] = open_price
@@ -72,10 +72,10 @@ class Portfolio(metaclass=ABCMeta):
         current_bar = self.data_handler.get_latest_bars(signal.symbol)
         if signal.direction == "BUY":
             direction = 1
-            price = current_bar["ask"].values[0]
+            price = current_bar["ask"]
         else:
             direction = -1
-            price = current_bar["bid"].values[0]
+            price = current_bar["bid"]
         return (price, direction)
 
     def create_report(self):
