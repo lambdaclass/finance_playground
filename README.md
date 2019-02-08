@@ -8,7 +8,10 @@ Algorithmic Trading
 - Python >= 3.6
 - pipenv
 
-Set the environment variable `$OPTIONS_DATA_PATH` to the appropriate data dir.
+For backtesting, set `$OPTIONS_DATA_PATH` to the appropriate data dir.
+To use the data scraper, set `$SAVE_DATA_PATH`. By default, it will save data to `./data/scraped`.
+
+**HINT**: store environment variables in an `.env` file and pipenv will load them automatically when using `make env`.
 
 ## Usage
 
@@ -30,10 +33,12 @@ $> make env
 $> make test
 ```
 
-### Scrape daily options data from CBOE (pass symbols through SYM)
+### Scrape data (supported scrapers: CBOE, Tiingo)
 
 ```shell
-$> make scrape SYM="spy msft"
+$> make scrape symbols=msft,goog scraper=cboe
+
+$> make scrape symbols=voo scraper=tiingo
 ```
 
 ### Run backtester with benchmark strategy
