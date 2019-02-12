@@ -50,8 +50,7 @@ class OptionsSignalEvent(Event):
     object.
     """
 
-    def __init__(self, symbol, optionroot, option_type, direction, size,
-                 sell_date):
+    def __init__(self, symbol, optionroot, option_type, direction):
         """symbol: underlying symbol
         optionroot: option name
         direction: BUY | SELL
@@ -62,5 +61,3 @@ class OptionsSignalEvent(Event):
         self.optionroot = optionroot
         self.option_type = option_type
         self.direction = direction
-        self.size = size
-        self.sell_date = sell_date

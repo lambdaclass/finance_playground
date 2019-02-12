@@ -1,4 +1,3 @@
-from copy import copy
 import math
 from .portfolio import Portfolio
 
@@ -27,7 +26,6 @@ class WeightedPortfolio(Portfolio):
         self.all_positions = {}
         self.current_balance = {"Cash": self.initial_capital}
         self.all_balances = {}
-        self._sell_puts = {}
 
     def update_signal(self, signal):
         """Processes signal event and updates the current position"""
@@ -45,9 +43,6 @@ class WeightedPortfolio(Portfolio):
         """Calculates new balance for the current date.
         Adds `current_position` to the `all_positions` dictionary."""
         date = self.spx_handler.current_date
-
-        if date in self._sell_puts:
-            self.update_signal(self._sell_puts[date])
 
         self.all_balances[date] = self.current_balance.copy()
         self.current_balance["Total Exposure"] = 0
@@ -85,17 +80,18 @@ class WeightedPortfolio(Portfolio):
         self.all_balances[date] = self.current_balance.copy()
 
     def _process_stock_signal(self, signal):
-        price, direction = self._get_price(signal)
-        qty = self._get_allocation(signal, price)
         item_name = signal.symbol
+        price, direction = self._get_price(signal)
 
         current_amount, current_open_price = self.current_position.get(
             item_name, (0, 0))
-        new_open_price = (current_open_price * current_amount +
-                          direction * price * qty) / (current_amount + qty)
+        if signal.direction == "SELL":
+            qty = current_amount
+        else:
+            qty = self._get_allocation(signal, price)
 
         self.current_position[item_name] = (current_amount + direction * qty,
-                                            new_open_price)
+                                            price)
         self.current_position["Cash"] -= direction * price * qty
 
     def _process_options_signal(self, signal):
@@ -108,9 +104,6 @@ class WeightedPortfolio(Portfolio):
         else:
             qty = self._get_allocation(signal, price)
             self.current_position[item_name] = (qty, direction * qty * price)
-            sell_signal = copy(signal)
-            sell_signal.direction = "SELL"
-            self._sell_puts[signal.sell_date] = sell_signal
 
         self.current_position["Cash"] -= direction * price * qty
 
@@ -136,16 +129,19 @@ class WeightedPortfolio(Portfolio):
         else:
             direction = -1
             price = current_bar["bid"]
+
+        if signal.type == "SIGNAL_OPTIONS":
+            price = price * 100
         return (price, direction)
 
     def _get_allocation(self, signal, price):
         """Calculates allocation for given signal"""
-        if signal.type == "SIGNAL_OPTIONS":
-            if self.current_position["Cash"] >= signal.size * price:
-                return signal.size
-            else:
-                return 0
-        else:
-            total_allocation = self.initial_capital * self.weights.get(
+        if price == 0.0:
+            return 0
+
+        if signal.type == "SIGNAL_STOCK":
+            cash_amount = self.current_position["Cash"] * self.weights.get(
                 signal.type, 0)
-            return math.floor(total_allocation / price)
+        else:
+            cash_amount = self.current_position["Cash"]
+        return math.floor(cash_amount / price)
