@@ -9,6 +9,7 @@ requests = "*"
 pandas = "*"
 altair = "*"
 jupyter = "*"
+pandas-datareader = "*"
 
 [dev-packages]
 
