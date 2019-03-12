@@ -1,7 +1,7 @@
 .PHONY: init env testdata test scrape bench
 
 init:
-	pipenv install
+	pipenv --three && pipenv install
 
 env:
 	pipenv shell
