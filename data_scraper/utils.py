@@ -1,6 +1,6 @@
+import hashlib
 import os
 from datetime import date
-import pandas as pd
 
 
 def get_environment_var(variable):
@@ -16,7 +16,7 @@ def get_environment_var(variable):
 
 def get_save_data_path():
     """Reads data path from environment variable `$SAVE_DATA_PATH`.
-    If it is not set, defaults to `data/scraped`.
+    If it is not set, defaults to `./data/scraped`.
     """
     try:
         data_dir = get_environment_var("SAVE_DATA_PATH")
@@ -31,15 +31,28 @@ def save_data(symbol, symbol_data, scraper):
     """Saves the contents of `symbol_data` to
     `$SAVE_DATA_PATH/{scraper}/{symbol}/{symbol}_{%date}.csv`"""
     filename = date.today().strftime(symbol + "_%Y%m%d.csv")
+
     save_data_path = get_save_data_path()
-    symbol_path = os.path.join(save_data_path, scraper, symbol)
+    symbol_dir = os.path.join(save_data_path, scraper, symbol)
 
-    if not os.path.exists(symbol_path):
-        os.makedirs(symbol_path)
-    file_path = os.path.join(symbol_path, filename)
+    if not os.path.exists(symbol_dir):
+        os.makedirs(symbol_dir)
+    file_path = os.path.join(symbol_dir, filename)
 
-    if isinstance(symbol_data, pd.DataFrame):
-        symbol_data.to_csv(file_path)
-    else:
-        with open(file_path, "wb+") as file:
-            file.write(symbol_data.content)
+    with open(file_path, "w+") as file:
+        file.write(symbol_data.content)
+
+
+def file_hash_matches_data(file_path, data):
+    file_md5 = get_file_md5(file_path)
+    data_md5 = hashlib.md5(data.encode()).hexdigest()
+    return file_md5 == data_md5
+
+
+def get_file_md5(file, chunk_size=4096):
+    md5 = hashlib.md5()
+    with open(file, "rb") as f:
+        for chunk in iter(lambda: f.read(chunk_size), b""):
+            md5.update(chunk)
+
+    return md5.hexdigest()
