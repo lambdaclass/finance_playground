@@ -1,6 +1,5 @@
 import hashlib
 import os
-from datetime import date
 
 
 def get_environment_var(variable):
@@ -25,22 +24,6 @@ def get_save_data_path():
         os.makedirs(data_dir)
 
     return data_dir
-
-
-def save_data(symbol, symbol_data, scraper):
-    """Saves the contents of `symbol_data` to
-    `$SAVE_DATA_PATH/{scraper}/{symbol}/{symbol}_{%date}.csv`"""
-    filename = date.today().strftime(symbol + "_%Y%m%d.csv")
-
-    save_data_path = get_save_data_path()
-    symbol_dir = os.path.join(save_data_path, scraper, symbol)
-
-    if not os.path.exists(symbol_dir):
-        os.makedirs(symbol_dir)
-    file_path = os.path.join(symbol_dir, filename)
-
-    with open(file_path, "w+") as file:
-        file.write(symbol_data.content)
 
 
 def file_hash_matches_data(file_path, data):
