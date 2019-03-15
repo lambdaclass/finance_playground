@@ -3,16 +3,91 @@ extern crate futures;
 extern crate fantoccini;
 extern crate webdriver;
 extern crate serde_json;
+extern crate select;
 
 use fantoccini::{Client, Locator};
 use futures::future::Future;
 use futures::sync::oneshot;
 use webdriver::capabilities::Capabilities;
 use serde_json::json;
+use select::document::Document;
+use select::predicate::{Predicate, Attr, Class, Name};
+
+struct DolarValue {
+    buy: f64,
+    buyamount: u32,
+    sell: f64,
+    sellamount: u32,
+    last: f64,
+    var: f64,
+    varper: f64,
+    volume: u32,
+    adjustment: f64,
+    min: f64,
+    max: f64,
+    oin: u32,
+}
 
 fn main() {
     let html = fetch_site();
-    println!("{}", html);
+
+    let document = Document::from(html.as_str());
+
+    // let mut values = DolarValue {};
+
+    for node in document.find(Class("PriceCell")) {
+        match node.attr("class") {
+            Some("PriceCell bsz") => {
+                println!("BuyAmount: {}", node.text())
+            },
+            Some("PriceCell bid") => {
+                println!("Buy: {}", node.text())
+            },
+            Some("PriceCell ask") => {
+                println!("Sell: {}", node.text())
+            },
+            Some("PriceCell asz") => {
+                println!("SellAmount: {}", node.text())
+            },
+            Some("PriceCell lst") => {
+                println!("Last: {}", node.text())
+            },
+            Some("PriceCell PriceCell-change-down variation") => {
+                println!("Var: {}", node.text())
+            },
+            Some("PriceCell PriceCell-change-up variation") => {
+                println!("Var: {}", node.text())
+            },
+            Some("PriceCell PriceCell-change-down change") => {
+                println!("VarPer: {}", node.text())
+            },
+            Some("PriceCell PriceCell-change-up change") => {
+                println!("VarPer: {}", node.text())
+            },
+            Some("PriceCell von") => {
+                println!("Volume: {}", node.text())
+            },
+            Some("PriceCell settlementPrice") => {
+                println!("Adjustment: {}", node.text())
+            },
+            Some("PriceCell PriceCell-none low") => {
+                println!("Min: {}", node.text())
+            },
+            Some("PriceCell PriceCell-none hgh") => {
+                println!("Max: {}", node.text())
+            },
+            Some("PriceCell oin") => {
+                println!("Oin: {}", node.text())
+            },
+            Some("PriceCell futureImpliedRate") => { },
+            Some(class) => {
+                panic!("Non-matching class: {}", class);
+            }
+            None => {
+                panic!("Node without class attribute");
+            }
+        }
+    }
 }
 
 fn fetch_site() -> String {
