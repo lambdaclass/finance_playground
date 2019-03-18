@@ -11,13 +11,14 @@ use futures::sync::oneshot;
 use webdriver::capabilities::Capabilities;
 use serde_json::json;
 use select::document::Document;
-use select::predicate::{Predicate, Attr, Class, Name};
+use select::predicate::Class;
+use std::fmt;
 
 struct DolarValue {
     buy: f64,
-    buyamount: u32,
+    buy_amount: u32,
     sell: f64,
-    sellamount: u32,
+    sell_amount: u32,
     last: f64,
     var: f64,
     varper: f64,
@@ -28,56 +29,84 @@ struct DolarValue {
     oin: u32,
 }
 
+impl DolarValue {
+    fn new() -> DolarValue {
+        DolarValue {
+            buy: 0.0,
+            buy_amount: 0,
+            sell: 0.0,
+            sell_amount: 0,
+            last: 0.0,
+            var: 0.0,
+            varper: 0.0,
+            volume: 0,
+            adjustment: 0.0,
+            min: 0.0,
+            max: 0.0,
+            oin: 0,
+        }
+    }
+}
+
+impl fmt::Display for DolarValue {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(
+            f,
+            "Buy: {}\nBuy Amount: {}\nSell: {}\nSell Amount: {}\nLast: {}\nVar: {}\nVarPer: {}\nVolume: {}\nAdjustment: {}\nMin: {}\nMax: {}\nOin: {}",
+            self.buy, self.buy_amount, self.sell, self.sell_amount, self.last, self.var, self.varper, self.volume, self.adjustment, self.min, self.max, self.oin)
+    }
+}
+
 fn main() {
     let html = fetch_site();
 
     let document = Document::from(html.as_str());
 
-    // let mut values = DolarValue {};
+    let mut value = DolarValue::new();
 
     for node in document.find(Class("PriceCell")) {
         match node.attr("class") {
             Some("PriceCell bsz") => {
-                println!("BuyAmount: {}", node.text())
+                value.buy_amount = parse_u32(node.text())
             },
             Some("PriceCell bid") => {
-                println!("Buy: {}", node.text())
+                value.buy = parse_f64(node.text())
             },
             Some("PriceCell ask") => {
-                println!("Sell: {}", node.text())
+                value.sell = parse_f64(node.text())
             },
             Some("PriceCell asz") => {
-                println!("SellAmount: {}", node.text())
+                value.sell_amount = parse_u32(node.text())
             },
             Some("PriceCell lst") => {
-                println!("Last: {}", node.text())
+                value.last = parse_f64(node.text())
             },
             Some("PriceCell PriceCell-change-down variation") => {
-                println!("Var: {}", node.text())
+                value.var = parse_f64(node.text())
             },
             Some("PriceCell PriceCell-change-up variation") => {
-                println!("Var: {}", node.text())
+                value.var = parse_f64(node.text())
             },
             Some("PriceCell PriceCell-change-down change") => {
-                println!("VarPer: {}", node.text())
+                value.varper = parse_f64(node.text().trim_end_matches("%").to_string())
             },
             Some("PriceCell PriceCell-change-up change") => {
-                println!("VarPer: {}", node.text())
+                value.varper = parse_f64(node.text().trim_end_matches("%").to_string())
             },
             Some("PriceCell von") => {
-                println!("Volume: {}", node.text())
+                value.volume = parse_u32(node.text())
             },
             Some("PriceCell settlementPrice") => {
-                println!("Adjustment: {}", node.text())
+                value.adjustment = parse_f64(node.text())
             },
             Some("PriceCell PriceCell-none low") => {
-                println!("Min: {}", node.text())
+                value.min = parse_f64(node.text())
             },
             Some("PriceCell PriceCell-none hgh") => {
-                println!("Max: {}", node.text())
+                value.max = parse_f64(node.text())
             },
             Some("PriceCell oin") => {
-                println!("Oin: {}", node.text())
+                value.oin = parse_u32(node.text())
             },
             Some("PriceCell futureImpliedRate") => { },
             Some(class) => {
@@ -88,6 +117,8 @@ fn main() {
             }
         }
     }
+
+    println!("{}", value);
 }
 
 fn fetch_site() -> String {
@@ -114,8 +145,14 @@ fn fetch_site() -> String {
                 e.html(true)
             })
             .and_then(|e| {
-                sender.send(e);
-                Ok(())
+                match sender.send(e) {
+                    Err(err) => {
+                        panic!("Error sending fetched site: {}", err)
+                    }
+                    Ok(()) => {
+                        Ok(())
+                    }
+                }
             })
             .map_err(|e| {
                 panic!("a WebDriver command failed: {:?}", e);
@@ -123,4 +160,19 @@ fn fetch_site() -> String {
     );
 
     receiver.wait().unwrap()
+}
+
+fn parse_u32(text: String) -> u32 {
+    text.replace(".", "")
+        .trim()
+        .parse()
+        .unwrap_or_else(|err| panic!("Error parsing \"{}\": {}", text, err))
+}
+
+fn parse_f64(text: String) -> f64 {
+    text.replace(".", "")
+        .replace(",", ".")
+        .trim()
+        .parse()
+        .unwrap_or_else(|err| panic!("Error parsing \"{}\": {}", text, err))
 }
