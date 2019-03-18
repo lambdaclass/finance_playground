@@ -1,17 +1,17 @@
-extern crate tokio;
-extern crate futures;
 extern crate fantoccini;
-extern crate webdriver;
-extern crate serde_json;
+extern crate futures;
 extern crate select;
+extern crate serde_json;
+extern crate tokio;
+extern crate webdriver;
 
 use fantoccini::{Client, Locator};
 use futures::future::Future;
 use futures::sync::oneshot;
-use webdriver::capabilities::Capabilities;
-use serde_json::json;
 use select::document::Document;
 use select::predicate::Class;
+use serde_json::json;
+use webdriver::capabilities::Capabilities;
 
 use crate::DolarValue;
 
@@ -24,49 +24,25 @@ pub fn scrape() -> DolarValue {
 
     for node in document.find(Class("PriceCell")) {
         match node.attr("class") {
-            Some("PriceCell bsz") => {
-                value.buy_amount = parse_u32(node.text())
-            },
-            Some("PriceCell bid") => {
-                value.buy = parse_f64(node.text())
-            },
-            Some("PriceCell ask") => {
-                value.sell = parse_f64(node.text())
-            },
-            Some("PriceCell asz") => {
-                value.sell_amount = parse_u32(node.text())
-            },
-            Some("PriceCell lst") => {
-                value.last = parse_f64(node.text())
-            },
-            Some("PriceCell PriceCell-change-down variation") => {
-                value.var = parse_f64(node.text())
-            },
-            Some("PriceCell PriceCell-change-up variation") => {
-                value.var = parse_f64(node.text())
-            },
+            Some("PriceCell bsz") => value.buy_amount = parse_u32(node.text()),
+            Some("PriceCell bid") => value.buy = parse_f64(node.text()),
+            Some("PriceCell ask") => value.sell = parse_f64(node.text()),
+            Some("PriceCell asz") => value.sell_amount = parse_u32(node.text()),
+            Some("PriceCell lst") => value.last = parse_f64(node.text()),
+            Some("PriceCell PriceCell-change-down variation") => value.var = parse_f64(node.text()),
+            Some("PriceCell PriceCell-change-up variation") => value.var = parse_f64(node.text()),
             Some("PriceCell PriceCell-change-down change") => {
                 value.varper = parse_f64(node.text().trim_end_matches("%").to_string())
-            },
+            }
             Some("PriceCell PriceCell-change-up change") => {
                 value.varper = parse_f64(node.text().trim_end_matches("%").to_string())
-            },
-            Some("PriceCell von") => {
-                value.volume = parse_u32(node.text())
-            },
-            Some("PriceCell settlementPrice") => {
-                value.adjustment = parse_f64(node.text())
-            },
-            Some("PriceCell PriceCell-none low") => {
-                value.min = parse_f64(node.text())
-            },
-            Some("PriceCell PriceCell-none hgh") => {
-                value.max = parse_f64(node.text())
-            },
-            Some("PriceCell oin") => {
-                value.oin = parse_u32(node.text())
-            },
-            Some("PriceCell futureImpliedRate") => { },
+            }
+            Some("PriceCell von") => value.volume = parse_u32(node.text()),
+            Some("PriceCell settlementPrice") => value.adjustment = parse_f64(node.text()),
+            Some("PriceCell PriceCell-none low") => value.min = parse_f64(node.text()),
+            Some("PriceCell PriceCell-none hgh") => value.max = parse_f64(node.text()),
+            Some("PriceCell oin") => value.oin = parse_u32(node.text()),
+            Some("PriceCell futureImpliedRate") => {}
             Some(class) => {
                 panic!("Non-matching class: {}", class);
             }
@@ -87,34 +63,21 @@ fn fetch_site() -> String {
     let (sender, receiver) = oneshot::channel::<String>();
 
     tokio::run(
-        c
-            .map_err(|e| {
-                unimplemented!("failed to connect to WebDriver: {:?}", e)
-            })
-            .and_then(|c| {
-                c.goto("https://rofex.primary.ventures/rofex/futuros")
-            })
+        c.map_err(|e| unimplemented!("failed to connect to WebDriver: {:?}", e))
+            .and_then(|c| c.goto("https://rofex.primary.ventures/rofex/futuros"))
             .and_then(|mut c| c.current_url().map(move |url| (c, url)))
             .and_then(|(c, url)| {
                 assert_eq!(url.as_ref(), "https://rofex.primary.ventures/rofex/futuros");
                 c.wait_for_find(Locator::Css(".PricePanelRow-row"))
             })
-            .and_then(|mut e| {
-                e.html(true)
-            })
-            .and_then(|e| {
-                match sender.send(e) {
-                    Err(err) => {
-                        panic!("Error sending fetched site: {}", err)
-                    }
-                    Ok(()) => {
-                        Ok(())
-                    }
-                }
+            .and_then(|mut e| e.html(true))
+            .and_then(|e| match sender.send(e) {
+                Err(err) => panic!("Error sending fetched site: {}", err),
+                Ok(()) => Ok(()),
             })
             .map_err(|e| {
                 panic!("a WebDriver command failed: {:?}", e);
-            })
+            }),
     );
 
     receiver.wait().unwrap()
