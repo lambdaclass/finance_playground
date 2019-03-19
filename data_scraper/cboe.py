@@ -3,10 +3,14 @@ import os
 from datetime import date
 from io import StringIO
 from itertools import groupby
+
 from bs4 import BeautifulSoup
 import requests
 import pandas as pd
-from data_scraper import utils
+
+import utils
+import validation
+from notifications import slack_notification
 
 logger = logging.getLogger(__name__)
 
@@ -19,10 +23,14 @@ def fetch_data(symbols=symbols):
     try:
         form_data = _form_data()
     except requests.ConnectionError as ce:
-        logger.error("Connection error trying to reach %s", url, exc_info=True)
+        msg = "Connection error trying to reach {}".format(url)
+        logger.error(msg, exc_info=True)
+        slack_notification(msg, __name__)
         raise (ce)
     except Exception as e:
-        logger.error("Error parsing response", exc_info=True)
+        msg = "Error parsing response"
+        logger.error(msg, exc_info=True)
+        slack_notification(msg, __name__)
         raise (e)
 
     headers = {"Referer": url}
@@ -38,29 +46,45 @@ def fetch_data(symbols=symbols):
                 file_url, cookies=response.cookies, headers=headers)
             _save_data(symbol, symbol_data.text)
         except Exception:
-            logger.error(
-                "Error fetching symbol %s data", symbol, exc_info=True)
+            msg = "Error fetching symbol {} data".format(symbol)
+            logger.error(msg, exc_info=True)
+            slack_notification(msg, __name__)
 
 
-def collate_monthly_data(symbol):
-    """Aggregate daily snapshots into month long csv"""
+def aggregate_monthly_data(symbols=symbols):
+    """Aggregate daily snapshots into monthly files and validate data"""
     save_data_path = utils.get_save_data_path()
     scraper_dir = os.path.join(save_data_path, "cboe")
-    symbol_dir = os.path.join(scraper_dir, symbol + "_daily")
 
-    if not os.path.exists(symbol_dir):
-        logger.error("Symbol dir %s does not exist", symbol_dir)
-        raise FileNotFoundError()
+    for symbol in symbols:
+        symbol_dir = os.path.join(scraper_dir, symbol + "_daily")
 
-    for month, files in groupby(os.listdir(symbol_dir), _monthly_grouper):
-        filenames = list(files)
-        df_generator = (pd.read_csv(os.path.join(symbol_dir, file))
-                        for file in filenames)
-        symbol_df = pd.concat(df_generator)
-        monthly_file = _monthly_filename(filenames)
-        file_path = os.path.join(scraper_dir, monthly_file)
-        symbol_df.to_csv(file_path, index=False)
-        logger.debug("Saved monthly data %s", monthly_file)
+        if not os.path.exists(symbol_dir):
+            msg = "Symbol dir {} does not exist. Cannot aggregate daily data.".format(
+                symbol_dir)
+            logger.error(msg)
+            slack_notification(msg, __name__)
+            continue
+
+        for month, files in groupby(os.listdir(symbol_dir), _monthly_grouper):
+            file_names = list(files)
+            daily_files = [
+                os.path.join(symbol_dir, name) for name in file_names
+            ]
+            symbol_df = validation.aggregate_data(daily_files)
+
+            date_range = symbol_df["quotedate"].unique()
+            validation.validate_dates(date_range)
+
+            file_name = _monthly_filename(file_names)
+            monthly_file = os.path.join(scraper_dir, file_name)
+            symbol_df.to_csv(monthly_file, index=False)
+
+            validation.validate_aggregate_file(monthly_file, daily_files)
+            logger.debug("Saved monthly data %s", monthly_file)
+
+            for file in daily_files:
+                utils.remove_file(file, logger)
 
 
 def _form_data():
@@ -85,9 +109,10 @@ def _save_data(symbol, symbol_data):
 
     if not os.path.exists(symbol_dir):
         os.makedirs(symbol_dir)
+        logger.debug("Symbol dir %s created", symbol_dir)
     file_path = os.path.join(symbol_dir, filename)
 
-    if os.path.exists(file_path) and utils.file_hash_matches_data(
+    if os.path.exists(file_path) and validation.file_hash_matches_data(
             file_path, symbol_data):
         logger.debug("File %s already downloaded", file_path)
     else:

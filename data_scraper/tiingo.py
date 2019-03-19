@@ -1,9 +1,12 @@
 import logging
-import glob
 import os
+
 from datetime import date
 import pandas_datareader as pdr
-from data_scraper import utils
+
+import utils
+import validation
+from notifications import slack_notification
 
 logger = logging.getLogger(__name__)
 
@@ -27,17 +30,20 @@ def fetch_data(symbols=assets):
             symbol_data = pdr.get_data_tiingo(symbol, api_key=api_key)
             save_data(symbol, symbol_data)
         except ConnectionError as ce:
-            logger.error(
-                "Unable to connect to api.tiingo.com while fetching symbol %s",
-                symbol,
-                exc_info=True)
+            msg = "Unable to connect to api.tiingo.com when fetching symbol {}".format(
+                symbol)
+            logger.error(msg, exc_info=True)
+            slack_notification(msg, __name__)
             raise ce
         except TypeError:
             # pandas_datareader raises TypeError when fetching invalid symbol
-            logger.error("Invalid symbol %s", symbol, exc_info=True)
+            msg = "Attempted to fetch invalid symbol {}".format(symbol)
+            logger.error(msg, exc_info=True)
+            slack_notification(msg, __name__)
         except Exception:
-            logger.error(
-                "Could not save symbol %s data", symbol, exc_info=True)
+            msg = "Error fetching symbol {}".format(symbol)
+            logger.error(msg, exc_info=True)
+            slack_notification(msg, __name__)
 
 
 def save_data(symbol, symbol_df):
@@ -50,19 +56,17 @@ def save_data(symbol, symbol_df):
 
     if not os.path.exists(scraper_dir):
         os.makedirs(scraper_dir)
+        logger.debug("Scraper dir %s created", scraper_dir)
     file_path = os.path.join(scraper_dir, filename)
 
-    if os.path.exists(file_path) and utils.file_hash_matches_data(
+    if os.path.exists(file_path) and validation.file_hash_matches_data(
             file_path, symbol_df.to_csv()):
         logger.debug("File %s already downloaded", file_path)
     else:
-        remove_old_files(scraper_dir, symbol)
+        validation.validate_dates(symbol_df["date"])
+
+        pattern = symbol + "_*"
+        utils.remove_files(scraper_dir, pattern, logger)
+
         symbol_df.to_csv(file_path)
         logger.debug("Saved symbol data as %s", file_path)
-
-
-def remove_old_files(data_dir, symbol):
-    pattern = symbol + "_*"
-    for old_file in glob.glob(os.path.join(data_dir, pattern)):
-        os.remove(old_file)
-        logger.debug("Removed file %s", old_file)

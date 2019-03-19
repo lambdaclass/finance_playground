@@ -1,4 +1,4 @@
-import hashlib
+import glob
 import os
 
 
@@ -26,16 +26,13 @@ def get_save_data_path():
     return data_dir
 
 
-def file_hash_matches_data(file_path, data):
-    file_md5 = get_file_md5(file_path)
-    data_md5 = hashlib.md5(data.encode()).hexdigest()
-    return file_md5 == data_md5
+def remove_files(data_dir, pattern, logger=None):
+    """Removes files in `data_dir` that match `pattern`"""
+    for file in glob.glob(os.path.join(data_dir, pattern)):
+        remove_file(file, logger)
 
 
-def get_file_md5(file, chunk_size=4096):
-    md5 = hashlib.md5()
-    with open(file, "rb") as f:
-        for chunk in iter(lambda: f.read(chunk_size), b""):
-            md5.update(chunk)
-
-    return md5.hexdigest()
+def remove_file(file, logger=None):
+    os.remove(file)
+    if logger:
+        logger.debug("Removed file %s", file)
