@@ -1,4 +1,5 @@
 mod scrape;
+mod storage;
 
 use std::fmt;
 
@@ -46,7 +47,9 @@ impl fmt::Display for DolarValue {
 }
 
 fn main() {
+    let dbconn = crate::storage::init();
     let value = crate::scrape::scrape();
+    crate::storage::store(dbconn, value);
 
-    println!("{}", value);
+    // println!("{}", value);
 }
