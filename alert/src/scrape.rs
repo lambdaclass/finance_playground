@@ -12,7 +12,6 @@ use select::document::Document;
 use select::predicate::Class;
 use serde_json::json;
 use webdriver::capabilities::Capabilities;
-use std::{thread, time};
 
 use crate::DolarValue;
 
@@ -69,13 +68,19 @@ fn fetch_site() -> String {
             .and_then(|mut c| c.current_url().map(move |url| (c, url)))
             .and_then(|(c, url)| {
                 assert_eq!(url.as_ref(), "https://rofex.primary.ventures/rofex/futuros");
-                c.wait_for_find(Locator::Css(".PricePanelRow-row"))
+                c.wait_for(|cli| {
+                    let elems =
+                        cli
+                        .find_all(Locator::XPath("((//div[@class='PricePanelRow-row'])[1]//div[@class='PriceCell lst'])[not(contains(., '-'))]"))
+                        .wait()
+                        .unwrap();
+                    Ok(!elems.is_empty())
+                })
+            })
+            .and_then(|c| {
+                c.wait_for_find(Locator::XPath("(//div[@class='PricePanelRow-row'])[1]"))
             })
             .and_then(|mut e| {
-                // TODO: site has a small delay between creating the table and populating it
-                //       this results in empty values ("-") causing an exception when parsing.
-                //       We should handle this using a find or something instead of sleep
-                thread::sleep(time::Duration::from_secs(1));
                 e.html(true)
             })
             .and_then(|e| match sender.send(e) {
