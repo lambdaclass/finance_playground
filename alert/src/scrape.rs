@@ -39,8 +39,10 @@ pub fn scrape() -> DolarValue {
             }
             Some("PriceCell von") => value.volume = parse_u32(node.text()),
             Some("PriceCell settlementPrice") => value.adjustment = parse_f64(node.text()),
+            Some("PriceCell PriceCell-lst-low low") => value.min = parse_f64(node.text()),
             Some("PriceCell PriceCell-none low") => value.min = parse_f64(node.text()),
             Some("PriceCell PriceCell-none hgh") => value.max = parse_f64(node.text()),
+            Some("PriceCell PriceCell-lst-hgh hgh") => value.max = parse_f64(node.text()),
             Some("PriceCell oin") => value.oin = parse_u32(node.text()),
             Some("PriceCell futureImpliedRate") => {}
             Some(class) => {
