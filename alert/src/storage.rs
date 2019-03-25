@@ -30,7 +30,7 @@ pub fn init() -> Connection {
     conn
 }
 
-pub fn store(conn: Connection, data: DolarValue) {
+pub fn store(conn: &Connection, data: DolarValue) {
     conn.execute(
         "INSERT INTO dolar (buy, buy_amount, sell, sell_amount, last, var, varper, volume, adjustment, min, max, oin, created_at)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, datetime('now'))",

@@ -12,6 +12,7 @@ use select::document::Document;
 use select::predicate::Class;
 use serde_json::json;
 use webdriver::capabilities::Capabilities;
+use std::{thread, time};
 
 use crate::DolarValue;
 
@@ -70,7 +71,13 @@ fn fetch_site() -> String {
                 assert_eq!(url.as_ref(), "https://rofex.primary.ventures/rofex/futuros");
                 c.wait_for_find(Locator::Css(".PricePanelRow-row"))
             })
-            .and_then(|mut e| e.html(true))
+            .and_then(|mut e| {
+                // TODO: site has a small delay between creating the table and populating it
+                //       this results in empty values ("-") causing an exception when parsing.
+                //       We should handle this using a find or something instead of sleep
+                thread::sleep(time::Duration::from_secs(1));
+                e.html(true)
+            })
             .and_then(|e| match sender.send(e) {
                 Err(err) => panic!("Error sending fetched site: {}", err),
                 Ok(()) => Ok(()),

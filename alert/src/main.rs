@@ -1,7 +1,7 @@
 mod scrape;
 mod storage;
 
-use std::fmt;
+use std::{fmt, thread, time};
 
 pub struct DolarValue {
     buy: f64,
@@ -48,8 +48,11 @@ impl fmt::Display for DolarValue {
 
 fn main() {
     let dbconn = crate::storage::init();
-    let value = crate::scrape::scrape();
-    crate::storage::store(dbconn, value);
 
-    // println!("{}", value);
+    loop {
+        let value = crate::scrape::scrape();
+        crate::storage::store(&dbconn, value);
+        println!("scraped dolar data");
+        thread::sleep(time::Duration::from_secs(60));
+    }
 }
