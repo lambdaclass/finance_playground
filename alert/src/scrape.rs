@@ -23,33 +23,32 @@ pub fn scrape() -> DolarValue {
     let mut value = DolarValue::new();
 
     for node in document.find(Class("PriceCell")) {
-        match node.attr("class") {
-            Some("PriceCell bsz") => value.buy_amount = parse_u32(node.text()),
-            Some("PriceCell bid") => value.buy = parse_f64(node.text()),
-            Some("PriceCell ask") => value.sell = parse_f64(node.text()),
-            Some("PriceCell asz") => value.sell_amount = parse_u32(node.text()),
-            Some("PriceCell lst") => value.last = parse_f64(node.text()),
-            Some("PriceCell PriceCell-change-down variation") => value.var = parse_f64(node.text()),
-            Some("PriceCell PriceCell-change-up variation") => value.var = parse_f64(node.text()),
-            Some("PriceCell PriceCell-change-down change") => {
+        let full_class =
+            node.attr("class")
+            .unwrap_or_else(|| panic!("Node without class attribute"));
+        let class = full_class.split_whitespace().last();
+
+        match class {
+            Some("bsz") => value.buy_amount = parse_u32(node.text()),
+            Some("bid") => value.buy = parse_f64(node.text()),
+            Some("ask") => value.sell = parse_f64(node.text()),
+            Some("asz") => value.sell_amount = parse_u32(node.text()),
+            Some("lst") => value.last = parse_f64(node.text()),
+            Some("variation") => value.var = parse_f64(node.text()),
+            Some("change") => {
                 value.varper = parse_f64(node.text().trim_end_matches("%").to_string())
             }
-            Some("PriceCell PriceCell-change-up change") => {
-                value.varper = parse_f64(node.text().trim_end_matches("%").to_string())
-            }
-            Some("PriceCell von") => value.volume = parse_u32(node.text()),
-            Some("PriceCell settlementPrice") => value.adjustment = parse_f64(node.text()),
-            Some("PriceCell PriceCell-lst-low low") => value.min = parse_f64(node.text()),
-            Some("PriceCell PriceCell-none low") => value.min = parse_f64(node.text()),
-            Some("PriceCell PriceCell-none hgh") => value.max = parse_f64(node.text()),
-            Some("PriceCell PriceCell-lst-hgh hgh") => value.max = parse_f64(node.text()),
-            Some("PriceCell oin") => value.oin = parse_u32(node.text()),
-            Some("PriceCell futureImpliedRate") => {}
+            Some("von") => value.volume = parse_u32(node.text()),
+            Some("settlementPrice") => value.adjustment = parse_f64(node.text()),
+            Some("low") => value.min = parse_f64(node.text()),
+            Some("hgh") => value.max = parse_f64(node.text()),
+            Some("oin") => value.oin = parse_u32(node.text()),
+            Some("futureImpliedRate") => {}
             Some(class) => {
                 panic!("Non-matching class: {}", class);
             }
             None => {
-                panic!("Node without class attribute");
+                panic!("Node without empty class attribute");
             }
         }
     }
@@ -58,6 +57,7 @@ pub fn scrape() -> DolarValue {
 }
 
 fn fetch_site() -> String {
+    // TODO: Set headless capabilities for chromedriver.
     let mut cap = Capabilities::new();
     let arg = json!({"args": ["-headless"]});
     cap.insert("moz:firefoxOptions".to_string(), arg);
@@ -68,19 +68,8 @@ fn fetch_site() -> String {
         c.map_err(|e| unimplemented!("failed to connect to WebDriver: {:?}", e))
             .and_then(|c| c.goto("https://rofex.primary.ventures/rofex/futuros"))
             .and_then(|mut c| c.current_url().map(move |url| (c, url)))
-            .and_then(|(c, url)| {
-                assert_eq!(url.as_ref(), "https://rofex.primary.ventures/rofex/futuros");
-                c.wait_for(|cli| {
-                    let elems =
-                        cli
-                        .find_all(Locator::XPath("((//div[@class='PricePanelRow-row'])[1]//div[@class='PriceCell lst'])[not(contains(., '-'))]"))
-                        .wait()
-                        .unwrap();
-                    Ok(!elems.is_empty())
-                })
-            })
-            .and_then(|c| {
-                c.wait_for_find(Locator::XPath("(//div[@class='PricePanelRow-row'])[1]"))
+            .and_then(|(c, _url)| {
+                c.wait_for_find(Locator::XPath("((//div[@class='PricePanelRow-row'])[1]//div[@class='PriceCell lst'])[not(contains(., '-'))]/.."))
             })
             .and_then(|mut e| {
                 e.html(true)
