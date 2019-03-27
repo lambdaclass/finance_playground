@@ -1,6 +1,7 @@
 extern crate rusqlite;
 
 use rusqlite::{Connection, ToSql, NO_PARAMS};
+use rusqlite::Error::QueryReturnedNoRows;
 use crate::DolarValue;
 
 pub fn init() -> Connection {
@@ -30,7 +31,7 @@ pub fn init() -> Connection {
     conn
 }
 
-pub fn store(conn: &Connection, data: DolarValue) {
+pub fn store(conn: &Connection, data: &DolarValue) {
     conn.execute(
         "INSERT INTO dolar (buy, buy_amount, sell, sell_amount, last, var, varper, volume, adjustment, min, max, oin, created_at)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, datetime('now'))",
@@ -47,4 +48,36 @@ pub fn store(conn: &Connection, data: DolarValue) {
           &data.max,
           &data.oin]
     ).unwrap();
+}
+
+pub fn get_previous_dolar(conn: &Connection) -> Option<DolarValue> {
+    let previous_dolar = conn.query_row(
+        "SELECT buy, buy_amount, sell, sell_amount, last, var, varper, volume, adjustment, min, max, oin, created_at
+            FROM dolar
+            ORDER BY created_at DESC
+            LIMIT 1",
+        NO_PARAMS,
+        |row| {
+            Ok(DolarValue {
+                buy: row.get_unwrap(0),
+                buy_amount: row.get_unwrap(1),
+                sell: row.get_unwrap(2),
+                sell_amount: row.get_unwrap(3),
+                last: row.get_unwrap(4),
+                var: row.get_unwrap(5),
+                varper: row.get_unwrap(6),
+                volume: row.get_unwrap(7),
+                adjustment: row.get_unwrap(8),
+                min: row.get_unwrap(9),
+                max: row.get_unwrap(10),
+                oin: row.get_unwrap(11)
+            })
+        }
+    );
+
+    match previous_dolar {
+        Ok(value) => Some(value),
+        Err(QueryReturnedNoRows) => None,
+        Err(err) => panic!("Error getting previous dollar value: {}", err)
+    }
 }

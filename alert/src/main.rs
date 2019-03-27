@@ -1,5 +1,6 @@
 mod scrape;
 mod storage;
+mod alert;
 
 use std::{fmt, thread, time};
 
@@ -51,7 +52,9 @@ fn main() {
 
     loop {
         let value = crate::scrape::scrape();
-        crate::storage::store(&dbconn, value);
+        crate::alert::new_data(&dbconn, &value);
+        crate::storage::store(&dbconn, &value);
+
         println!("scraped dolar data");
         thread::sleep(time::Duration::from_secs(60));
     }
