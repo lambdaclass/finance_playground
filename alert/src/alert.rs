@@ -1,14 +1,13 @@
-extern crate rusqlite;
 extern crate reqwest;
 
-use rusqlite::Connection;
-use crate::DolarValue;
+use diesel::sqlite::SqliteConnection;
+use crate::models::NewDollar;
 
 use std::collections::HashMap;
 
-pub fn new_data(conn: &Connection, new_data: &DolarValue) {
+pub fn new_data(conn: &SqliteConnection, new_data: &NewDollar) {
     let prc_change =
-        match crate::storage::get_previous_dolar(conn) {
+        match crate::storage::get_previous_dollar(conn) {
             Some(old_data) => (new_data.last - old_data.last)/old_data.last * 100.0,
             None => 0.0
         };
@@ -29,7 +28,7 @@ fn send_alert_slack(prc_change: f64) {
     let mut map = HashMap::new();
     map.insert("text", format!("Dollar changed {:+.2}%", prc_change));
     // TODO: Get Slack webhook URL from environment/argument/config
-    client.post("https://hooks.slack.com/services/")
+    client.post("https://hooks.slack.com/services/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")
         .json(&map)
         .send();
 }

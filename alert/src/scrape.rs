@@ -13,14 +13,14 @@ use select::predicate::Class;
 use serde_json::json;
 use webdriver::capabilities::Capabilities;
 
-use crate::DolarValue;
+use crate::models::NewDollar;
 
-pub fn scrape() -> DolarValue {
+pub fn scrape() -> NewDollar {
     let html = fetch_site();
 
     let document = Document::from(html.as_str());
 
-    let mut value = DolarValue::new();
+    let mut value = NewDollar::new();
 
     for node in document.find(Class("PriceCell")) {
         let full_class =
@@ -29,20 +29,20 @@ pub fn scrape() -> DolarValue {
         let class = full_class.split_whitespace().last();
 
         match class {
-            Some("bsz") => value.buy_amount = parse_u32(node.text()),
+            Some("bsz") => value.buy_amount = parse_i32(node.text()),
             Some("bid") => value.buy = parse_f64(node.text()),
             Some("ask") => value.sell = parse_f64(node.text()),
-            Some("asz") => value.sell_amount = parse_u32(node.text()),
+            Some("asz") => value.sell_amount = parse_i32(node.text()),
             Some("lst") => value.last = parse_f64(node.text()),
             Some("variation") => value.var = parse_f64(node.text()),
             Some("change") => {
                 value.varper = parse_f64(node.text().trim_end_matches("%").to_string())
             }
-            Some("von") => value.volume = parse_u32(node.text()),
+            Some("von") => value.volume = parse_i32(node.text()),
             Some("settlementPrice") => value.adjustment = parse_f64(node.text()),
             Some("low") => value.min = parse_f64(node.text()),
             Some("hgh") => value.max = parse_f64(node.text()),
-            Some("oin") => value.oin = parse_u32(node.text()),
+            Some("oin") => value.oin = parse_i32(node.text()),
             Some("futureImpliedRate") => {}
             Some(class) => {
                 panic!("Non-matching class: {}", class);
@@ -86,7 +86,7 @@ fn fetch_site() -> String {
     receiver.wait().unwrap()
 }
 
-fn parse_u32(text: String) -> u32 {
+fn parse_i32(text: String) -> i32 {
     text.replace(".", "")
         .trim()
         .parse()
