@@ -10,8 +10,8 @@ use crate::models::{Dollar, NewDollar};
 use crate::schema::dollar;
 
 pub fn establish_connection() -> SqliteConnection {
-    let database_url = env::var("DATABASE_URL")
-        .expect("DATABASE_URL must be set");
+    // We can unwrap safely because env variables are checking in main.rs::init_env()
+    let database_url = env::var("DATABASE_URL").unwrap();
     SqliteConnection::establish(&database_url)
         .expect(&format!("Error connecting to {}", database_url))
 }

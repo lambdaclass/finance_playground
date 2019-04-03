@@ -11,10 +11,10 @@ mod storage;
 mod alert;
 
 use dotenv::dotenv;
-use std::{thread, time};
+use std::{thread, time, env};
 
 fn main() {
-    dotenv().ok();
+    init_env();
     let dbconn = crate::storage::establish_connection();
 
     loop {
@@ -24,4 +24,12 @@ fn main() {
 
         thread::sleep(time::Duration::from_secs(60));
     }
+}
+
+fn init_env() {
+    dotenv().ok();
+    env::var("DATABASE_URL")
+        .expect("DATABASE_URL must be set");
+    env::var("SLACK_WEBHOOK_URL")
+        .expect("SLACK_WEBHOOK_URL must be set");
 }

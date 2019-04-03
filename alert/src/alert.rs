@@ -2,6 +2,7 @@ extern crate reqwest;
 
 use diesel::sqlite::SqliteConnection;
 use std::collections::HashMap;
+use std::env;
 use crate::models::NewDollar;
 use crate::storage;
 
@@ -26,11 +27,12 @@ fn send_alert(prc_change: f64) {
 }
 
 fn send_alert_slack(prc_change: f64) {
+    // We can unwrap safely because env variables are checking in main.rs::init_env()
+    let slack_webhook_url = env::var("DATABASE_URL").unwrap();
     let client = reqwest::Client::new();
     let mut map = HashMap::new();
     map.insert("text", format!("Dollar changed {:+.2}%", prc_change));
-    // TODO: Get Slack webhook URL from environment/argument/config
-    client.post("https://hooks.slack.com/services/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")
+    client.post(&slack_webhook_url)
         .json(&map)
         .send();
 }
