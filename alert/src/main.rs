@@ -15,12 +15,14 @@ use std::{thread, time, env};
 
 fn main() {
     init_env();
-    let dbconn = crate::storage::establish_connection();
 
     loop {
-        let value = crate::scrape::scrape();
-        crate::alert::new_data(&dbconn, &value);
-        crate::storage::store(&dbconn, &value);
+        std::thread::spawn(|| {
+            let dbconn = crate::storage::establish_connection();
+            let value = crate::scrape::scrape();
+            crate::alert::new_data(&dbconn, &value);
+            crate::storage::store(&dbconn, &value);
+        });
 
         thread::sleep(time::Duration::from_secs(60));
     }
