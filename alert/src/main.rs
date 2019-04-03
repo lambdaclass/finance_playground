@@ -10,12 +10,11 @@ mod scrape;
 mod storage;
 mod alert;
 
-use std::{thread, time};
 use dotenv::dotenv;
+use std::{thread, time};
 
 fn main() {
     dotenv().ok();
-
     let dbconn = crate::storage::establish_connection();
 
     loop {

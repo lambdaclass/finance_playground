@@ -1,14 +1,16 @@
 extern crate reqwest;
 
 use diesel::sqlite::SqliteConnection;
-use crate::models::NewDollar;
-
 use std::collections::HashMap;
+use crate::models::NewDollar;
+use crate::storage;
 
 pub fn new_data(conn: &SqliteConnection, new_data: &NewDollar) {
     let prc_change =
-        match crate::storage::get_previous_dollar(conn) {
-            Some(old_data) => (new_data.last - old_data.last)/old_data.last * 100.0,
+        match storage::get_dollar_on_close(conn) {
+            Some(old_data) => {
+                (new_data.last - old_data.last)/old_data.last * 100.0
+            },
             None => 0.0
         };
 
@@ -32,18 +34,3 @@ fn send_alert_slack(prc_change: f64) {
         .json(&map)
         .send();
 }
-
-// fn send_alert_mail(prc_change: f64) {
-//     let email = SendableEmail::new(
-//         Envelope::new(
-//             Some(EmailAddress::new("user@localhost".to_string()).unwrap()),
-//             vec![EmailAddress::new("amin.arria@lambdaclass.com".to_string()).unwrap()],
-//         ).unwrap(),
-//         format!("id-{}", prc_change),
-//         format!("Dolar changed: {}%", prc_change).into_bytes(),
-//     );
-//     let mut sender = SendmailTransport::new();
-//     let mut sender = FileTransport::new("./tmp");
-//     let result = sender.send(email);
-//     assert!(result.is_ok());
-// }
