@@ -1,10 +1,10 @@
-.PHONY: migration run diesel_cli
+.PHONY: migration run install_diesel_cli
 
 migration:
-    diesel migration run
+	diesel migration run
 
 run:
-    cargo run
+	cargo run
 
-diesel_cli:
-    cargo install diesel_cli --no-default-features --features sqlite chrono
+install_diesel_cli:
+	cargo install diesel_cli --no-default-features --features sqlite chrono
