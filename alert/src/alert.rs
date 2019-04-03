@@ -3,10 +3,10 @@ extern crate reqwest;
 use diesel::sqlite::SqliteConnection;
 use std::collections::HashMap;
 use std::env;
-use crate::models::NewDollar;
+use crate::models::Dollar;
 use crate::storage;
 
-pub fn new_data(conn: &SqliteConnection, new_data: &NewDollar) {
+pub fn new_data(conn: &SqliteConnection, new_data: &Dollar) {
     let prc_change =
         match storage::get_dollar_on_close(conn) {
             Some(old_data) => {

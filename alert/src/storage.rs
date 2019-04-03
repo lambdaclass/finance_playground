@@ -6,17 +6,17 @@ use diesel::sqlite::SqliteConnection;
 use diesel::result::Error::NotFound;
 use chrono::{Utc, NaiveDateTime, NaiveTime};
 use std::env;
-use crate::models::{Dollar, NewDollar};
+use crate::models::Dollar;
 use crate::schema::dollar;
 
 pub fn establish_connection() -> SqliteConnection {
-    // We can unwrap safely because env variables are checking in main.rs::init_env()
+    // We can unwrap safely because env variables are checked in main.rs::init_env()
     let database_url = env::var("DATABASE_URL").unwrap();
     SqliteConnection::establish(&database_url)
         .expect(&format!("Error connecting to {}", database_url))
 }
 
-pub fn store(conn: &SqliteConnection, new_dollar: &NewDollar) {
+pub fn store(conn: &SqliteConnection, new_dollar: &Dollar) {
     diesel::insert_into(dollar::table)
         .values(new_dollar)
         .execute(conn)

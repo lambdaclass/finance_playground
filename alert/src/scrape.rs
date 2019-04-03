@@ -13,14 +13,14 @@ use select::predicate::Class;
 use serde_json::json;
 use webdriver::capabilities::Capabilities;
 
-use crate::models::NewDollar;
+use crate::models::Dollar;
 
-pub fn scrape() -> NewDollar {
+pub fn scrape() -> Dollar {
     let html = fetch_site();
 
     let document = Document::from(html.as_str());
 
-    let mut value = NewDollar::new();
+    let mut value = Dollar::new();
 
     for node in document.find(Class("PriceCell")) {
         let full_class =

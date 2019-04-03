@@ -2,7 +2,8 @@ use chrono::NaiveDateTime;
 use chrono::offset::Utc;
 use crate::schema::dollar;
 
-#[derive(Queryable, Debug)]
+#[derive(Queryable, Insertable, Debug)]
+#[table_name="dollar"]
 pub struct Dollar {
     pub id: Option<i32>,
     pub buy: f64,
@@ -20,29 +21,12 @@ pub struct Dollar {
     pub created_at: NaiveDateTime
 }
 
-#[derive(Insertable)]
-#[table_name="dollar"]
-pub struct NewDollar {
-    pub buy: f64,
-    pub buy_amount: i32,
-    pub sell: f64,
-    pub sell_amount: i32,
-    pub last: f64,
-    pub var: f64,
-    pub varper: f64,
-    pub volume: i32,
-    pub adjustment: f64,
-    pub min: f64,
-    pub max: f64,
-    pub oin: i32,
-    pub created_at: NaiveDateTime
-}
-
-impl NewDollar {
-    pub fn new() -> NewDollar {
+impl Dollar {
+    pub fn new() -> Dollar {
         let created_at = Utc::now().naive_utc();
 
-        NewDollar {
+        Dollar {
+            id: None,
             buy: 0.0,
             buy_amount: 0,
             sell: 0.0,
