@@ -1,4 +1,15 @@
 table! {
+    alerts (id) {
+        id -> Nullable<Integer>,
+        created_at -> Timestamp,
+        asset -> Text,
+        previous_value -> Double,
+        current_value -> Double,
+        active -> Bool,
+    }
+}
+
+table! {
     dollar (id) {
         id -> Nullable<Integer>,
         buy -> Double,
@@ -16,3 +27,8 @@ table! {
         created_at -> Timestamp,
     }
 }
+
+allow_tables_to_appear_in_same_query!(
+    alerts,
+    dollar,
+);

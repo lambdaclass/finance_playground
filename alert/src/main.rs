@@ -20,7 +20,7 @@ fn main() {
         std::thread::spawn(|| {
             let dbconn = crate::storage::establish_connection();
             let value = crate::scrape::scrape();
-            crate::alert::new_data(&dbconn, &value);
+            crate::alert::check_dollar(&dbconn, &value);
             crate::storage::store(&dbconn, &value);
         });
 
