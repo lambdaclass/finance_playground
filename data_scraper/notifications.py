@@ -5,7 +5,7 @@ import requests
 webhook = "https://hooks.slack.com/services/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"
 payload = {
     "channel":
-    "#sandbox",
+    "#algotrading",
     "username":
     "Talebot",
     "icon_emoji":
