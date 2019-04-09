@@ -4,8 +4,8 @@ import hashlib
 import pandas as pd
 import pandas_market_calendars as mcal
 
-import utils
-from notifications import slack_notification
+from data_scraper import utils
+from data_scraper.notifications import slack_notification
 
 logger = logging.getLogger(__name__)
 

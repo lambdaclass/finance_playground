@@ -8,9 +8,8 @@ from bs4 import BeautifulSoup
 import requests
 import pandas as pd
 
-import utils
-import validation
-from notifications import slack_notification
+from data_scraper import utils, validation
+from data_scraper.notifications import slack_notification
 
 logger = logging.getLogger(__name__)
 
@@ -44,6 +43,8 @@ def fetch_data(symbols=symbols):
                 url, data=form_data, headers=headers, allow_redirects=False)
             symbol_data = requests.get(
                 file_url, cookies=response.cookies, headers=headers)
+            if symbol_data.text.startswith(" <!DOCTYPE"):
+                raise Exception
             _save_data(symbol, symbol_data.text)
         except Exception:
             msg = "Error fetching symbol {} data".format(symbol)

@@ -1,4 +1,4 @@
-.PHONY: init env testdata test scrape aggregate backup bench
+.PHONY: init env testdata test test_scraper scrape aggregate backup bench
 
 init:
 	pipenv --three && pipenv install
@@ -12,8 +12,11 @@ testdata:
 test:
 	pipenv run python -m unittest discover -s backtester/test
 
+test_scraper:
+	pipenv run python -m data_scraper -t
+
 scrape:
-	pipenv run python -m data_scraper -t $(symbols) -s $(scraper)
+	pipenv run python -m data_scraper -s $(symbols) -c $(scraper)
 
 aggregate:
 	pipenv run python -m data_scraper -a

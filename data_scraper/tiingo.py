@@ -4,9 +4,8 @@ import os
 from datetime import date
 import pandas_datareader as pdr
 
-import utils
-import validation
-from notifications import slack_notification
+from data_scraper import utils, validation
+from data_scraper.notifications import slack_notification
 
 logger = logging.getLogger(__name__)
 
