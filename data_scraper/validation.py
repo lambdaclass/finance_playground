@@ -4,7 +4,7 @@ import hashlib
 import pandas as pd
 import pandas_market_calendars as mcal
 
-from data_scraper import utils
+from data_scraper import cboe
 from data_scraper.notifications import slack_notification
 
 logger = logging.getLogger(__name__)
@@ -25,16 +25,10 @@ def file_md5(file, chunk_size=4096):
     return md5.hexdigest()
 
 
-def aggregate_data(files):
-    """Returns a dataframe of the aggregated data from `files`.
-    IMPORTANT: Concatenates data in the order found in `files`.
+def validate_dates(symbol, date_range):
+    """Compares `date_range` with NYSE trading calendar and
+    returns `True` if there are no missing days.
     """
-    df_generator = (pd.read_csv(file) for file in files)
-    return pd.concat(df_generator)
-
-
-def validate_dates(date_range):
-    """Raises exception if there are trading days NOT present in `date_range`"""
     # NYSE and CBOE have the same trading calendar
     # https://www.nyse.com/markets/hours-calendars
     # http://cfe.cboe.com/about-cfe/holiday-calendar
@@ -48,21 +42,22 @@ def validate_dates(date_range):
 
     missing_days = trading_days.difference(date_range)
     if not missing_days.empty:
-        msg = "Some trading dates where not found in the data"
-        logger.critical("%s\nMissing: %s", msg, missing_days)
+        msg = "Some trading dates where missing for symbol {}".format(symbol)
+        logger.error("%s\nMissing: %s", msg, missing_days)
         slack_notification(msg, __name__)
-        raise Exception("Trading dates missing")
+
+    return missing_days.empty
 
 
 def validate_aggregate_file(aggregate_file, daily_files):
-    """Raises exception and DELETES `aggregate_file` if it contains different
-    data from that in `daily_files`.
-    """
+    """Compares `aggregate_file` with the data from `daily_files`."""
     aggregate_df = pd.read_csv(aggregate_file)
-    recreated_df = aggregate_data(daily_files)
+    recreated_df = cboe.aggregate_data(daily_files)
 
-    if not aggregate_df.equals(recreated_df):
-        utils.remove_file(aggregate_file)
+    is_valid = aggregate_df.equals(recreated_df)
+    if not is_valid:
         msg = "Data in {} differs from the daily files".format(aggregate_file)
         logger.error(msg)
         slack_notification(msg, __name__)
+
+    return is_valid

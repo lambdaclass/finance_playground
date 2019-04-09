@@ -61,7 +61,7 @@ def aggregate_monthly_data(symbols=symbols):
         symbol_dir = os.path.join(scraper_dir, symbol + "_daily")
 
         if not os.path.exists(symbol_dir):
-            msg = "Symbol dir {} does not exist. Cannot aggregate daily data.".format(
+            msg = "Error aggregating data. Dir {} not found.".format(
                 symbol_dir)
             logger.error(msg)
             slack_notification(msg, __name__)
@@ -72,20 +72,33 @@ def aggregate_monthly_data(symbols=symbols):
             daily_files = [
                 os.path.join(symbol_dir, name) for name in file_names
             ]
-            symbol_df = validation.aggregate_data(daily_files)
+            symbol_df = aggregate_data(daily_files)
 
             date_range = symbol_df["quotedate"].unique()
-            validation.validate_dates(date_range)
+            if not validation.validate_dates(symbol, date_range):
+                continue
 
             file_name = _monthly_filename(file_names)
             monthly_file = os.path.join(scraper_dir, file_name)
             symbol_df.to_csv(monthly_file, index=False)
 
-            validation.validate_aggregate_file(monthly_file, daily_files)
+            if not validation.validate_aggregate_file(monthly_file,
+                                                      daily_files):
+                utils.remove_file(monthly_file)
+                continue
+
             logger.debug("Saved monthly data %s", monthly_file)
 
             for file in daily_files:
                 utils.remove_file(file, logger)
+
+
+def aggregate_data(files):
+    """Returns a dataframe of the aggregated data from `files`.
+    IMPORTANT: Concatenates data in the order found in `files`.
+    """
+    df_generator = (pd.read_csv(file) for file in files)
+    return pd.concat(df_generator)
 
 
 def _form_data():

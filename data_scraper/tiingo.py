@@ -27,7 +27,7 @@ def fetch_data(symbols=assets):
     for symbol in symbols:
         try:
             symbol_data = pdr.get_data_tiingo(symbol, api_key=api_key)
-            save_data(symbol, symbol_data)
+            _save_data(symbol, symbol_data)
         except ConnectionError as ce:
             msg = "Unable to connect to api.tiingo.com when fetching symbol {}".format(
                 symbol)
@@ -45,7 +45,7 @@ def fetch_data(symbols=assets):
             slack_notification(msg, __name__)
 
 
-def save_data(symbol, symbol_df):
+def _save_data(symbol, symbol_df):
     """Saves the contents of `symbol_df` to
     `$SAVE_DATA_PATH/tiingo/{symbol}_{%date}.csv`"""
     filename = date.today().strftime(symbol + "_%Y%m%d.csv")
@@ -62,10 +62,9 @@ def save_data(symbol, symbol_df):
             file_path, symbol_df.to_csv()):
         logger.debug("File %s already downloaded", file_path)
     else:
-        validation.validate_dates(symbol_df["date"])
+        if validation.validate_dates(symbol, symbol_df["date"]):
+            pattern = symbol + "_*"
+            utils.remove_files(scraper_dir, pattern, logger)
 
-        pattern = symbol + "_*"
-        utils.remove_files(scraper_dir, pattern, logger)
-
-        symbol_df.to_csv(file_path)
-        logger.debug("Saved symbol data as %s", file_path)
+            symbol_df.to_csv(file_path)
+            logger.debug("Saved symbol data as %s", file_path)
