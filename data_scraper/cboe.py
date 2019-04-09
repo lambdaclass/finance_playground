@@ -67,7 +67,11 @@ def aggregate_monthly_data(symbols=symbols):
             slack_notification(msg, __name__)
             continue
 
-        for month, files in groupby(os.listdir(symbol_dir), _monthly_grouper):
+        symbol_files = [
+            file for file in os.listdir(symbol_dir) if file.endswith(".csv")
+        ]
+
+        for month, files in groupby(symbol_files, _monthly_grouper):
             file_names = list(files)
             daily_files = [
                 os.path.join(symbol_dir, name) for name in file_names
