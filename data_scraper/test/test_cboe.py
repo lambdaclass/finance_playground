@@ -36,15 +36,14 @@ class TestCBOE(unittest.TestCase):
         spy_dir = os.path.join(TestCBOE.cboe_data_path, "SPY_daily")
         self.addCleanup(TestCBOE.remove_files, spy_dir)
 
-        with self.assertTrue(os.path.exists(spy_dir)):
-            file_name = "SPY_" + pd.Timestamp.today().strftime(
-                "%Y%m%d") + ".csv"
-            file_path = os.path.join(spy_dir, file_name)
-            spy_df = pd.read_csv(file_path, parse_dates=["quotedate"])
-            self.assertTrue(all(spy_df["underlying"] == "SPX"))
-            self.assertEqual(spy_df["quotedate"].nunique(), 1)
-            counts = spy_df["type"].value_counts()
-            self.assertEqual(counts["put"] + counts["call"], len(spy_df))
+        self.assertTrue(os.path.exists(spy_dir))
+        file_name = "SPY_" + pd.Timestamp.today().strftime("%Y%m%d") + ".csv"
+        file_path = os.path.join(spy_dir, file_name)
+        spy_df = pd.read_csv(file_path, parse_dates=["quotedate"])
+        self.assertTrue(all(spy_df["underlying"] == "SPX"))
+        self.assertEqual(spy_df["quotedate"].nunique(), 1)
+        counts = spy_df["type"].value_counts()
+        self.assertEqual(counts["put"] + counts["call"], len(spy_df))
 
     @patch("data_scraper.cboe.slack_notification", return_value=None)
     def test_fetch_invalid_symbol(self, mocked_notification):
