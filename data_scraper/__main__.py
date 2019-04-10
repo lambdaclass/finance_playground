@@ -21,7 +21,6 @@ parser.add_argument(
     help="Aggregate daily data files")
 parser.add_argument(
     "-b", "--backup", action="store_true", help="Backup files in S3 bucket")
-parser.add_argument("-t", "--test", action="store_true", help="Run tests")
 
 args = parser.parse_args()
 module_dir = os.path.join(os.getcwd(), os.path.dirname(__file__))
