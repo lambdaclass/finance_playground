@@ -13,7 +13,7 @@ test:
 	pipenv run python -m unittest discover -s backtester/test
 
 test_scraper:
-	pipenv run python -m data_scraper -t
+	pipenv run python -m unittest discover -s data_scraper
 
 scrape:
 	pipenv run python -m data_scraper -s $(symbols) -c $(scraper)

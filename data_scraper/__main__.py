@@ -5,9 +5,9 @@ import argparse
 from data_scraper import cboe, tiingo
 
 parser = argparse.ArgumentParser(prog="data_scraper.py")
-parser.add_argument("-s", "--symbols", nargs="+", help="Symbols to fetch")
+parser.add_argument("-t", "--symbols", nargs="+", help="Symbols to fetch")
 parser.add_argument(
-    "-c",
+    "-s",
     "--scraper",
     choices=["cboe", "tiingo"],
     default="cboe",
@@ -38,15 +38,6 @@ if args.aggregate:
 elif args.backup:
     pass
     # backup_data()
-elif args.test:
-    import unittest
-
-    logging.disable(level=logging.CRITICAL)
-    loader = unittest.TestLoader()
-    test_dir = os.path.join(module_dir, "test")
-    suite = loader.discover(start_dir=test_dir)
-    runner = unittest.TextTestRunner()
-    runner.run(suite)
 else:
     if args.scraper == "tiingo":
         scraper = tiingo
