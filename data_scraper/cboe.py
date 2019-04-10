@@ -23,7 +23,7 @@ def fetch_data(symbols=symbols):
         form_data = _form_data()
     except requests.ConnectionError as ce:
         msg = "Connection error trying to reach {}".format(url)
-        logger.error(msg, exc_info=True)
+        logger.error(msg)
         slack_notification(msg, __name__)
         raise (ce)
     except Exception as e:
@@ -58,32 +58,36 @@ def aggregate_monthly_data(symbols=symbols):
     scraper_dir = os.path.join(save_data_path, "cboe")
 
     for symbol in symbols:
-        symbol_dir = os.path.join(scraper_dir, symbol + "_daily")
-
-        if not os.path.exists(symbol_dir):
-            msg = "Error aggregating data. Dir {} not found.".format(
-                symbol_dir)
+        daily_dir = os.path.join(scraper_dir, symbol + "_daily")
+        if not os.path.exists(daily_dir):
+            msg = "Error aggregating data. Dir {} not found.".format(daily_dir)
             logger.error(msg)
             slack_notification(msg, __name__)
             continue
 
+        monthly_dir = os.path.join(scraper_dir, symbol)
+
         symbol_files = [
-            file for file in os.listdir(symbol_dir) if file.endswith(".csv")
+            file for file in os.listdir(daily_dir) if file.endswith(".csv")
         ]
 
         for month, files in groupby(symbol_files, _monthly_grouper):
             file_names = list(files)
             daily_files = [
-                os.path.join(symbol_dir, name) for name in file_names
+                os.path.join(daily_dir, name) for name in file_names
             ]
-            symbol_df = aggregate_data(daily_files)
+            symbol_df = concatenate_files(daily_files)
 
-            date_range = symbol_df["quotedate"].unique()
+            date_range = pd.to_datetime(symbol_df["quotedate"].unique())
             if not validation.validate_dates(symbol, date_range):
                 continue
 
+            if not os.path.exists(monthly_dir):
+                os.makedirs(monthly_dir)
+                logger.debug("Symbol dir %s created", monthly_dir)
+
             file_name = _monthly_filename(file_names)
-            monthly_file = os.path.join(scraper_dir, file_name)
+            monthly_file = os.path.join(monthly_dir, file_name)
             symbol_df.to_csv(monthly_file, index=False)
 
             if not validation.validate_aggregate_file(monthly_file,
@@ -97,12 +101,10 @@ def aggregate_monthly_data(symbols=symbols):
                 utils.remove_file(file, logger)
 
 
-def aggregate_data(files):
-    """Returns a dataframe of the aggregated data from `files`.
-    IMPORTANT: Concatenates data in the order found in `files`.
-    """
-    df_generator = (pd.read_csv(file) for file in files)
-    return pd.concat(df_generator)
+def concatenate_files(files):
+    """Returns a dataframe of the concatenated data from `files`."""
+    df_generator = (pd.read_csv(file) for file in sorted(files))
+    return pd.concat(df_generator, ignore_index=True)
 
 
 def _form_data():

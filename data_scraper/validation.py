@@ -33,9 +33,10 @@ def validate_dates(symbol, date_range):
     # https://www.nyse.com/markets/hours-calendars
     # http://cfe.cboe.com/about-cfe/holiday-calendar
     nyse = mcal.get_calendar("NYSE")
-    start_date = date_range.min()
-    end_date = date_range.max()
-    trading_days = nyse.valid_days(start_date=start_date, end_date=end_date)
+    first_date = date_range[0]
+    period = pd.Period(year=first_date.year, month=first_date.month, freq="M")
+    trading_days = nyse.valid_days(
+        start_date=period.start_time, end_date=period.end_time)
 
     # Remove timezone info
     trading_days = trading_days.tz_convert(None)
@@ -52,7 +53,7 @@ def validate_dates(symbol, date_range):
 def validate_aggregate_file(aggregate_file, daily_files):
     """Compares `aggregate_file` with the data from `daily_files`."""
     aggregate_df = pd.read_csv(aggregate_file)
-    recreated_df = cboe.aggregate_data(daily_files)
+    recreated_df = cboe.concatenate_files(daily_files)
 
     is_valid = aggregate_df.equals(recreated_df)
     if not is_valid:
