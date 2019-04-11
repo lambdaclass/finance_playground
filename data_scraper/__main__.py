@@ -2,7 +2,7 @@ import logging.config
 import os
 import argparse
 
-from data_scraper import cboe, tiingo
+from data_scraper import cboe, tiingo, backup
 
 parser = argparse.ArgumentParser(prog="data_scraper.py")
 parser.add_argument("-t", "--symbols", nargs="+", help="Symbols to fetch")
@@ -35,8 +35,7 @@ if args.aggregate:
     else:
         cboe.aggregate_monthly_data()
 elif args.backup:
-    pass
-    # backup_data()
+    backup.backup_data()
 else:
     if args.scraper == "tiingo":
         scraper = tiingo

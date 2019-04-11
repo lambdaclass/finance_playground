@@ -29,13 +29,15 @@ class TestTiingo(unittest.TestCase):
         if cls.save_data_path:
             os.environ["SAVE_DATA_PATH"] = cls.save_data_path
 
-    def test_fetch_gld(self):
+    @patch("data_scraper.tiingo.slack_report", return_value=None)
+    def test_fetch_gld(self, mocked_report):
         """Fetch GLD data"""
         tiingo.fetch_data(["GLD"])
         gld_dir = os.path.join(TestTiingo.tiingo_data_path, "GLD")
         self.addCleanup(TestTiingo.remove_files, gld_dir)
 
         if self.assertTrue(os.path.exists(gld_dir)):
+            self.assertTrue(mocked_report.called)
             file_name = "GLD_" + pd.Timestamp.today().strftime(
                 "%Y%m%d") + ".csv"
             file_path = os.path.join(gld_dir, file_name)
@@ -48,11 +50,13 @@ class TestTiingo(unittest.TestCase):
             ]
             self.assertEqual(gld_df.columns, expected_columns)
 
+    @patch("data_scraper.tiingo.slack_report", return_value=None)
     @patch("data_scraper.tiingo.slack_notification", return_value=None)
-    def test_fetch_invalid_symbol(self, mocked_notification):
+    def test_fetch_invalid_symbol(self, mocked_notification, mocked_report):
         """Fetching invalid symbol data should send notification"""
         tiingo.fetch_data(["FOOBAR"])
         self.assertTrue(mocked_notification.called)
+        self.assertTrue(mocked_report.called)
 
     @patch("data_scraper.tiingo.pdr.get_data_tiingo")  # mock pandas_datareader
     @patch("data_scraper.tiingo.slack_notification", return_value=None)

@@ -9,7 +9,7 @@ import requests
 import pandas as pd
 
 from data_scraper import utils, validation
-from data_scraper.notifications import slack_notification
+from data_scraper.notifications import slack_notification, slack_report
 
 logger = logging.getLogger(__name__)
 
@@ -36,6 +36,8 @@ def fetch_data(symbols=symbols):
     file_url = "http://www.cboe.com/delayedquote/quotedata.dat"
 
     symbols = [symbol.upper() for symbol in symbols]
+    done, failed = [], []
+
     for symbol in symbols:
         form_data["ctl00$ContentTop$C005$txtTicker"] = symbol
         try:
@@ -46,16 +48,27 @@ def fetch_data(symbols=symbols):
             if symbol_data.text.startswith(" <!DOCTYPE"):
                 raise Exception
             _save_data(symbol, symbol_data.text)
+            done.append(symbol)
         except Exception:
+            failed.append(symbol)
             msg = "Error fetching symbol {} data".format(symbol)
             logger.error(msg, exc_info=True)
             slack_notification(msg, __name__)
+
+    if len(done) > 0:
+        msg = "Successfully scraped symbols: " + ", ".join(done)
+        slack_report(msg, __name__)
+    if len(failed) > 0:
+        msg = "Failed to scrape symbols: " + ", ".join(failed)
+        slack_report(msg, __name__)
 
 
 def aggregate_monthly_data(symbols=symbols):
     """Aggregate daily snapshots into monthly files and validate data"""
     save_data_path = utils.get_save_data_path()
     scraper_dir = os.path.join(save_data_path, "cboe")
+
+    symbols = [symbol.upper() for symbol in symbols]
 
     for symbol in symbols:
         daily_dir = os.path.join(scraper_dir, symbol + "_daily")

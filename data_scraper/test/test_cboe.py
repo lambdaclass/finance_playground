@@ -30,13 +30,15 @@ class TestCBOE(unittest.TestCase):
         if cls.save_data_path:
             os.environ["SAVE_DATA_PATH"] = cls.save_data_path
 
-    def test_fetch_spy(self):
+    @patch("data_scraper.cboe.slack_report", return_value=None)
+    def test_fetch_spy(self, mocked_report):
         """Fetch todays SPY quote"""
         cboe.fetch_data(["SPY"])
         spy_dir = os.path.join(TestCBOE.cboe_data_path, "SPY_daily")
         self.addCleanup(TestCBOE.remove_files, spy_dir)
 
         if self.assertTrue(os.path.exists(spy_dir)):
+            self.assertTrue(mocked_report.called)
             file_name = "SPY_" + pd.Timestamp.today().strftime(
                 "%Y%m%d") + ".csv"
             file_path = os.path.join(spy_dir, file_name)
@@ -46,11 +48,13 @@ class TestCBOE(unittest.TestCase):
             counts = spy_df["type"].value_counts()
             self.assertEqual(counts["put"] + counts["call"], len(spy_df))
 
+    @patch("data_scraper.cboe.slack_report", return_value=None)
     @patch("data_scraper.cboe.slack_notification", return_value=None)
-    def test_fetch_invalid_symbol(self, mocked_notification):
+    def test_fetch_invalid_symbol(self, mocked_notification, mocked_report):
         """Fetching invalid symbol should send notification"""
         cboe.fetch_data(["FOOBAR"])
         self.assertTrue(mocked_notification.called)
+        self.assertTrue(mocked_report.called)
 
     @patch("data_scraper.cboe.url", new="http://www.aldkfjaskldfjsa.com")
     @patch("data_scraper.cboe.slack_notification", return_value=None)

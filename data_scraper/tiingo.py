@@ -5,7 +5,7 @@ from datetime import date
 import pandas_datareader as pdr
 
 from data_scraper import utils, validation
-from data_scraper.notifications import slack_notification
+from data_scraper.notifications import slack_notification, slack_report
 
 logger = logging.getLogger(__name__)
 
@@ -24,10 +24,13 @@ def fetch_data(symbols=assets):
     api_key = utils.get_environment_var("TIINGO_API_KEY")
 
     symbols = [symbol.upper() for symbol in symbols]
+    done, failed = [], []
+
     for symbol in symbols:
         try:
             symbol_data = pdr.get_data_tiingo(symbol, api_key=api_key)
             _save_data(symbol, symbol_data.reset_index())
+            done.append(symbol)
         except ConnectionError as ce:
             msg = "Unable to connect to api.tiingo.com when fetching symbol {}".format(
                 symbol)
@@ -36,13 +39,21 @@ def fetch_data(symbols=assets):
             raise ce
         except TypeError:
             # pandas_datareader raises TypeError when fetching invalid symbol
+            failed.append(symbol)
             msg = "Attempted to fetch invalid symbol {}".format(symbol)
-            logger.error(msg, exc_info=True)
+            logger.error(msg)
             slack_notification(msg, __name__)
         except Exception:
             msg = "Error fetching symbol {}".format(symbol)
             logger.error(msg, exc_info=True)
             slack_notification(msg, __name__)
+
+    if len(done) > 0:
+        msg = "Successfully scraped symbols: " + ", ".join(done)
+        slack_report(msg, __name__)
+    if len(failed) > 0:
+        msg = "Failed to scrape symbols: " + ", ".join(failed)
+        slack_report(msg, __name__)
 
 
 def _save_data(symbol, symbol_df):
