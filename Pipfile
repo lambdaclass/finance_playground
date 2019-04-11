@@ -11,5 +11,6 @@ altair = "*"
 jupyter = "*"
 pandas-datareader = "*"
 pandas-market-calendars = "*"
+boto3 = "*"
 
 [dev-packages]
