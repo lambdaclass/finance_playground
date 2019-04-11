@@ -25,6 +25,8 @@ pub fn check_dollar(conn: &SqliteConnection, dollar: &Dollar) {
                 if closing_prc_change.abs() > 3.0 {
                     // If we couldn't unwrap closing_prc_change == 0.0
                     let dollar_close = dollar_close.unwrap();
+                    let new_alert = Alert::new("dollar".to_string(), dollar_alert.previous_value, dollar.last);
+                    storage::replace_alert(conn, &dollar_alert, &new_alert);
                     send_updated_alert(dollar_close.last, dollar_alert.current_value, dollar.last, alert_prc_change, closing_prc_change);
                 } else {
                     storage::deactivate_alert(conn, &dollar_alert);

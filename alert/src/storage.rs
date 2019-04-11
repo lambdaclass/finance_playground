@@ -62,3 +62,9 @@ pub fn deactivate_alert(conn: &SqliteConnection, alert: &Alert) {
         .execute(conn)
         .expect("Error deactivating alert");
 }
+
+pub fn replace_alert(conn: &SqliteConnection, old_alert: &Alert, new_alert: &Alert) {
+    // TODO: Do this operations inside a transaction for atomicity
+    store_alert(conn, new_alert);
+    deactivate_alert(conn, old_alert);
+}
