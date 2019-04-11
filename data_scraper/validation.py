@@ -5,7 +5,6 @@ import pandas as pd
 import pandas_market_calendars as mcal
 
 from data_scraper import cboe
-from data_scraper.notifications import slack_notification
 
 logger = logging.getLogger(__name__)
 
@@ -25,9 +24,9 @@ def file_md5(file, chunk_size=4096):
     return md5.hexdigest()
 
 
-def validate_dates(symbol, date_range):
-    """Compares `date_range` with NYSE trading calendar and
-    returns `True` if there are no missing days.
+def validate_dates_in_month(symbol, date_range):
+    """Compares `date_range` (month) with NYSE trading calendar.
+    Returns `True` if there are no missing days.
     """
     # NYSE and CBOE have the same trading calendar
     # https://www.nyse.com/markets/hours-calendars
@@ -39,13 +38,32 @@ def validate_dates(symbol, date_range):
         start_date=period.start_time, end_date=period.end_time)
 
     # Remove timezone info
-    trading_days = trading_days.tz_convert(None)
-
+    trading_days = trading_days.tz_convert(tz=None)
     missing_days = trading_days.difference(date_range)
+
     if not missing_days.empty:
-        msg = "Some trading dates where missing for symbol {}".format(symbol)
-        logger.error("%s\nMissing: %s", msg, missing_days)
-        slack_notification(msg, __name__)
+        logger.error("Error validating monthly dates. Missing: %s",
+                     missing_days)
+    return missing_days.empty
+
+
+def validate_historical_dates(symbol, date_range):
+    """Compares `date_range` (any time range) with trading calendar.
+    Returns `True` if there are no missing days.
+    """
+    nyse = mcal.get_calendar("NYSE")
+    start_date = date_range.min()
+    end_date = date_range.max()
+    trading_days = nyse.valid_days(start_date=start_date, end_date=end_date)
+
+    # Remove timezone info
+    trading_days = trading_days.tz_convert(tz=None)
+    date_range = date_range.dt.tz_convert(tz=None)
+    missing_days = trading_days.difference(date_range)
+
+    if not missing_days.empty:
+        logger.error("Error validating historical dates. Missing: %s",
+                     missing_days)
 
     return missing_days.empty
 
@@ -55,10 +73,4 @@ def validate_aggregate_file(aggregate_file, daily_files):
     aggregate_df = pd.read_csv(aggregate_file)
     recreated_df = cboe.concatenate_files(daily_files)
 
-    is_valid = aggregate_df.equals(recreated_df)
-    if not is_valid:
-        msg = "Data in {} differs from the daily files".format(aggregate_file)
-        logger.error(msg)
-        slack_notification(msg, __name__)
-
-    return is_valid
+    return aggregate_df.equals(recreated_df)

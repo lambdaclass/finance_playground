@@ -27,7 +27,7 @@ def fetch_data(symbols=assets):
     for symbol in symbols:
         try:
             symbol_data = pdr.get_data_tiingo(symbol, api_key=api_key)
-            _save_data(symbol, symbol_data)
+            _save_data(symbol, symbol_data.reset_index())
         except ConnectionError as ce:
             msg = "Unable to connect to api.tiingo.com when fetching symbol {}".format(
                 symbol)
@@ -47,24 +47,24 @@ def fetch_data(symbols=assets):
 
 def _save_data(symbol, symbol_df):
     """Saves the contents of `symbol_df` to
-    `$SAVE_DATA_PATH/tiingo/{symbol}_{%date}.csv`"""
+    `$SAVE_DATA_PATH/tiingo/{symbol}/{symbol}_{%date}.csv`"""
     filename = date.today().strftime(symbol + "_%Y%m%d.csv")
 
     save_data_path = utils.get_save_data_path()
-    scraper_dir = os.path.join(save_data_path, "tiingo")
+    symbol_dir = os.path.join(save_data_path, "tiingo", symbol)
 
-    if not os.path.exists(scraper_dir):
-        os.makedirs(scraper_dir)
-        logger.debug("Scraper dir %s created", scraper_dir)
-    file_path = os.path.join(scraper_dir, filename)
+    if not os.path.exists(symbol_dir):
+        os.makedirs(symbol_dir)
+        logger.debug("Symbol dir %s created", symbol_dir)
+    file_path = os.path.join(symbol_dir, filename)
 
     if os.path.exists(file_path) and validation.file_hash_matches_data(
             file_path, symbol_df.to_csv()):
         logger.debug("File %s already downloaded", file_path)
     else:
-        if validation.validate_dates(symbol, symbol_df["date"]):
+        if validation.validate_historical_dates(symbol, symbol_df["date"]):
             pattern = symbol + "_*"
-            utils.remove_files(scraper_dir, pattern, logger)
+            utils.remove_files(symbol_dir, pattern, logger)
 
-            symbol_df.to_csv(file_path)
+            symbol_df.to_csv(file_path, index=False)
             logger.debug("Saved symbol data as %s", file_path)

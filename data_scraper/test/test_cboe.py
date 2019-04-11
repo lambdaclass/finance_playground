@@ -36,14 +36,15 @@ class TestCBOE(unittest.TestCase):
         spy_dir = os.path.join(TestCBOE.cboe_data_path, "SPY_daily")
         self.addCleanup(TestCBOE.remove_files, spy_dir)
 
-        self.assertTrue(os.path.exists(spy_dir))
-        file_name = "SPY_" + pd.Timestamp.today().strftime("%Y%m%d") + ".csv"
-        file_path = os.path.join(spy_dir, file_name)
-        spy_df = pd.read_csv(file_path, parse_dates=["quotedate"])
-        self.assertTrue(all(spy_df["underlying"] == "SPX"))
-        self.assertEqual(spy_df["quotedate"].nunique(), 1)
-        counts = spy_df["type"].value_counts()
-        self.assertEqual(counts["put"] + counts["call"], len(spy_df))
+        if self.assertTrue(os.path.exists(spy_dir)):
+            file_name = "SPY_" + pd.Timestamp.today().strftime(
+                "%Y%m%d") + ".csv"
+            file_path = os.path.join(spy_dir, file_name)
+            spy_df = pd.read_csv(file_path, parse_dates=["quotedate"])
+            self.assertTrue(all(spy_df["underlying"] == "SPX"))
+            self.assertEqual(spy_df["quotedate"].nunique(), 1)
+            counts = spy_df["type"].value_counts()
+            self.assertEqual(counts["put"] + counts["call"], len(spy_df))
 
     @patch("data_scraper.cboe.slack_notification", return_value=None)
     def test_fetch_invalid_symbol(self, mocked_notification):
@@ -60,7 +61,7 @@ class TestCBOE(unittest.TestCase):
             self.assertTrue(mocked_notification.called)
 
     @patch("data_scraper.cboe.utils.remove_file", return_value=None)
-    @patch("data_scraper.validation.slack_notification", return_value=None)
+    @patch("data_scraper.cboe.slack_notification", return_value=None)
     def test_data_aggregation(self, mocked_notification, mocked_remove):
         """Test data aggregation happy path"""
         cboe.aggregate_monthly_data(["SPX"])
@@ -70,13 +71,13 @@ class TestCBOE(unittest.TestCase):
         self.assertTrue(mocked_remove.called)
         self.assertFalse(mocked_notification.called)
 
-        self.assertTrue(os.path.exists(aggregate_file))
-        spx_df = pd.read_csv(TestCBOE.spx_data_path)
-        aggregate_df = pd.read_csv(aggregate_file)
-        self.assertTrue(spx_df.equals(aggregate_df))
+        if self.assertTrue(os.path.exists(aggregate_file)):
+            spx_df = pd.read_csv(TestCBOE.spx_data_path)
+            aggregate_df = pd.read_csv(aggregate_file)
+            self.assertTrue(spx_df.equals(aggregate_df))
 
     @patch("data_scraper.cboe.utils.remove_file", return_value=None)
-    @patch("data_scraper.validation.slack_notification", return_value=None)
+    @patch("data_scraper.cboe.slack_notification", return_value=None)
     def test_aggregate_missing_days(self, mocked_notification, mocked_remove):
         """Data aggregation should send notification when there are missing days"""
         cboe.aggregate_monthly_data(["GOOG"])

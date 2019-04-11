@@ -79,7 +79,13 @@ def aggregate_monthly_data(symbols=symbols):
             symbol_df = concatenate_files(daily_files)
 
             date_range = pd.to_datetime(symbol_df["quotedate"].unique())
-            if not validation.validate_dates(symbol, date_range):
+            if not validation.validate_dates_in_month(symbol, date_range):
+                today = pd.Timestamp.today()
+                first_date = date_range[0]
+                if first_date.year != today.year or first_date.month != today.month:
+                    msg = "Some trading dates where missing for symbol {}".format(
+                        symbol)
+                    slack_notification(msg, __name__)
                 continue
 
             if not os.path.exists(monthly_dir):
@@ -93,6 +99,10 @@ def aggregate_monthly_data(symbols=symbols):
             if not validation.validate_aggregate_file(monthly_file,
                                                       daily_files):
                 utils.remove_file(monthly_file)
+                msg = "Data in {} differs from the daily files".format(
+                    monthly_file)
+                logger.error(msg)
+                slack_notification(msg, __name__)
                 continue
 
             logger.debug("Saved monthly data %s", monthly_file)
