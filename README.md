@@ -41,9 +41,9 @@ $> make test
 ### Scrape data (supported scrapers: CBOE, Tiingo)
 
 ```shell
-$> make scrape symbols=msft,goog scraper=cboe
+$> make scrape scraper=cboe
 
-$> make scrape symbols=voo scraper=tiingo
+$> make scrape scraper=tiingo
 ```
 
 ### Run backtester with benchmark strategy

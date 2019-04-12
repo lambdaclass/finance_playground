@@ -25,7 +25,11 @@ test_scraper:
 	pipenv run python -m unittest discover -s data_scraper
 
 scrape:
-	pipenv run python -m data_scraper -t $(symbols) -s $(scraper) -v
+ifdef scraper
+	pipenv run python -m data_scraper -s $(scraper) -v
+else
+	pipenv run python -m data_scraper -v
+endif
 
 aggregate:
 	pipenv run python -m data_scraper -a
