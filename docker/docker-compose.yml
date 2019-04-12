@@ -5,4 +5,4 @@ services:
     image: data_scraper:latest
     container_name: data_scraper
     volumes:
-      - ~/work/algo-trading/data:/finance/data
+      - ~/finance/data:/finance/data
