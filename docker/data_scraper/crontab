@@ -1,0 +1,1 @@
+0 10 * * 1-5 cd /finance && make scrape scraper=cboe; make scrape scraper=tiingo 

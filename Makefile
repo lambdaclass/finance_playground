@@ -1,4 +1,13 @@
-.PHONY: init env testdata test test_scraper scrape aggregate backup bench
+.PHONY: image init env testdata test test_scraper scrape aggregate backup bench
+
+image:
+	docker build -t data_scraper -f ./docker/data_scraper/Dockerfile .
+
+ops:
+	docker-compose -f ./docker/docker-compose.yml up -d
+
+stop:
+	docker-compose -f ./docker/docker-compose.yml down
 
 init:
 	pipenv --three && pipenv install
@@ -16,7 +25,7 @@ test_scraper:
 	pipenv run python -m unittest discover -s data_scraper
 
 scrape:
-	pipenv run python -m data_scraper -t $(symbols) -s $(scraper)
+	pipenv run python -m data_scraper -t $(symbols) -s $(scraper) -v
 
 aggregate:
 	pipenv run python -m data_scraper -a

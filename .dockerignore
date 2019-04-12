@@ -1,0 +1,9 @@
+notebooks/
+backtester/
+data/
+.git/
+.vscode/
+.gitignore
+.dockerignore
+*.log
+scratch*
