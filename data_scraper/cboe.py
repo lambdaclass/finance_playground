@@ -9,7 +9,7 @@ import requests
 import pandas as pd
 
 from data_scraper import utils, validation
-from data_scraper.notifications import slack_notification, slack_report
+from data_scraper.notifications import slack_notification, Status
 
 logger = logging.getLogger(__name__)
 
@@ -58,10 +58,10 @@ def fetch_data(symbols=symbols):
 
     if len(done) > 0:
         msg = "Successfully scraped symbols: " + ", ".join(done)
-        slack_report(msg, __name__)
+        slack_notification(msg, __name__, status=Status.Success)
     if len(failed) > 0:
         msg = "Failed to scrape symbols: " + ", ".join(failed)
-        slack_report(msg, __name__)
+        slack_notification(msg, __name__, status=Status.Warning)
 
 
 def aggregate_monthly_data(symbols=symbols):

@@ -5,7 +5,7 @@ import boto3
 from botocore.exceptions import ClientError
 
 from data_scraper import utils
-from data_scraper.notifications import slack_notification, slack_report
+from data_scraper.notifications import slack_notification, Status
 
 logger = logging.getLogger(__name__)
 
@@ -49,7 +49,7 @@ def backup_data():
 
     symbols = [os.path.basename(folder) for folder in folders]
     msg = "Successful backup of symbols: " + ", ".join(symbols)
-    slack_report(msg, __name__)
+    slack_notification(msg, __name__, status=Status.Success)
 
 
 def _upload_folder(bucket, folder, data_path):

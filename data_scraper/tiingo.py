@@ -6,7 +6,7 @@ import pandas as pd
 import pandas_datareader as pdr
 
 from data_scraper import utils, validation
-from data_scraper.notifications import slack_notification, slack_report
+from data_scraper.notifications import slack_notification, Status
 
 logger = logging.getLogger(__name__)
 
@@ -52,10 +52,10 @@ def fetch_data(symbols=assets):
 
     if len(done) > 0:
         msg = "Successfully scraped symbols: " + ", ".join(done)
-        slack_report(msg, __name__)
+        slack_notification(msg, __name__, status=Status.Success)
     if len(failed) > 0:
         msg = "Failed to scrape symbols: " + ", ".join(failed)
-        slack_report(msg, __name__)
+        slack_notification(msg, __name__, status=Status.Warning)
 
 
 def _save_data(symbol, symbol_df):
