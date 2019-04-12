@@ -47,13 +47,14 @@ def fetch_data(symbols=symbols):
                 file_url, cookies=response.cookies, headers=headers)
             if symbol_data.text.startswith(" <!DOCTYPE"):
                 raise Exception
-            _save_data(symbol, symbol_data.text)
-            done.append(symbol)
         except Exception:
             failed.append(symbol)
             msg = "Error fetching symbol {} data".format(symbol)
             logger.error(msg, exc_info=True)
             slack_notification(msg, __name__)
+        else:
+            _save_data(symbol, symbol_data.text)
+            done.append(symbol)
 
     if len(done) > 0:
         msg = "Successfully scraped symbols: " + ", ".join(done)
@@ -89,7 +90,13 @@ def aggregate_monthly_data(symbols=symbols):
             daily_files = [
                 os.path.join(daily_dir, name) for name in file_names
             ]
-            symbol_df = concatenate_files(daily_files)
+            try:
+                symbol_df = _concatenate_files(daily_files)
+            except Exception:
+                msg = "Error concatenating daily files"
+                logger.error(msg, exc_info=True)
+                slack_notification(msg, __name__)
+                continue
 
             date_range = pd.to_datetime(symbol_df["quotedate"].unique())
             if not validation.validate_dates_in_month(symbol, date_range):
@@ -124,7 +131,7 @@ def aggregate_monthly_data(symbols=symbols):
                 utils.remove_file(file, logger)
 
 
-def concatenate_files(files):
+def _concatenate_files(files):
     """Returns a dataframe of the concatenated data from `files`."""
     df_generator = (pd.read_csv(file) for file in sorted(files))
     return pd.concat(df_generator, ignore_index=True)

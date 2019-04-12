@@ -5,6 +5,7 @@ import pandas as pd
 import pandas_market_calendars as mcal
 
 from data_scraper import cboe
+from data_scraper.notifications import slack_notification
 
 logger = logging.getLogger(__name__)
 
@@ -66,6 +67,22 @@ def validate_historical_dates(symbol, date_range):
                      missing_days)
 
     return missing_days.empty
+
+
+def validate_columns(expected, received):
+    """Verify that the `received` columns scraped are equal to `expected`"""
+    valid = all(expected == received)
+
+    if not valid:
+        expected_cols = ", ".join(expected)
+        received_cols = ", ".join(received)
+        msg = """Columns expected differ from those received.
+            Expected: {}
+            Received: {}""".format(expected_cols, received_cols)
+        logger.error(msg)
+        slack_notification(msg, __name__)
+
+    return valid
 
 
 def validate_aggregate_file(aggregate_file, daily_files):
