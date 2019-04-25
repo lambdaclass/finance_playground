@@ -1,1 +1,2 @@
-0 18 * * 1-5 cd /finance && make scrape scraper=cboe && make scrape scraper=tiingo && make backup
+0 18 * * 1-5 root cd /finance && make scrape scraper=cboe && make scrape scraper=tiingo && make backup
+
