@@ -43,13 +43,38 @@ def backup_data():
             for folder in os.listdir(tiingo_data)
         ]
 
-    folders = cboe_folders + tiingo_folders
-    for folder in folders:
-        _upload_folder(bucket, folder, data_path)
+    done_cboe, fail_cboe = _upload_folders(
+        bucket, "cboe", cboe_folders, remove_files=False)
+    done_tiingo, fail_tiingo = _upload_folders(
+        bucket, "tiingo", tiingo_folders, remove_files=True)
 
-    symbols = [os.path.basename(folder) for folder in folders]
-    msg = "Successful backup of symbols: " + ", ".join(symbols)
-    slack_notification(msg, __name__, status=Status.Success)
+    done = done_cboe + done_tiingo
+    failed = fail_cboe + fail_tiingo
+    if len(done) > 0:
+        msg = "Successful backup of symbols: " + ", ".join(done)
+        slack_notification(msg, __name__, status=Status.Success)
+    if len(failed) > 0:
+        msg = "Unable to backup symbols: " + ", ".join(done)
+        slack_notification(msg, __name__, status=Status.Warning)
+
+
+def _upload_folders(bucket, scraper, folders, remove_files=False):
+    """Uploads folders to S3 bucket and (optionally) removes old files"""
+    data_path = utils.get_save_data_path()
+    done, failed = [], []
+
+    for folder in folders:
+        symbol = os.path.basename(folder)
+        try:
+            if remove_files:
+                _remove_old_files(bucket, prefix=scraper + "/" + symbol)
+            _upload_folder(bucket, folder, data_path)
+        except Exception:
+            failed.append(os.path.basename(folder))
+        else:
+            done.append(os.path.basename(folder))
+
+    return (done, failed)
 
 
 def _upload_folder(bucket, folder, data_path):
@@ -81,3 +106,9 @@ def _key_exists(bucket, key):
     except ClientError as e:
         return int(e.response["Error"]["Code"]) != 404
     return False
+
+
+def _remove_old_files(bucket, prefix):
+    old_files = bucket.objects.filter(Prefix=prefix)
+    for file in old_files:
+        file.delete()
