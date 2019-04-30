@@ -12,5 +12,8 @@ WORKDIR /finance
 RUN make init
 
 COPY ./docker/data_scraper/crontab /etc/cron.d/scraper-cron
+COPY ./docker/data_scraper/entrypoint.sh /usr/bin/entrypoint.sh
+COPY ./docker/data_scraper/run-task.sh /usr/bin/run-task
 RUN chmod 0644 /etc/cron.d/scraper-cron && crontab /etc/cron.d/scraper-cron
+ENTRYPOINT ["entrypoint.sh"]
 CMD ["cron", "-f"]
