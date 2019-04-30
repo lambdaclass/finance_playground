@@ -7,7 +7,7 @@ import requests
 logger = logging.getLogger(__name__)
 
 Status = Enum("Status", "Success Warning Error")
-webhook = "https://hooks.slack.com/services/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"
+webhook = "https://hooks.slack.com/services/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"
 payload = {
     "channel": "#algotrading",
     "username": "Talebot",
