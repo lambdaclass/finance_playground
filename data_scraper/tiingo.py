@@ -14,9 +14,9 @@ logger = logging.getLogger(__name__)
 assets = [
     "VTSMX", "VFINX", "VIVAX", "VIGRX", "VIMSX", "VMVIX", "VMGIX", "NAESX",
     "VISVX", "VISGX", "BRSIX", "VGTSX", "VTMGX", "VFSVX", "EFV", "VEURX",
-    "VPACX", "VEIEX", "CASHX", "VFISX", "VFITX", "IEF", "VUSTX", "VBMFX",
-    "VIPSX", "PIGLX", "PGBIX", "VFSTX", "LQD", "VWESX", "VWEHX", "VWSTX",
-    "VWITX", "VWLTX", "VGSIX", "GLD", "PSAU", "GSG"
+    "VPACX", "VEIEX", "VFISX", "VFITX", "IEF", "VUSTX", "VBMFX", "VIPSX",
+    "PIGLX", "PGBIX", "VFSTX", "LQD", "VWESX", "VWEHX", "VWSTX", "VWITX",
+    "VWLTX", "VGSIX", "GLD", "PSAU", "GSG"
 ]
 
 
