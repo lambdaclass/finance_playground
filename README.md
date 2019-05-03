@@ -3,6 +3,34 @@ Algorithmic Trading
 
 > Exploratory analysis of historical options data
 
+## Recommended reading
+
+### Books
+
+#### Introductory
+- Option Volatility and Pricing 2nd Ed. - Natemberg, 2014
+- Options, Futures, and Other Derivatives 10th Ed. - Hull 2017
+- Trading Options Greeks: How Time, Volatility, and Other Pricing Factors Drive Profits 2nd Ed. - Passarelli 2012
+
+#### Intermediate
+- Trading Volatility - Bennet 2014
+- Volatility Trading 2nd Ed. - Sinclair 2013
+
+#### Advanced
+- Dynamic Hedging - Taleb 1997
+- The Volatility Surface: A Practitioner's Guide - Gatheral 2006
+- The Volatility Smile - Derman & Miller 2016
+
+### Papers
+- [Everybody’s Doing It: Short Volatility Strategies and Shadow Financial Insurers](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3071457)
+- [Volatility-of-Volatility Risk](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2497759)
+- [The Distribution of Returns](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2828744)
+- [Safe Haven Investing Part I - Not all risk mitigation is created equal](https://www.universa.net/UniversaResearch_SafeHavenPart1_RiskMitigation.pdf)
+- [Safe Haven Investing Part II - Not all risk is created equal](https://www.universa.net/UniversaResearch_SafeHavenPart2_NotAllRisk.pdf)
+- [Safe Haven Investing Part III - Those wonderful tenbaggers](https://www.universa.net/UniversaResearch_SafeHavenPart3_Tenbaggers.pdf)
+- [Insurance makes wealth grow faster](https://arxiv.org/abs/1507.04655)
+- [Ergodicity economics](https://ergodicityeconomics.files.wordpress.com/2018/06/ergodicity_economics.pdf)
+
 ## Requirements
 
 - Python >= 3.6
