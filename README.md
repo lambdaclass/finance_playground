@@ -1,7 +1,12 @@
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/lambdaclass/finance/ergodicity)
+
 Algorithmic Trading
 ==============================
 
-> Exploratory analysis of historical options data
+> Exploratory analysis of historical stock and options data
+
+In this project our aim is to explore and analyse financial instruments (stocks and options in particular) and to develop profitable trading strategies. To that end, we focused on the relation between price time series and factors such as market volatility, interest rates, and various economic indicators.  
+You can browse our Jupyter notebooks [here](https://mybinder.org/v2/gh/lambdaclass/finance/ergodicity).
 
 ## Recommended reading
 
@@ -51,7 +56,7 @@ Algorithmic Trading
 - Python >= 3.6
 - pipenv
 
-For backtesting, set `$OPTIONS_DATA_PATH` to the appropriate data dir.
+For backtesting, set `$OPTIONS_DATA_PATH` to the appropriate data dir.  
 To use the data scraper, set `$SAVE_DATA_PATH`. By default, it will save data to `./data/scraped`.
 
 **HINT**: store environment variables in an `.env` file and pipenv will load them automatically when using `make env`.
