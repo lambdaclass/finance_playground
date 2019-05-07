@@ -31,6 +31,21 @@ Algorithmic Trading
 - [Insurance makes wealth grow faster](https://arxiv.org/abs/1507.04655)
 - [Ergodicity economics](https://ergodicityeconomics.files.wordpress.com/2018/06/ergodicity_economics.pdf)
 
+## Data sources
+
+### Exchanges
+
+- [IEX](https://iextrading.com/developer/)
+- [Tiingo](https://api.tiingo.com/)
+- [CBOE Options Data](http://www.cboe.com/delayedquote/quote-table-download)
+
+### Historical Data
+
+- [Shiller's US Stocks, Dividends, Earnings, Inflation (CPI), and long term interest rates](http://www.econ.yale.edu/~shiller/data.htm)
+- [Fama/French US Stock Index Data](http://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html)
+- [FRED CPI, Interest Rates, Trade Data](https://fred.stlouisfed.org)
+- [REIT Data](https://www.reit.com/data-research/reit-market-data/reit-industry-financial-snapshot)
+
 ## Requirements
 
 - Python >= 3.6
@@ -74,18 +89,3 @@ $> make scrape symbols=voo scraper=tiingo
 ```shell
 $> make bench
 ```
-
-## Data sources
-
-### Exchanges
-
-- [IEX](https://iextrading.com/developer/)
-- [Tiingo](https://api.tiingo.com/)
-- [CBOE Options Data](http://www.cboe.com/delayedquote/quote-table-download)
-
-### Historical Data
-
-- [Shiller's US Stocks, Dividends, Earnings, Inflation (CPI), and long term interest rates](http://www.econ.yale.edu/~shiller/data.htm)
-- [Fama/French US Stock Index Data](http://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html)
-- [FRED CPI, Interest Rates, Trade Data](https://fred.stlouisfed.org)
-- [REIT Data](https://www.reit.com/data-research/reit-market-data/reit-industry-financial-snapshot)
