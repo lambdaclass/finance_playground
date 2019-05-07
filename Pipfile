@@ -10,5 +10,6 @@ pandas = "*"
 altair = "*"
 jupyter = "*"
 pandas-datareader = "*"
+matplotlib = "*"
 
 [dev-packages]
