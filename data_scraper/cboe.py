@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 url = "http://www.cboe.com/delayedquote/quote-table-download"
 
 
-def fetch_data(symbols=symbols):
+def fetch_data(symbols=None):
     """Fetches options data for a given list of symbols"""
     symbols = symbols or _get_all_listed_symbols()
 
@@ -65,8 +65,10 @@ def fetch_data(symbols=symbols):
         slack_notification(msg, __name__, status=Status.Warning)
 
 
-def aggregate_monthly_data(symbols=symbols):
+def aggregate_monthly_data(symbols=None):
     """Aggregate daily snapshots into monthly files and validate data"""
+    symbols = symbols or _get_all_listed_symbols()
+
     save_data_path = utils.get_save_data_path()
     scraper_dir = os.path.join(save_data_path, "cboe")
 
