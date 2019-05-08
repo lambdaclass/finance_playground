@@ -43,6 +43,7 @@ For complete novices in finance and economics, this [post](https://notamonadtuto
 - [Insurance makes wealth grow faster](https://arxiv.org/abs/1507.04655)
 - [Ergodicity economics](https://ergodicityeconomics.files.wordpress.com/2018/06/ergodicity_economics.pdf)
 - [The Rate of Return on Everything, 1870–2015](https://economics.harvard.edu/files/economics/files/ms28533.pdf)
+- [Volatility and the Alchemy of Risk](https://static1.squarespace.com/static/5581f17ee4b01f59c2b1513a/t/59ea16dbbe42d6ff1cae589f/1508513505640/Artemis_Volatility+and+the+Alchemy+of+Risk_2017.pdf)
 
 ## Data sources
 
