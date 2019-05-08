@@ -1,14 +1,19 @@
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/lambdaclass/finance/ergodicity)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/lambdaclass/finance/master)
 
 Finance Playground
 ==============================
 
-> Exploratory analysis of historical stock and options data
-
 In this project our aim is to explore and analyse financial instruments (stocks and options in particular) and to develop profitable trading strategies. To that end, we focused on the relation between price time series and factors such as market volatility, interest rates, and various economic indicators.  
-You can browse our Jupyter notebooks [here](https://mybinder.org/v2/gh/lambdaclass/finance/ergodicity).
+We started this as a learning tool. As developers, we advocate a hands on approach, we like trying out ideas and tinkering with models. If that sounds at all interesting, you can follow our progress which will be documented in Jupyter notebooks [here](https://mybinder.org/v2/gh/lambdaclass/finance/master).
+
+`UPDATE`  
+As of 2019-05-08, this repo will host our explorations in finance and economics, mainly in the form of notebooks. The backtester and data scraper components will be moved to a different one soon.  
+Collaboration is welcome: by all means, if you spot a mistake or just want to add an interesting notebook you've been playing with, please submit a pull request.
 
 ## Recommended reading
+
+For complete novices in finance and economics, this [post](https://notamonadtutorial.com/how-to-earn-your-macroeconomics-and-finance-white-belt-as-a-software-developer-136e7454866f) gives a comprehensive introduction.
+
 
 ### Books
 
@@ -27,6 +32,8 @@ You can browse our Jupyter notebooks [here](https://mybinder.org/v2/gh/lambdacla
 - The Volatility Smile - Derman & Miller 2016
 
 ### Papers
+- [Volatility: A New Return Driver?](http://static.squarespace.com/static/53974e3ae4b0039937edb698/t/53da6400e4b0d5d5360f4918/1406821376095/Directional%20Volatility%20Research.pdf)
+- [Easy Volatility Investing](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2255327)
 - [Everybody’s Doing It: Short Volatility Strategies and Shadow Financial Insurers](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3071457)
 - [Volatility-of-Volatility Risk](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2497759)
 - [The Distribution of Returns](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2828744)
