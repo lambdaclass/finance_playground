@@ -35,6 +35,7 @@ You can browse our Jupyter notebooks [here](https://mybinder.org/v2/gh/lambdacla
 - [Safe Haven Investing Part III - Those wonderful tenbaggers](https://www.universa.net/UniversaResearch_SafeHavenPart3_Tenbaggers.pdf)
 - [Insurance makes wealth grow faster](https://arxiv.org/abs/1507.04655)
 - [Ergodicity economics](https://ergodicityeconomics.files.wordpress.com/2018/06/ergodicity_economics.pdf)
+- [The Rate of Return on Everything, 1870–2015](https://economics.harvard.edu/files/economics/files/ms28533.pdf)
 
 ## Data sources
 
