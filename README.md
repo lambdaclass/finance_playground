@@ -1,6 +1,6 @@
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/lambdaclass/finance/ergodicity)
 
-Algorithmic Trading
+Finance Playground
 ==============================
 
 > Exploratory analysis of historical stock and options data
