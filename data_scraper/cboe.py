@@ -180,16 +180,16 @@ def _save_data(symbol, symbol_data):
             file_path, symbol_data):
         logger.debug("File %s already downloaded", file_path)
     else:
-        daily_df = _wrangle_data(symbol_data)
+        daily_df = _wrangle_data(symbol, symbol_data)
         daily_df.to_csv(file_path, index=False)
         logger.debug("Saved daily symbol data as %s", file_path)
 
 
-def _wrangle_data(symbol_data):
+def _wrangle_data(symbol, symbol_data):
     """Returns a properly formated (_tidy_) dataframe"""
     string_data = StringIO(symbol_data)
     first_line = string_data.readline()
-    spot_price = float(first_line.split(",")[1])
+    spot_price = float(first_line.split(",")[-2])
     quote_date = date.today().strftime("%m/%d/%Y")
 
     data = pd.read_csv(string_data, skiprows=1)
@@ -215,7 +215,7 @@ def _wrangle_data(symbol_data):
     puts.insert(loc=1, column="type", value="put")
 
     merged = pd.concat([calls, puts])
-    merged.insert(loc=0, column="underlying", value="SPX")
+    merged.insert(loc=0, column="underlying", value=symbol)
     merged.insert(loc=1, column="underlying_last", value=spot_price)
     merged.insert(loc=2, column="exchange", value="CBOE")
     merged.insert(loc=6, column="quotedate", value=quote_date)
