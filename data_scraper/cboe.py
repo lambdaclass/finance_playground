@@ -14,11 +14,12 @@ from data_scraper.notifications import slack_notification, Status
 logger = logging.getLogger(__name__)
 
 url = "http://www.cboe.com/delayedquote/quote-table-download"
-symbols = ["SPX", "SPY"]
 
 
 def fetch_data(symbols=symbols):
     """Fetches options data for a given list of symbols"""
+    symbols = symbols or _get_all_listed_symbols()
+
     try:
         form_data = _form_data()
     except requests.ConnectionError as ce:
@@ -129,6 +130,17 @@ def aggregate_monthly_data(symbols=symbols):
 
             for file in daily_files:
                 utils.remove_file(file, logger)
+
+
+def _get_all_listed_symbols():
+    """Returns array of all listed symbols.
+    http://www.cboe.com/publish/scheduledtask/mktdata/cboesymboldir2.csv
+    """
+    current_dir = os.path.join(os.getcwd(), os.path.dirname(__file__))
+    symbols_file = os.path.realpath(
+        os.path.join(current_dir, "cboesymboldir2.csv"))
+    symbols_df = pd.read_csv(symbols_file, skiprows=1)
+    return symbols_df["Stock Symbol"].array
 
 
 def _concatenate_files(files):
