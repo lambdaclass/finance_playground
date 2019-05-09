@@ -19,6 +19,7 @@ url = "http://www.cboe.com/delayedquote/quote-table-download"
 def fetch_data(symbols=None):
     """Fetches options data for a given list of symbols"""
     symbols = symbols or _get_all_listed_symbols()
+    ignore_notifications = _get_muted_symbols()
 
     try:
         form_data = _form_data()
@@ -53,7 +54,8 @@ def fetch_data(symbols=None):
             failed.append(symbol)
             msg = "Error fetching symbol {} data".format(symbol)
             logger.error(msg, exc_info=True)
-            slack_notification(msg, __name__)
+            if symbol not in ignore_notifications:
+                slack_notification(msg, __name__)
         else:
             _save_data(symbol, symbol_data)
             done.append(symbol)
@@ -97,7 +99,7 @@ def aggregate_monthly_data(symbols=None):
             try:
                 symbol_df = _concatenate_files(daily_files)
             except Exception:
-                msg = "Error concatenating daily files"
+                msg = "Error concatenating daily files for period " + month
                 logger.error(msg, exc_info=True)
                 slack_notification(msg, __name__)
                 continue
@@ -133,6 +135,12 @@ def aggregate_monthly_data(symbols=None):
 
             for file in daily_files:
                 utils.remove_file(file, logger)
+
+
+def _get_muted_symbols():
+    """Returns a list of symbols for which no error notifications
+    will be sent.
+    """
 
 
 def _get_all_listed_symbols():
