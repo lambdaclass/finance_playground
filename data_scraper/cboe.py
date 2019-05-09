@@ -44,9 +44,10 @@ def fetch_data(symbols=None):
         try:
             response = requests.post(
                 url, data=form_data, headers=headers, allow_redirects=False)
-            symbol_data = requests.get(
+            symbol_req = requests.get(
                 file_url, cookies=response.cookies, headers=headers)
-            if symbol_data.text.startswith(" <!DOCTYPE"):
+            symbol_data = symbol_req.text
+            if symbol_data == "" or symbol_data.startswith(" <!DOCTYPE"):
                 raise Exception
         except Exception:
             failed.append(symbol)
@@ -54,7 +55,7 @@ def fetch_data(symbols=None):
             logger.error(msg, exc_info=True)
             slack_notification(msg, __name__)
         else:
-            _save_data(symbol, symbol_data.text)
+            _save_data(symbol, symbol_data)
             done.append(symbol)
 
     if len(done) > 0:
