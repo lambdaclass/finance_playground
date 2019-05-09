@@ -1,4 +1,5 @@
 import glob
+import json
 import os
 
 
@@ -24,6 +25,19 @@ def get_save_data_path():
         os.makedirs(data_dir)
 
     return data_dir
+
+
+def get_scraper_config(scraper, config_file="data_scraper.conf"):
+    """Parses configuration file and returns the configuration options
+    for the chosen scraper.
+    """
+    options = []
+    if os.path.exists(config_file):
+        with open(config_file) as file:
+            config = json.load(file)
+            options = config.get(scraper, [])
+
+    return options
 
 
 def remove_files(data_dir, pattern, logger=None):

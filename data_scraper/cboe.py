@@ -19,7 +19,7 @@ url = "http://www.cboe.com/delayedquote/quote-table-download"
 def fetch_data(symbols=None):
     """Fetches options data for a given list of symbols"""
     symbols = symbols or _get_all_listed_symbols()
-    ignore_notifications = _get_muted_symbols()
+    mute_notifications = _get_muted_symbols()
 
     try:
         form_data = _form_data()
@@ -54,7 +54,7 @@ def fetch_data(symbols=None):
             failed.append(symbol)
             msg = "Error fetching symbol {} data".format(symbol)
             logger.error(msg, exc_info=True)
-            if symbol not in ignore_notifications:
+            if symbol not in mute_notifications:
                 slack_notification(msg, __name__)
         else:
             _save_data(symbol, symbol_data)
@@ -141,6 +141,8 @@ def _get_muted_symbols():
     """Returns a list of symbols for which no error notifications
     will be sent.
     """
+    options = utils.get_scraper_config("cboe")
+    return options.get("mute_notifications", [])
 
 
 def _get_all_listed_symbols():
