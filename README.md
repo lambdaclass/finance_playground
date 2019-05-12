@@ -52,6 +52,10 @@ For complete novices in finance and economics, this [post](https://notamonadtuto
 - [IEX](https://iextrading.com/developer/)
 - [Tiingo](https://api.tiingo.com/)
 - [CBOE Options Data](http://www.cboe.com/delayedquote/quote-table-download)
+- [Sharadar](http://www.sharadar.com)
+- [Quandl](https://www.quandl.com/)
+- [Intrinio](https://intrinio.com/)
+- [Xignite](http://www.xignite.com/)
 
 ### Historical Data
 
