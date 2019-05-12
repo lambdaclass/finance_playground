@@ -50,15 +50,15 @@ For complete novices in finance and economics, this [post](https://notamonadtuto
 ### Exchanges
 
 - [IEX](https://iextrading.com/developer/)
-- [Tiingo](https://api.tiingo.com/)
 - [CBOE Options Data](http://www.cboe.com/delayedquote/quote-table-download)
+
+### Historical Data
+
+- [Tiingo](https://api.tiingo.com/)
 - [Sharadar](http://www.sharadar.com)
 - [Quandl](https://www.quandl.com/)
 - [Intrinio](https://intrinio.com/)
 - [Xignite](http://www.xignite.com/)
-
-### Historical Data
-
 - [Shiller's US Stocks, Dividends, Earnings, Inflation (CPI), and long term interest rates](http://www.econ.yale.edu/~shiller/data.htm)
 - [Fama/French US Stock Index Data](http://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html)
 - [FRED CPI, Interest Rates, Trade Data](https://fred.stlouisfed.org)
