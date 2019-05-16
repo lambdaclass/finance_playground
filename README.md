@@ -10,6 +10,26 @@ We started this as a learning tool. As developers, we advocate a hands on approa
 As of 2019-05-08, this repo will host our explorations in finance and economics, mainly in the form of notebooks. The backtester and data scraper components will be moved to a different one soon.  
 Collaboration is welcome: by all means, if you spot a mistake or just want to add an interesting notebook you've been playing with, please submit a pull request.
 
+
+## Requirements
+
+- Python >= 3.5
+- pipenv
+
+## Usage
+
+If you want to view the notebooks locally, simply install the dependencies with:
+
+```shell
+$ pipenv --three && pipenv install
+```
+
+Then start Jupyter Lab
+
+```shell
+$ cd notebooks && jupyter lab
+```
+
 ## Recommended reading
 
 For complete novices in finance and economics, this [post](https://notamonadtutorial.com/how-to-earn-your-macroeconomics-and-finance-white-belt-as-a-software-developer-136e7454866f) gives a comprehensive introduction.
@@ -63,47 +83,3 @@ For complete novices in finance and economics, this [post](https://notamonadtuto
 - [Fama/French US Stock Index Data](http://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html)
 - [FRED CPI, Interest Rates, Trade Data](https://fred.stlouisfed.org)
 - [REIT Data](https://www.reit.com/data-research/reit-market-data/reit-industry-financial-snapshot)
-
-## Requirements
-
-- Python >= 3.6
-- pipenv
-
-For backtesting, set `$OPTIONS_DATA_PATH` to the appropriate data dir.  
-To use the data scraper, set `$SAVE_DATA_PATH`. By default, it will save data to `./data/scraped`.
-
-**HINT**: store environment variables in an `.env` file and pipenv will load them automatically when using `make env`.
-
-## Usage
-
-### Create environment and download dependencies
-
-```shell
-$> make init
-```
-
-### Activate environment
-
-```shell
-$> make env
-```
-
-### Run tests
-
-```shell
-$> make test
-```
-
-### Scrape data (supported scrapers: CBOE, Tiingo)
-
-```shell
-$> make scrape symbols=msft,goog scraper=cboe
-
-$> make scrape symbols=voo scraper=tiingo
-```
-
-### Run backtester with benchmark strategy
-
-```shell
-$> make bench
-```
