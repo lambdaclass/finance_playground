@@ -11,4 +11,3 @@ html:
 	-jupyter nbconvert $(HTML_DIR)/**/*.ipynb
 	-rm $(HTML_DIR)/*.ipynb
 	-rm $(HTML_DIR)/**/*.ipynb
-	tree $(HTML_DIR)/ -H '.' -C --noreport --charset utf-8 > $(HTML_DIR)/index.html

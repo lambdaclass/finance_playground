@@ -6,7 +6,6 @@ before_install:
   - sudo apt-get -qq update
 
 install:
-  - sudo apt-get install tree
   - pip install pipenv
   - pipenv install
 
