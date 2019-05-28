@@ -11,6 +11,7 @@ install:
 
 script:
   - make html
+  - cp README.md html/
 
 deploy:
   provider: pages

@@ -13,11 +13,11 @@ Collaboration is welcome: by all means, if you spot a mistake or just want to ad
 
 ## Notebooks
 
-- [Introduction to Finance](notebooks/intro-finance.ipynb) - Basic concepts in Finance (stocks, ETFs, options).
-- [The Holy Grail of Investing](notebooks/diversification-dalio-holy-grail.ipynb) - On Ray Dalio's insights into the benefits of [diversification](https://www.investopedia.com/video/play/ray-dalio-his-portfolio-holy-grail/).
-- [Ergodicity Explorations](notebooks/ergodicity/ergodicity-explorations.ipynb) - Based on the [research](https://ergodicityeconomics.com/lecture-notes/) from Professor Ole Peters regarding [insurance](https://arxiv.org/abs/1507.04655) contracts, expectation values and time averages.
-- [Evaluating Gambles](notebooks/ergodicity/evaluating-gambles-presentation.ipynb) - Continuing on our explorations on how to evaluate gambles and optimal betting criteria.
-- [Emergence of Cooperation in Evolutionary Systems](notebooks/ergodicity/emergence-of-cooperation.ipynb) - An ergodic explanation for the advantage of [cooperation](https://arxiv.org/abs/1506.03414) under evolutionary dynamics.
+- [Introduction to Finance](https://lambdaclass.com/finance_playground/intro-finance.html) - Basic concepts in Finance (stocks, ETFs, options).
+- [The Holy Grail of Investing](https://lambdaclass.com/finance_playground/diversification-dalio-holy-grail.html) - On Ray Dalio's insights into the benefits of [diversification](https://www.investopedia.com/video/play/ray-dalio-his-portfolio-holy-grail/).
+- [Ergodicity Explorations](https://lambdaclass.com/finance_playground/ergodicity/ergodicity-explorations.html) - Based on the [research](https://ergodicityeconomics.com/lecture-notes/) from Professor Ole Peters regarding [insurance](https://arxiv.org/abs/1507.04655) contracts, expectation values and time averages.
+- [Evaluating Gambles](https://lambdaclass.com/finance_playground/ergodicity/evaluating-gambles-presentation.html) - Continuing on our explorations on how to evaluate gambles and optimal betting criteria.
+- [Emergence of Cooperation in Evolutionary Systems](https://lambdaclass.com/finance_playground/ergodicity/emergence-of-cooperation.html) - An ergodic explanation for the advantage of [cooperation](https://arxiv.org/abs/1506.03414) under evolutionary dynamics.
 
 ## Requirements
 
