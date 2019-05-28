@@ -13,6 +13,10 @@ script:
   - make html
   - cp README.md html/
 
+branches:
+  only:
+    - master
+
 deploy:
   provider: pages
   skip_cleanup: true
