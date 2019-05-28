@@ -6,18 +6,16 @@ Finance Playground
 In this project our aim is to explore and analyse financial instruments (stocks and options in particular) and to develop profitable trading strategies. To that end, we focused on the relation between price time series and factors such as market volatility, interest rates, and various economic indicators.  
 We started this as a learning tool. As developers, we advocate a hands on approach, we like trying out ideas and tinkering with models. If that sounds at all interesting, you can follow our progress which will be documented in Jupyter notebooks [here](https://mybinder.org/v2/gh/lambdaclass/finance_playground/master).
 
-`UPDATE`  
-As of 2019-05-08, this repo will host our explorations in finance and economics, mainly in the form of notebooks. The backtester and data scraper components will be moved to a different one soon.  
 Collaboration is welcome: by all means, if you spot a mistake or just want to add an interesting notebook you've been playing with, please submit a pull request.
 
 
 ## Notebooks
 
-- [Introduction to Finance](notebooks/intro-finance.ipynb) - Basic concepts in Finance (stocks, ETFs, options).
-- [The Holy Grail of Investing](notebooks/diversification-dalio-holy-grail.ipynb) - On Ray Dalio's insights into the benefits of [diversification](https://www.investopedia.com/video/play/ray-dalio-his-portfolio-holy-grail/).
-- [Ergodicity Explorations](notebooks/ergodicity/ergodicity-explorations.ipynb) - Based on the [research](https://ergodicityeconomics.com/lecture-notes/) from Professor Ole Peters regarding [insurance](https://arxiv.org/abs/1507.04655) contracts, expectation values and time averages.
-- [Evaluating Gambles](notebooks/ergodicity/evaluating-gambles-presentation.ipynb) - Continuing on our explorations on how to evaluate gambles and optimal betting criteria.
-- [Emergence of Cooperation in Evolutionary Systems](notebooks/ergodicity/emergence-of-cooperation.ipynb) - An ergodic explanation for the advantage of [cooperation](https://arxiv.org/abs/1506.03414) under evolutionary dynamics.
+- [Introduction to Finance](https://lambdaclass.com/finance_playground/intro-finance.html) - Basic concepts in Finance (stocks, ETFs, options).
+- [The Holy Grail of Investing](https://lambdaclass.com/finance_playground/diversification-dalio-holy-grail.html) - On Ray Dalio's insights into the benefits of [diversification](https://www.investopedia.com/video/play/ray-dalio-his-portfolio-holy-grail/).
+- [Ergodicity Explorations](https://lambdaclass.com/finance_playground/ergodicity/ergodicity-explorations.html) - Based on the [research](https://ergodicityeconomics.com/lecture-notes/) from Professor Ole Peters regarding [insurance](https://arxiv.org/abs/1507.04655) contracts, expectation values and time averages.
+- [Evaluating Gambles](https://lambdaclass.com/finance_playground/ergodicity/evaluating-gambles-presentation.html) - Continuing on our explorations on how to evaluate gambles and optimal betting criteria.
+- [Emergence of Cooperation in Evolutionary Systems](https://lambdaclass.com/finance_playground/ergodicity/emergence-of-cooperation.html) - An ergodic explanation for the advantage of [cooperation](https://arxiv.org/abs/1506.03414) under evolutionary dynamics.
 
 ## Requirements
 
