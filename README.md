@@ -58,6 +58,7 @@ For complete novices in finance and economics, this [post](https://notamonadtuto
 - The Volatility Smile - Derman & Miller (2016)
 
 ### Papers
+- [Dennis Rodman and the Art of Portfolio Optimization](https://www.artemiscm.com/s/Artemis-Research_Dennis-Rodman-and-Portfolio-Optimization_April2016-efr3.pdf)
 - [Volatility: A New Return Driver?](http://static.squarespace.com/static/53974e3ae4b0039937edb698/t/53da6400e4b0d5d5360f4918/1406821376095/Directional%20Volatility%20Research.pdf) - Greggory Flinn, Roger J. Schreiner
 - [Easy Volatility Investing](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2255327) - Tony Cooper (2013)
 - [Everybody’s Doing It: Short Volatility Strategies and Shadow Financial Insurers](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3071457) - Vineer Bhansali, Lawrence Harris (2018)
