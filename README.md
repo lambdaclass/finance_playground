@@ -42,8 +42,24 @@ $ cd notebooks && jupyter lab
 
 For complete novices in finance and economics, this [post](https://notamonadtutorial.com/how-to-earn-your-macroeconomics-and-finance-white-belt-as-a-software-developer-136e7454866f) gives a comprehensive introduction.
 
-
 ### Books
+
+### Papers
+- [Dennis Rodman and the Art of Portfolio Optimization](https://www.artemiscm.com/s/Artemis-Research_Dennis-Rodman-and-Portfolio-Optimization_April2016-efr3.pdf)
+- [Doing a Laplace](https://ergodicityeconomics.com/2017/07/18/doing-a-laplace/)
+- [What’s a growth rate, really?](https://ergodicityeconomics.com/2019/03/13/whats-a-growth-rate-really/)
+- [Volatility: A New Return Driver?](http://static.squarespace.com/static/53974e3ae4b0039937edb698/t/53da6400e4b0d5d5360f4918/1406821376095/Directional%20Volatility%20Research.pdf) - Greggory Flinn, Roger J. Schreiner
+- [Easy Volatility Investing](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2255327) - Tony Cooper (2013)
+- [Everybody’s Doing It: Short Volatility Strategies and Shadow Financial Insurers](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3071457) - Vineer Bhansali, Lawrence Harris (2018)
+- [Volatility-of-Volatility Risk](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2497759)- Darien Huang, Christian Schlag, Ivan Shaliastovich, Julian Thimme (2018)
+- [The Distribution of Returns](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2828744) - David E. Harris (2017)
+- [Safe Haven Investing Part I - Not all risk mitigation is created equal](https://www.universa.net/UniversaResearch_SafeHavenPart1_RiskMitigation.pdf) - Universa Investments (2017)
+- [Safe Haven Investing Part II - Not all risk is created equal](https://www.universa.net/UniversaResearch_SafeHavenPart2_NotAllRisk.pdf) - Universa Investments (2017)
+- [Safe Haven Investing Part III - Those wonderful tenbaggers](https://www.universa.net/UniversaResearch_SafeHavenPart3_Tenbaggers.pdf) - Universa Investments (2017)
+- [Insurance makes wealth grow faster](https://arxiv.org/abs/1507.04655) - Ole Peters, Alexander Adamou (2017)
+- [Ergodicity economics](https://ergodicityeconomics.files.wordpress.com/2018/06/ergodicity_economics.pdf) - Ole Peters (2018)
+- [The Rate of Return on Everything, 1870–2015](https://economics.harvard.edu/files/economics/files/ms28533.pdf) - Oscar Jorda, Katharina Knoll, Dmitry Kuvshinov, Moritz Schularick, Alan M. Taylor (2019)
+- [Volatility and the Alchemy of Risk](https://static1.squarespace.com/static/5581f17ee4b01f59c2b1513a/t/59ea16dbbe42d6ff1cae589f/1508513505640/Artemis_Volatility+and+the+Alchemy+of+Risk_2017.pdf) - Artemis Capital Management (2017)
 
 #### Introductory
 - Option Volatility and Pricing 2nd Ed. - Natemberg (2014)
@@ -58,21 +74,6 @@ For complete novices in finance and economics, this [post](https://notamonadtuto
 - Dynamic Hedging - Taleb (1997)
 - The Volatility Surface: A Practitioner's Guide - Gatheral (2006)
 - The Volatility Smile - Derman & Miller (2016)
-
-### Papers
-- [Dennis Rodman and the Art of Portfolio Optimization](https://www.artemiscm.com/s/Artemis-Research_Dennis-Rodman-and-Portfolio-Optimization_April2016-efr3.pdf)
-- [Volatility: A New Return Driver?](http://static.squarespace.com/static/53974e3ae4b0039937edb698/t/53da6400e4b0d5d5360f4918/1406821376095/Directional%20Volatility%20Research.pdf) - Greggory Flinn, Roger J. Schreiner
-- [Easy Volatility Investing](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2255327) - Tony Cooper (2013)
-- [Everybody’s Doing It: Short Volatility Strategies and Shadow Financial Insurers](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3071457) - Vineer Bhansali, Lawrence Harris (2018)
-- [Volatility-of-Volatility Risk](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2497759)- Darien Huang, Christian Schlag, Ivan Shaliastovich, Julian Thimme (2018)
-- [The Distribution of Returns](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2828744) - David E. Harris (2017)
-- [Safe Haven Investing Part I - Not all risk mitigation is created equal](https://www.universa.net/UniversaResearch_SafeHavenPart1_RiskMitigation.pdf) - Universa Investments (2017)
-- [Safe Haven Investing Part II - Not all risk is created equal](https://www.universa.net/UniversaResearch_SafeHavenPart2_NotAllRisk.pdf) - Universa Investments (2017)
-- [Safe Haven Investing Part III - Those wonderful tenbaggers](https://www.universa.net/UniversaResearch_SafeHavenPart3_Tenbaggers.pdf) - Universa Investments (2017)
-- [Insurance makes wealth grow faster](https://arxiv.org/abs/1507.04655) - Ole Peters, Alexander Adamou (2017)
-- [Ergodicity economics](https://ergodicityeconomics.files.wordpress.com/2018/06/ergodicity_economics.pdf) - Ole Peters (2018)
-- [The Rate of Return on Everything, 1870–2015](https://economics.harvard.edu/files/economics/files/ms28533.pdf) - Oscar Jorda, Katharina Knoll, Dmitry Kuvshinov, Moritz Schularick, Alan M. Taylor (2019)
-- [Volatility and the Alchemy of Risk](https://static1.squarespace.com/static/5581f17ee4b01f59c2b1513a/t/59ea16dbbe42d6ff1cae589f/1508513505640/Artemis_Volatility+and+the+Alchemy+of+Risk_2017.pdf) - Artemis Capital Management (2017)
 
 ## Data sources
 
