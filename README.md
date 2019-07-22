@@ -52,6 +52,7 @@ For complete novices in finance and economics, this [post](https://notamonadtuto
 - [Easy Volatility Investing](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2255327) - Tony Cooper (2013)
 - [Everybody’s Doing It: Short Volatility Strategies and Shadow Financial Insurers](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3071457) - Vineer Bhansali, Lawrence Harris (2018)
 - [Volatility-of-Volatility Risk](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2497759)- Darien Huang, Christian Schlag, Ivan Shaliastovich, Julian Thimme (2018)
+- [Four Points Beginner Risk Managers Should Learn from Jeff Holman’s Mistakes in the Discussion of Antifragile - Taleb](https://arxiv.org/pdf/1401.2524.pdf)
 - [The Distribution of Returns](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2828744) - David E. Harris (2017)
 - [Safe Haven Investing Part I - Not all risk mitigation is created equal](https://www.universa.net/UniversaResearch_SafeHavenPart1_RiskMitigation.pdf) - Universa Investments (2017)
 - [Safe Haven Investing Part II - Not all risk is created equal](https://www.universa.net/UniversaResearch_SafeHavenPart2_NotAllRisk.pdf) - Universa Investments (2017)
