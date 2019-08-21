@@ -42,8 +42,6 @@ $ cd notebooks && jupyter lab
 
 For complete novices in finance and economics, this [post](https://notamonadtutorial.com/how-to-earn-your-macroeconomics-and-finance-white-belt-as-a-software-developer-136e7454866f) gives a comprehensive introduction.
 
-### Books
-
 ### Papers
 - [Dennis Rodman and the Art of Portfolio Optimization](https://www.artemiscm.com/s/Artemis-Research_Dennis-Rodman-and-Portfolio-Optimization_April2016-efr3.pdf)
 - [Doing a Laplace](https://ergodicityeconomics.com/2017/07/18/doing-a-laplace/)
@@ -61,6 +59,8 @@ For complete novices in finance and economics, this [post](https://notamonadtuto
 - [Ergodicity economics](https://ergodicityeconomics.files.wordpress.com/2018/06/ergodicity_economics.pdf) - Ole Peters (2018)
 - [The Rate of Return on Everything, 1870–2015](https://economics.harvard.edu/files/economics/files/ms28533.pdf) - Oscar Jorda, Katharina Knoll, Dmitry Kuvshinov, Moritz Schularick, Alan M. Taylor (2019)
 - [Volatility and the Alchemy of Risk](https://static1.squarespace.com/static/5581f17ee4b01f59c2b1513a/t/59ea16dbbe42d6ff1cae589f/1508513505640/Artemis_Volatility+and+the+Alchemy+of+Risk_2017.pdf) - Artemis Capital Management (2017)
+
+### Books
 
 #### Introductory
 - Option Volatility and Pricing 2nd Ed. - Natemberg (2014)
