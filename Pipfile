@@ -4,12 +4,11 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-"beautifulsoup4" = "*"
-requests = "*"
 pandas = "*"
 altair = "*"
 jupyter = "*"
 pandas-datareader = "*"
 matplotlib = "*"
+seaborn = "*"
 
 [dev-packages]
