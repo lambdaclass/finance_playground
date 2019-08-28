@@ -10,5 +10,6 @@ jupyter = "*"
 pandas-datareader = "*"
 matplotlib = "*"
 seaborn = "*"
+jupyterlab = "*"
 
 [dev-packages]
