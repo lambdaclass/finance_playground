@@ -1,5 +1,4 @@
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/lambdaclass/finance_playground/master)
-
 [![Build Status](https://travis-ci.org/lambdaclass/finance_playground.svg?branch=master)](https://travis-ci.org/lambdaclass/finance_playground)
 
 Finance Playground
