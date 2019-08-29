@@ -41,6 +41,7 @@ Then start Jupyter Lab
 $ cd notebooks && jupyter lab
 ```
 
+# Mathematics, science and engineering
 Before diving into the notebooks we recommend you read this great quote by Emanuel Derman in his book The Volatility Smile:
 
 >Mathematics requires axioms and postulates, from which mathematicians then derive the logical consequences. In geometry, for example, Euclid's axioms are meant to describe self-evident relationships of parts of things to the whole, and his postulates further describe supposedly self-evident properties of points and lines. One Euclidean axiom is that things that are equal to
