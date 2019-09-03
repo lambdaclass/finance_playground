@@ -94,6 +94,7 @@ For complete novices in finance and economics, this [post](https://notamonadtuto
 - [The Rate of Return on Everything, 1870–2015](https://economics.harvard.edu/files/economics/files/ms28533.pdf) - Oscar Jorda, Katharina Knoll, Dmitry Kuvshinov, Moritz Schularick, Alan M. Taylor (2019)
 - [Volatility and the Alchemy of Risk](https://static1.squarespace.com/static/5581f17ee4b01f59c2b1513a/t/59ea16dbbe42d6ff1cae589f/1508513505640/Artemis_Volatility+and+the+Alchemy+of+Risk_2017.pdf) - Artemis Capital Management (2017)
 - [Trading Volatility](https://inference-review.com/article/trading-volatility) - Emanuel Derman
+- [Trends Everywhere](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3386035) - Abhilash Babu, Ari Levine, Yao Hua Ooi, Lasse Heje Pedersen, Erik Stamelos (2018)
 
 ### Books
 
