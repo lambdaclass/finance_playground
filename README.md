@@ -130,3 +130,5 @@ For complete novices in finance and economics, this [post](https://notamonadtuto
 - [Fama/French US Stock Index Data](http://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html)
 - [FRED CPI, Interest Rates, Trade Data](https://fred.stlouisfed.org)
 - [REIT Data](https://www.reit.com/data-research/reit-market-data/reit-industry-financial-snapshot)
+- [Historical Data: International monthly government bond returns](https://eur.figshare.com/articles/Data_Treasury_Bond_Return_Data_Starting_in_1962/8152748)
+- [Treasury Bond Return Data Starting in 1962](https://www.mdpi.com/2306-5729/4/3/91)
