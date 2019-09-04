@@ -13,11 +13,12 @@ Collaboration is welcome: by all means, if you spot a mistake or just want to ad
 
 ## Notebooks
 
-- [Introduction to Finance](https://lambdaclass.com/finance_playground/intro-finance.html) - Basic concepts in Finance (stocks, ETFs, options).
+- [Introduction to Finance](https://lambdaclass.com/finance_playground/intro-finance.html) - Basic concepts in Finance (stocks, ETFs, options) \[[slides](https://lambdaclass.com/finance_playground/intro-finance.slides.html)\]
 - [The Holy Grail of Investing](https://lambdaclass.com/finance_playground/diversification-dalio-holy-grail.html) - On Ray Dalio's insights into the benefits of [diversification](https://www.investopedia.com/video/play/ray-dalio-his-portfolio-holy-grail/).
 - [Ergodicity Explorations](https://lambdaclass.com/finance_playground/ergodicity/ergodicity-explorations.html) - Based on the [research](https://ergodicityeconomics.com/lecture-notes/) from Professor Ole Peters regarding [insurance](https://arxiv.org/abs/1507.04655) contracts, expectation values and time averages.
 - [Evaluating Gambles](https://lambdaclass.com/finance_playground/ergodicity/evaluating-gambles-presentation.html) - Continuing on our explorations on how to evaluate gambles and optimal betting criteria.
 - [Emergence of Cooperation in Evolutionary Systems](https://lambdaclass.com/finance_playground/ergodicity/emergence-of-cooperation.html) - An ergodic explanation for the advantage of [cooperation](https://arxiv.org/abs/1506.03414) under evolutionary dynamics.
+- [Troubled Markets](https://lambdaclass.com/finance_playground/options/0.6-exploring-argentinas-adrs.html) - An exploration on Argentina's ADRs recent performance (2019) \[[slides](https://lambdaclass.com/finance_playground/options/0.6-exploring-argentinas-adrs.slides.html)\]
 
 ## Requirements
 
