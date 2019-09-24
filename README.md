@@ -103,6 +103,7 @@ For complete novices in finance and economics, this [post](https://notamonadtuto
 - [Risk premia: asymmetric tail risks and excess returns - Bouchaud](https://www.tandfonline.com/doi/full/10.1080/14697688.2016.1183035)
 - [Black Scholes and the normal distribution](https://mathbabe.org/2013/03/12/black-scholes-and-the-normal-distribution/)
 - [Why log returns?](https://mathbabe.org/2011/08/30/why-log-returns/)
+- [The Variation of Some Other Speculative Prices - Benoit Mandelbrot](https://web.williams.edu/Mathematics/sjmiller/public_html/341Fa09/econ/Mandelbroit_VariationCertainSpeculativePrices.pdf)
 
 ### Books
 
