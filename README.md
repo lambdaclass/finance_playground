@@ -104,6 +104,7 @@ For complete novices in finance and economics, this [post](https://notamonadtuto
 - [Black Scholes and the normal distribution](https://mathbabe.org/2013/03/12/black-scholes-and-the-normal-distribution/)
 - [Why log returns?](https://mathbabe.org/2011/08/30/why-log-returns/)
 - [The Variation of Some Other Speculative Prices - Benoit Mandelbrot](https://web.williams.edu/Mathematics/sjmiller/public_html/341Fa09/econ/Mandelbroit_VariationCertainSpeculativePrices.pdf)
+- [A New Heuristic Measure of Fragility and Tail Risks : Application to Stress Testing -  Schmieder, Kinda, Taleb, Loukoianova, Canetti ](https://www.imf.org/en/Publications/WP/Issues/2016/12/31/A-New-Heuristic-Measure-of-Fragility-and-Tail-Risks-Application-to-Stress-Testing-26222)
 
 ### Books
 
