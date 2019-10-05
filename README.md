@@ -105,6 +105,7 @@ For complete novices in finance and economics, this [post](https://notamonadtuto
 - [Why log returns?](https://mathbabe.org/2011/08/30/why-log-returns/)
 - [The Variation of Some Other Speculative Prices - Benoit Mandelbrot](https://web.williams.edu/Mathematics/sjmiller/public_html/341Fa09/econ/Mandelbroit_VariationCertainSpeculativePrices.pdf)
 - [A New Heuristic Measure of Fragility and Tail Risks : Application to Stress Testing -  Schmieder, Kinda, Taleb, Loukoianova, Canetti ](https://www.imf.org/en/Publications/WP/Issues/2016/12/31/A-New-Heuristic-Measure-of-Fragility-and-Tail-Risks-Application-to-Stress-Testing-26222)
+- [Fallibility, Reflexivity, and the Human Uncertainty Principle - George Soros](https://www.georgesoros.com/2014/01/13/fallibility-reflexivity-and-the-human-uncertainty-principle-2/)
 
 ### Books
 
