@@ -12,3 +12,4 @@ html:
 	-rm $(HTML_DIR)/*.ipynb
 	-rm $(HTML_DIR)/**/*.ipynb
 	cd html/rgbm_animation && npm install && npm run build
+	rm -rf html/rgbm_animation/node_modules/

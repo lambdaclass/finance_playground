@@ -23,6 +23,7 @@ deploy:
   edge: true
   token: $GITHUB_TOKEN # Set in travis-ci.org dashboard
   keep_history: false
+  verbose: true
   local_dir: html
   on:
     branch: master
