@@ -6,7 +6,7 @@ before_install:
   - sudo apt-get -qq update
 
 install:
-  - apt-get install -y nodejs npm
+  - sudo apt-get install -y nodejs npm
   - pip install pipenv
   - pipenv install
 
@@ -20,7 +20,6 @@ branches:
 
 deploy:
   provider: pages
-  edge: true # use latest dpl release
   skip_cleanup: true
   github_token: $GITHUB_TOKEN # Set in travis-ci.org dashboard
   local_dir: html

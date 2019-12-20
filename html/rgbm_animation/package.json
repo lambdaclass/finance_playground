@@ -28,6 +28,7 @@
     "transform-loader": "^0.2.4"
   },
   "dependencies": {
+    "static-eval": ">=2.0.0",
     "chart.js": "^2.9.3",
     "cwise": "^1.0.10",
     "ndarray": "^1.0.18",
