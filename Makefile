@@ -11,6 +11,4 @@ html:
 	-jupyter nbconvert $(HTML_DIR)/**/*.ipynb
 	-rm $(HTML_DIR)/*.ipynb
 	-rm $(HTML_DIR)/**/*.ipynb
-	cd html/rgbm_animation
-	npm install
-	npm run build
+	cd html/rgbm_animation && npm install && npm run build
