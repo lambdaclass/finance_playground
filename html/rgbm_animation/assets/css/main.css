@@ -1,0 +1,314 @@
+@import url("https://fonts.googleapis.com/css?family=Baskervville|Cinzel&display=swap");
+/* Color Scheme
+
+#25274D
+#464866
+#AAABB8
+#2E9CCA
+#29648A
+
+Fonts
+
+
+   font-family: 'Dosis', sans-serif;
+
+    font-family: 'Open Sans', sans-serif;
+
+
+*/
+
+body {
+  font-family: "Baskervville", serif;
+  font-size: 1.2rem;
+  background: rgb(251, 251, 253);
+  color: black;
+  margin: 0;
+}
+
+.title-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  margin-top: 3rem;
+}
+
+a {
+  color: rgb(46, 156, 203);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+h1 {
+  font-family: "Cinzel", serif;
+  font-weight: 800;
+  font-size: 5rem;
+  color: black;
+  text-align: center;
+  margin: 0;
+}
+
+.underline{
+    border-bottom: solid black 2px;
+    padding-bottom: 3.5rem;
+}
+
+.subtitle{
+    font-size: 1.2rem;
+    color: rgb(82, 81, 81);
+    margin: 1.5rem 0;
+}
+
+.letter{
+    color: rgb(2, 2, 2);
+    font-weight: 800;
+    font-size: 1.6rem;
+}
+
+.quote{
+    display: flex;
+    justify-content: center;
+    font-style: italic;
+    color: rgb(82, 81, 81);
+
+}
+.text-container {
+  margin: 1rem 2rem;
+  text-align: center;
+}
+
+.title {
+  font-weight: 900;
+}
+
+.info-container {
+  display: flex;
+  justify-content: space-around;
+  margin: 2rem 4rem;
+  padding: 2.5rem 0;
+  color: black;
+  border-bottom: solid #c2bfbf 0.05rem;
+  border-top: solid #c2bfbf 0.05rem;
+}
+
+button {
+  margin: 2rem 1rem;
+  width: 5rem;
+  border: none;
+  border-radius: 0.5rem;
+  background: #2e9cca;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+}
+
+.info {
+  width: 30rem;
+  margin-right: 1rem;
+  font-size: 1.3rem;
+}
+
+.parameters {
+  font-size: 1rem;
+  display: grid;
+  grid-template-columns: 17rem 20rem 5rem;
+  padding: 1rem;
+  border: black solid 1px;
+}
+
+#container {
+  width: 60%;
+}
+
+.time {
+  font-weight: 800;
+}
+
+.graph-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.graph-container {
+  display: flex;
+  justify-content: space-around;
+  margin: 2rem 0;
+}
+
+.graph-info {
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem 2rem;
+  border: solid 1px rgb(199, 199, 199);
+  border-radius: 0.2rem;
+  color: black;
+}
+
+footer {
+  margin-top: 2rem;
+  padding: 0 3rem;
+  height: 20rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #25274d;
+  color: white;
+}
+
+footer > p{
+    margin: 0.5rem 0;
+}
+.ba {
+  border-style: solid;
+  border-width: 1px;
+}
+
+.bw2 {
+  border-width: 0.25rem;
+}
+
+.dib {
+  display: inline-block;
+}
+
+.link {
+  text-decoration: none;
+  transition: color 0.15s ease-in;
+}
+
+.link:link,
+.link:visited {
+  transition: color 0.15s ease-in;
+}
+
+.link:hover {
+  transition: color 0.15s ease-in;
+}
+
+.link:active {
+  transition: color 0.15s ease-in;
+}
+
+.link:focus {
+  transition: color 0.15s ease-in;
+  outline: 1px dotted currentColor;
+}
+
+.white {
+  color: #fff;
+}
+
+.pv2 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.ph3 {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.mb2 {
+  margin-bottom: 0.5rem;
+}
+
+.f6 {
+  font-size: 0.875rem;
+}
+
+.dim {
+  opacity: 1;
+  transition: opacity 0.15s ease-in;
+}
+
+.dim:hover,
+.dim:focus {
+  opacity: 0.5;
+  transition: opacity 0.15s ease-in;
+}
+
+.dim:active {
+  opacity: 0.8;
+  transition: opacity 0.15s ease-out;
+}
+
+@media only screen and (max-width: 1024px) {
+  .info-container {
+    flex-direction: column;
+    align-items: center;
+    margin: 2rem 1.5rem;
+  }
+
+  .info {
+    min-width: 90%;
+  }
+
+  body {
+    font-size: 1rem;
+  }
+}
+
+@media only screen and (max-width: 600px) and (orientation: portrait){
+   h1{
+       font-size: 2rem;
+   }
+
+   .info{
+       width: 70%;
+   }
+
+   .parameters{
+    grid-template-columns: 1fr;
+    grid-gap: 1.3rem;
+    /* grid-template-columns: 8rem 10rem 1rem; */
+
+   }
+
+   output{
+       margin-top: -2rem;
+       display: flex;
+       justify-content: flex-end;
+   }
+
+   .graph-container{
+       flex-direction: column-reverse;
+       align-items:center;
+   }
+
+   #container{
+       width: 90%;
+   }
+
+   .graph-info{
+       width: 60%;
+       margin-bottom: 2rem;
+   }
+
+   .time{
+      top: 1px;
+   }
+   .subtitle{
+       display: none;
+   }
+}
+
+@media only screen and (max-height: 600px) and (orientation: landscape){
+    .parameter-container{
+        width: 100%;
+       
+    }
+    .parameters{
+        width: 90%;
+    grid-template-columns: 12rem 20rem 5rem;
+
+    }
+
+    
+}
