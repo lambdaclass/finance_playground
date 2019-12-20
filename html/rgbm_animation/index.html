@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <meta property="og:title" content="RGBM wealth distribution model" />
+  <meta property="og:image" content="https://lambdaclass.com/RGBM_animations/assets/static/ScreenShot.png">
+  <meta property="og:url" content="https://lambdaclass.com/RGBM_animations">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image:src" content="https://lambdaclass.com/RGBM_animations/assets/static/ScreenShot.png">
+  <meta name="description" content="Interactive simulation of N wealth trajectories over T time steps">
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <title>RGBM wealth distribution model</title>
+</head>
+
+<body>
+  <div class="title-container">
+    <span class='subtitle'>
+      <span class="letter">R</span>e-allocating
+      <span class="letter">G</span>eometric
+      <span class="letter">B</span>rownian
+      <span class="letter">M</span>otion
+    </span>
+    <h1>RGBM</h1>
+
+    <h1 class='underline'>wealth distribution <br> model</h1>
+    <div class="text-container">
+      <p>
+        Interactive simulation of \(N\) wealth trajectories over
+        \(dt\) time steps following the model detailed in <br>
+        <a href="http://ssrn.com/abstract=2794830">Wealth Inequality and the Ergodic Hypothesis: Evidence from the
+          United States</a> <br> <p class="quote">Adamou, Berman, Peters (2019)</p>
+      </p>
+      <p>
+        The paper describes an economy in which the change in an individual's wealth follows a <a
+          href="https://en.wikipedia.org/wiki/Geometric_Brownian_motion">geometric brownian motion</a>, with an added
+        term that accounts for the re-distribution of wealth. Every year everyone contributes a proportion \(\tau\) of
+        his/her wealth to a central pot, and then the pot is split evenly across the population.
+      </p>
+      <p>
+        Let \(x(t)\) describe the wealth of an individual at time \(t\), the change in wealth is given by:
+        $$dx = x(\mu dt + \sigma dW) - \tau(x - \langle x \rangle_N) dt$$
+
+        where \(W\) is a <a href="https://en.wikipedia.org/wiki/Wiener_process">Wiener process</a> with mean \(\mu\) and
+        standard deviation \(\sigma\), \(\langle x \rangle_N\) represents per-capita wealth and \(\tau\) is the
+        re-allocation parameter.
+      </p>
+    </div>
+
+  </div>
+  <div class="info-container">
+    <div>
+      <p class="info">
+        You are encouraged to try out different values for \(\tau\) and explore the
+        wealth distributions it generates. Further details on the RGBM model are
+        found in
+        <a href="https://ergodicityeconomics.com/2017/08/14/wealth-redistribution-and-interest-rates/">this</a>
+        blog post.
+      </p>
+    </div>
+    <div class="parameter-container">
+
+      <div class="parameters">
+        <label for="N">Number of individuals \(N\):</label>
+        <input type="range" id="N" name="N" min="10" max="1000" value="100" step="10" onchange="Nvalue.value=value" />
+        <output id="Nvalue">100</output>
+        <label for="T">Total time \(T\):</label>
+        <input type="range" id="T" name="T" min="10" max="1000" value="100" step="10" onchange="Tvalue.value=value" />
+        <output id="Tvalue">100</output>
+        <label for="dt">Time increment \(dt\):</label>
+        <input type="range" id="dt" name="dt" min="0.01" max="1" value="0.1" step="0.01"
+          onchange="dtvalue.value=value" />
+        <output id="dtvalue">0.1</output>
+
+        <label for="mu">Mean wealth increment \(\mu\):</label>
+        <input type="range" id="mu" name="mu" min="0" max="1" value="0.08" step="0.01" onchange="muvalue.value=value" />
+        <output id="muvalue">0.08</output>
+
+        <label for="sigma">Std of wealth increments \(\sigma\):</label>
+        <input type="range" id="sigma" name="sigma" min="0" max="2" value="0.18" step="0.02"
+          onchange="sigmavalue.value=value" />
+        <output id="sigmavalue">0.18</output>
+
+        <label for="tau">Re-allocation parameter \(\tau\):</label>
+        <input type="range" id="tau" name="tau" min="-1" max="1" value="0.01" step="0.01"
+          onchange="tauvalue.value=value" />
+        <output id="tauvalue">0.01</output>
+
+        <label for="bins">Number of bins:</label>
+        <input type="range" id="bins" name="bins" min="10" max="50" value="20" step="1"
+          onchange="binsvalue.value=value" />
+        <output id="binsvalue">20</output>
+      </div>
+      <div class="button-container">
+        <button class="f6 link dim ph3 pv2 mb2 dib white" id="startAnimation">Play</button>
+        <button class="f6 link dim ph3 pv2 mb2 dib white" id="pauseAnimation">Pause</button>
+        <button class="f6 link dim ph3 pv2 mb2 dib white" id="stopAnimation">Stop</button>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+  <div class="graph-wrapper">
+    <div class="graph-container">
+      <div id="container">
+        <canvas id="animation"></canvas>
+      </div>
+      <div class="graph-info">
+        <p class="title">Wealth levels over time</p>
+        <p>Each individual's wealth is shown as a fraction of maximum wealth. We can see that as \(\tau \to -1\), the
+          wealth distribution becomes more unequal. Importantly, wealth <i>can</i> become negative, but the plot only
+          shows positive wealth individuals.</p>
+        <span class="time" id="animation_time"></span>
+      </div>
+    </div>
+
+    <div class="graph-container">
+      <div id="container">
+        <canvas id="histogram"></canvas>
+      </div>
+      <div class="graph-info">
+        <p class="title">Histogram of wealth levels</p>
+        <p>In this plot we discretize wealth levels in a number of bins, and show the number of individuals per bin.</p>
+        <span class="time" id="histogram_time"></span>
+      </div>
+    </div>
+
+
+  </div>
+  <footer>
+    <p>Made with <span style="color: #e25555;">&#9829;</span> by <a href="https://lambdaclass.com">Lambdaclass</a></p>
+    <p>Visit <a href="https://www.ergodicityeconomics.com">Ergodicity Economics</a></p>
+  </footer>
+
+  <script src="assets/js/bundle.js" type="text/javascript"></script>
+</body>
+
+</html>

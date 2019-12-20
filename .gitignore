@@ -87,3 +87,9 @@ target/
 
 # Mypy cache
 .mypy_cache/
+
+# direnv
+.envrc
+
+# JS dependencies
+node_modules/
