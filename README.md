@@ -100,6 +100,8 @@ For complete novices in finance and economics, this [post](https://notamonadtuto
 - [Volatility and the Alchemy of Risk](https://static1.squarespace.com/static/5581f17ee4b01f59c2b1513a/t/59ea16dbbe42d6ff1cae589f/1508513505640/Artemis_Volatility+and+the+Alchemy+of+Risk_2017.pdf) - Artemis Capital Management (2017)
 - [Trading Volatility](https://inference-review.com/article/trading-volatility) - Emanuel Derman
 - [Trends Everywhere](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3386035) - Abhilash Babu, Ari Levine, Yao Hua Ooi, Lasse Heje Pedersen, Erik Stamelos (2018)
+- [Two centuries of trend following - Y. Lempérière, C. Deremble, P. Seager, M. Potters, J. P. Bouchaud](https://arxiv.org/abs/1404.3274)
+- [Risk Premia: Asymmetric Tail Risks and Excess Returns - Bouchaud](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2502743)
 - [A Century of Evidence on Trend-Following Investing - AQR](https://www.aqr.com/Insights/Research/Journal-Article/A-Century-of-Evidence-on-Trend-Following-Investing)
 - [Why Not 100% Equities - AQR](https://www.aqr.com/Insights/Research/Journal-Article/Why-Not--Equities)
 - [Risk premia: asymmetric tail risks and excess returns - Bouchaud](https://www.tandfonline.com/doi/full/10.1080/14697688.2016.1183035)
