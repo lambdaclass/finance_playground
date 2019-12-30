@@ -29,7 +29,7 @@ def plot(df,start,end,month_mean=False):
     
     ax.set_xlabel(df.columns[0],fontweight='bold',fontsize='x-large')
     ax.set_ylabel(df.columns[1],fontweight='bold',fontsize='x-large')
-    ax.set_title(df.columns[1]+' over time, Argentina',fontweight='bold',fontsize='xx-large')
+    #ax.set_title(df.columns[1]+' over time, Argentina',fontweight='bold',fontsize='xx-large')
 
-    ax.plot(df[str(df.columns[0])],df[str(df.columns[1])],"o",color='black',markersize=2)
-    plt.show()
+    ax.plot(df[str(df.columns[0])],df[str(df.columns[1])],"-",color='black',markersize=2)
+    return ax
