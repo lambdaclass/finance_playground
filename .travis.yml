@@ -20,9 +20,8 @@ branches:
 
 deploy:
   provider: pages
-  edge: true
-  token: $GITHUB_TOKEN # Set in travis-ci.org dashboard
-  keep_history: false
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN # Set in travis-ci.org dashboard
   verbose: true
   local_dir: html
   on:

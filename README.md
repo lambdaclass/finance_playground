@@ -4,10 +4,6 @@
 Finance Playground
 ==============================
 
-> In God we trust, all others bring data - William Edwards Deming
-
-> I am not interested in proofs, but only in what nature does - Paul Dirac
-
 > Uncertainty must be taken in a sense radically distinct from the familiar notion of Risk, from which it has never been properly separated.... The essential fact is that 'risk' means in some cases a quantity susceptible of measurement, while at other times it is something distinctly not of this character; and there are far-reaching and crucial differences in the bearings of the phenomena depending on which of the two is really present and operating.... It will appear that a measurable uncertainty, or 'risk' proper, as we shall use the term, is so far different from an unmeasurable one that it is not in effect an uncertainty at all - Frank Knight
 
 In this project our aim is to explore and analyse financial instruments (stocks and options in particular) and to develop profitable trading strategies. To that end, we focused on the relation between price time series and factors such as market volatility, interest rates, and various economic indicators.  
@@ -76,57 +72,6 @@ Because we don't have the right laws, the axiomatic approach to finance is probl
 If finance is about anything, it is about the messy world we inhabit. It's best to learn axioms only after you've acquired intuition.
 Mathematics is important, and the more mathematics you know the better off you're going to be. But don't fall too in love with mathematics. The problems of financial modeling are less mathematical than they are conceptual. In this book, we want to first concentrate on understanding concepts and their implementation, and then use mathematics as a tool. We're less interested here in great numerical accuracy or computational efficiency than in making the ideas we're using clear.
 We know so little that is absolutely right about the fundamental behavior of assets. Are there really strict laws they satisfy? Are those laws stationary? It's best to assume as little as possible and rely on models as little as possible. And when we do rely on models, simpler is better. With that in mind, we proceed to a brief overview of the principles of financial modeling.
-
-## Recommended reading
-
-For complete novices in finance and economics, this [post](https://notamonadtutorial.com/how-to-earn-your-macroeconomics-and-finance-white-belt-as-a-software-developer-136e7454866f) gives a comprehensive introduction.
-
-### Papers and Posts
-- [Dennis Rodman and the Art of Portfolio Optimization](https://www.artemiscm.com/s/Artemis-Research_Dennis-Rodman-and-Portfolio-Optimization_April2016-efr3.pdf)
-- [Doing a Laplace](https://ergodicityeconomics.com/2017/07/18/doing-a-laplace/)
-- [What’s a growth rate, really?](https://ergodicityeconomics.com/2019/03/13/whats-a-growth-rate-really/)
-- [Volatility: A New Return Driver?](http://static.squarespace.com/static/53974e3ae4b0039937edb698/t/53da6400e4b0d5d5360f4918/1406821376095/Directional%20Volatility%20Research.pdf) - Greggory Flinn, Roger J. Schreiner
-- [Easy Volatility Investing](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2255327) - Tony Cooper (2013)
-- [Everybody’s Doing It: Short Volatility Strategies and Shadow Financial Insurers](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3071457) - Vineer Bhansali, Lawrence Harris (2018)
-- [Volatility-of-Volatility Risk](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2497759)- Darien Huang, Christian Schlag, Ivan Shaliastovich, Julian Thimme (2018)
-- [Four Points Beginner Risk Managers Should Learn from Jeff Holman’s Mistakes in the Discussion of Antifragile - Taleb](https://arxiv.org/pdf/1401.2524.pdf)
-- [The Distribution of Returns](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2828744) - David E. Harris (2017)
-- [Safe Haven Investing Part I - Not all risk mitigation is created equal](https://www.universa.net/UniversaResearch_SafeHavenPart1_RiskMitigation.pdf) - Universa Investments (2017)
-- [Safe Haven Investing Part II - Not all risk is created equal](https://www.universa.net/UniversaResearch_SafeHavenPart2_NotAllRisk.pdf) - Universa Investments (2017)
-- [Safe Haven Investing Part III - Those wonderful tenbaggers](https://www.universa.net/UniversaResearch_SafeHavenPart3_Tenbaggers.pdf) - Universa Investments (2017)
-- [Insurance makes wealth grow faster](https://arxiv.org/abs/1507.04655) - Ole Peters, Alexander Adamou (2017)
-- [Ergodicity economics](https://ergodicityeconomics.files.wordpress.com/2018/06/ergodicity_economics.pdf) - Ole Peters (2018)
-- [The Rate of Return on Everything, 1870–2015](https://economics.harvard.edu/files/economics/files/ms28533.pdf) - Oscar Jorda, Katharina Knoll, Dmitry Kuvshinov, Moritz Schularick, Alan M. Taylor (2019)
-- [Volatility and the Alchemy of Risk](https://static1.squarespace.com/static/5581f17ee4b01f59c2b1513a/t/59ea16dbbe42d6ff1cae589f/1508513505640/Artemis_Volatility+and+the+Alchemy+of+Risk_2017.pdf) - Artemis Capital Management (2017)
-- [Trading Volatility](https://inference-review.com/article/trading-volatility) - Emanuel Derman
-- [Trends Everywhere](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3386035) - Abhilash Babu, Ari Levine, Yao Hua Ooi, Lasse Heje Pedersen, Erik Stamelos (2018)
-- [Two centuries of trend following - Y. Lempérière, C. Deremble, P. Seager, M. Potters, J. P. Bouchaud](https://arxiv.org/abs/1404.3274)
-- [Risk Premia: Asymmetric Tail Risks and Excess Returns - Bouchaud](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2502743)
-- [A Century of Evidence on Trend-Following Investing - AQR](https://www.aqr.com/Insights/Research/Journal-Article/A-Century-of-Evidence-on-Trend-Following-Investing)
-- [Why Not 100% Equities - AQR](https://www.aqr.com/Insights/Research/Journal-Article/Why-Not--Equities)
-- [Risk premia: asymmetric tail risks and excess returns - Bouchaud](https://www.tandfonline.com/doi/full/10.1080/14697688.2016.1183035)
-- [Black Scholes and the normal distribution](https://mathbabe.org/2013/03/12/black-scholes-and-the-normal-distribution/)
-- [Why log returns?](https://mathbabe.org/2011/08/30/why-log-returns/)
-- [The Variation of Some Other Speculative Prices - Benoit Mandelbrot](https://web.williams.edu/Mathematics/sjmiller/public_html/341Fa09/econ/Mandelbroit_VariationCertainSpeculativePrices.pdf)
-- [A New Heuristic Measure of Fragility and Tail Risks : Application to Stress Testing -  Schmieder, Kinda, Taleb, Loukoianova, Canetti ](https://www.imf.org/en/Publications/WP/Issues/2016/12/31/A-New-Heuristic-Measure-of-Fragility-and-Tail-Risks-Application-to-Stress-Testing-26222)
-- [Fallibility, Reflexivity, and the Human Uncertainty Principle - George Soros](https://www.georgesoros.com/2014/01/13/fallibility-reflexivity-and-the-human-uncertainty-principle-2/)
-- [Option Pricing Under Power Laws: A Robust Heuristic - Taleb](https://arxiv.org/pdf/1908.02347)
-
-### Books
-
-#### Introductory
-- Option Volatility and Pricing 2nd Ed. - Natemberg (2014)
-- Options, Futures, and Other Derivatives 10th Ed. - Hull (2017)
-- Trading Options Greeks: How Time, Volatility, and Other Pricing Factors Drive Profits 2nd Ed. - Passarelli (2012)
-
-#### Intermediate
-- Trading Volatility - Bennet (2014)
-- Volatility Trading 2nd Ed. - Sinclair (2013)
-
-#### Advanced
-- Dynamic Hedging - Taleb (1997)
-- The Volatility Surface: A Practitioner's Guide - Gatheral (2006)
-- The Volatility Smile - Derman & Miller (2016)
 
 ## Data sources
 
