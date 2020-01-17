@@ -6,24 +6,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>$title$</title>
-    <meta property="og:title" content="The Central Limit Theorem and its misuse">
-    <meta name="description" content="The central limit theorem is possibly the most famous theorem in all of statistics, being widely used in any field that wants to infer something or make predictions from gathered data. A first (simple) version of it was introduced in the eighteenth century, first by de Moivre and then later in a more refined way by Laplace, but it wasn't until around 1935 that the theorem as we know it today was published. The goal of these notes is to explain in broad terms what it says and, more importantly, what it doesn't.">
+
+    <meta property="og:title" content="Don't bet on an expected value">
+
+    <meta property="og:image" content="https://lambdaclass.com/data_etudes/dont_bet_on_an_ev/img/dontbetonanev.png">
+    <meta property="og:url" content="https://lambdaclass.com/data_etudes/dont_bet_on_an_ev/">
 
     <meta name="twitter:title" content="$title$">
-    <meta property="og:url" content="https://lambdaclass.com/data_etudes/central_limit_theorem_misuse/">
-    <meta property="og:image" content="https://lambdaclass.com/data_etudes/central_limit_theorem_misuse/img/screenshot.png">
-
-    <meta name="twitter:image:src" content="https://lambdaclass.com/data_etudes/central_limit_theorem_misuse/img/screenshot.png">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:description" content="The central limit theorem is possibly the most famous theorem in all of statistics, being widely used in any field that wants to infer something or make predictions from gathered data. A first (simple) version of it was introduced in the eighteenth century, first by de Moivre and then later in a more refined way by Laplace, but it wasn't until around 1935 that the theorem as we know it today was published. The goal of these notes is to explain in broad terms what it says and, more importantly, what it doesn't.">
+    <meta name="twitter:image:src" content="https://lambdaclass.com/data_etudes/dont_bet_on_an_ev/img/dontbetonanev.png">
+
+    <meta name="description" content="Imagine a game where you toss a fair coin and bet an initial wealth W0. If it comes up heads your monetary wealth increases by 50%; otherwise, it is reduced by 40%. You're not only doing this once, but many times; for example, once per week for the rest of your life. Would you accept the rules of our game? Would you play this game if given the opportunity?">
+    <meta name="twitter:description" content="Imagine a game where you toss a fair coin and bet an initial wealth W0. If it comes up heads your monetary wealth increases by 50%; otherwise, it is reduced by 40%. You're not only doing this once, but many times; for example, once per week for the rest of your life. Would you accept the rules of our game? Would you play this game if given the opportunity?">
     <meta name="twitter:creator" content="@unbalancedparen">
 
     <link rel="stylesheet" type="text/css" href="./css/main.css">
     <link rel="stylesheet" type="text/css" href="https://edwardtufte.github.io/tufte-css/tufte.css">
 
-    <script async
+    <script type="text/javascript" async
             src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
     </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
 
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-155234935-1"></script>
     <script>
@@ -33,11 +39,14 @@
 
       gtag('config', 'UA-155234935-1');
     </script>
-
   </head>
   <body>
     <article>
       $body$
+      <video width="50%" class="bordered" controls>
+       <source src="img/biomass-growth.mp4" type="video/mp4">
+        Your browser does not support the video tag. </video></div>
     </article>
   </body>
+  <script src="./js/main.js"></script>
 </html>
