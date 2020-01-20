@@ -1,4 +1,6 @@
-# The emergence of cooperation in evolutionary systems
+The emergence of cooperation in evolutionary systems
+====================================================
+<br />
 
 Notes for [_An evolutionary advantage of cooperation_](https://arxiv.org/abs/1506.03414) - Peters and Adamou 2018
 
@@ -19,6 +21,7 @@ where $\mu$ is the drift, $\sigma$ the volatility and $\mathit{W_i}$ is a [Wiene
 $$g(x_i, T) \equiv \frac{1}{T} \ln{\Big( \frac{x_i(T)}{x_i(0)} \Big)}$$
 
 ## Cooperation protocol
+<br />
 
 The baseline model consists of $N$ non-cooperating entities $x_i$. This system is compared to one where a  mutation is introduced that hard wires cooperation into the entities. The _cooperators_, hence referred to as $y_i$, pool resources and then share them equally.
 
@@ -35,7 +38,7 @@ $$ y_{i}(t+\Delta t)=\frac{1}{N} \sum_{j=1}^{N}\left(y_{j}(t)+\Delta y_{j}(t)\ri
 
 
 ## Analysis of the system
-
+<br />
 Looked at from the ensemble averaging perspective, given identical initial biomasses $x_i(0) = y_i(0)$ we have
 
 $$\left\langle x_{i}(t)\right\rangle = \left\langle y_{i}(t)\right\rangle = x_{i}(0) \exp (\mu t)$$
@@ -58,8 +61,7 @@ where
 \end{equation}
 
 ## Plots
-
-
+<br />
 The chart from the paper showing the expectation value, growth rate for non colaborating and for $N = 2$ colaborating entities.
 
 <label for="imgemergence-of-cooperation_11_0" class="margin-toggle">⊕</label>
