@@ -1,5 +1,6 @@
 # Explorations on ergodicity and random processes
 
+
 Notes for:
 
 - [Ergodicity Economics](https://ergodicityeconomics.com/lecture-notes/) - _Peters_
