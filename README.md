@@ -3,6 +3,8 @@
 
 Finance Playground
 ==============================
+</br>
+
 
 > Uncertainty must be taken in a sense radically distinct from the familiar notion of Risk, from which it has never been properly separated.... The essential fact is that 'risk' means in some cases a quantity susceptible of measurement, while at other times it is something distinctly not of this character; and there are far-reaching and crucial differences in the bearings of the phenomena depending on which of the two is really present and operating.... It will appear that a measurable uncertainty, or 'risk' proper, as we shall use the term, is so far different from an unmeasurable one that it is not in effect an uncertainty at all - Frank Knight
 
@@ -13,6 +15,8 @@ Collaboration is welcome: by all means, if you spot a mistake or just want to ad
 
 
 ## Notebooks
+
+
 
 - [Introduction to Finance](https://lambdaclass.com/finance_playground/intro-finance.html) - Basic concepts in Finance (stocks, ETFs, options) \[[slides](https://lambdaclass.com/finance_playground/intro-finance.slides.html)\]
 - [The Holy Grail of Investing](https://lambdaclass.com/finance_playground/diversification-dalio-holy-grail.html) - On Ray Dalio's insights into the benefits of [diversification](https://www.investopedia.com/video/play/ray-dalio-his-portfolio-holy-grail/).
@@ -45,6 +49,9 @@ $ cd notebooks && jupyter lab
 ```
 
 # Mathematics, science and engineering
+</br>
+
+
 Before diving into the notebooks we recommend you read this great quote by Emanuel Derman in his book The Volatility Smile:
 
 >Mathematics requires axioms and postulates, from which mathematicians then derive the logical consequences. In geometry, for example, Euclid's axioms are meant to describe self-evident relationships of parts of things to the whole, and his postulates further describe supposedly self-evident properties of points and lines. One Euclidean axiom is that things that are equal to
@@ -77,6 +84,7 @@ We know so little that is absolutely right about the fundamental behavior of ass
 ## Data sources
 
 ### Exchanges
+
 
 - [IEX](https://iextrading.com/developer/)
 - [CBOE Options Data](http://www.cboe.com/delayedquote/quote-table-download)

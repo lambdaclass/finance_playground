@@ -39,7 +39,7 @@ $$ y_{i}(t+\Delta t)=\frac{1}{N} \sum_{j=1}^{N}\left(y_{j}(t)+\Delta y_{j}(t)\ri
 
 ## Analysis of the system
 <br />
-Looked at from the ensemble averaging perspective, given identical initial biomasses $x_i(0) = y_i(0)$ we have
+From the point of view of ensamble averaging, given identical initial biomasses $x_i(0) = y_i(0)$ we have
 
 $$\left\langle x_{i}(t)\right\rangle = \left\langle y_{i}(t)\right\rangle = x_{i}(0) \exp (\mu t)$$
 
