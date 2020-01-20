@@ -1,5 +1,6 @@
-# Explorations on ergodicity and random processes
-
+Explorations on ergodicity and random processes
+================================================
+<br />
 
 Notes for:
 
@@ -26,10 +27,10 @@ The aforementioned paradox was studied by [Daniel Bernoulli](https://en.wikipedi
 Professor [Ole Peters](http://tuvalu.santafe.edu/~ole/), Fellow at the [London Mathematical Laboratory](http://www.lml.org.uk/), has studied random processes such as this under different dynamics (where wealth changes in additive or multiplicative increments) and has proposed an alternative approach, one that seeks to explain human decision making when faced with such risky propositions. Instead of taking into account the state space average of wealth, this paradigm focuses on the time-average of wealth which are most often **not equal**. This framework is generally useful in evaluating gambles, and delivers insights into questions of optimal leverage, the puzzle of insurance, the emergence of cooperation, and the dynamics of inequality.
 
 In a nutshell:
-> People just optimize what happens to their wealth over time.
+ People just optimize what happens to their wealth over time.
 
 ## A motivating example
-
+<br />
 Consider the following game
 
 > Flip a coin:
@@ -54,9 +55,7 @@ $$\mathbb{E}(x(t + \Delta t)) = 0.5 \cdot 1.6 x(t) + 0.5 \cdot 0.5 x(t) = 1.05 x
 This makes it a positive **EV** game.
 
 We'll generate 100 draws from a uniform distribution $[0,1)$, and call every value > 0.5 heads, and tails for the rest.  
-Our initial wealth $x(t) = \$ 1000$
-
-    0.0027875931498163344
+With an initial wealth of $x(t) = \$ 1000$, at the end of the experiment we obtain a final wealth of 0.00279
 
 Surpisingly, our wealth goes to 0 as we repeat the experiment, with
 $$\lim_{T\to\infty} x(t + T \Delta t) = 0$$
@@ -64,15 +63,14 @@ $$\lim_{T\to\infty} x(t + T \Delta t) = 0$$
 We can plot the evolution of our wealth with time.
 <label for="imgemergence-of-cooperation_11_0" class="margin-toggle">⊕</label>
 <input type="checkbox" id="imgemergence-of-cooperation_11_0" class="margin-toggle">
-<span class="marginnote">Wealth over time for the simulation.</span>
+<span class="marginnote">Wealth over time for one simulation.</span>
 ![](img/ergodicity-explorations_14_0.png)
 
 Let's plot more realizations of the experiment.
 
 <label for="imgemergence-of-cooperation_11_0" class="margin-toggle">⊕</label>
 <input type="checkbox" id="imgemergence-of-cooperation_11_0" class="margin-toggle">
-<span class="marginnote">Wealth over time for the different simulations.</span>![](img/ergodicity-explorations_16_0.png)
-
+<span class="marginnote">Wealth over time for more simulations of the experiment.</span>![](img/ergodicity-explorations_16_0.png)
 
 There is high variance in the short term, but over the long run we see that realizations tend to 0 as $t$ grows.
 <br>
@@ -88,10 +86,10 @@ Professor Steve Keen sums it up clearly in his book _Debunking Economics_:
 > "Ergodic" is a frequently misunderstood term, especially within economics. It is properly defined by the [Wiktionary](https://en.wiktionary.org/wiki/ergodic), and the Wikipedia entry on [Ergodic Theory](https://en.wikipedia.org/wiki/ergodic_theory) makes the important point that "For the special class of ergodic systems, the time average is the same for almost all initial points: statistically speaking, the system that evolves for a long time _forgets_ its initial state." This is not the case for complex or chaotic models, which show "sensitive dependence on initial conditions" (see [Butterfly Effect](https://en.wikipedia.org/wiki/Butterfly_effect) and [Chaos Theory](https://en.wikipedia.org/wiki/Chaos_theory)).
 
 ## _Insurance makes wealth grow faster_
-
-Ole Peters, Alexander Adamou  
+<br />
+[Insurance makes wealth grow faster](https://arxiv.org/abs/1507.04655) _Ole Peters & Alexander Adamou_
 last revised 13 Jul 2017  
-https://arxiv.org/abs/1507.04655
+
 
 This paper tries to answer Kenneth Arrow's observation: _why does insurance exist?_  
 In a world without arbitrage oportunities (assuming buyer and seller of insurance contracts have the same information), the insurer cannot charge more than the net premium (i.e. the expectation value of any future claims made by the buyer of the contract). Likewise, the buyer should not be willing to pay more than the premium.
@@ -99,8 +97,8 @@ In a world without arbitrage oportunities (assuming buyer and seller of insuranc
 Given that insurance is antisymmetric (what one party gains the other loses) and that the contracts should be priced exactly at the net premium, they should not exist.  
 And yet they do.
 
-#### To buy or not to buy insurance
-
+## _To buy or not to buy insurance_
+<br />
 Let's go through a simple case, considered in [Rothchild & Stiglitz 1976](academic.oup.com/qje/article-abstract/90/4/629/1886620).  
 > A merchant sends a ship from St. Petersburg to Amsterdam. The safe delivery of the ship's cargo nets him $G = \$ 4,000$. With probability $p = 0.05$ the ship is sunk, and its replacement cost is $C = \$ 30,000$. The journey takes $\Delta t = 1$ month and the merchant's wealth at time $t$ is $W_{mer} = \$ 100,000$.  
 > An insurer offers a contract that stipulates that, should the ship be lost, the merchant would receive the cost of the ship plus his lost profit $L = G + C$ for a fee of $F = \$ 1,800$.
@@ -148,8 +146,8 @@ $$\delta \langle r_{ins} \rangle = - \delta \langle r_{mer} \rangle$$
 ![](img/ergodicity-explorations_27_0.png)
 
 
-### Utility functions and the utility maximisation paradigm
-
+## Utility functions and the utility maximisation paradigm
+<br />
 Classical economic theory gets around this problem by introducing non linear **utility functions**, that map wealth to _happiness_ or _well being_ levels. The general idea is that one unit of wealth (i.e. one dollar) does not provide the same level of happiness to a millionaire than to a poor person.  
 Under this framework, rational agents act in a manner that maximises their rate of change of _utility_, which could be different for each agent. Thus, it is possible that insurance can provide positive utility for _both_ insurer and buyer.
 
@@ -187,8 +185,9 @@ $$\delta \langle r_{u} \rangle_{mer} = \langle r_{u} \rangle_{mer}^{in} - \langl
 
 Notice that $\langle r_{u} \rangle$ is measured in _utility units_.
 
-### Time averageing perspective
 
+## Time averageing perspective
+<br />
 The paradigm discussed in the paper proposes that individuals make decisions that maximise the _time-average growth rate_ of their wealth.  
 From page 17:
 > The usual procedure for computing such a time average is to first transform wealth in such a way as to generate an ergodic observable and then compute the expectation value of that observable.
