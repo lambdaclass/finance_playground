@@ -1,6 +1,6 @@
 BUILD_DIR = build
 
-.PHONY: default emergence_of_cooperation 
+.PHONY: default emergence_of_cooperation html
 default: index emergence_of_cooperation 
 
 dev: default
@@ -15,4 +15,8 @@ emergence_of_cooperation:
 
 index:
 	mkdir -p $(BUILD_DIR)
-	pandoc README.md --template ./template.tmpl -t html5 -o $(BUILD_DIR)/index.html --metadata title="LambdaClass Data Études"
+	pandoc README.md --template ./template.tmpl -t html5 -o $(BUILD_DIR)/index.html --metadata title="LambdaClass finance playground"
+
+html:
+	cd html/rgbm_animation && npm install && npm run build
+	rm -rf html/rgbm_animation/node_modules/
