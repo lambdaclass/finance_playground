@@ -10,78 +10,19 @@ As an example, consider a game where a fair coin is tossed. If heads comes up, y
 Here the gamble has payouts $D = \{3, -1\}$ where $P(d) = 0.5 \, \, \forall \, d \in D$  
 Would it be profitable to play such a game?
 
-Our intuition suggests we should take the average of the payouts weighted by their probalility.
-
-
-```python
-weighted_average = 3 * 0.5 + -1 * 0.5
-print(weighted_average)
-```
-
-    1.0
-
+Our intuition suggests we should take the average of the payouts weighted by their probalility : 3 * 0.5 + -1 * 0.5 = 1.
 
 This number is known as the **expected value** of the game (we also refer to $G$ as a [random variable](https://en.wikipedia.org/wiki/Random_variable)).
 
 What does this number mean? Should we expect to win $\$1$ _every time_ we play? Perhaps it says something about our long term winnigs if we play many times over?
 
 Conceptually, it helps to think about expected values as taking the average of the payouts over many (tending to infinity) plays (_realizations_) of the game.  
-Think of $n$ individuals playing simultaneously. We then take the average of their winnings by summing over all the payouts and dividing over $n$.
+Think of $n$ individuals playing simultaneously. We then take the average of their winnings by summing over all the payouts and dividing over $n$. Simulating 100 realizations, we obtained an average value of $0.88$.
 
-
-```python
-%config InlineBackend.figure_format="retina"
-%matplotlib inline
-
-import numpy as np
-import matplotlib.pyplot as plt
-
-plt.style.use("seaborn-talk")
-np.random.seed(42)
-```
-
-
-```python
-plt.rcParams["figure.figsize"] = (12, 6)
-```
-
-
-```python
-n = 100
-
-def average_payout(n):
-    coin_flips = np.random.rand(n)
-
-    # Heads when > 0.5, Tails when <= 0.5
-    payouts = np.where(coin_flips > 0.5, 3, -1)
-    
-    return payouts.mean()
-
-print(average_payout(n))
-```
-
-    0.88
-
-
-In fact, by the [central limit theorem](https://en.wikipedia.org/wiki/Central_limit_theorem#Classical_CLT), as $n$ increases this average will tend towards the expected value.
-
-
-```python
-n = 1_000_000
-
-print(average_payout(n))
-```
-
-    1.0021
-
-
-
-```python
-many_payouts = [average_payout(x) for x in np.full(1000, n)]
-plt.hist(many_payouts, bins=40);
-```
-
-
+In fact, by the [central limit theorem](https://en.wikipedia.org/wiki/Central_limit_theorem#Classical_CLT), as $n$ increases this average will tend towards the expected value. With $n=1000000$, the average value obtained was $1.0021$ and the histogram shown below.
+<label for="img1" class="margin-toggle">⊕</label>
+<input type="checkbox" id="img1" class="margin-toggle">
+<span class="marginnote">Histogram of the simulations with $n=1000000$.</span>
 ![](img/evaluating-gambles-presentation_13_0.png)
 
 
@@ -122,16 +63,9 @@ The aforementioned paradox was studied by [Daniel Bernoulli](https://en.wikipedi
 - Any arbitrary function could be used to model utility. This makes the theory very flexibile, at the cost of explanatory power.
 - Typical choices for utilities include $\sqrt{x}$ and $\ln{x}$.
 
-
-```python
-points = np.linspace(0.0001, 50, num=300)
-fig, (ax1, ax2) = plt.subplots(1, 2, sharey=True)
-ax1.set_title(r"$\sqrt{x}$"), ax2.set_title(r"$\log{x}$")
-ax1.plot(points, np.sqrt(points))
-ax2.plot(points, np.log(points));
-```
-
-
+<label for="img2" class="margin-toggle">⊕</label>
+<input type="checkbox" id="img2" class="margin-toggle">
+<span class="marginnote">Plot of the functions $f(x)=\sqrt{x}$ and $f(x)=log(x)$.</span>
 ![](img/evaluating-gambles-presentation_22_0.png)
 
 
@@ -150,38 +84,19 @@ $$\mathbb{E}(x(1)) = 0.5 \cdot 1.6 x(0) + 0.5 \cdot 0.5 x(0) = 1.05 x(0)$$
 - Once? Many times?
 
 
+We run a simulation of 100 flips, obtaining a wealth over time shown below, starting with an initial wealth of 100.
 
-```python
-def play_game(initial_wealth, steps):
-    draws = np.random.rand(steps)
-    factors = np.where(draws > 0.5, 1.6, 0.5)
-    factors[0] = 1 # Factor at initial time step
-    return factors.cumprod() * initial_wealth
-
-x_0 = 1_000
-wealth = play_game(x_0, 100)
-plt.plot(wealth)
-plt.xlabel("t"), plt.ylabel(r"$x(t)$");
-```
-
-
+<label for="img3" class="margin-toggle">⊕</label>
+<input type="checkbox" id="img3" class="margin-toggle">
+<span class="marginnote">Wealth over time for a simulation of 100 flips with a initial wealth of $100.</span>
 ![](img/evaluating-gambles-presentation_25_0.png)
 
 
-
-```python
-plays = [play_game(x_0, 100) for _ in range(20)]
-
-for play in plays:
-    plt.plot(play)
-
-plt.title("Wealth over time")
-plt.xlabel("t"), plt.ylabel(r"$x(t)$");
-```
-
-
-![png](img/evaluating-gambles-presentation_26_0.png)
-
+Then, we run more simulations, each one starting from a different initial wealth, obtaining the next plot.
+<label for="img3" class="margin-toggle">⊕</label>
+<input type="checkbox" id="img3" class="margin-toggle">
+<span class="marginnote">Wealth over time for simulations starting from different initial wealth.</span>
+![](img/evaluating-gambles-presentation_26_0.png)
 
 There is high variance in the short term, but over the long run we see that realizations tend to 0 as $t$ grows.
 <br>
@@ -226,7 +141,7 @@ plt.hist(avg_payouts, bins=40);
 ```
 
 
-![png](img/evaluating-gambles-presentation_34_0.png)
+![](img/evaluating-gambles-presentation_34_0.png)
 
 
 An interesting question:  
@@ -262,7 +177,7 @@ plt.plot(wealth_over_time(p, x_0, 500, 1.0));
 ```
 
 
-![png](img/evaluating-gambles-presentation_39_0.png)
+![](img/evaluating-gambles-presentation_39_0.png)
 
 
 If we try to maximise the rate of growth by betting all our wealth each time, we will inevitably go broke.  
@@ -275,7 +190,7 @@ plt.plot(wealth_over_time(p, x_0, 500, 0.001));
 ```
 
 
-![png](img/evaluating-gambles-presentation_41_0.png)
+![](img/evaluating-gambles-presentation_41_0.png)
 
 
 We're not broke, but our earnings are growing timidly.   
@@ -323,7 +238,7 @@ plt.plot(fs, g_star(fs));
 ```
 
 
-![png](img/evaluating-gambles-presentation_49_0.png)
+![](img/evaluating-gambles-presentation_49_0.png)
 
 
 
@@ -334,7 +249,7 @@ plt.yscale("log");
 ```
 
 
-![png](img/evaluating-gambles-presentation_50_0.png)
+![](img/evaluating-gambles-presentation_50_0.png)
 
 
 We can calculate the maximum by taking the derivative.
@@ -359,7 +274,7 @@ plt.plot(wealth);
 ```
 
 
-![png](img/evaluating-gambles-presentation_54_0.png)
+![](img/evaluating-gambles-presentation_54_0.png)
 
 
 
@@ -371,7 +286,7 @@ plt.plot(wealth);
 ```
 
 
-![png](img/evaluating-gambles-presentation_55_0.png)
+![](img/evaluating-gambles-presentation_55_0.png)
 
 
 
