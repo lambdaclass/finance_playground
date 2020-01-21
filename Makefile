@@ -1,7 +1,7 @@
 BUILD_DIR = build
 
 .PHONY: default emergence_of_cooperation html
-default: index emergence_of_cooperation 
+default: index emergence_of_cooperation html
 
 dev: default
 	python -m http.server
