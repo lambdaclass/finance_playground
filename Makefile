@@ -1,6 +1,6 @@
 BUILD_DIR = build
 
-.PHONY: default ergodicity_explorations
+.PHONY: default ergodicity_explorations html
 default: index ergodicity_explorations 
 
 dev: default
@@ -17,3 +17,7 @@ ergodicity_explorations:
 index:
 	mkdir -p $(BUILD_DIR)
 	pandoc README.md --template ./template.tmpl -t html5 -o $(BUILD_DIR)/index.html --metadata title="LambdaClass Finance Playground"
+
+html:
+	cd html/rgbm_animation && npm install && npm run build
+	rm -rf html/rgbm_animation/node_modules/
