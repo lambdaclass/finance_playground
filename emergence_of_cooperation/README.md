@@ -66,7 +66,7 @@ The chart from the paper showing the expectation value, growth rate for non cola
 
 <label for="imgemergence-of-cooperation_11_0" class="margin-toggle">⊕</label>
 <input type="checkbox" id="imgemergence-of-cooperation_11_0" class="margin-toggle">
-<span class="marginnote">Expectation value and growth rate for two non colaborating and colaborating entities.</span>![](img/emergence-of-cooperation_11_0.png)
+<span class="marginnote">Typical trajectories for two non-cooperating (green) entities andfor the corresponding cooperating unit (blue) on a logarithmic vertical scal (Peters & Adamou, 2018).</span>![](img/emergence-of-cooperation_11_0.png)
 
 
 As the authors point out:
