@@ -84,7 +84,7 @@ $$\mathbb{E}(x(1)) = 0.5 \cdot 1.6 x(0) + 0.5 \cdot 0.5 x(0) = 1.05 x(0)$$
 - Once? Many times?
 
 
-We run a simulation of 100 flips, obtaining a wealth over time shown below, starting with an initial wealth of 100.
+Running a simulation of 100 flips, we obtain the wealth over time shown below, starting with an initial wealth of 100.
 
 <label for="img3" class="margin-toggle">⊕</label>
 <input type="checkbox" id="img3" class="margin-toggle">
@@ -112,35 +112,11 @@ We say that such systems are **non ergodic**, that is, they behave differently w
 Now suppose we could play a game infinitely many times where a coin is flipped, coming up heads with probability $p > 0.5$, tails with probalility $q = 1 - p$.  
 You win an amount equal to your stake: if you bet $\$1$ you would earn $\$2$ if heads show up, $-\$1$ otherwise.
 
-Let's set $p = 0.6$
+Running a simulation for $p = 0.6$, $n = 1000000$ and a stake of 100, we obtain an average payout of $\$79.98$. We're making money! Let's plot some more runs:
 
-
-```python
-def average_payout_biased_coin(n, p, stake):
-    coin_flips = np.random.rand(n)
-    payouts = np.where(coin_flips > p, -stake, 2*stake)
-    
-    return payouts.mean()
-
-n = 1_000_000
-p = 0.6
-stake = 100
-
-print(average_payout_biased_coin(n, p, stake))
-```
-
-    79.9808
-
-
-We're making money! Let's plot some more runs:
-
-
-```python
-avg_payouts = [average_payout_biased_coin(x, p, stake) for x in np.full(200, n)]
-plt.hist(avg_payouts, bins=40);
-```
-
-
+<label for="img4" class="margin-toggle">⊕</label>
+<input type="checkbox" id="img4" class="margin-toggle">
+<span class="marginnote">Histogram of the average payouts for $p=0.6$ and a stake of $\$100$.</span>
 ![](img/evaluating-gambles-presentation_34_0.png)
 
 
@@ -150,48 +126,21 @@ An interesting question:
 
 Since the expected value of this game is positive, should we bet all our wealth each time? A fraction?
 
-Given our initial wealth $x(0) = \$1000$, we have after $t$ plays:
+Given our initial wealth $x(0) = \$1000$, we have after $t$ plays, an stake equal to the wealth:
 
-
-```python
-def wealth_over_time(p, initial_wealth, t, stake):
-    """Returns an np.array of wealth levels after `t` time steps.
-    Arguments:
-    p: float     - Probability of heads (win chance)
-    x_0: float   - Initial wealth
-    t: int       - Number of time steps
-    stake: float - Fraction of wealth to bet
-    """
-    coin_flips = np.random.rand(t)
-    factors = np.where(coin_flips > p, 1 - stake, 1 + stake)
-    factors[0] = 1
-    
-    return factors.cumprod() * initial_wealth
-```
-
-
-```python
-x_0 = 1_000
-
-plt.plot(wealth_over_time(p, x_0, 500, 1.0));
-```
-
-
+<label for="img5" class="margin-toggle">⊕</label>
+<input type="checkbox" id="img5" class="margin-toggle">
+<span class="marginnote">Wealth over time for a stake equal to the wealth.</span>
 ![](img/evaluating-gambles-presentation_39_0.png)
 
+If we try to maximize the rate of growth by betting all our wealth each time, we will inevitably go broke.  
 
-If we try to maximise the rate of growth by betting all our wealth each time, we will inevitably go broke.  
+Perhaps we should bet the minimum amount, and avoid bankrupcy, then  we run the simulation with a stake equal to 0.001 of the wealth.
 
-Perhaps we should bet the minimum amount, and avoid bankrupcy.
-
-
-```python
-plt.plot(wealth_over_time(p, x_0, 500, 0.001));
-```
-
-
+<label for="img5" class="margin-toggle">⊕</label>
+<input type="checkbox" id="img5" class="margin-toggle">
+<span class="marginnote">Wealth over time for a stake equal to 0.001 of the wealth.</span>
 ![](img/evaluating-gambles-presentation_41_0.png)
-
 
 We're not broke, but our earnings are growing timidly.   
 Is there a better approach? 🤔
@@ -228,27 +177,14 @@ g(f) & = p \log{(1 + f)} + q \log{(1 - f)} \\
 
 Let's plot $g(t)$
 
-
-```python
-fs = np.linspace(0, 1, endpoint=False, num=200)
-p, q = 0.6, 0.4
-g_star = lambda f: p * np.log(1+f) + q * np.log(1-f)
-
-plt.plot(fs, g_star(fs));
-```
-
-
+<label for="img5" class="margin-toggle">⊕</label>
+<input type="checkbox" id="img5" class="margin-toggle">
+<span class="marginnote">Plot of $g(t)$.</span>
 ![](img/evaluating-gambles-presentation_49_0.png)
 
-
-
-```python
-plt.plot(fs, g_star(fs))
-plt.axvline(x=p-q, linestyle="--", color="r", linewidth=1)
-plt.yscale("log");
-```
-
-
+<label for="img5" class="margin-toggle">⊕</label>
+<input type="checkbox" id="img5" class="margin-toggle">
+<span class="marginnote">Plot of $g(t)$ in log scale.</span>
 ![](img/evaluating-gambles-presentation_50_0.png)
 
 
@@ -264,32 +200,14 @@ This was first discovered by mathematician John Kelly in 1956. Known as _Kelly's
 
 Let's see how our wealth grows using Kelly's optimal betting strategy.
 
-
-```python
-plt.title("Wealth over time with optimal betting")
-plt.xlabel("t"), plt.ylabel("x(t)")
-plt.ticklabel_format(style="plain")
-wealth = wealth_over_time(p, x_0, 500, p-q)
-plt.plot(wealth);
-```
-
-
+<label for="img5" class="margin-toggle">⊕</label>
+<input type="checkbox" id="img5" class="margin-toggle">
+<span class="marginnote">Wealth over time with optimal betting.</span>
 ![](img/evaluating-gambles-presentation_54_0.png)
 
-
-
-```python
-plt.title("Wealth over time with optimal betting")
-plt.xlabel("t"), plt.ylabel(r"$\log{x(t)}$")
-plt.yscale("log");
-plt.plot(wealth);
-```
-
-
+<label for="img5" class="margin-toggle">⊕</label>
+<input type="checkbox" id="img5" class="margin-toggle">
+<span class="marginnote">Wealth over time with optimal betting in log scale.</span>
 ![](img/evaluating-gambles-presentation_55_0.png)
 
 
-
-```python
-
-```
