@@ -1,7 +1,6 @@
 Explorations on ergodicity and random processes
 ================================================
 <br />
-
 Notes for:
 
 - [Ergodicity Economics](https://ergodicityeconomics.com/lecture-notes/) - _Peters_
@@ -22,7 +21,7 @@ $$\mathbb{E} = \frac{1}{2} \cdot 2 + \frac{1}{4} \cdot 4 + \frac{1}{8} \cdot 8 +
 
 Should we be willing to pay any amount for the opportunity to play? Most people would not, even though the game has an infinite expected value.
 
-The aforementioned paradox was studied by [Daniel Bernoulli](https://en.wikipedia.org/wiki/Daniel_Bernoulli) in a paper published in 1738 in the journal of the Imperial Academy of Science in St. Petersburg. In it, he introduced the [expected utility hypothesis](https://en.wikipedia.org/wiki/Expected_utility_hypothesis), which states that individual preferences concerning such gambles seek to maximise not the expected change in wealth, but the expected change in _utility_, which is a mathematical concept that captures the subjective value of wealth to the individual. Utility functions could differ between individuals, which gives much (perhaps too much) flexibility to the theory, at the cost of explanatory power. Typical choices for utilities include $\sqrt{x}$ and $\ln{x}$ that explain the fact that the increase in utility provided by a $\$$ is inversely proportional to the level of wealth.
+The aforementioned paradox was studied by [Daniel Bernoulli](https://en.wikipedia.org/wiki/Daniel_Bernoulli) in a paper published in 1738 in the journal of the Imperial Academy of Science in St. Petersburg. In it, he introduced the [expected utility hypothesis](https://en.wikipedia.org/wiki/Expected_utility_hypothesis), which states that individual preferences concerning such gambles seek to maximise not the expected change in wealth, but the expected change in _utility_, which is a mathematical concept that captures the subjective value of wealth to the individual. Utility functions could differ between individuals, which gives much (perhaps too much) flexibility to the theory, at the cost of explanatory power. Typical choices for utilities include $\sqrt{x}$ and _$ln(x)$_ that explain the fact that the increase in utility provided by a dollar is inversely proportional to the level of wealth.
 
 Professor [Ole Peters](http://tuvalu.santafe.edu/~ole/), Fellow at the [London Mathematical Laboratory](http://www.lml.org.uk/), has studied random processes such as this under different dynamics (where wealth changes in additive or multiplicative increments) and has proposed an alternative approach, one that seeks to explain human decision making when faced with such risky propositions. Instead of taking into account the state space average of wealth, this paradigm focuses on the time-average of wealth which are most often **not equal**. This framework is generally useful in evaluating gambles, and delivers insights into questions of optimal leverage, the puzzle of insurance, the emergence of cooperation, and the dynamics of inequality.
 
@@ -34,6 +33,7 @@ In a nutshell:
 Consider the following game
 
 > Flip a coin:
+
 > - heads -> increase your wealth by 60%
 > - tails -> decrease your wealth by 50%
 
@@ -54,19 +54,20 @@ $$\mathbb{E}(x(t + \Delta t)) = 0.5 \cdot 1.6 x(t) + 0.5 \cdot 0.5 x(t) = 1.05 x
 
 This makes it a positive **EV** game.
 
-We'll generate 100 draws from a uniform distribution $[0,1)$, and call every value > 0.5 heads, and tails for the rest.  
-With an initial wealth of $x(t) = \$ 1000$, at the end of the experiment we obtain a final wealth of 0.00279
+We'll generate 100 draws from a uniform distribution $[0,1)$, and call every value greater than 0.5 _head_, and _tail_ for the rest.  
+With an initial wealth of $x(t) = \$ 1000$, at the end of the experiment we obtain a final wealth of 0.0028
 
 Surpisingly, our wealth goes to 0 as we repeat the experiment, with
 $$\lim_{T\to\infty} x(t + T \Delta t) = 0$$
 
-We can plot the evolution of our wealth with time.
+We can plot the evolution of our wealth with time:
+
 <label for="imgemergence-of-cooperation_11_0" class="margin-toggle">⊕</label>
 <input type="checkbox" id="imgemergence-of-cooperation_11_0" class="margin-toggle">
 <span class="marginnote">Wealth over time for one simulation.</span>
 ![](img/ergodicity-explorations_14_0.png)
 
-Let's plot more realizations of the experiment.
+Let's plot more realizations of the experiment:
 
 <label for="imgemergence-of-cooperation_11_0" class="margin-toggle">⊕</label>
 <input type="checkbox" id="imgemergence-of-cooperation_11_0" class="margin-toggle">
@@ -87,8 +88,8 @@ Professor Steve Keen sums it up clearly in his book _Debunking Economics_:
 
 ## _Insurance makes wealth grow faster_
 <br />
-[Insurance makes wealth grow faster](https://arxiv.org/abs/1507.04655) _Ole Peters & Alexander Adamou_
-last revised 13 Jul 2017  
+[_Insurance makes wealth grow faster_](https://arxiv.org/abs/1507.04655) Ole Peters & Alexander Adamou.
+Last revised 13 Jul 2017  
 
 
 This paper tries to answer Kenneth Arrow's observation: _why does insurance exist?_  
@@ -114,7 +115,7 @@ $$\langle r \rangle = \frac{\langle \Delta W \rangle}{\Delta t} = \frac{\langle 
 
 $$\langle r_{mer}^{un} \rangle = (1 - p)G - p C = 0.95 \cdot \$ 4,000 - 0.05 \cdot \$ 30,000 = \$ 2,300$$
 
-- Merchant's $\langle r_{mer}^{in} \rangle$_with_ insurance:
+- Merchant's $\langle r_{mer}^{in} \rangle$ _with_ insurance:
 
 $$\langle r_{mer}^{in} \rangle = (1 - p)(G - F) + p(L - C - F) = G - F = \$ 4,000 - \$ 1,800 = \$ 2,200$$
 
@@ -137,7 +138,7 @@ $$\langle r_{ins}^{in} \rangle = F - p L = \$ 1,800 - 0.05 \cdot (\$ 30,000 + \$
 The change in $\langle r_{ins} \rangle$ is:  
 $$\delta \langle r_{ins} \rangle = \langle r_{ins}^{in} \rangle - \langle r_{ins}^{un} \rangle = \$ 100$$
 
-The insurer stands to gain  \$ 100 per contract sold. Note that it is the same amount that the merchant would lose if he entered the contract.  
+The insurer stands to gain  $\$100$ per contract sold. Note that it is the same amount that the merchant would lose if he entered the contract.  
 
 $$\delta \langle r_{ins} \rangle = - \delta \langle r_{mer} \rangle$$
 <label for="imgemergence-of-cooperation_11_0" class="margin-toggle">⊕</label>
@@ -146,10 +147,10 @@ $$\delta \langle r_{ins} \rangle = - \delta \langle r_{mer} \rangle$$
 ![](img/ergodicity-explorations_27_0.png)
 
 
-## Utility functions and the utility maximisation paradigm
+## Utility functions and the utility maximization paradigm
 <br />
 Classical economic theory gets around this problem by introducing non linear **utility functions**, that map wealth to _happiness_ or _well being_ levels. The general idea is that one unit of wealth (i.e. one dollar) does not provide the same level of happiness to a millionaire than to a poor person.  
-Under this framework, rational agents act in a manner that maximises their rate of change of _utility_, which could be different for each agent. Thus, it is possible that insurance can provide positive utility for _both_ insurer and buyer.
+Under this framework, rational agents act in a manner that maximizes their rate of change of _utility_, which could be different for each agent. Thus, it is possible that insurance can provide positive utility for _both_ insurer and buyer.
 
 If we stipulate a square root utility $U(W) = \sqrt{W}$ for both insurer and merchant, then the following holds:  
 
@@ -188,7 +189,7 @@ Notice that $\langle r_{u} \rangle$ is measured in _utility units_.
 
 ## Time averageing perspective
 <br />
-The paradigm discussed in the paper proposes that individuals make decisions that maximise the _time-average growth rate_ of their wealth.  
+The paradigm discussed in the paper proposes that individuals make decisions that maximize the _time-average growth rate_ of their wealth.  
 From page 17:
 > The usual procedure for computing such a time average is to first transform wealth in such a way as to generate an ergodic observable and then compute the expectation value of that observable.
 
@@ -204,7 +205,7 @@ then we can create an _ergodic observable_ by taking into consideration the rela
 
 $$\lim_{T\to\infty} \frac{1}{T \Delta t} \ln \left(\frac{W_{mer}(t + T \Delta t)}{W_{mer}} \right) = \frac{\langle \Delta \ln W_{mer} \rangle}{\Delta t} = \frac{\langle \Delta \ln W_{mer}(t + \Delta t) \rangle - \ln W_{mer}(t)}{\Delta t}$$
 
-Under this paradigm, merchant and insurer should act in a way that maximises their rate of change in the _log_ of wealth. Note that this is a particular case of the utility paradigm, where both participants have log utilities.
+Under this paradigm, merchant and insurer should act in a way that maximizes their rate of change in the _log_ of wealth. Note that this is a particular case of the utility paradigm, where both participants have log utilities.
 
 We then have, under multiplicative dynamics, that the growth rate of the merchants wealth when _uninsured_ is
 
@@ -221,6 +222,7 @@ $$g_{ins}^{un} = 0$$
 _With insurance_
 
 $$g_{ins}^{in} = (1 - p) \ln \left( \frac{W_{ins} + F}{W_{ins}} \right) + p \ln \left( \frac{W_{ins} + F - L}{W_{ins}} \right)$$
+
 <label for="imgemergence-of-cooperation_11_0" class="margin-toggle">⊕</label>
 <input type="checkbox" id="imgemergence-of-cooperation_11_0" class="margin-toggle">
 <span class="marginnote">Rate of change for the grow rate.</span>
