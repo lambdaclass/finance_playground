@@ -19,10 +19,10 @@ What does this number mean? Should we expect to win $\$1$ _every time_ we play? 
 Conceptually, it helps to think about expected values as taking the average of the payouts over many (tending to infinity) plays (_realizations_) of the game.  
 Think of $n$ individuals playing simultaneously. We then take the average of their winnings by summing over all the payouts and dividing over $n$. Simulating 100 realizations, we obtained an average value of $0.88$.
 
-In fact, by the [central limit theorem](https://en.wikipedia.org/wiki/Central_limit_theorem#Classical_CLT), as $n$ increases this average will tend towards the expected value. With $n=1000000$, the average value obtained was $1.0021$ and the histogram shown below.
+In fact, by the [central limit theorem](https://en.wikipedia.org/wiki/Central_limit_theorem#Classical_CLT), as $n$ increases this average will tend towards the expected value. With $n=1,000,000$, the average value obtained was $1.0021$ and the histogram shown below.
 <label for="img1" class="margin-toggle">⊕</label>
 <input type="checkbox" id="img1" class="margin-toggle">
-<span class="marginnote">Histogram of the simulations with $n=1000000$.</span>
+<span class="marginnote">Histogram of the simulations with $n=1,000,000$.</span>
 ![](img/evaluating-gambles-presentation_13_0.png)
 
 
@@ -55,7 +55,7 @@ Most people would not, even though the game has an infinite expected value.
 
 ### Expected utility hypothesis
 
-The aforementioned paradox was studied by [Daniel Bernoulli](https://en.wikipedia.org/wiki/Daniel_Bernoulli). He introduced the [expected utility hypothesis](https://en.wikipedia.org/wiki/Expected_utility_hypothesis), which states that individual preferences concerning such gambles aim to maximise not the expected change in wealth, but the **expected change in utility**, which is a mathematical concept that captures the subjective value of wealth to the individual.
+The aforementioned paradox was studied by [Daniel Bernoulli](https://en.wikipedia.org/wiki/Daniel_Bernoulli). He introduced the [expected utility hypothesis](https://en.wikipedia.org/wiki/Expected_utility_hypothesis), which states that individual preferences concerning such gambles aim to maximize not the expected change in wealth, but the **expected change in utility**, which is a mathematical concept that captures the subjective value of wealth to the individual.
 
 **Key points**
 
@@ -84,7 +84,7 @@ $$\mathbb{E}(x(1)) = 0.5 \cdot 1.6 x(0) + 0.5 \cdot 0.5 x(0) = 1.05 x(0)$$
 - Once? Many times?
 
 
-Running a simulation of 100 flips, we obtain the wealth over time shown below, starting with an initial wealth of 100.
+Running a simulation of 100 flips, we obtain the wealth over time shown below, starting with an initial wealth of $\$100$.
 
 <label for="img3" class="margin-toggle">⊕</label>
 <input type="checkbox" id="img3" class="margin-toggle">
@@ -92,7 +92,7 @@ Running a simulation of 100 flips, we obtain the wealth over time shown below, s
 ![](img/evaluating-gambles-presentation_25_0.png)
 
 
-Then, we run more simulations, each one starting from a different initial wealth, obtaining the next plot.
+Then, we run more simulations, each one starting from a different initial wealth, obtaining:
 <label for="img3" class="margin-toggle">⊕</label>
 <input type="checkbox" id="img3" class="margin-toggle">
 <span class="marginnote">Wealth over time for simulations starting from different initial wealth.</span>
@@ -112,7 +112,8 @@ We say that such systems are **non ergodic**, that is, they behave differently w
 Now suppose we could play a game infinitely many times where a coin is flipped, coming up heads with probability $p > 0.5$, tails with probalility $q = 1 - p$.  
 You win an amount equal to your stake: if you bet $\$1$ you would earn $\$2$ if heads show up, $-\$1$ otherwise.
 
-Running a simulation for $p = 0.6$, $n = 1000000$ and a stake of 100, we obtain an average payout of $\$79.98$. We're making money! Let's plot some more runs:
+Running a simulation for $p = 0.6$, $n = 1000000$ and a stake of 100, we obtain an average payout of $\$79.98$. We're making money!
+Let's plot some more runs:
 
 <label for="img4" class="margin-toggle">⊕</label>
 <input type="checkbox" id="img4" class="margin-toggle">
@@ -122,7 +123,7 @@ Running a simulation for $p = 0.6$, $n = 1000000$ and a stake of 100, we obtain 
 
 An interesting question:  
 
-- How should we choose our stakes in order to maximise the rate at which our wealth grows?
+- How should we choose our stakes in order to maximize the rate at which our wealth grows?
 
 Since the expected value of this game is positive, should we bet all our wealth each time? A fraction?
 
@@ -135,7 +136,7 @@ Given our initial wealth $x(0) = \$1000$, we have after $t$ plays, an stake equa
 
 If we try to maximize the rate of growth by betting all our wealth each time, we will inevitably go broke.  
 
-Perhaps we should bet the minimum amount, and avoid bankrupcy, then  we run the simulation with a stake equal to 0.001 of the wealth.
+Perhaps we should bet the minimum amount, and avoid bankrupcy, then  we run the simulation with a stake equal to 0.001 of the wealth:
 
 <label for="img5" class="margin-toggle">⊕</label>
 <input type="checkbox" id="img5" class="margin-toggle">
@@ -143,7 +144,7 @@ Perhaps we should bet the minimum amount, and avoid bankrupcy, then  we run the 
 ![](img/evaluating-gambles-presentation_41_0.png)
 
 We're not broke, but our earnings are growing timidly.   
-Is there a better approach? 🤔
+Is there a better approach? 
 
 Let's look at how our wealth changes each time we play. We'll bet a fraction $f$ of our current wealth each time.  
 
@@ -160,15 +161,13 @@ Let's focus on this part:
 
 $$G_{t}(f) = \log{\left[ \frac{x(t)}{x(0)} \right]}^{\frac{1}{t}} = \frac{H}{t}(1 + f) + \frac{T}{t}(1 - f)$$
 
-We want to find $f^\ast$ that maximises  
+We want to find $f^\ast$ that maximizes  
 
 $$g(f) = \mathbb{E} \Bigg \{ \frac{1}{t} \log{\left[ \frac{x(t)}{x(0)} \right]} \Bigg \}$$
 
-🧙‍
-
 $$g(f) = \mathbb{E} \Big \{ \frac{1}{t} \log{x(t)} - \frac{1}{t} \log{x(0)} \Big \}$$
 
-Since $\frac{1}{t} \log{x(0)}$ is a constant, maximising $g(f)$ is the same as maximising $\mathbb{E} \Big \{ \frac{1}{t} \log{x(t)} \Big \}$
+Since $\frac{1}{t} \log{x(0)}$ is a constant, maximizing $g(f)$ is the same as maximizing $\mathbb{E} \Big \{ \frac{1}{t} \log{x(t)} \Big \}$
 
 \begin{align}
 g(f) & = \mathbb{E} \Big \{ \frac{H}{t} \log{(1 + f)} + \frac{T}{t} \log{(1 - f)} \Big \} \\
