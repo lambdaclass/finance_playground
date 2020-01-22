@@ -1,4 +1,5 @@
 # Ray Dalio's Holy Grail
+<br>
 
 ### _Reducing return/risk ratio through diversification._
 
@@ -9,25 +10,62 @@ From _Principles: Life and Work_ by Ray Dalio.
 In this notebook, we'll explore what Ray Dalio referrs to as the _Holy Grail of Investing_, how increasing diversification we are able to reduce overall risk, as measured by the standard deviation of portfolio returns.  
 The idea is to show that, if we can find a basket of uncorrelated return streams (in practice we allow for low correlation), we can reduce the portfolio risk significantly by increasing the number of streams in our portfolio.
 
-We begin by creating a function that simulates `n` return streams with a given mean (`mean`) and standard deviation (`risk`), and a given average correlation (`corr`) between them.
+We begin by creating a function that simulates `n` return streams with a given mean (`mean`) and standard deviation (`risk`), and a given average correlation (`corr`) between them. We set $n=5$, $mean=10$, $std=15$, $corr=0.6$.
+Just to make sure, let's do a sanity check calculating the mean, std and correlation coefficient of the data obtained in the simulation.
 
-Just to make sure, let's do a sanity check.
+streams.mean = [10.12,  9.91,  9.95, 10.06,  9.95]
+
+streams.std = [15.07, 15.05, 15.09 , 15.25, 15.19] 
+
+correalation = 
 
 
-n = 5
-mean, std, corr = 10, 15, 0.6
-streams = correlated_streams(n, mean, std, corr)
+<style type="text/css" class="center">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg .tg-hq8v{background-color:#fdf6e3;border-color:inherit;text-align:center;vertical-align:top}
+.tg .tg-1wza{background-color:#fdf6e3;text-align:center;vertical-align:top}
+.tg .tg-ymju{background-color:#fdf6e3;color:#002b36;border-color:inherit;text-align:center;vertical-align:top}
+</style>
+<table  class="tg">
+  <tr>
+    <th class="tg-hq8v">1.</th>
+    <th class="tg-hq8v">0.607</th>
+    <th class="tg-hq8v">0.606</th>
+    <th class="tg-hq8v">0.613</th>
+    <th class="tg-1wza">0.608</th>
+  </tr>
+  <tr>
+    <td class="tg-hq8v">0.607</td>
+    <td class="tg-hq8v">1</td>
+    <td class="tg-hq8v">0.613</td>
+    <td class="tg-hq8v">0.607</td>
+    <td class="tg-1wza">0.612</td>
+  </tr>
+  <tr>
+    <td class="tg-hq8v">0.606</td>
+    <td class="tg-hq8v">0.613</td>
+    <td class="tg-hq8v">1.</td>
+    <td class="tg-ymju">0.610</td>
+    <td class="tg-1wza">0.613<br></td>
+  </tr>
+  <tr>
+    <td class="tg-hq8v">0.613<br></td>
+    <td class="tg-hq8v">0.607</td>
+    <td class="tg-hq8v">0.610</td>
+    <td class="tg-hq8v">1.</td>
+    <td class="tg-1wza">0.609</td>
+  </tr>
+  <tr>
+    <td class="tg-1wza">0.608</td>
+    <td class="tg-1wza">0.612</td>
+    <td class="tg-1wza">0.613</td>
+    <td class="tg-1wza">0.609</td>
+    <td class="tg-1wza">1</td>
+  </tr>
+</table>
 
-streams.mean(axis=1) 
-    array([10.12229747,  9.91347988,  9.95317061, 10.06166556,  9.94924518])
-streams.std(axis=1)
-    array([15.07254044, 15.05647577, 15.0998279 , 15.24958429, 15.19313782])
-np.corrcoef(streams)
-    array([[1.        , 0.60683631, 0.60620386, 0.61315395, 0.60761005],
-           [0.60683631, 1.        , 0.61271087, 0.60745895, 0.61264296],
-           [0.60620386, 0.61271087, 1.        , 0.61056518, 0.61252593],
-           [0.61315395, 0.60745895, 0.61056518, 1.        , 0.60931493],
-           [0.60761005, 0.61264296, 0.61252593, 0.60931493, 1.        ]])
 
 
 This is the simplest way to construct such a portfolio. We make each pariwise correlation between assets equal to a given level `corr`. The important point is that the average of all the pairwise correlations should be equal to `corr`.
@@ -39,20 +77,16 @@ Next, we'll build our simulated dataset. We'll analyse return streams with risk 
 We'll plot the risk levels for different average correlation, ranging from 0 to 0.7.
 
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
 
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
+<style type="text/css" class="center">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg .tg-hq8v{background-color:#fdf6e3;border-color:inherit;text-align:center;vertical-align:top}
+.tg .tg-1wza{background-color:#fdf6e3;text-align:center;vertical-align:top}
+.tg .tg-ymju{background-color:#fdf6e3;color:#002b36;border-color:inherit;text-align:center;vertical-align:top}
 </style>
-<table border="1" class="dataframe">
+<table  class="tg">
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -313,8 +347,9 @@ To recreate Dalio's chart (as seen in [this video](https://www.investopedia.com/
 
 Let's see how diversification benefits a portfolio with assets that have a risk level of 10%.
 
-
-
+<label for="img1" class="margin-toggle">⊕</label>
+<input type="checkbox" id="img1" class="margin-toggle">
+<span class="marginnote">Risk % by number of assets in the portfolio.</span>
 
 <div id="altair-viz-62c9e8b76c2948579ccfe6988e4ce696"></div>
 <script type="text/javascript">
@@ -370,6 +405,11 @@ In contrast, we can _halve_ the risk by adding just 6 or 7 uncorrelated (or more
 
 Let's plot the risk levels for a portfolio with returns streams with 7% risk.
 
+<label for="img1" class="margin-toggle">⊕</label>
+<input type="checkbox" id="img1" class="margin-toggle">
+<span class="marginnote">Risk % by number of assets in the portfolio.</span>
+
+
 <div id="altair-viz-def488cf99c04fe9b15e4e19cdaccbb7"></div>
 <script type="text/javascript">
   (function(spec, embedOpt){
@@ -422,14 +462,5 @@ Let's plot the risk levels for a portfolio with returns streams with 7% risk.
 ## Conclusion
 
 The benefits of diversification are generally well known: reduced risk through exposure to different sources of income.  
-The insight Dalio brings to the forefront, is that the construction of a diversified portfolio through a combination of _uncorrelated_ return streams, significantly decreases our overall risk, raising in turn our return / risk ratio. By the careful mixing of uncorrelated assets, we capture true _alpha_, enabling us to use leverage to increase our returns.
+The insight Dalio brings to the forefront, is that the construction of a diversified portfolio through a combination of _uncorrelated_ return streams, significantly decreases our overall risk, raising in turn our return/risk ratio. By the careful mixing of uncorrelated assets, we capture true _alpha_, enabling us to use leverage to increase our returns.
 
-
-```python
-
-```
-
-
-```python
-
-```
