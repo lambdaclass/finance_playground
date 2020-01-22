@@ -28,7 +28,8 @@ correalation =
 .tg .tg-1wza{background-color:#fdf6e3;text-align:center;vertical-align:top}
 .tg .tg-ymju{background-color:#fdf6e3;color:#002b36;border-color:inherit;text-align:center;vertical-align:top}
 </style>
-<table  class="tg">
+<table  class="tg" align="center" >
+<center>
   <tr>
     <th class="tg-hq8v">1.</th>
     <th class="tg-hq8v">0.607</th>
@@ -64,6 +65,7 @@ correalation =
     <td class="tg-1wza">0.609</td>
     <td class="tg-1wza">1</td>
   </tr>
+  </center>
 </table>
 
 
