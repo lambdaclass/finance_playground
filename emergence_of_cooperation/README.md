@@ -1,12 +1,11 @@
 The emergence of cooperation in evolutionary systems
 ====================================================
 <br />
-
-Notes for [_An evolutionary advantage of cooperation_](https://arxiv.org/abs/1506.03414) - Peters and Adamou 2018
+Notes for Peters and Adamou (2018) [_An evolutionary advantage of cooperation_](https://arxiv.org/abs/1506.03414)
 
 This paper tackles the apparently paradoxical emergence of cooperation patterns under evolutionary dynamics.  
 Why do we observe seemingly _altruistic_ behavior in systems where organisms compete for resources and only the fittest thrive (the so called _survival of the fittest_)?   
-Classical solutions propose a net fitness gain from colaboration. The authors seek to explain this gain through the analysis of the time average growth rate for the fitness of the collaborating organisms.
+Classical solutions propose a net fitness gain from collaboration. The authors seek to explain this gain through the analysis of the time-average growth rate for the fitness of the collaborating organisms.
 
 Consider a species in their transition from single cell to multicellular organisms. This change occurs when cells agglomerate and begin sharing nutrients through common membranes, increasing their biomass. Entities with more biomass come to dominate the environment and generate more of themselves.  
 
@@ -22,8 +21,7 @@ $$g(x_i, T) \equiv \frac{1}{T} \ln{\Big( \frac{x_i(T)}{x_i(0)} \Big)}$$
 
 ## Cooperation protocol
 <br />
-
-The baseline model consists of $N$ non-cooperating entities $x_i$. This system is compared to one where a  mutation is introduced that hard wires cooperation into the entities. The _cooperators_, hence referred to as $y_i$, pool resources and then share them equally.
+The baseline model consists of $N$ non-cooperating entities $x_i$. This system is compared to one where a  mutation is introduced that hardwires cooperation into the entities. The _cooperators_, hence referred to as $y_i$, pool resources and then share them equally.
 
 The growth phase is the same for all entities in both systems (cooperators and non-cooperators)
 
@@ -45,7 +43,7 @@ $$\left\langle x_{i}(t)\right\rangle = \left\langle y_{i}(t)\right\rangle = x_{i
 
 Moreover, in a cooperating pair, the entity with higher initial biomass could increase its expectation value by breaking off the cooperation.  
 
-The answer to the paradox comes when the system is looked at through the time-averaging perspective. The authors show that non-cooperators grow at 
+The answer to the paradox comes when the system is viewed from the time-averaging perspective. The authors show that non-cooperators grow at 
 
 $$\overline{g}\left(x_{i}\right)=\mu-\sigma^{2} / 2$$
 
@@ -62,12 +60,10 @@ where
 
 ## Plots
 <br />
-The chart from the paper showing the expectation value, growth rate for non colaborating and for $N = 2$ colaborating entities.
-
+Figure 2 from Peters' and Adamou's paper shows the expectation value and growth rate for non colaborating and for $N = 2$ colaborating entities.
 <label for="imgemergence-of-cooperation_11_0" class="margin-toggle">⊕</label>
 <input type="checkbox" id="imgemergence-of-cooperation_11_0" class="margin-toggle">
-<span class="marginnote">Typical trajectories for two non-cooperating (green) entities andfor the corresponding cooperating unit (blue) on a logarithmic vertical scal (Peters & Adamou, 2018).</span>![](img/emergence-of-cooperation_11_0.png)
-
+<span class="marginnote">Typical trajectories for two non-cooperating (green) entities and for the corresponding cooperating unit (blue) on a logarithmic vertical scal (Peters & Adamou, 2018).</span>![](img/emergence-of-cooperation_11_0.png)
 
 As the authors point out:
 
@@ -80,7 +76,7 @@ For this, we'll build generators that produce an array of biomasses for each tim
 <p>
 <label for="imgbiomass-growth" class="margin-toggle">⊕</label>
 <input type="checkbox" id="imgbiomass-growth" class="margin-toggle">
-<span class="marginnote">Simulation of the total biomass grow for cooperating vs non-cooperating entities with different populations.</span>
+<span class="marginnote">Simulation of the total biomass growth for cooperating vs non-cooperating entities with different populations.</span>
 </p>
 <video width="50%" class="bordered" controls>
        <source src="img/biomass-growth.mp4" type="video/mp4">
