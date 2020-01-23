@@ -10,15 +10,49 @@ From _Principles: Life and Work_ by Ray Dalio.
 In this notebook, we'll explore what Ray Dalio referrs to as the _Holy Grail of Investing_, how increasing diversification we are able to reduce overall risk, as measured by the standard deviation of portfolio returns.  
 The idea is to show that, if we can find a basket of uncorrelated return streams (in practice we allow for low correlation), we can reduce the portfolio risk significantly by increasing the number of streams in our portfolio.
 
-We begin by creating a function that simulates `n` return streams with a given mean (`mean`) and standard deviation (`risk`), and a given average correlation (`corr`) between them. We set $n=5$, $mean=10$, $std=15$, $corr=0.6$.
-Just to make sure, let's do a sanity check calculating the mean, std and correlation coefficient of the data obtained in the simulation.
+We begin by creating a function that simulates `n` return streams with a given mean (`mean`) and standard deviation (`risk`), and a given average correlation (`corr`) between them. We set $n=5$, $mean=10$, $std=15$ and $corr=0.6$.
+Just to make sure, let's do a sanity check calculating the mean, std and correlation coefficient of the data obtained with the simulation.
 
-streams.mean = [10.12,  9.91,  9.95, 10.06,  9.95]
+$streams$ $mean =$ 
 
-streams.std = [15.07, 15.05, 15.09 , 15.25, 15.19] 
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg .tg-hq8v{background-color:#fdf6e3;border-color:inherit;text-align:center;vertical-align:top}
+</style>
+<table class="tg" style="margin-top:-55px; margin-left:210px;" >
+  <tr>
+    <th class="tg-hq8v">$10.12$<br></th>
+    <th class="tg-hq8v">$9.91$</th>
+    <th class="tg-hq8v">$9.95$<br></th>
+    <th class="tg-hq8v">$10.06$</th>
+    <th class="tg-hq8v">$9.95$</th>
+  </tr>
+</table>
 
-correalation = 
+$streams$ $std =$ 
 
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg .tg-hq8v{background-color:#fdf6e3;border-color:inherit;text-align:center;vertical-align:top}
+</style>
+<table class="tg" style="margin-top:-55px; margin-left:210px;">
+  <tr>
+    <th class="tg-hq8v">$15.07$</th>
+    <th class="tg-hq8v">$15.05$<br></th>
+    <th class="tg-hq8v">$15.09$<br></th>
+    <th class="tg-hq8v">$15.25$</th>
+    <th class="tg-hq8v">$15.19$</th>
+  </tr>
+</table>
+
+<br>
+</br>
+
+$streams$ $correlation =$
 
 <style type="text/css" class="center">
 .tg  {border-collapse:collapse;border-spacing:0;}
@@ -28,45 +62,48 @@ correalation =
 .tg .tg-1wza{background-color:#fdf6e3;text-align:center;vertical-align:top}
 .tg .tg-ymju{background-color:#fdf6e3;color:#002b36;border-color:inherit;text-align:center;vertical-align:top}
 </style>
-<table  class="tg" align="center" >
-<center>
+
+<table  class="tg" style="margin-top:-135px; margin-left:210px;" >
+
   <tr>
-    <th class="tg-hq8v">1.</th>
-    <th class="tg-hq8v">0.607</th>
-    <th class="tg-hq8v">0.606</th>
-    <th class="tg-hq8v">0.613</th>
-    <th class="tg-1wza">0.608</th>
+    <th class="tg-hq8v">$1.$</th>
+    <th class="tg-hq8v">$0.607$</th>
+    <th class="tg-hq8v">$0.606$</th>
+    <th class="tg-hq8v">$0.613$</th>
+    <th class="tg-1wza">$0.608$</th>
   </tr>
   <tr>
-    <td class="tg-hq8v">0.607</td>
-    <td class="tg-hq8v">1</td>
-    <td class="tg-hq8v">0.613</td>
-    <td class="tg-hq8v">0.607</td>
-    <td class="tg-1wza">0.612</td>
+    <td class="tg-hq8v">$0.607$</td>
+    <td class="tg-hq8v">$1.$</td>
+    <td class="tg-hq8v">$0.613$</td>
+    <td class="tg-hq8v">$0.607$</td>
+    <td class="tg-1wza">$0.612$</td>
   </tr>
   <tr>
-    <td class="tg-hq8v">0.606</td>
-    <td class="tg-hq8v">0.613</td>
-    <td class="tg-hq8v">1.</td>
-    <td class="tg-ymju">0.610</td>
-    <td class="tg-1wza">0.613<br></td>
+    <td class="tg-hq8v">$0.606$</td>
+    <td class="tg-hq8v">$0.613$</td>
+    <td class="tg-hq8v">$1.$</td>
+    <td class="tg-ymju">$0.610$</td>
+    <td class="tg-1wza">$0.613$<br></td>
   </tr>
   <tr>
-    <td class="tg-hq8v">0.613<br></td>
-    <td class="tg-hq8v">0.607</td>
-    <td class="tg-hq8v">0.610</td>
-    <td class="tg-hq8v">1.</td>
-    <td class="tg-1wza">0.609</td>
+    <td class="tg-hq8v">$0.613$<br></td>
+    <td class="tg-hq8v">$0.607$</td>
+    <td class="tg-hq8v">$0.610$</td>
+    <td class="tg-hq8v">$1.$</td>
+    <td class="tg-1wza">$0.609$</td>
   </tr>
   <tr>
-    <td class="tg-1wza">0.608</td>
-    <td class="tg-1wza">0.612</td>
-    <td class="tg-1wza">0.613</td>
-    <td class="tg-1wza">0.609</td>
-    <td class="tg-1wza">1</td>
+    <td class="tg-1wza">$0.608$</td>
+    <td class="tg-1wza">$0.612$</td>
+    <td class="tg-1wza">$0.613$</td>
+    <td class="tg-1wza">$0.609$</td>
+    <td class="tg-1wza">$1.$</td>
   </tr>
-  </center>
+  
 </table>
+ </div>
+</div>
 
 
 
@@ -75,273 +112,268 @@ This is the simplest way to construct such a portfolio. We make each pariwise co
 We'll create a helper function to calculate the pooled risk of a given number of return streams in the porfolio.
 
 
-Next, we'll build our simulated dataset. We'll analyse return streams with risk levels in the range 1% - 14%, for varying number of streams ranging from 1 to 20.  
-We'll plot the risk levels for different average correlation, ranging from 0 to 0.7.
+Next, we'll build our simulated dataset. We'll analyse return streams with risk levels in the range $1\%$ - $14\%$, for varying number of streams ranging from 1 to 20.  
+We'll plot the risk levels for different average correlation, ranging from $0$ to $0.7$.
 
-<div>
 
-<style type="text/css" class="center">
-.tg  {border-collapse:collapse;border-spacing:0;}
-.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
-.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
-.tg .tg-hq8v{background-color:#fdf6e3;border-color:inherit;text-align:center;vertical-align:top}
-.tg .tg-1wza{background-color:#fdf6e3;text-align:center;vertical-align:top}
-.tg .tg-ymju{background-color:#fdf6e3;color:#002b36;border-color:inherit;text-align:center;vertical-align:top}
+<style type="text/css">
+.tg1  {border-collapse:collapse;border-spacing:0;border-color:#93a1a1;}
+.tg1 td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#93a1a1;color:#002b36;background-color:#fdf6e3;}
+.tg1 th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#93a1a1;color:#fdf6e3;background-color:#657b83;}
+.tg1 .tg1-3ggi{background-color:#002b36;border-color:#fdf6e3;text-align:center;vertical-align:top}
+.tg1 .tg1-5xqe{background-color:#000000;text-align:center;vertical-align:top}
+.tg1 .tg1-c3ow{border-color:inherit;text-align:center;vertical-align:top}
+.tg1 .tg1-wp8o{border-color:#000000;text-align:center;vertical-align:top}
+.tg1 .tg1-67im{background-color:#002b36;color:#fdf6e3;border-color:#fdf6e3;text-align:center;vertical-align:top}
+.tg1 .tg1-lduz{border-color:#002b36;text-align:center;vertical-align:top}
 </style>
-<table  class="tg">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>correlation</th>
-      <th>0.0</th>
-      <th>0.1</th>
-      <th>0.2</th>
-      <th>0.3</th>
-      <th>0.4</th>
-      <th>0.5</th>
-      <th>0.6</th>
-      <th>0.7</th>
-    </tr>
-    <tr>
-      <th>risk_level</th>
-      <th>num_assets</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th rowspan="20" valign="top">14</th>
-      <th>1</th>
-      <td>14.139732</td>
-      <td>13.957619</td>
-      <td>14.075192</td>
-      <td>13.867259</td>
-      <td>14.046052</td>
-      <td>14.179601</td>
-      <td>13.975763</td>
-      <td>14.076922</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>9.971890</td>
-      <td>10.428599</td>
-      <td>10.730664</td>
-      <td>11.286977</td>
-      <td>11.765276</td>
-      <td>12.288127</td>
-      <td>12.461520</td>
-      <td>13.002143</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>8.109977</td>
-      <td>8.879904</td>
-      <td>9.529010</td>
-      <td>10.155933</td>
-      <td>10.947757</td>
-      <td>11.610703</td>
-      <td>11.944455</td>
-      <td>12.606311</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>6.986998</td>
-      <td>7.993475</td>
-      <td>8.860350</td>
-      <td>9.594832</td>
-      <td>10.478606</td>
-      <td>11.212934</td>
-      <td>11.660692</td>
-      <td>12.416321</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>6.264615</td>
-      <td>7.396657</td>
-      <td>8.390059</td>
-      <td>9.251380</td>
-      <td>10.189657</td>
-      <td>10.971248</td>
-      <td>11.480105</td>
-      <td>12.311307</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>5.716743</td>
-      <td>6.974917</td>
-      <td>8.089853</td>
-      <td>9.017493</td>
-      <td>10.007342</td>
-      <td>10.816056</td>
-      <td>11.365798</td>
-      <td>12.230357</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>5.295934</td>
-      <td>6.662161</td>
-      <td>7.859379</td>
-      <td>8.824764</td>
-      <td>9.856687</td>
-      <td>10.712191</td>
-      <td>11.321949</td>
-      <td>12.171641</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>4.947562</td>
-      <td>6.423757</td>
-      <td>7.696844</td>
-      <td>8.679358</td>
-      <td>9.747797</td>
-      <td>10.634026</td>
-      <td>11.247242</td>
-      <td>12.148834</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>4.661358</td>
-      <td>6.225810</td>
-      <td>7.560406</td>
-      <td>8.595651</td>
-      <td>9.667656</td>
-      <td>10.578506</td>
-      <td>11.201661</td>
-      <td>12.127171</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>4.442710</td>
-      <td>6.067776</td>
-      <td>7.446004</td>
-      <td>8.525349</td>
-      <td>9.611252</td>
-      <td>10.524736</td>
-      <td>11.162967</td>
-      <td>12.084786</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>4.239165</td>
-      <td>5.933185</td>
-      <td>7.355868</td>
-      <td>8.461778</td>
-      <td>9.556228</td>
-      <td>10.480231</td>
-      <td>11.130585</td>
-      <td>12.079894</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>4.067129</td>
-      <td>5.827928</td>
-      <td>7.264793</td>
-      <td>8.389360</td>
-      <td>9.503458</td>
-      <td>10.434209</td>
-      <td>11.103509</td>
-      <td>12.061826</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>3.899028</td>
-      <td>5.732506</td>
-      <td>7.197538</td>
-      <td>8.346479</td>
-      <td>9.459833</td>
-      <td>10.402789</td>
-      <td>11.089700</td>
-      <td>12.053231</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>3.748972</td>
-      <td>5.646150</td>
-      <td>7.153607</td>
-      <td>8.305596</td>
-      <td>9.431916</td>
-      <td>10.377509</td>
-      <td>11.066079</td>
-      <td>12.036244</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>3.621510</td>
-      <td>5.579756</td>
-      <td>7.090094</td>
-      <td>8.265396</td>
-      <td>9.399480</td>
-      <td>10.342332</td>
-      <td>11.047928</td>
-      <td>12.037133</td>
-    </tr>
-    <tr>
-      <th>16</th>
-      <td>3.504821</td>
-      <td>5.511635</td>
-      <td>7.047425</td>
-      <td>8.238685</td>
-      <td>9.376114</td>
-      <td>10.320739</td>
-      <td>11.029313</td>
-      <td>12.025305</td>
-    </tr>
-    <tr>
-      <th>17</th>
-      <td>3.388423</td>
-      <td>5.439192</td>
-      <td>7.002091</td>
-      <td>8.208520</td>
-      <td>9.356543</td>
-      <td>10.294709</td>
-      <td>10.999417</td>
-      <td>12.014179</td>
-    </tr>
-    <tr>
-      <th>18</th>
-      <td>3.286793</td>
-      <td>5.404517</td>
-      <td>6.957228</td>
-      <td>8.165158</td>
-      <td>9.335345</td>
-      <td>10.269455</td>
-      <td>10.986990</td>
-      <td>11.999746</td>
-    </tr>
-    <tr>
-      <th>19</th>
-      <td>3.202366</td>
-      <td>5.363016</td>
-      <td>6.924446</td>
-      <td>8.139594</td>
-      <td>9.320987</td>
-      <td>10.258329</td>
-      <td>10.980354</td>
-      <td>11.996438</td>
-    </tr>
-    <tr>
-      <th>20</th>
-      <td>3.127220</td>
-      <td>5.314700</td>
-      <td>6.896133</td>
-      <td>8.123222</td>
-      <td>9.304375</td>
-      <td>10.239964</td>
-      <td>10.973629</td>
-      <td>11.985602</td>
-    </tr>
-  </tbody>
+<table class="tg1" style="margin-left:60px;">
+  <tr>
+    <th class="tg1-5xqe"></th>
+    <th class="tg1-3ggi">Correlation</th>
+    <th class="tg1-3ggi">$0.0$</th>
+    <th class="tg1-3ggi">$0.1$</th>
+    <th class="tg1-3ggi">$0.2$</th>
+    <th class="tg1-3ggi">$0.3$</th>
+    <th class="tg1-3ggi">$0.4$</th>
+    <th class="tg1-3ggi">$0.5$</th>
+    <th class="tg1-3ggi">$0.6$</th>
+    <th class="tg1-3ggi">$0.7$</th>
+  </tr>
+  <tr>
+    <td class="tg1-67im">Risk level</td>
+    <td class="tg1-wp8o">Num assets</td>
+    <td class="tg1-wp8o"></td>
+    <td class="tg1-wp8o"></td>
+    <td class="tg1-wp8o"></td>
+    <td class="tg1-wp8o"></td>
+    <td class="tg1-wp8o"></td>
+    <td class="tg1-wp8o"></td>
+    <td class="tg1-wp8o"></td>
+    <td class="tg1-wp8o"></td>
+  </tr>
+  <tr>
+    <td class="tg1-67im" rowspan="20">$14$</td>
+    <td class="tg1-c3ow">$1$</td>
+    <td class="tg1-c3ow">$14.14$</td>
+    <td class="tg1-c3ow">$13.95$</td>
+    <td class="tg1-c3ow">$14.07$</td>
+    <td class="tg1-wp8o">$13.87$</td>
+    <td class="tg1-wp8o">$14.04$</td>
+    <td class="tg1-wp8o">$14.17$</td>
+    <td class="tg1-wp8o">$13.97$</td>
+    <td class="tg1-wp8o">$14.08$</td>
+  </tr>
+  <tr>
+    <td class="tg1-wp8o">$2$</td>
+    <td class="tg1-wp8o">$9.97$</td>
+    <td class="tg1-wp8o">$10.42$</td>
+    <td class="tg1-wp8o">$10.73$</td>
+    <td class="tg1-wp8o">$11.29$</td>
+    <td class="tg1-wp8o">$11.76$</td>
+    <td class="tg1-wp8o">$12.29$</td>
+    <td class="tg1-wp8o">$12.46$</td>
+    <td class="tg1-wp8o">$13.00$</td>
+  </tr>
+  <tr>
+    <td class="tg1-wp8o">$3$</td>
+    <td class="tg1-wp8o">$8.11$</td>
+    <td class="tg1-wp8o">$8.88$</td>
+    <td class="tg1-wp8o">$9.53$</td>
+    <td class="tg1-wp8o">$10.16$</td>
+    <td class="tg1-wp8o">$10.95$</td>
+    <td class="tg1-wp8o">$11.61$</td>
+    <td class="tg1-wp8o">$11.94$</td>
+    <td class="tg1-wp8o">$12.06$</td>
+  </tr>
+  <tr>
+    <td class="tg1-wp8o">$4$</td>
+    <td class="tg1-wp8o">$6.99$</td>
+    <td class="tg1-wp8o">$7.99$</td>
+    <td class="tg1-wp8o">$8.86$</td>
+    <td class="tg1-wp8o">$9.59$</td>
+    <td class="tg1-wp8o">$10.47$<br></td>
+    <td class="tg1-wp8o">$11.21$</td>
+    <td class="tg1-wp8o">$11.66$</td>
+    <td class="tg1-wp8o">$12.41$</td>
+  </tr>
+  <tr>
+    <td class="tg1-wp8o">$5$</td>
+    <td class="tg1-wp8o">$6.26$</td>
+    <td class="tg1-wp8o">$7.40$</td>
+    <td class="tg1-wp8o">$8.39$</td>
+    <td class="tg1-wp8o">$9.25$</td>
+    <td class="tg1-wp8o">$10.19$</td>
+    <td class="tg1-wp8o">$10.97$</td>
+    <td class="tg1-wp8o">$11.48$</td>
+    <td class="tg1-wp8o">$12.31$</td>
+  </tr>
+  <tr>
+    <td class="tg1-wp8o">$6$</td>
+    <td class="tg1-wp8o">$5.72$</td>
+    <td class="tg1-wp8o">$6.97$</td>
+    <td class="tg1-wp8o">$8.09$</td>
+    <td class="tg1-wp8o">$9.02$<br></td>
+    <td class="tg1-wp8o">$10.01$</td>
+    <td class="tg1-wp8o">$10.82$</td>
+    <td class="tg1-wp8o">$11.37$</td>
+    <td class="tg1-wp8o">$12.23$</td>
+  </tr>
+  <tr>
+    <td class="tg1-lduz">$7$</td>
+    <td class="tg1-lduz">$5.30$</td>
+    <td class="tg1-lduz">$6.62$</td>
+    <td class="tg1-lduz">$7.86$</td>
+    <td class="tg1-lduz">$8.82$</td>
+    <td class="tg1-lduz">$9.86$</td>
+    <td class="tg1-lduz">$10.71$</td>
+    <td class="tg1-lduz">$11.32$</td>
+    <td class="tg1-lduz">$12.17$</td>
+  </tr>
+  <tr>
+    <td class="tg1-lduz">$8$</td>
+    <td class="tg1-lduz">$4.95$</td>
+    <td class="tg1-lduz">$6.42$</td>
+    <td class="tg1-lduz">$7.70$</td>
+    <td class="tg1-lduz">$8.68$</td>
+    <td class="tg1-lduz">$9.75$</td>
+    <td class="tg1-lduz">$10.63$</td>
+    <td class="tg1-lduz">$11.25$</td>
+    <td class="tg1-lduz">$12.15$</td>
+  </tr>
+  <tr>
+    <td class="tg1-lduz">$9$</td>
+    <td class="tg1-lduz">$4.66$</td>
+    <td class="tg1-lduz">$6.23$</td>
+    <td class="tg1-lduz">$7.56$</td>
+    <td class="tg1-lduz">$8.60$</td>
+    <td class="tg1-lduz">$9.67$</td>
+    <td class="tg1-lduz">$10.57$</td>
+    <td class="tg1-lduz">$11.20$</td>
+    <td class="tg1-lduz">$12.13$</td>
+  </tr>
+  <tr>
+    <td class="tg1-lduz">$10$</td>
+    <td class="tg1-lduz">$4.44$</td>
+    <td class="tg1-lduz">$6.07$</td>
+    <td class="tg1-lduz">$7.45$</td>
+    <td class="tg1-lduz">$8.53$</td>
+    <td class="tg1-lduz">$9.61$</td>
+    <td class="tg1-lduz">$10.52$<br></td>
+    <td class="tg1-lduz">$11.17$</td>
+    <td class="tg1-lduz">$12.08$</td>
+  </tr>
+  <tr>
+    <td class="tg1-lduz">$11$</td>
+    <td class="tg1-lduz">$4.24$</td>
+    <td class="tg1-lduz">$5.93$</td>
+    <td class="tg1-lduz">$7.36$</td>
+    <td class="tg1-lduz">$8.46$</td>
+    <td class="tg1-lduz">$9.56$</td>
+    <td class="tg1-lduz">$10.48$</td>
+    <td class="tg1-lduz">$11.13$</td>
+    <td class="tg1-lduz">$12.08$</td>
+  </tr>
+  <tr>
+    <td class="tg1-lduz">$12$</td>
+    <td class="tg1-lduz">$4.07$</td>
+    <td class="tg1-lduz">$5.83$</td>
+    <td class="tg1-lduz">$7.26$</td>
+    <td class="tg1-lduz">$8.39$</td>
+    <td class="tg1-lduz">$9.50$</td>
+    <td class="tg1-lduz">$10.43$</td>
+    <td class="tg1-lduz">$11.10$</td>
+    <td class="tg1-lduz">$12.06$</td>
+  </tr>
+  <tr>
+    <td class="tg1-lduz">$13$</td>
+    <td class="tg1-lduz">$3.90$</td>
+    <td class="tg1-lduz">$5.73$</td>
+    <td class="tg1-lduz">$7.20$</td>
+    <td class="tg1-lduz">$8.35$</td>
+    <td class="tg1-lduz">$9.46$</td>
+    <td class="tg1-lduz">$10.40$</td>
+    <td class="tg1-lduz">$11.09$</td>
+    <td class="tg1-lduz">$12.05$</td>
+  </tr>
+  <tr>
+    <td class="tg1-lduz">$14$</td>
+    <td class="tg1-lduz">$3.75$</td>
+    <td class="tg1-lduz">$5.65$</td>
+    <td class="tg1-lduz">$7.15$</td>
+    <td class="tg1-lduz">$8.31$</td>
+    <td class="tg1-lduz">$9.43$</td>
+    <td class="tg1-lduz">$10.38$</td>
+    <td class="tg1-lduz">$11.07$</td>
+    <td class="tg1-lduz">$12.04$</td>
+  </tr>
+  <tr>
+    <td class="tg1-lduz">$15$</td>
+    <td class="tg1-lduz">$3.62$</td>
+    <td class="tg1-lduz">$5.58$</td>
+    <td class="tg1-lduz">$7.09$</td>
+    <td class="tg1-lduz">$8.27$</td>
+    <td class="tg1-lduz">$9.40$</td>
+    <td class="tg1-lduz">$10.34$</td>
+    <td class="tg1-lduz">$11.05$</td>
+    <td class="tg1-lduz">$12.04$</td>
+  </tr>
+  <tr>
+    <td class="tg1-lduz">$16$</td>
+    <td class="tg1-lduz">$3.75$</td>
+    <td class="tg1-lduz">$5.65$</td>
+    <td class="tg1-lduz">$7.15$</td>
+    <td class="tg1-lduz">$8.31$<br></td>
+    <td class="tg1-lduz">$9.43$<br></td>
+    <td class="tg1-lduz">$10.38$<br></td>
+    <td class="tg1-lduz">$11.07$</td>
+    <td class="tg1-lduz">$12.04$</td>
+  </tr>
+  <tr>
+    <td class="tg1-lduz">$17$</td>
+    <td class="tg1-lduz">$3.39$</td>
+    <td class="tg1-lduz">$5.44$</td>
+    <td class="tg1-lduz">$7.00$</td>
+    <td class="tg1-lduz">$8.21$</td>
+    <td class="tg1-lduz">$9.36$</td>
+    <td class="tg1-lduz">$10.29$</td>
+    <td class="tg1-lduz">$11.00$</td>
+    <td class="tg1-lduz">$12.01$</td>
+  </tr>
+  <tr>
+    <td class="tg1-lduz">$18$</td>
+    <td class="tg1-lduz">$3.29$</td>
+    <td class="tg1-lduz">$5.40$</td>
+    <td class="tg1-lduz">$6.96$</td>
+    <td class="tg1-lduz">$8.17$</td>
+    <td class="tg1-lduz">$9.34$<br></td>
+    <td class="tg1-lduz">$10.27$</td>
+    <td class="tg1-lduz">$10.99$</td>
+    <td class="tg1-lduz">$12.00$<br></td>
+  </tr>
+  <tr>
+    <td class="tg1-lduz">$19$</td>
+    <td class="tg1-lduz">$3.20$</td>
+    <td class="tg1-lduz">$5.36$</td>
+    <td class="tg1-lduz">$6.92$</td>
+    <td class="tg1-lduz">$8.14$</td>
+    <td class="tg1-lduz">$9.32$</td>
+    <td class="tg1-lduz">$10.26$</td>
+    <td class="tg1-lduz">$10.98$</td>
+    <td class="tg1-lduz">$12.00$</td>
+  </tr>
+  <tr>
+    <td class="tg1-lduz">$20$</td>
+    <td class="tg1-lduz">$3.13$</td>
+    <td class="tg1-lduz">$5.31$</td>
+    <td class="tg1-lduz">$6.90$<br></td>
+    <td class="tg1-lduz">$8.12$</td>
+    <td class="tg1-lduz">$9.30$<br></td>
+    <td class="tg1-lduz">$10.24$</td>
+    <td class="tg1-lduz">$10.97$<br></td>
+    <td class="tg1-lduz">$11.99$</td>
+  </tr>
 </table>
-</div>
-
-
 
 We can already see how portfolio risk _decreases_ as we add more assets, with sharper declines when we they have low correlation.
 
