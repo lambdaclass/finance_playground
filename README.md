@@ -6,6 +6,7 @@ Finance Playground
 
 > Uncertainty must be taken in a sense radically distinct from the familiar notion of Risk, from which it has never been properly separated.... The essential fact is that 'risk' means in some cases a quantity susceptible of measurement, while at other times it is something distinctly not of this character; and there are far-reaching and crucial differences in the bearings of the phenomena depending on which of the two is really present and operating.... It will appear that a measurable uncertainty, or 'risk' proper, as we shall use the term, is so far different from an unmeasurable one that it is not in effect an uncertainty at all - Frank Knight
 
+
 In this project our aim is to explore and analyse financial instruments (stocks and options in particular) and to develop profitable trading strategies. To that end, we focused on the relation between price time series and factors such as market volatility, interest rates, and various economic indicators.  
 We started this as a learning tool. As developers, we advocate a hands on approach, we like trying out ideas and tinkering with models. If that sounds at all interesting, you can follow our progress which will be documented in Jupyter notebooks [here](https://mybinder.org/v2/gh/lambdaclass/finance_playground/master).
 
@@ -23,26 +24,6 @@ Collaboration is welcome: by all means, if you spot a mistake or just want to ad
 - [Troubled Markets](https://lambdaclass.com/finance_playground/options/0.6-troubled-markets-and-volatility.html) - An exploration on Argentina's ADRs recent performance (2019) \[[slides](https://lambdaclass.com/finance_playground/options/0.6-troubled-markets-and-volatility.slides.html)\]
 - [2019 Metadata Forcasting Competition](https://lambdaclass.com/finance_playground/metadata-2019/soy-price-prediction.html) - Our entry to the 2019 soy price forecasting competition organized by [Fundación Sadosky](http://www.fundacionsadosky.org.ar).
 
-
-## Requirements
-
-- Python >= 3.6
-- pipenv
-- [Node](https://nodejs.org) (to build interactive animations)
-
-## Usage
-
-If you want to view the notebooks locally, simply install the dependencies with:
-
-```shell
-$ pipenv --three && pipenv install
-```
-
-Then start Jupyter Lab
-
-```shell
-$ cd notebooks && jupyter lab
-```
 
 # Mathematics, science and engineering
 Before diving into the notebooks we recommend you read this great quote by Emanuel Derman in his book The Volatility Smile:

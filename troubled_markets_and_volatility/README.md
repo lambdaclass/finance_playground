@@ -19,140 +19,129 @@ We will be looking at the end-of-day data of the Argentine ADRs, and their corre
 We begin our exploration of the end-of-day (EOD) data for Argentina's ADRs.
 
 </br>
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;border-color:#93a1a1;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#93a1a1;color:#002b36;background-color:#fdf6e3;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#93a1a1;color:#fdf6e3;background-color:#657b83;}
+.tg .tg-ttiq{background-color:#002b36;color:#fffff8;border-color:#fffff8;text-align:center;vertical-align:top}
+.tg .tg-664r{background-color:#fffff8;border-color:inherit;text-align:center;vertical-align:top}
+.tg .tg-lkkz{background-color:#fffff8;border-color:#000000;text-align:center;vertical-align:top}
+.tg .tg-zlpi{background-color:#fffff8;border-color:#002b36;text-align:center;vertical-align:top}
 </style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>symbol</th>
-      <th>close</th>
-      <th>high</th>
-      <th>low</th>
-      <th>open</th>
-      <th>volume</th>
-      <th>adjClose</th>
-      <th>adjHigh</th>
-      <th>adjLow</th>
-      <th>adjOpen</th>
-      <th>adjVolume</th>
-      <th>divCash</th>
-      <th>splitFactor</th>
-    </tr>
-    <tr>
-      <th>date</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>2006-03-27</th>
-      <td>BMA</td>
-      <td>23.05</td>
-      <td>23.05</td>
-      <td>22.23</td>
-      <td>22.89</td>
-      <td>1065200</td>
-      <td>15.524521</td>
-      <td>15.524521</td>
-      <td>14.972239</td>
-      <td>15.416759</td>
-      <td>1065200</td>
-      <td>0.0</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <th>2006-03-28</th>
-      <td>BMA</td>
-      <td>22.38</td>
-      <td>22.47</td>
-      <td>21.90</td>
-      <td>22.47</td>
-      <td>1556100</td>
-      <td>15.073266</td>
-      <td>15.133883</td>
-      <td>14.749979</td>
-      <td>15.133883</td>
-      <td>1556100</td>
-      <td>0.0</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <th>2006-03-29</th>
-      <td>BMA</td>
-      <td>22.84</td>
-      <td>23.14</td>
-      <td>22.05</td>
-      <td>22.10</td>
-      <td>641300</td>
-      <td>15.383083</td>
-      <td>15.585138</td>
-      <td>14.851006</td>
-      <td>14.884682</td>
-      <td>641300</td>
-      <td>0.0</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <th>2006-03-30</th>
-      <td>BMA</td>
-      <td>22.75</td>
-      <td>23.10</td>
-      <td>22.70</td>
-      <td>23.00</td>
-      <td>293600</td>
-      <td>15.322467</td>
-      <td>15.558197</td>
-      <td>15.288791</td>
-      <td>15.490846</td>
-      <td>293600</td>
-      <td>0.0</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <th>2006-03-31</th>
-      <td>BMA</td>
-      <td>22.93</td>
-      <td>22.93</td>
-      <td>22.35</td>
-      <td>22.83</td>
-      <td>113600</td>
-      <td>15.443700</td>
-      <td>15.443700</td>
-      <td>15.053061</td>
-      <td>15.376348</td>
-      <td>113600</td>
-      <td>0.0</td>
-      <td>1.0</td>
-    </tr>
-  </tbody>
+<table class="tg" style="undefined;table-layout: fixed; width: 896px">
+<colgroup>
+<col style="width: 83px">
+<col style="width: 58px">
+<col style="width: 47px">
+<col style="width: 46px">
+<col style="width: 52px">
+<col style="width: 46px">
+<col style="width: 65px">
+<col style="width: 65px">
+<col style="width: 62px">
+<col style="width: 76px">
+<col style="width: 71px">
+<col style="width: 81px">
+<col style="width: 64px">
+<col style="width: 80px">
+</colgroup>
+  <tr>
+    <th class="tg-ttiq">Date<br></th>
+    <th class="tg-ttiq">Symbol</th>
+    <th class="tg-ttiq">Close<br></th>
+    <th class="tg-ttiq">High<br></th>
+    <th class="tg-ttiq">Low<br></th>
+    <th class="tg-ttiq">Open<br></th>
+    <th class="tg-ttiq">Volume<br></th>
+    <th class="tg-ttiq">adjClose</th>
+    <th class="tg-ttiq">adjHigh</th>
+    <th class="tg-ttiq">adjLow</th>
+    <th class="tg-ttiq">adjOpen</th>
+    <th class="tg-ttiq">adjVolume</th>
+    <th class="tg-ttiq">divCash</th>
+    <th class="tg-ttiq">splitFactor</th>
+  </tr>
+  <tr>
+    <td class="tg-ttiq">2006-03-27</td>
+    <td class="tg-664r">BMA</td>
+    <td class="tg-664r">$23.05$</td>
+    <td class="tg-664r">$23.05$<br></td>
+    <td class="tg-664r">$22.23$</td>
+    <td class="tg-lkkz">$22.89$<br></td>
+    <td class="tg-lkkz">$1065200$<br></td>
+    <td class="tg-lkkz">$15.52$</td>
+    <td class="tg-lkkz">$15.52$</td>
+    <td class="tg-lkkz">$14.08$</td>
+    <td class="tg-zlpi">$15.42$</td>
+    <td class="tg-zlpi">$1065200$</td>
+    <td class="tg-zlpi">$0$</td>
+    <td class="tg-zlpi">$1$</td>
+  </tr>
+  <tr>
+    <td class="tg-ttiq">2006-03-28</td>
+    <td class="tg-lkkz">BMA</td>
+    <td class="tg-lkkz">$22.38$</td>
+    <td class="tg-lkkz">$22.47$</td>
+    <td class="tg-lkkz">$21.90$</td>
+    <td class="tg-lkkz">$22.47$</td>
+    <td class="tg-lkkz">$1556100$</td>
+    <td class="tg-lkkz">$15.07$</td>
+    <td class="tg-lkkz">$15.13$</td>
+    <td class="tg-lkkz">$14.75$</td>
+    <td class="tg-zlpi">$15.13$</td>
+    <td class="tg-zlpi">$1556100$</td>
+    <td class="tg-zlpi">$0$</td>
+    <td class="tg-zlpi">$1$</td>
+  </tr>
+  <tr>
+    <td class="tg-ttiq">2006-03-29</td>
+    <td class="tg-lkkz">BMA</td>
+    <td class="tg-lkkz">$22.84$</td>
+    <td class="tg-lkkz">$23.14$</td>
+    <td class="tg-lkkz">$22.05$</td>
+    <td class="tg-lkkz">$22.10$</td>
+    <td class="tg-lkkz">$641300$</td>
+    <td class="tg-lkkz">$15.38$</td>
+    <td class="tg-lkkz">$15.59$</td>
+    <td class="tg-lkkz">$14.85$</td>
+    <td class="tg-zlpi">$14.88$</td>
+    <td class="tg-zlpi">$641300$</td>
+    <td class="tg-zlpi">$0$</td>
+    <td class="tg-zlpi">$1$</td>
+  </tr>
+  <tr>
+    <td class="tg-ttiq">2006-03-30</td>
+    <td class="tg-lkkz">BMA</td>
+    <td class="tg-lkkz">$22.75$</td>
+    <td class="tg-lkkz">$23.10$</td>
+    <td class="tg-lkkz">$22.70$</td>
+    <td class="tg-lkkz">$23.00$</td>
+    <td class="tg-lkkz">$293600$</td>
+    <td class="tg-lkkz">$15.32$</td>
+    <td class="tg-lkkz">$15.56$</td>
+    <td class="tg-lkkz">$15.29$</td>
+    <td class="tg-zlpi">$15.49$</td>
+    <td class="tg-zlpi">$293600$</td>
+    <td class="tg-zlpi">$0$</td>
+    <td class="tg-zlpi">$1$</td>
+  </tr>
+  <tr>
+    <td class="tg-ttiq">2006-03-31</td>
+    <td class="tg-lkkz">BMA</td>
+    <td class="tg-lkkz">$22.93$</td>
+    <td class="tg-lkkz">$22.93$</td>
+    <td class="tg-lkkz">$22.35$</td>
+    <td class="tg-lkkz">$22.83$</td>
+    <td class="tg-lkkz">$113600$</td>
+    <td class="tg-lkkz">$15.44$</td>
+    <td class="tg-lkkz">$15.44$</td>
+    <td class="tg-lkkz">$15.05$</td>
+    <td class="tg-zlpi">$15.38$</td>
+    <td class="tg-zlpi">$113600$</td>
+    <td class="tg-zlpi">$0$</td>
+    <td class="tg-zlpi">$1$</td>
+  </tr>
 </table>
-</div>
 
 </br>
 
@@ -175,259 +164,248 @@ We can see most stocks experienced a sharp decline in August 2019, after a surpr
 
 </br>
 
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg .tg-ttiq{background-color:#002b36;color:#fffff8;border-color:#fffff8;text-align:center;vertical-align:top}
+.tg .tg-664r{background-color:#fffff8;border-color:inherit;text-align:center;vertical-align:top}
+.tg .tg-lkkz{background-color:#fffff8;border-color:#000000;text-align:center;vertical-align:top}
+.tg .tg-zlpi{background-color:#fffff8;border-color:#002b36;text-align:center;vertical-align:top}
 </style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>count</th>
-      <th>mean</th>
-      <th>std</th>
-      <th>min</th>
-      <th>25%</th>
-      <th>50%</th>
-      <th>75%</th>
-      <th>max</th>
-    </tr>
-    <tr>
-      <th>symbol</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>BFR</th>
-      <td>4936.0</td>
-      <td>8.279068</td>
-      <td>5.706390</td>
-      <td>0.744824</td>
-      <td>3.953318</td>
-      <td>5.724786</td>
-      <td>12.029480</td>
-      <td>25.454491</td>
-    </tr>
-    <tr>
-      <th>BMA</th>
-      <td>3371.0</td>
-      <td>35.178278</td>
-      <td>25.470378</td>
-      <td>4.999717</td>
-      <td>15.792980</td>
-      <td>24.600919</td>
-      <td>48.906183</td>
-      <td>125.424911</td>
-    </tr>
-    <tr>
-      <th>CEPU</th>
-      <td>386.0</td>
-      <td>10.988264</td>
-      <td>2.897472</td>
-      <td>3.460000</td>
-      <td>9.060000</td>
-      <td>9.975000</td>
-      <td>12.277500</td>
-      <td>17.919462</td>
-    </tr>
-    <tr>
-      <th>CRESY</th>
-      <td>4936.0</td>
-      <td>9.937665</td>
-      <td>3.951959</td>
-      <td>2.923092</td>
-      <td>6.744933</td>
-      <td>9.466466</td>
-      <td>12.010526</td>
-      <td>21.638971</td>
-    </tr>
-    <tr>
-      <th>EDN</th>
-      <td>3099.0</td>
-      <td>15.310731</td>
-      <td>12.471194</td>
-      <td>1.710000</td>
-      <td>6.330000</td>
-      <td>12.110000</td>
-      <td>20.245000</td>
-      <td>62.550000</td>
-    </tr>
-    <tr>
-      <th>GGAL</th>
-      <td>4795.0</td>
-      <td>13.551952</td>
-      <td>13.195641</td>
-      <td>0.211733</td>
-      <td>5.404357</td>
-      <td>7.966350</td>
-      <td>16.436948</td>
-      <td>71.458310</td>
-    </tr>
-    <tr>
-      <th>IRCP</th>
-      <td>3971.0</td>
-      <td>15.634198</td>
-      <td>14.424214</td>
-      <td>1.293231</td>
-      <td>4.377059</td>
-      <td>10.018225</td>
-      <td>21.425000</td>
-      <td>62.224671</td>
-    </tr>
-    <tr>
-      <th>IRS</th>
-      <td>4936.0</td>
-      <td>10.068860</td>
-      <td>5.624760</td>
-      <td>1.904546</td>
-      <td>6.130128</td>
-      <td>8.541985</td>
-      <td>13.279294</td>
-      <td>32.170000</td>
-    </tr>
-    <tr>
-      <th>LOMA</th>
-      <td>449.0</td>
-      <td>14.069621</td>
-      <td>5.356757</td>
-      <td>5.400000</td>
-      <td>10.340000</td>
-      <td>11.740000</td>
-      <td>21.120000</td>
-      <td>25.020000</td>
-    </tr>
-    <tr>
-      <th>MELI</th>
-      <td>3025.0</td>
-      <td>138.089838</td>
-      <td>126.898120</td>
-      <td>8.023763</td>
-      <td>59.112264</td>
-      <td>93.592940</td>
-      <td>153.612638</td>
-      <td>690.100000</td>
-    </tr>
-    <tr>
-      <th>NTL</th>
-      <td>4519.0</td>
-      <td>13.146904</td>
-      <td>8.402332</td>
-      <td>0.392764</td>
-      <td>6.546068</td>
-      <td>12.756651</td>
-      <td>18.681158</td>
-      <td>51.700000</td>
-    </tr>
-    <tr>
-      <th>PAM</th>
-      <td>2479.0</td>
-      <td>21.467967</td>
-      <td>18.064011</td>
-      <td>2.850000</td>
-      <td>9.885292</td>
-      <td>14.590000</td>
-      <td>30.800000</td>
-      <td>71.650000</td>
-    </tr>
-    <tr>
-      <th>PZE</th>
-      <td>4608.0</td>
-      <td>5.865744</td>
-      <td>2.463131</td>
-      <td>1.515041</td>
-      <td>4.362068</td>
-      <td>5.365770</td>
-      <td>6.720500</td>
-      <td>14.550000</td>
-    </tr>
-    <tr>
-      <th>SUPV</th>
-      <td>816.0</td>
-      <td>15.182065</td>
-      <td>7.337212</td>
-      <td>3.160000</td>
-      <td>8.918750</td>
-      <td>13.907507</td>
-      <td>17.840770</td>
-      <td>32.369630</td>
-    </tr>
-    <tr>
-      <th>TEO</th>
-      <td>4936.0</td>
-      <td>12.194805</td>
-      <td>6.370887</td>
-      <td>0.380288</td>
-      <td>7.642209</td>
-      <td>12.427119</td>
-      <td>16.013961</td>
-      <td>35.963224</td>
-    </tr>
-    <tr>
-      <th>TGS</th>
-      <td>4936.0</td>
-      <td>4.000758</td>
-      <td>4.341288</td>
-      <td>0.287635</td>
-      <td>1.615702</td>
-      <td>2.457407</td>
-      <td>3.514175</td>
-      <td>20.523048</td>
-    </tr>
-    <tr>
-      <th>TS</th>
-      <td>4195.0</td>
-      <td>25.943267</td>
-      <td>10.946160</td>
-      <td>2.261653</td>
-      <td>21.353160</td>
-      <td>28.215679</td>
-      <td>34.121053</td>
-      <td>55.724628</td>
-    </tr>
-    <tr>
-      <th>TX</th>
-      <td>3408.0</td>
-      <td>20.250514</td>
-      <td>6.297409</td>
-      <td>3.256623</td>
-      <td>16.042294</td>
-      <td>19.848379</td>
-      <td>24.567725</td>
-      <td>39.303918</td>
-    </tr>
-    <tr>
-      <th>YPF</th>
-      <td>4936.0</td>
-      <td>21.578362</td>
-      <td>9.696556</td>
-      <td>3.164889</td>
-      <td>14.031595</td>
-      <td>21.594239</td>
-      <td>29.665596</td>
-      <td>47.309175</td>
-    </tr>
-  </tbody>
+<table class="tg" style="undefined;table-layout: fixed; width: 793px">
+<colgroup>
+<col style="width: 125px">
+<col style="width: 88px">
+<col style="width: 71px">
+<col style="width: 70px">
+<col style="width: 79px">
+<col style="width: 70px">
+<col style="width: 98px">
+<col style="width: 98px">
+<col style="width: 94px">
+</colgroup>
+  <tr>
+    <th class="tg-ttiq">Symbol</th>
+    <th class="tg-ttiq">Count</th>
+    <th class="tg-ttiq">Mean<br></th>
+    <th class="tg-ttiq">Std<br></th>
+    <th class="tg-ttiq">Min</th>
+    <th class="tg-ttiq">25%</th>
+    <th class="tg-ttiq">50%</th>
+    <th class="tg-ttiq">75%<br></th>
+    <th class="tg-ttiq">Max<br></th>
+  </tr>
+  <tr>
+    <td class="tg-ttiq">BFR<br></td>
+    <td class="tg-664r">$4936$</td>
+    <td class="tg-664r">$8.28$</td>
+    <td class="tg-664r">$5.71$</td>
+    <td class="tg-664r">$0.75$</td>
+    <td class="tg-lkkz">$3.95$</td>
+    <td class="tg-lkkz">$5.72$</td>
+    <td class="tg-lkkz">$12.03$</td>
+    <td class="tg-zlpi">$25.45$</td>
+  </tr>
+  <tr>
+    <td class="tg-ttiq">BMA<br></td>
+    <td class="tg-lkkz">$3371$</td>
+    <td class="tg-lkkz">$31.18$</td>
+    <td class="tg-lkkz">$25.47$</td>
+    <td class="tg-lkkz">$5.00$</td>
+    <td class="tg-lkkz">$15.79$</td>
+    <td class="tg-lkkz">$24.6$</td>
+    <td class="tg-lkkz">$48.91$</td>
+    <td class="tg-zlpi">$125.43$</td>
+  </tr>
+  <tr>
+    <td class="tg-ttiq">CEPU<br></td>
+    <td class="tg-lkkz">$386$</td>
+    <td class="tg-lkkz">$10.99$</td>
+    <td class="tg-lkkz">$2.89$</td>
+    <td class="tg-lkkz">$3.46$</td>
+    <td class="tg-lkkz">$9.06$</td>
+    <td class="tg-lkkz">$9.97$</td>
+    <td class="tg-lkkz">$12.28$</td>
+    <td class="tg-zlpi">$17.92$</td>
+  </tr>
+  <tr>
+    <td class="tg-ttiq">CRESY</td>
+    <td class="tg-lkkz">$4936$</td>
+    <td class="tg-lkkz">$9.94$</td>
+    <td class="tg-lkkz">$3.95$</td>
+    <td class="tg-lkkz">$2.92$</td>
+    <td class="tg-lkkz">$6.75$</td>
+    <td class="tg-lkkz">$9.47$</td>
+    <td class="tg-lkkz">$12.01$</td>
+    <td class="tg-zlpi">$21.64$</td>
+  </tr>
+  <tr>
+    <td class="tg-ttiq">EDN<br></td>
+    <td class="tg-lkkz">$3099$</td>
+    <td class="tg-lkkz">$15.31$</td>
+    <td class="tg-lkkz">$12.47$</td>
+    <td class="tg-lkkz">$1.71$</td>
+    <td class="tg-lkkz">$6.33$</td>
+    <td class="tg-lkkz">$12.11$</td>
+    <td class="tg-lkkz">$20.25$</td>
+    <td class="tg-zlpi">$62.55$</td>
+  </tr>
+  <tr>
+    <td class="tg-ttiq">GGAL</td>
+    <td class="tg-zlpi">$4795$</td>
+    <td class="tg-zlpi">$13.55$</td>
+    <td class="tg-zlpi">$13.20$</td>
+    <td class="tg-zlpi">$0.21$</td>
+    <td class="tg-zlpi">$5.40$</td>
+    <td class="tg-zlpi">$7.97$</td>
+    <td class="tg-zlpi">$16.44$</td>
+    <td class="tg-zlpi">$71.46$</td>
+  </tr>
+  <tr>
+    <td class="tg-ttiq">IRCP</td>
+    <td class="tg-zlpi">$3971$</td>
+    <td class="tg-zlpi">$15.63$</td>
+    <td class="tg-zlpi">$14.42$</td>
+    <td class="tg-zlpi">$1.29$</td>
+    <td class="tg-zlpi">$4.38$</td>
+    <td class="tg-zlpi">$10.02$</td>
+    <td class="tg-zlpi">$21.43$</td>
+    <td class="tg-zlpi">$62.22$</td>
+  </tr>
+  <tr>
+    <td class="tg-ttiq">IRS<br></td>
+    <td class="tg-zlpi">$4936$</td>
+    <td class="tg-zlpi">$10.07$</td>
+    <td class="tg-zlpi">$5.63$</td>
+    <td class="tg-zlpi">$1.90$</td>
+    <td class="tg-zlpi">$6.13$</td>
+    <td class="tg-zlpi">$8.54$</td>
+    <td class="tg-zlpi">$13.28$</td>
+    <td class="tg-zlpi">$32.17$</td>
+  </tr>
+  <tr>
+    <td class="tg-ttiq">LOMA<br></td>
+    <td class="tg-zlpi">$449$</td>
+    <td class="tg-zlpi">$14.07$</td>
+    <td class="tg-zlpi">$5.36$</td>
+    <td class="tg-zlpi">$5.40$</td>
+    <td class="tg-zlpi">$10.34$</td>
+    <td class="tg-zlpi">$11.74$</td>
+    <td class="tg-zlpi">$21.12$</td>
+    <td class="tg-zlpi">$25.02$</td>
+  </tr>
+  <tr>
+    <td class="tg-ttiq">MELI<br></td>
+    <td class="tg-zlpi">$3025$</td>
+    <td class="tg-zlpi">$138.09$</td>
+    <td class="tg-zlpi">$126.90$</td>
+    <td class="tg-zlpi">$8.02$</td>
+    <td class="tg-zlpi">$59.11$</td>
+    <td class="tg-zlpi">$93.59$</td>
+    <td class="tg-zlpi">$153.61$</td>
+    <td class="tg-zlpi">$69.01$</td>
+  </tr>
+  <tr>
+    <td class="tg-ttiq">NTL<br></td>
+    <td class="tg-zlpi">$4519$</td>
+    <td class="tg-zlpi">$13.15$</td>
+    <td class="tg-zlpi">$8.40$</td>
+    <td class="tg-zlpi">$0.39$</td>
+    <td class="tg-zlpi">$6.55$</td>
+    <td class="tg-zlpi">$12.76$</td>
+    <td class="tg-zlpi">$18.68$</td>
+    <td class="tg-zlpi">$51.70$</td>
+  </tr>
+  <tr>
+    <td class="tg-ttiq">PAM</td>
+    <td class="tg-zlpi">$2479$</td>
+    <td class="tg-zlpi">$21.47$</td>
+    <td class="tg-zlpi">$18.06$</td>
+    <td class="tg-zlpi">$2.85$</td>
+    <td class="tg-zlpi">$9.89$</td>
+    <td class="tg-zlpi">$14.59$</td>
+    <td class="tg-zlpi">$30.80$</td>
+    <td class="tg-zlpi">$71.65$</td>
+  </tr>
+  <tr>
+    <td class="tg-ttiq">PZE</td>
+    <td class="tg-zlpi">$4608$</td>
+    <td class="tg-zlpi">$5.87$</td>
+    <td class="tg-zlpi">$2.46$</td>
+    <td class="tg-zlpi">$1.52$</td>
+    <td class="tg-zlpi">$4.36$</td>
+    <td class="tg-zlpi">$5.37$</td>
+    <td class="tg-zlpi">$6.72$</td>
+    <td class="tg-zlpi">$14.55$</td>
+  </tr>
+  <tr>
+    <td class="tg-ttiq">SUPV<br></td>
+    <td class="tg-zlpi">$816$</td>
+    <td class="tg-zlpi">$15.18$</td>
+    <td class="tg-zlpi">$7.34$</td>
+    <td class="tg-zlpi">$3.16$</td>
+    <td class="tg-zlpi">$8.92$</td>
+    <td class="tg-zlpi">$13.91$</td>
+    <td class="tg-zlpi">$17.84$</td>
+    <td class="tg-zlpi">$32.37$</td>
+  </tr>
+  <tr>
+    <td class="tg-ttiq">TEO</td>
+    <td class="tg-zlpi">$4936$</td>
+    <td class="tg-zlpi">$12.20$</td>
+    <td class="tg-zlpi">$6.37$</td>
+    <td class="tg-zlpi">$0.38$</td>
+    <td class="tg-zlpi">$7.64$</td>
+    <td class="tg-zlpi">$12.43$</td>
+    <td class="tg-zlpi">$16.01$</td>
+    <td class="tg-zlpi">$35.96$</td>
+  </tr>
+  <tr>
+    <td class="tg-ttiq">TGS</td>
+    <td class="tg-zlpi">$4936$</td>
+    <td class="tg-zlpi">$4.00$</td>
+    <td class="tg-zlpi">$4.34$</td>
+    <td class="tg-zlpi">$0.29$</td>
+    <td class="tg-zlpi">$1.62$</td>
+    <td class="tg-zlpi">$2.46$</td>
+    <td class="tg-zlpi">$3.51$</td>
+    <td class="tg-zlpi">$20.52$</td>
+  </tr>
+  <tr>
+    <td class="tg-ttiq">TS</td>
+    <td class="tg-zlpi">$4195$</td>
+    <td class="tg-zlpi">$25.94$</td>
+    <td class="tg-zlpi">$10.95$</td>
+    <td class="tg-zlpi">$2.26$</td>
+    <td class="tg-zlpi">$21.35$</td>
+    <td class="tg-zlpi">$28.22$</td>
+    <td class="tg-zlpi">$34.12$</td>
+    <td class="tg-zlpi">$55.72$</td>
+  </tr>
+  <tr>
+    <td class="tg-ttiq">TX<br></td>
+    <td class="tg-zlpi">$3408$</td>
+    <td class="tg-zlpi">$20.25$</td>
+    <td class="tg-zlpi">$6.30$</td>
+    <td class="tg-zlpi">$3.27$</td>
+    <td class="tg-zlpi">$16.04$</td>
+    <td class="tg-zlpi">$19.85$</td>
+    <td class="tg-zlpi">$24.57$</td>
+    <td class="tg-zlpi">$39.30$</td>
+  </tr>
+  <tr>
+    <td class="tg-ttiq">YPF</td>
+    <td class="tg-zlpi">$4936$</td>
+    <td class="tg-zlpi">$21.58$</td>
+    <td class="tg-zlpi">$9.67$</td>
+    <td class="tg-zlpi">$3.16$</td>
+    <td class="tg-zlpi">$14.03$</td>
+    <td class="tg-zlpi">$21.59$</td>
+    <td class="tg-zlpi">$29.67$</td>
+    <td class="tg-zlpi">$47.31$</td>
+  </tr>
 </table>
-</div>
-
 </br>
 
 ### Simple returns
@@ -440,402 +418,382 @@ $$R_t \equiv \frac{S_t - S_{t-1}}{S_{t-1}}  \%$$
 
 </br>
 
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;border-color:#93a1a1;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#93a1a1;color:#002b36;background-color:#fdf6e3;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#93a1a1;color:#fdf6e3;background-color:#657b83;}
+.tg .tg-8a3j{background-color:#fffff8;color:#002b36;border-color:#002b36;text-align:center;vertical-align:top}
+.tg .tg-ttiq{background-color:#002b36;color:#fffff8;border-color:#fffff8;text-align:center;vertical-align:top}
+.tg .tg-fq4g{background-color:#002b36;color:#fffff8;border-color:#fffff8;text-align:center;vertical-align:top}
+.tg .tg-664r{background-color:#fffff8;border-color:inherit;text-align:center;vertical-align:top}
+.tg .tg-lkkz{background-color:#fffff8;border-color:#000000;text-align:center;vertical-align:top}
+.tg .tg-zlpi{background-color:#fffff8;border-color:#002b36;text-align:center;vertical-align:top}
 </style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>symbol</th>
-      <th>close</th>
-      <th>high</th>
-      <th>low</th>
-      <th>open</th>
-      <th>volume</th>
-      <th>adjClose</th>
-      <th>adjHigh</th>
-      <th>adjLow</th>
-      <th>adjOpen</th>
-      <th>adjVolume</th>
-      <th>divCash</th>
-      <th>splitFactor</th>
-      <th>return</th>
-    </tr>
-    <tr>
-      <th>date</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>2006-03-27</th>
-      <td>BMA</td>
-      <td>23.05</td>
-      <td>23.05</td>
-      <td>22.23</td>
-      <td>22.89</td>
-      <td>1065200</td>
-      <td>15.524521</td>
-      <td>15.524521</td>
-      <td>14.972239</td>
-      <td>15.416759</td>
-      <td>1065200</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>2006-03-28</th>
-      <td>BMA</td>
-      <td>22.38</td>
-      <td>22.47</td>
-      <td>21.90</td>
-      <td>22.47</td>
-      <td>1556100</td>
-      <td>15.073266</td>
-      <td>15.133883</td>
-      <td>14.749979</td>
-      <td>15.133883</td>
-      <td>1556100</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>-2.906725</td>
-    </tr>
-    <tr>
-      <th>2006-03-29</th>
-      <td>BMA</td>
-      <td>22.84</td>
-      <td>23.14</td>
-      <td>22.05</td>
-      <td>22.10</td>
-      <td>641300</td>
-      <td>15.383083</td>
-      <td>15.585138</td>
-      <td>14.851006</td>
-      <td>14.884682</td>
-      <td>641300</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>2.055407</td>
-    </tr>
-    <tr>
-      <th>2006-03-30</th>
-      <td>BMA</td>
-      <td>22.75</td>
-      <td>23.10</td>
-      <td>22.70</td>
-      <td>23.00</td>
-      <td>293600</td>
-      <td>15.322467</td>
-      <td>15.558197</td>
-      <td>15.288791</td>
-      <td>15.490846</td>
-      <td>293600</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>-0.394046</td>
-    </tr>
-    <tr>
-      <th>2006-03-31</th>
-      <td>BMA</td>
-      <td>22.93</td>
-      <td>22.93</td>
-      <td>22.35</td>
-      <td>22.83</td>
-      <td>113600</td>
-      <td>15.443700</td>
-      <td>15.443700</td>
-      <td>15.053061</td>
-      <td>15.376348</td>
-      <td>113600</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>0.791209</td>
-    </tr>
-  </tbody>
+<table class="tg" style="undefined;table-layout: fixed; width: 966px">
+<colgroup>
+<col style="width: 83px">
+<col style="width: 58px">
+<col style="width: 47px">
+<col style="width: 46px">
+<col style="width: 51px">
+<col style="width: 46px">
+<col style="width: 65px">
+<col style="width: 65px">
+<col style="width: 62px">
+<col style="width: 74px">
+<col style="width: 70px">
+<col style="width: 80px">
+<col style="width: 64px">
+<col style="width: 80px">
+<col style="width: 75px">
+</colgroup>
+  <tr>
+    <th class="tg-ttiq">Date<br></th>
+    <th class="tg-ttiq">Symbol</th>
+    <th class="tg-ttiq">Close<br></th>
+    <th class="tg-ttiq">High<br></th>
+    <th class="tg-ttiq">Low<br></th>
+    <th class="tg-ttiq">Open<br></th>
+    <th class="tg-ttiq">Volume<br></th>
+    <th class="tg-ttiq">adjClose</th>
+    <th class="tg-ttiq">adjHigh</th>
+    <th class="tg-ttiq">adjLow</th>
+    <th class="tg-ttiq">adjOpen</th>
+    <th class="tg-ttiq">adjVolume</th>
+    <th class="tg-ttiq">divCash</th>
+    <th class="tg-ttiq">splitFactor</th>
+    <th class="tg-fq4g">Return</th>
+  </tr>
+  <tr>
+    <td class="tg-ttiq">2006-03-27</td>
+    <td class="tg-664r">BMA</td>
+    <td class="tg-664r">$23.05$</td>
+    <td class="tg-664r">$23.05$<br></td>
+    <td class="tg-664r">$22.23$</td>
+    <td class="tg-lkkz">$22.89$<br></td>
+    <td class="tg-lkkz">$1065200$<br></td>
+    <td class="tg-lkkz">$15.52$</td>
+    <td class="tg-lkkz">$15.52$</td>
+    <td class="tg-lkkz">$14.08$</td>
+    <td class="tg-zlpi">$15.42$</td>
+    <td class="tg-zlpi">$1065200$</td>
+    <td class="tg-zlpi">$0$</td>
+    <td class="tg-zlpi">$1$</td>
+    <td class="tg-8a3j">NaN<br></td>
+  </tr>
+  <tr>
+    <td class="tg-ttiq">2006-03-28</td>
+    <td class="tg-lkkz">BMA</td>
+    <td class="tg-lkkz">$22.38$</td>
+    <td class="tg-lkkz">$22.47$</td>
+    <td class="tg-lkkz">$21.90$</td>
+    <td class="tg-lkkz">$22.47$</td>
+    <td class="tg-lkkz">$1556100$</td>
+    <td class="tg-lkkz">$15.07$</td>
+    <td class="tg-lkkz">$15.13$</td>
+    <td class="tg-lkkz">$14.75$</td>
+    <td class="tg-zlpi">$15.13$</td>
+    <td class="tg-zlpi">$1556100$</td>
+    <td class="tg-zlpi">$0$</td>
+    <td class="tg-zlpi">$1$</td>
+    <td class="tg-8a3j">$-2.91$</td>
+  </tr>
+  <tr>
+    <td class="tg-ttiq">2006-03-29</td>
+    <td class="tg-lkkz">BMA</td>
+    <td class="tg-lkkz">$22.84$</td>
+    <td class="tg-lkkz">$23.14$</td>
+    <td class="tg-lkkz">$22.05$</td>
+    <td class="tg-lkkz">$22.10$</td>
+    <td class="tg-lkkz">$641300$</td>
+    <td class="tg-lkkz">$15.38$</td>
+    <td class="tg-lkkz">$15.59$</td>
+    <td class="tg-lkkz">$14.85$</td>
+    <td class="tg-zlpi">$14.88$</td>
+    <td class="tg-zlpi">$641300$</td>
+    <td class="tg-zlpi">$0$</td>
+    <td class="tg-zlpi">$1$</td>
+    <td class="tg-8a3j">$2.06$</td>
+  </tr>
+  <tr>
+    <td class="tg-ttiq">2006-03-30</td>
+    <td class="tg-lkkz">BMA</td>
+    <td class="tg-lkkz">$22.75$</td>
+    <td class="tg-lkkz">$23.10$</td>
+    <td class="tg-lkkz">$22.70$</td>
+    <td class="tg-lkkz">$23.00$</td>
+    <td class="tg-lkkz">$293600$</td>
+    <td class="tg-lkkz">$15.32$</td>
+    <td class="tg-lkkz">$15.56$</td>
+    <td class="tg-lkkz">$15.29$</td>
+    <td class="tg-zlpi">$15.49$</td>
+    <td class="tg-zlpi">$293600$</td>
+    <td class="tg-zlpi">$0$</td>
+    <td class="tg-zlpi">$1$</td>
+    <td class="tg-8a3j">$-0.39$</td>
+  </tr>
+  <tr>
+    <td class="tg-ttiq">2006-03-31</td>
+    <td class="tg-lkkz">BMA</td>
+    <td class="tg-lkkz">$22.93$</td>
+    <td class="tg-lkkz">$22.93$</td>
+    <td class="tg-lkkz">$22.35$</td>
+    <td class="tg-lkkz">$22.83$</td>
+    <td class="tg-lkkz">$113600$</td>
+    <td class="tg-lkkz">$15.44$</td>
+    <td class="tg-lkkz">$15.44$</td>
+    <td class="tg-lkkz">$15.05$</td>
+    <td class="tg-zlpi">$15.38$</td>
+    <td class="tg-zlpi">$113600$</td>
+    <td class="tg-zlpi">$0$</td>
+    <td class="tg-zlpi">$1$</td>
+    <td class="tg-8a3j">$0.79$</td>
+  </tr>
 </table>
-</div>
 
 </br>
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg .tg-ttiq{background-color:#002b36;color:#fffff8;border-color:#fffff8;text-align:center;vertical-align:top}
+.tg .tg-664r{background-color:#fffff8;border-color:inherit;text-align:center;vertical-align:top}
+.tg .tg-lkkz{background-color:#fffff8;border-color:#000000;text-align:center;vertical-align:top}
+.tg .tg-zlpi{background-color:#fffff8;border-color:#002b36;text-align:center;vertical-align:top}
 </style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>count</th>
-      <th>mean</th>
-      <th>std</th>
-      <th>min</th>
-      <th>25%</th>
-      <th>50%</th>
-      <th>75%</th>
-      <th>max</th>
-    </tr>
-    <tr>
-      <th>symbol</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>BFR</th>
-      <td>4935.0</td>
-      <td>0.053087</td>
-      <td>3.671496</td>
-      <td>-55.850622</td>
-      <td>-1.734230</td>
-      <td>0.000000</td>
-      <td>1.686544</td>
-      <td>46.760563</td>
-    </tr>
-    <tr>
-      <th>BMA</th>
-      <td>3370.0</td>
-      <td>0.083384</td>
-      <td>3.282690</td>
-      <td>-52.667364</td>
-      <td>-1.489327</td>
-      <td>0.000000</td>
-      <td>1.647746</td>
-      <td>27.008149</td>
-    </tr>
-    <tr>
-      <th>CEPU</th>
-      <td>385.0</td>
-      <td>-0.265245</td>
-      <td>4.306204</td>
-      <td>-55.915179</td>
-      <td>-1.913876</td>
-      <td>-0.317460</td>
-      <td>1.581028</td>
-      <td>16.880093</td>
-    </tr>
-    <tr>
-      <th>CRESY</th>
-      <td>4935.0</td>
-      <td>0.038327</td>
-      <td>2.767597</td>
-      <td>-38.090452</td>
-      <td>-1.250890</td>
-      <td>0.000000</td>
-      <td>1.180099</td>
-      <td>27.118644</td>
-    </tr>
-    <tr>
-      <th>EDN</th>
-      <td>3098.0</td>
-      <td>0.051126</td>
-      <td>3.888776</td>
-      <td>-58.983957</td>
-      <td>-1.690714</td>
-      <td>-0.031217</td>
-      <td>1.629187</td>
-      <td>27.551020</td>
-    </tr>
-    <tr>
-      <th>GGAL</th>
-      <td>4794.0</td>
-      <td>0.094611</td>
-      <td>4.627147</td>
-      <td>-56.117370</td>
-      <td>-1.626710</td>
-      <td>0.000000</td>
-      <td>1.693722</td>
-      <td>153.623188</td>
-    </tr>
-    <tr>
-      <th>IRCP</th>
-      <td>3970.0</td>
-      <td>0.142312</td>
-      <td>4.226301</td>
-      <td>-32.424983</td>
-      <td>-0.681957</td>
-      <td>0.000000</td>
-      <td>0.849814</td>
-      <td>36.986301</td>
-    </tr>
-    <tr>
-      <th>IRS</th>
-      <td>4935.0</td>
-      <td>0.015710</td>
-      <td>2.675223</td>
-      <td>-38.287402</td>
-      <td>-1.250000</td>
-      <td>0.000000</td>
-      <td>1.214575</td>
-      <td>18.083573</td>
-    </tr>
-    <tr>
-      <th>LOMA</th>
-      <td>448.0</td>
-      <td>-0.166143</td>
-      <td>4.533969</td>
-      <td>-57.298137</td>
-      <td>-1.875441</td>
-      <td>-0.087351</td>
-      <td>1.505056</td>
-      <td>22.650602</td>
-    </tr>
-    <tr>
-      <th>MELI</th>
-      <td>3024.0</td>
-      <td>0.165014</td>
-      <td>3.566247</td>
-      <td>-21.198668</td>
-      <td>-1.400264</td>
-      <td>0.083916</td>
-      <td>1.589953</td>
-      <td>36.000000</td>
-    </tr>
-    <tr>
-      <th>NTL</th>
-      <td>4518.0</td>
-      <td>0.082807</td>
-      <td>3.342394</td>
-      <td>-46.188341</td>
-      <td>-1.315789</td>
-      <td>0.000000</td>
-      <td>1.365299</td>
-      <td>30.000000</td>
-    </tr>
-    <tr>
-      <th>PAM</th>
-      <td>2478.0</td>
-      <td>0.060250</td>
-      <td>2.964323</td>
-      <td>-53.815490</td>
-      <td>-1.415248</td>
-      <td>0.000000</td>
-      <td>1.411089</td>
-      <td>16.941990</td>
-    </tr>
-    <tr>
-      <th>PZE</th>
-      <td>4607.0</td>
-      <td>0.066024</td>
-      <td>3.908461</td>
-      <td>-19.221411</td>
-      <td>-1.457769</td>
-      <td>0.000000</td>
-      <td>1.415805</td>
-      <td>179.843750</td>
-    </tr>
-    <tr>
-      <th>SUPV</th>
-      <td>815.0</td>
-      <td>-0.025345</td>
-      <td>4.183604</td>
-      <td>-58.746736</td>
-      <td>-1.407739</td>
-      <td>0.000000</td>
-      <td>1.494714</td>
-      <td>28.330206</td>
-    </tr>
-    <tr>
-      <th>TEO</th>
-      <td>4935.0</td>
-      <td>0.035329</td>
-      <td>3.079372</td>
-      <td>-33.375796</td>
-      <td>-1.419974</td>
-      <td>0.000000</td>
-      <td>1.450779</td>
-      <td>23.076923</td>
-    </tr>
-    <tr>
-      <th>TGS</th>
-      <td>4935.0</td>
-      <td>0.077615</td>
-      <td>3.385825</td>
-      <td>-48.035488</td>
-      <td>-1.494490</td>
-      <td>0.000000</td>
-      <td>1.615534</td>
-      <td>25.203252</td>
-    </tr>
-    <tr>
-      <th>TS</th>
-      <td>4194.0</td>
-      <td>0.084939</td>
-      <td>2.537497</td>
-      <td>-21.309735</td>
-      <td>-1.177830</td>
-      <td>0.113344</td>
-      <td>1.351878</td>
-      <td>21.576763</td>
-    </tr>
-    <tr>
-      <th>TX</th>
-      <td>3407.0</td>
-      <td>0.047116</td>
-      <td>3.028683</td>
-      <td>-19.678519</td>
-      <td>-1.351580</td>
-      <td>0.036819</td>
-      <td>1.413508</td>
-      <td>49.096099</td>
-    </tr>
-    <tr>
-      <th>YPF</th>
-      <td>4935.0</td>
-      <td>0.033014</td>
-      <td>2.563941</td>
-      <td>-34.052758</td>
-      <td>-1.121233</td>
-      <td>0.000000</td>
-      <td>1.123280</td>
-      <td>37.254597</td>
-    </tr>
-  </tbody>
+<table class="tg" style="undefined;table-layout: fixed; width: 804px">
+<colgroup>
+<col style="width: 126.166667px">
+<col style="width: 89.166667px">
+<col style="width: 72.166667px">
+<col style="width: 71.166667px">
+<col style="width: 80.166667px">
+<col style="width: 71.166667px">
+<col style="width: 99.166667px">
+<col style="width: 99.166667px">
+<col style="width: 95.166667px">
+</colgroup>
+  <tr>
+    <th class="tg-ttiq">Symbol</th>
+    <th class="tg-ttiq">Count</th>
+    <th class="tg-ttiq">Mean<br></th>
+    <th class="tg-ttiq">Std<br></th>
+    <th class="tg-ttiq">Min</th>
+    <th class="tg-ttiq">25%</th>
+    <th class="tg-ttiq">50%</th>
+    <th class="tg-ttiq">75%<br></th>
+    <th class="tg-ttiq">Max<br></th>
+  </tr>
+  <tr>
+    <td class="tg-ttiq">BFR<br></td>
+    <td class="tg-664r">$4936$</td>
+    <td class="tg-664r">$0.053$</td>
+    <td class="tg-664r">$3.67$</td>
+    <td class="tg-664r">$-55.85$</td>
+    <td class="tg-lkkz">$-1.73$</td>
+    <td class="tg-lkkz">$0$<br></td>
+    <td class="tg-lkkz">$1.69$</td>
+    <td class="tg-zlpi">$46.76$</td>
+  </tr>
+  <tr>
+    <td class="tg-ttiq">BMA<br></td>
+    <td class="tg-lkkz">$3371$</td>
+    <td class="tg-lkkz">$0.08$</td>
+    <td class="tg-lkkz">$3.28$</td>
+    <td class="tg-lkkz">$-52.67$</td>
+    <td class="tg-lkkz">$-1.49$</td>
+    <td class="tg-lkkz">$0$</td>
+    <td class="tg-lkkz">$1.65$</td>
+    <td class="tg-zlpi">$27.01$</td>
+  </tr>
+  <tr>
+    <td class="tg-ttiq">CEPU<br></td>
+    <td class="tg-lkkz">$386$</td>
+    <td class="tg-lkkz">$-0.26$</td>
+    <td class="tg-lkkz">$4.31$</td>
+    <td class="tg-lkkz">$-55.92$</td>
+    <td class="tg-lkkz">$-1.91$</td>
+    <td class="tg-lkkz">$-0.32$</td>
+    <td class="tg-lkkz">$1.58$</td>
+    <td class="tg-zlpi">$16.88$</td>
+  </tr>
+  <tr>
+    <td class="tg-ttiq">CRESY</td>
+    <td class="tg-lkkz">$4936$</td>
+    <td class="tg-lkkz">$0.038$</td>
+    <td class="tg-lkkz">$2.77$</td>
+    <td class="tg-lkkz">$-38.09$</td>
+    <td class="tg-lkkz">$-1.25$</td>
+    <td class="tg-lkkz">$0$</td>
+    <td class="tg-lkkz">$1.184$</td>
+    <td class="tg-zlpi">$27.19$</td>
+  </tr>
+  <tr>
+    <td class="tg-ttiq">EDN<br></td>
+    <td class="tg-lkkz">$3099$</td>
+    <td class="tg-lkkz">$0.051$</td>
+    <td class="tg-lkkz">$3.88$</td>
+    <td class="tg-lkkz">$-58.98$</td>
+    <td class="tg-lkkz">$-1.69$</td>
+    <td class="tg-lkkz">$-0.031$</td>
+    <td class="tg-lkkz">$1.63$</td>
+    <td class="tg-zlpi">$27.55$</td>
+  </tr>
+  <tr>
+    <td class="tg-ttiq">GGAL</td>
+    <td class="tg-zlpi">$4795$</td>
+    <td class="tg-zlpi">$0.095$</td>
+    <td class="tg-zlpi">$4.63$</td>
+    <td class="tg-zlpi">$-56.12$</td>
+    <td class="tg-zlpi">$-1.63$</td>
+    <td class="tg-zlpi">$0$</td>
+    <td class="tg-zlpi">$1.69$</td>
+    <td class="tg-zlpi">$153.6$</td>
+  </tr>
+  <tr>
+    <td class="tg-ttiq">IRCP</td>
+    <td class="tg-zlpi">$3971$</td>
+    <td class="tg-zlpi">$0.14$</td>
+    <td class="tg-zlpi">$4.23$</td>
+    <td class="tg-zlpi">$-32.42$</td>
+    <td class="tg-zlpi">$-0.68$</td>
+    <td class="tg-zlpi">$0$</td>
+    <td class="tg-zlpi">$0.85$</td>
+    <td class="tg-zlpi">$36.99$</td>
+  </tr>
+  <tr>
+    <td class="tg-ttiq">IRS<br></td>
+    <td class="tg-zlpi">$4936$</td>
+    <td class="tg-zlpi">$0.016$</td>
+    <td class="tg-zlpi">$2.68$</td>
+    <td class="tg-zlpi">$-38.29$</td>
+    <td class="tg-zlpi">$-1.25$</td>
+    <td class="tg-zlpi">$0$</td>
+    <td class="tg-zlpi">$1.21$</td>
+    <td class="tg-zlpi">$18.08$</td>
+  </tr>
+  <tr>
+    <td class="tg-ttiq">LOMA<br></td>
+    <td class="tg-zlpi">$449$</td>
+    <td class="tg-zlpi">$-0.166$</td>
+    <td class="tg-zlpi">$4.53$</td>
+    <td class="tg-zlpi">$-57.30$</td>
+    <td class="tg-zlpi">$-1.88$</td>
+    <td class="tg-zlpi">$-0.087$</td>
+    <td class="tg-zlpi">$1.51$</td>
+    <td class="tg-zlpi">$22.65$</td>
+  </tr>
+  <tr>
+    <td class="tg-ttiq">MELI<br></td>
+    <td class="tg-zlpi">$3025$</td>
+    <td class="tg-zlpi">$0.16$</td>
+    <td class="tg-zlpi">$3.57$</td>
+    <td class="tg-zlpi">$-21.20$</td>
+    <td class="tg-zlpi">$-1.40$</td>
+    <td class="tg-zlpi">$0.084$</td>
+    <td class="tg-zlpi">$1.59$</td>
+    <td class="tg-zlpi">$36.00$</td>
+  </tr>
+  <tr>
+    <td class="tg-ttiq">NTL<br></td>
+    <td class="tg-zlpi">$4519$</td>
+    <td class="tg-zlpi">$0.082$</td>
+    <td class="tg-zlpi">$3.34$</td>
+    <td class="tg-zlpi">$-46.19$</td>
+    <td class="tg-zlpi">$-1.32$</td>
+    <td class="tg-zlpi">$0$</td>
+    <td class="tg-zlpi">$1.37$</td>
+    <td class="tg-zlpi">$30.00$</td>
+  </tr>
+  <tr>
+    <td class="tg-ttiq">PAM</td>
+    <td class="tg-zlpi">$2479$</td>
+    <td class="tg-zlpi">$0.06$</td>
+    <td class="tg-zlpi">$2.96$</td>
+    <td class="tg-zlpi">$-53.82$</td>
+    <td class="tg-zlpi">$-1.42$</td>
+    <td class="tg-zlpi">$0$</td>
+    <td class="tg-zlpi">$1.41$</td>
+    <td class="tg-zlpi">$16.94$</td>
+  </tr>
+  <tr>
+    <td class="tg-ttiq">PZE</td>
+    <td class="tg-zlpi">$4608$</td>
+    <td class="tg-zlpi">$0.066$</td>
+    <td class="tg-zlpi">$3.91$</td>
+    <td class="tg-zlpi">$-19.22$</td>
+    <td class="tg-zlpi">$-1.46$</td>
+    <td class="tg-zlpi">$0$</td>
+    <td class="tg-zlpi">$1.42$</td>
+    <td class="tg-zlpi">$179.84$</td>
+  </tr>
+  <tr>
+    <td class="tg-ttiq">SUPV<br></td>
+    <td class="tg-zlpi">$816$</td>
+    <td class="tg-zlpi">$-0.025$</td>
+    <td class="tg-zlpi">$4.18$</td>
+    <td class="tg-zlpi">$-58.75$</td>
+    <td class="tg-zlpi">$-1.41$</td>
+    <td class="tg-zlpi">$0$</td>
+    <td class="tg-zlpi">$1.49$</td>
+    <td class="tg-zlpi">$28.33$</td>
+  </tr>
+  <tr>
+    <td class="tg-ttiq">TEO</td>
+    <td class="tg-zlpi">$4936$</td>
+    <td class="tg-zlpi">$0.035$</td>
+    <td class="tg-zlpi">$3.08$</td>
+    <td class="tg-zlpi">$-33.38$</td>
+    <td class="tg-zlpi">$-1.42$</td>
+    <td class="tg-zlpi">$0$</td>
+    <td class="tg-zlpi">$1.45$</td>
+    <td class="tg-zlpi">$23.07$</td>
+  </tr>
+  <tr>
+    <td class="tg-ttiq">TGS</td>
+    <td class="tg-zlpi">$4936$</td>
+    <td class="tg-zlpi">$0.078$</td>
+    <td class="tg-zlpi">$3.39$</td>
+    <td class="tg-zlpi">$-48.03$</td>
+    <td class="tg-zlpi">$-1.49$</td>
+    <td class="tg-zlpi">$0$</td>
+    <td class="tg-zlpi">$1.62$</td>
+    <td class="tg-zlpi">$25.20$</td>
+  </tr>
+  <tr>
+    <td class="tg-ttiq">TS</td>
+    <td class="tg-zlpi">$4195$</td>
+    <td class="tg-zlpi">$0.085$</td>
+    <td class="tg-zlpi">$2.53$</td>
+    <td class="tg-zlpi">$-21.31$</td>
+    <td class="tg-zlpi">$-1.18$</td>
+    <td class="tg-zlpi">$0.11$</td>
+    <td class="tg-zlpi">$1.35$</td>
+    <td class="tg-zlpi">$21.57$</td>
+  </tr>
+  <tr>
+    <td class="tg-ttiq">TX<br></td>
+    <td class="tg-zlpi">$3408$</td>
+    <td class="tg-zlpi">$0.047$</td>
+    <td class="tg-zlpi">$3.02$</td>
+    <td class="tg-zlpi">$-19.68$</td>
+    <td class="tg-zlpi">$-1.35$</td>
+    <td class="tg-zlpi">$0.037$</td>
+    <td class="tg-zlpi">$1.41$</td>
+    <td class="tg-zlpi">$49.09$</td>
+  </tr>
+  <tr>
+    <td class="tg-ttiq">YPF</td>
+    <td class="tg-zlpi">$4936$</td>
+    <td class="tg-zlpi">$0.033$</td>
+    <td class="tg-zlpi">$2.56$</td>
+    <td class="tg-zlpi">$-34.05$</td>
+    <td class="tg-zlpi">$-1.12$</td>
+    <td class="tg-zlpi">$0$</td>
+    <td class="tg-zlpi">$1.12$</td>
+    <td class="tg-zlpi">$37.25$</td>
+  </tr>
 </table>
-</div>
-
 </br>
 
 Let's plot a histogram of the daily returns for each symbol.
@@ -963,161 +921,151 @@ We will explore how volatility in the prices of the underlying assests impacted 
 To this end, we will examine the options end-of-day data for the ADRs. [Options](https://www.investopedia.com/terms/o/option.asp) are derivative contracts based on an underlying asset such as stocks. They offer the buyer the opportunity to buy or sell the underlying asset at a given price (or _strike price_). You can find more information on options in [this article](../intro-finance.index.html).
 
 </br>
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;border-color:#93a1a1;}
+.tg td{font-family:Arial, sans-serif;font-size:12px;padding:8px 4px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#93a1a1;color:#002b36;background-color:#fdf6e3;}
+.tg th{font-family:Arial, sans-serif;font-size:12px;font-weight:normal;padding:8px 4px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#93a1a1;color:#fdf6e3;background-color:#657b83;}
+.tg .tg-ttiq{background-color:#002b36;color:#fffff8;border-color:#fffff8;text-align:center;vertical-align:top}
+.tg .tg-6uqc{background-color:#002b36;color:#fffff8;border-color:inherit;text-align:center;vertical-align:top}
+.tg .tg-664r{background-color:#fffff8;border-color:inherit;text-align:center;vertical-align:top}
+.tg .tg-lkkz{background-color:#fffff8;border-color:#000000;text-align:center;vertical-align:top}
+.tg .tg-zlpi{background-color:#fffff8;border-color:#002b36;text-align:center;vertical-align:top}
 </style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>underlying</th>
-      <th>underlying_last</th>
-      <th>exchange</th>
-      <th>optionroot</th>
-      <th>type</th>
-      <th>expiration</th>
-      <th>strike</th>
-      <th>last</th>
-      <th>net</th>
-      <th>bid</th>
-      <th>ask</th>
-      <th>volume</th>
-      <th>openinterest</th>
-      <th>impliedvol</th>
-      <th>delta</th>
-      <th>gamma</th>
-    </tr>
-    <tr>
-      <th>quotedate</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>2019-07-03</th>
-      <td>TEO</td>
-      <td>17.79</td>
-      <td>CBOE</td>
-      <td>TEO190719C00002500</td>
-      <td>call</td>
-      <td>2019-07-19</td>
-      <td>2.5</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>13.0</td>
-      <td>17.8</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0.0200</td>
-      <td>1.0000</td>
-      <td>0.0000</td>
-    </tr>
-    <tr>
-      <th>2019-07-03</th>
-      <td>TEO</td>
-      <td>17.79</td>
-      <td>CBOE</td>
-      <td>TEO190719C00005000</td>
-      <td>call</td>
-      <td>2019-07-19</td>
-      <td>5.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>10.5</td>
-      <td>15.2</td>
-      <td>0</td>
-      <td>0</td>
-      <td>6.3229</td>
-      <td>0.9446</td>
-      <td>0.0045</td>
-    </tr>
-    <tr>
-      <th>2019-07-03</th>
-      <td>TEO</td>
-      <td>17.79</td>
-      <td>CBOE</td>
-      <td>TEO190719C00007500</td>
-      <td>call</td>
-      <td>2019-07-19</td>
-      <td>7.5</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>8.0</td>
-      <td>12.8</td>
-      <td>0</td>
-      <td>0</td>
-      <td>3.5717</td>
-      <td>0.9336</td>
-      <td>0.0093</td>
-    </tr>
-    <tr>
-      <th>2019-07-03</th>
-      <td>TEO</td>
-      <td>17.79</td>
-      <td>CBOE</td>
-      <td>TEO190719C00010000</td>
-      <td>call</td>
-      <td>2019-07-19</td>
-      <td>10.0</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>5.5</td>
-      <td>10.2</td>
-      <td>0</td>
-      <td>0</td>
-      <td>2.0354</td>
-      <td>0.9375</td>
-      <td>0.0156</td>
-    </tr>
-    <tr>
-      <th>2019-07-03</th>
-      <td>TEO</td>
-      <td>17.79</td>
-      <td>CBOE</td>
-      <td>TEO190719C00012500</td>
-      <td>call</td>
-      <td>2019-07-19</td>
-      <td>12.5</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>3.0</td>
-      <td>7.8</td>
-      <td>0</td>
-      <td>199</td>
-      <td>1.2856</td>
-      <td>0.9215</td>
-      <td>0.0297</td>
-    </tr>
-  </tbody>
+<table class="tg" style="undefined;table-layout: fixed; width: 1185px">
+<colgroup>
+<col style="width: 80px">
+<col style="width: 65px">
+<col style="width: 80px">
+<col style="width: 54px">
+<col style="width: 120px">
+<col style="width: 35px">
+<col style="width: 80px">
+<col style="width: 46px">
+<col style="width: 35px">
+<col style="width: 30px">
+<col style="width: 30px">
+<col style="width: 41px">
+<col style="width: 44px">
+<col style="width: 64px">
+<col style="width: 60px">
+<col style="width: 52px">
+<col style="width: 61px">
+</colgroup>
+  <tr>
+    <th class="tg-ttiq">quotedate</th>
+    <th class="tg-ttiq">underlying</th>
+    <th class="tg-ttiq">underlying_last</th>
+    <th class="tg-ttiq">exchange</th>
+    <th class="tg-ttiq">optionroot</th>
+    <th class="tg-ttiq">type</th>
+    <th class="tg-ttiq">expiration</th>
+    <th class="tg-ttiq">strike</th>
+    <th class="tg-ttiq">last</th>
+    <th class="tg-ttiq">net</th>
+    <th class="tg-ttiq">bid</th>
+    <th class="tg-ttiq">ask</th>
+    <th class="tg-ttiq">volume</th>
+    <th class="tg-ttiq">openinterest</th>
+    <th class="tg-6uqc">impliedvol</th>
+    <th class="tg-6uqc">delta</th>
+    <th class="tg-6uqc">gamma</th>
+  </tr>
+  <tr>
+    <td class="tg-ttiq">2019-07-03</td>
+    <td class="tg-664r">TEO</td>
+    <td class="tg-664r">17.79</td>
+    <td class="tg-664r">CBOE</td>
+    <td class="tg-664r">TEO190719C00002500</td>
+    <td class="tg-lkkz">call</td>
+    <td class="tg-lkkz">2019-07-19</td>
+    <td class="tg-lkkz">2.5</td>
+    <td class="tg-lkkz">0</td>
+    <td class="tg-lkkz">0</td>
+    <td class="tg-zlpi">13.0</td>
+    <td class="tg-zlpi">17.8</td>
+    <td class="tg-zlpi">0</td>
+    <td class="tg-zlpi">0</td>
+    <td class="tg-664r">0.02</td>
+    <td class="tg-664r">1.28</td>
+    <td class="tg-664r">0.0000</td>
+  </tr>
+  <tr>
+    <td class="tg-ttiq">2019-07-03</td>
+    <td class="tg-lkkz">TEO</td>
+    <td class="tg-lkkz">17.79</td>
+    <td class="tg-lkkz">CBOE</td>
+    <td class="tg-lkkz">TEO190719C00005000</td>
+    <td class="tg-lkkz">call</td>
+    <td class="tg-lkkz">2019-07-19</td>
+    <td class="tg-lkkz">5.0</td>
+    <td class="tg-lkkz">0</td>
+    <td class="tg-lkkz">0</td>
+    <td class="tg-zlpi">10.5</td>
+    <td class="tg-zlpi">15.2</td>
+    <td class="tg-zlpi">0</td>
+    <td class="tg-zlpi">0</td>
+    <td class="tg-664r">6.32</td>
+    <td class="tg-664r">0.94</td>
+    <td class="tg-664r">0.0045</td>
+  </tr>
+  <tr>
+    <td class="tg-ttiq">2019-07-03</td>
+    <td class="tg-lkkz">TEO</td>
+    <td class="tg-lkkz">17.79</td>
+    <td class="tg-lkkz">CBOE</td>
+    <td class="tg-lkkz">TEO190719C00007500</td>
+    <td class="tg-lkkz">call</td>
+    <td class="tg-lkkz">2019-07-19</td>
+    <td class="tg-lkkz">7.5</td>
+    <td class="tg-lkkz">0</td>
+    <td class="tg-lkkz">0</td>
+    <td class="tg-zlpi">8.0</td>
+    <td class="tg-zlpi">12.8</td>
+    <td class="tg-zlpi">0</td>
+    <td class="tg-zlpi">0</td>
+    <td class="tg-664r">3.57</td>
+    <td class="tg-664r">0.93</td>
+    <td class="tg-664r">0.0093</td>
+  </tr>
+  <tr>
+    <td class="tg-ttiq">2019-07-03</td>
+    <td class="tg-lkkz">TEO</td>
+    <td class="tg-lkkz">17.79</td>
+    <td class="tg-lkkz">CBOE</td>
+    <td class="tg-lkkz">TEO190719C00010000</td>
+    <td class="tg-lkkz">call</td>
+    <td class="tg-lkkz">2019-07-19</td>
+    <td class="tg-lkkz">10</td>
+    <td class="tg-lkkz">0</td>
+    <td class="tg-lkkz">0</td>
+    <td class="tg-zlpi">5.5</td>
+    <td class="tg-zlpi">10.2</td>
+    <td class="tg-zlpi">0</td>
+    <td class="tg-zlpi">1</td>
+    <td class="tg-664r">2.04</td>
+    <td class="tg-664r">0.94</td>
+    <td class="tg-664r">0.0156</td>
+  </tr>
+  <tr>
+    <td class="tg-ttiq">2019-07-03</td>
+    <td class="tg-lkkz">TEO</td>
+    <td class="tg-lkkz">17.79</td>
+    <td class="tg-lkkz">CBOE</td>
+    <td class="tg-lkkz">TEO190719C00012500</td>
+    <td class="tg-lkkz">call</td>
+    <td class="tg-lkkz">2019-07-19</td>
+    <td class="tg-lkkz">12.5</td>
+    <td class="tg-lkkz">0</td>
+    <td class="tg-lkkz">0</td>
+    <td class="tg-zlpi">3.0</td>
+    <td class="tg-zlpi">7.8</td>
+    <td class="tg-zlpi">0</td>
+    <td class="tg-zlpi">199</td>
+    <td class="tg-664r">1.28</td>
+    <td class="tg-664r">0.92</td>
+    <td class="tg-664r">0.0297</td>
+  </tr>
 </table>
-</div>
 
 </br>
 
@@ -1186,7 +1134,7 @@ This plots reveal a huge drop in prices for the calls, and, conversely, a large 
 
 </br>
 
-#### June 2019
+**June 2019**
 
 As a comparison, let's try plotting the option prices for June 2019, a more uneventful month for the Argentine market.
 
@@ -1202,7 +1150,7 @@ Next we'll have a look the the actively traded puts for June 2019.
 
 </br>
 
-#### October 2015
+**October 2015**
 
 Let's have a look at the options data from October, November and December 2015.  
 During those months, the Argentine elections took place, which marked the beginning of a bull market. In the following four years, the MERVAL index increased four-fold its value in Pesos.
@@ -1219,7 +1167,7 @@ Now let's plot the actively traded puts for October 2015
 ![](img/0.6-troubled-markets-and-volatility_92_0.png)
 
 
-#### November 2015
+**November 2015**
 
 </br>
 
@@ -1231,7 +1179,7 @@ Now let's plot the actively traded puts for October 2015
 
 </br>
 
-#### December 2015
+**December 2015**
 
 </br>
 
@@ -1243,7 +1191,7 @@ Now let's plot the actively traded puts for October 2015
 
 </br>
 
-#### January 2008
+**January 2008**
 
 We'll examine the Argentine ADR options data for January 2008, the beginning of the US mortgage crisis, which had global effects. We only have data for 3 companies: \$MELI, \$TS and \$TX.
 
