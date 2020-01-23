@@ -15,90 +15,70 @@ Just to make sure, let's do a sanity check calculating the mean, std and correla
 
 $streams$ $mean =$ 
 
-<style type="text/css">
-.tg  {border-collapse:collapse;border-spacing:0;}
-.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
-.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
-.tg .tg-hq8v{background-color:#fdf6e3;border-color:inherit;text-align:center;vertical-align:top}
-</style>
-<table class="tg" style="margin-top:-55px; margin-left:210px;" >
+
+<table class="matrix" style="margin-top:-55px; margin-left:210px;" >
   <tr>
-    <th class="tg-hq8v">$10.12$<br></th>
-    <th class="tg-hq8v">$9.91$</th>
-    <th class="tg-hq8v">$9.95$<br></th>
-    <th class="tg-hq8v">$10.06$</th>
+    <th class="tg-hq8v">$10.12$, <br></th>
+    <th class="tg-hq8v">$9.91$, </th>
+    <th class="tg-hq8v">$9.95$, <br></th>
+    <th class="tg-hq8v">$10.06$, </th>
     <th class="tg-hq8v">$9.95$</th>
   </tr>
 </table>
 
 $streams$ $std =$ 
 
-<style type="text/css">
-.tg  {border-collapse:collapse;border-spacing:0;}
-.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
-.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
-.tg .tg-hq8v{background-color:#fdf6e3;border-color:inherit;text-align:center;vertical-align:top}
-</style>
-<table class="tg" style="margin-top:-55px; margin-left:210px;">
+
+<table class="matrix" style="margin-top:-55px; margin-left:210px;">
   <tr>
-    <th class="tg-hq8v">$15.07$</th>
-    <th class="tg-hq8v">$15.05$<br></th>
-    <th class="tg-hq8v">$15.09$<br></th>
-    <th class="tg-hq8v">$15.25$</th>
+    <th class="tg-hq8v">$15.07$, </th>
+    <th class="tg-hq8v">$15.05$, <br></th>
+    <th class="tg-hq8v">$15.09$, <br></th>
+    <th class="tg-hq8v">$15.25$, </th>
     <th class="tg-hq8v">$15.19$</th>
   </tr>
 </table>
 
 <br>
 </br>
-
 $streams$ $correlation =$
 
-<style type="text/css" class="center">
-.tg  {border-collapse:collapse;border-spacing:0;}
-.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
-.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
-.tg .tg-hq8v{background-color:#fdf6e3;border-color:inherit;text-align:center;vertical-align:top}
-.tg .tg-1wza{background-color:#fdf6e3;text-align:center;vertical-align:top}
-.tg .tg-ymju{background-color:#fdf6e3;color:#002b36;border-color:inherit;text-align:center;vertical-align:top}
-</style>
-
-<table  class="tg" style="margin-top:-135px; margin-left:210px;" >
+<table  class="matrix" style="margin-top:-90px; margin-left:210px;" >
 
   <tr>
-    <th class="tg-hq8v">$1.$</th>
-    <th class="tg-hq8v">$0.607$</th>
-    <th class="tg-hq8v">$0.606$</th>
-    <th class="tg-hq8v">$0.613$</th>
+    <th class="tg-hq8v">$1$, </th>
+    <th class="tg-hq8v">$0.607$, </th>
+    <th class="tg-hq8v">$0.606$, </th>
+    <th class="tg-hq8v">$0.613$, </th>
     <th class="tg-1wza">$0.608$</th>
   </tr>
   <tr>
-    <td class="tg-hq8v">$0.607$</td>
-    <td class="tg-hq8v">$1.$</td>
-    <td class="tg-hq8v">$0.613$</td>
-    <td class="tg-hq8v">$0.607$</td>
-    <td class="tg-1wza">$0.612$</td>
+    <td class="tg-hq8v">$0.607$, </td>
+    <td class="tg-hq8v">$1$, </td>
+    <td class="tg-hq8v">$0.613$, </td>
+    <td class="tg-hq8v">$0.607$, </td>
+    <td class="tg-1wza">$0.612$, </td>
   </tr>
   <tr>
-    <td class="tg-hq8v">$0.606$</td>
-    <td class="tg-hq8v">$0.613$</td>
-    <td class="tg-hq8v">$1.$</td>
-    <td class="tg-ymju">$0.610$</td>
-    <td class="tg-1wza">$0.613$<br></td>
+    <td class="tg-hq8v">$0.606$, </td>
+    <td class="tg-hq8v">$0.613$, </td>
+    <td class="tg-hq8v">$1$, </td>
+    <td class="tg-ymju">$0.610$, </td>
+    <td class="tg-1wza">$0.613$, <br></td>
   </tr>
   <tr>
-    <td class="tg-hq8v">$0.613$<br></td>
-    <td class="tg-hq8v">$0.607$</td>
-    <td class="tg-hq8v">$0.610$</td>
-    <td class="tg-hq8v">$1.$</td>
+    <td class="tg-hq8v">$0.613$, <br></td>
+    <td class="tg-hq8v">$0.607$, </td>
+    <td class="tg-hq8v">$0.610$, </td>
+    <td class="tg-hq8v">$1$, </td>
     <td class="tg-1wza">$0.609$</td>
   </tr>
   <tr>
-    <td class="tg-1wza">$0.608$</td>
-    <td class="tg-1wza">$0.612$</td>
-    <td class="tg-1wza">$0.613$</td>
-    <td class="tg-1wza">$0.609$</td>
-    <td class="tg-1wza">$1.$</td>
+    <td class="tg-1wza">$0.608$, </td>
+    <td class="tg-1wza">$0.612$, </td>
+    <td class="tg-1wza">$0.613$, </td>
+    <td class="tg-1wza">$0.609$, </td>
+    <td class="tg-1wza">$1$</td>
   </tr>
   
 </table>
@@ -118,13 +98,13 @@ We'll plot the risk levels for different average correlation, ranging from $0$ t
 
 <style type="text/css">
 .tg1  {border-collapse:collapse;border-spacing:0;border-color:#93a1a1;}
-.tg1 td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#93a1a1;color:#002b36;background-color:#fdf6e3;}
-.tg1 th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#93a1a1;color:#fdf6e3;background-color:#657b83;}
-.tg1 .tg1-3ggi{background-color:#002b36;border-color:#fdf6e3;text-align:center;vertical-align:top}
+.tg1 td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#93a1a1;color:#002b36;background-color:#fffff8;}
+.tg1 th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#93a1a1;color:#fffff8;background-color:#657b83;}
+.tg1 .tg1-3ggi{background-color:#002b36;border-color:#fffff8;text-align:center;vertical-align:top}
 .tg1 .tg1-5xqe{background-color:#000000;text-align:center;vertical-align:top}
 .tg1 .tg1-c3ow{border-color:inherit;text-align:center;vertical-align:top}
 .tg1 .tg1-wp8o{border-color:#000000;text-align:center;vertical-align:top}
-.tg1 .tg1-67im{background-color:#002b36;color:#fdf6e3;border-color:#fdf6e3;text-align:center;vertical-align:top}
+.tg1 .tg1-67im{background-color:#002b36;color:#fffff8;border-color:#fffff8;text-align:center;vertical-align:top}
 .tg1 .tg1-lduz{border-color:#002b36;text-align:center;vertical-align:top}
 </style>
 <table class="tg1" style="margin-left:60px;">
