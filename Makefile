@@ -1,15 +1,25 @@
-HTML_DIR = html
-NOTEBOOKS_DIR = notebooks
+BUILD_DIR = build
 
-.PHONY: html
+.PHONY: default intro_finance index
+default:  intro_finance index
 
+dev: default
+	python -m http.server
+
+intro_finance:
+	mkdir -p build/intro_finance/img
+	mkdir -p build/intro_finance/css
+	-cp -R ./intro_finance/img/* $(BUILD_DIR)/intro_finance/img/
+	-cp -R ./intro_finance/css/* $(BUILD_DIR)/intro_finance/css/
+	pandoc ./intro_finance/README.md --template ./intro_finance/template.tmpl -t html5 --mathjax -o $(BUILD_DIR)/intro_finance/Intro_Finance.html --metadata title="Intro Finance"
+	pandoc README.md --template ./template.tmpl -t html5 -o $(BUILD_DIR)/index.html --metadata title="LambdaClass Finance Playground"
+
+index:
+	mkdir -p $(BUILD_DIR)
+	mkdir -p $(BUILD_DIR)/css
+
+	-cp -R ./css/* $(BUILD_DIR)/css/
+	pandoc README.md --template ./template.tmpl -t html5 --mathjax -o $(BUILD_DIR)/index.html --metadata title="LambdaClass Finance Playground"
 html:
-	-mkdir -p $(HTML_DIR)
-	-shopt -s globstar
-	cp -R $(NOTEBOOKS_DIR)/* $(HTML_DIR)
-	-jupyter nbconvert $(HTML_DIR)/*.ipynb
-	-jupyter nbconvert $(HTML_DIR)/**/*.ipynb
-	-rm $(HTML_DIR)/*.ipynb
-	-rm $(HTML_DIR)/**/*.ipynb
 	cd html/rgbm_animation && npm install && npm run build
 	rm -rf html/rgbm_animation/node_modules/
