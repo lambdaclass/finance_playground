@@ -1,7 +1,7 @@
 BUILD_DIR = build
 
-.PHONY: default troubled_markets_and_volatility html
-default: index troubled_markets_and_volatility 
+.PHONY: default troubled_markets_and_volatility index
+default: troubled_markets_and_volatility index
 
 dev: default
 	python -m http.server
@@ -15,7 +15,10 @@ troubled_markets_and_volatility:
 
 index:
 	mkdir -p $(BUILD_DIR)
-	pandoc README.md --template ./template.tmpl -t html5 -o $(BUILD_DIR)/index.html --metadata title="LambdaClass Finance Playground"
+	mkdir -p $(BUILD_DIR)/css
+
+	-cp -R ./css/* $(BUILD_DIR)/css/
+	pandoc README.md --template ./template.tmpl -t html5 --mathjax -o $(BUILD_DIR)/index.html --metadata title="LambdaClass Finance Playground"
 
 html:
 	cd html/rgbm_animation && npm install && npm run build
