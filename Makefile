@@ -15,8 +15,13 @@ emergence_of_cooperation:
 
 index:
 	mkdir -p $(BUILD_DIR)
-	pandoc README.md --template ./template.tmpl -t html5 -o $(BUILD_DIR)/index.html --metadata title="LambdaClass finance playground"
+	mkdir -p $(BUILD_DIR)/css
+
+	-cp -R ./css/* $(BUILD_DIR)/css/
+	pandoc README.md --template ./template.tmpl -t html5 --mathjax -o $(BUILD_DIR)/index.html --metadata title="LambdaClass Finance Playground"
 
 html:
-	#cd html/rgbm_animation && npm install && npm run build
-	#rm -rf html/rgbm_animation/node_modules/
+	mkdir -p $(BUILD_DIR)/rgbm_animation
+	-cp -R ./html/rgbm_animation/* $(BUILD_DIR)/rgbm_animation
+	cd $(BUILD_DIR)/rgbm_animation && npm install && npm run build
+	rm -rf $(BUILD_DIR)/rgbm_animation/node_modules/
