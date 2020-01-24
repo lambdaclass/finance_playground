@@ -1,8 +1,8 @@
 BUILD_DIR = build
 
 
-.PHONY: default emergence_of_cooperation html troubled_markets_and_volatility
-default: index emergence_of_cooperation html troubled_markets_and_volatility
+.PHONY: default emergence_of_cooperation troubled_markets_and_volatility html
+default: index emergence_of_cooperation troubled_markets_and_volatility html
 
 dev: default
 	python -m http.server
