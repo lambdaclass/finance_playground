@@ -78,6 +78,7 @@ For this, we'll build generators that produce an array of biomasses for each tim
 <input type="checkbox" id="imgbiomass-growth" class="margin-toggle">
 <span class="marginnote">Simulation of the total biomass growth for cooperating vs non-cooperating entities with different populations.</span>
 </p>
+<div>
 <video width="50%" class="bordered" controls>
        <source src="img/biomass-growth.mp4" type="video/mp4">
         Your browser does not support the video tag. </video></div>

@@ -1,7 +1,7 @@
 BUILD_DIR = build
 
 
-.PHONY: default emergence_of_cooperation html
+.PHONY: default emergence_of_cooperation html troubled_markets_and_volatility
 default: index emergence_of_cooperation html troubled_markets_and_volatility
 
 dev: default
