@@ -4,6 +4,7 @@ python:
 
 before_install:
   - sudo apt-get -qq update
+  - sudo apt-get install -y pandoc
 
 install:
   - sudo apt-get install -y nodejs npm
@@ -11,7 +12,7 @@ install:
   - pipenv install
 
 script:
-  - make html
+  - make
   - cp README.md html/
 
 branches:
@@ -23,6 +24,6 @@ deploy:
   skip_cleanup: true
   github_token: $GITHUB_TOKEN # Set in travis-ci.org dashboard
   verbose: true
-  local_dir: html
+  local_dir: build
   on:
     branch: master
