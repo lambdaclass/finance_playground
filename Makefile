@@ -1,10 +1,19 @@
 BUILD_DIR = build
 
+
 .PHONY: default emergence_of_cooperation html
-default: index emergence_of_cooperation html
+default: index emergence_of_cooperation html troubled_markets_and_volatility
 
 dev: default
 	python -m http.server
+
+
+troubled_markets_and_volatility:
+	mkdir -p $(BUILD_DIR)/troubled_markets_and_volatility/img
+	mkdir -p $(BUILD_DIR)/troubled_markets_and_volatility/css
+	-cp -R ./troubled_markets_and_volatility/img/* $(BUILD_DIR)/troubled_markets_and_volatility/img/
+	-cp -R ./troubled_markets_and_volatility/css/* $(BUILD_DIR)/troubled_markets_and_volatility/css/
+	pandoc ./troubled_markets_and_volatility/README.md --template ./troubled_markets_and_volatility/template.tmpl -t html5 --mathjax -o $(BUILD_DIR)/troubled_markets_and_volatility/index.html --metadata title="Troubled Markets and Volatility"
 
 emergence_of_cooperation:
 	mkdir -p build/emergence_of_cooperation/img
@@ -12,6 +21,7 @@ emergence_of_cooperation:
 	-cp -R ./emergence_of_cooperation/img/* $(BUILD_DIR)/emergence_of_cooperation/img/
 	-cp -R ./emergence_of_cooperation/css/* $(BUILD_DIR)/emergence_of_cooperation/css/
 	pandoc ./emergence_of_cooperation/README.md --template ./emergence_of_cooperation/template.tmpl -t html5 --mathjax -o $(BUILD_DIR)/emergence_of_cooperation/index.html --metadata title="Emergence of Cooperation"
+
 
 index:
 	mkdir -p $(BUILD_DIR)
