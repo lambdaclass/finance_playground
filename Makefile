@@ -23,7 +23,6 @@ emergence_of_cooperation:
 	-cp -R ./emergence_of_cooperation/css/* $(BUILD_DIR)/emergence_of_cooperation/css/
 	pandoc ./emergence_of_cooperation/README.md --template ./emergence_of_cooperation/template.tmpl -t html5 --mathjax -o $(BUILD_DIR)/emergence_of_cooperation/index.html --metadata title="Emergence of Cooperation"
 
-
 ergodicity_explorations:
 	mkdir -p build/ergodicity_explorations/img
 	mkdir -p build/ergodicity_explorations/css
@@ -51,5 +50,3 @@ html:
 	-cp -R ./html/rgbm_animation/* $(BUILD_DIR)/rgbm_animation
 	cd $(BUILD_DIR)/rgbm_animation && npm install && npm run build
 	rm -rf $(BUILD_DIR)/rgbm_animation/node_modules/
-	
-	
