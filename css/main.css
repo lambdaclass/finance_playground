@@ -1,0 +1,56 @@
+@media screen and (min-width: 786px) {
+    p {
+        width: 55%;
+   }
+    .chart-container {
+        width: 55%;
+   }
+
+}
+.first-letter {
+    font-size: 55px;
+    line-height: 70px;
+  }
+
+.quotation{
+    font-size: 25px;
+    //margin: 0 auto;
+    quotes: "\201C""\201D""\2018""\2019";
+    padding: 10px 20px;
+    line-height: 1.4;
+    font-style: italic;
+  }
+  
+  .quotation:before {
+    content: open-quote;
+    display: inline;
+    height: 0;
+    line-height: 0;
+    left: -10px;
+    position: relative;
+    top: 30px;
+    color: #ccc;
+    font-size: 6em;
+  }
+  .quotation::after {
+    content: close-quote;
+    display: inline;
+    height: 0;
+    line-height: 0;
+    left: 10px;
+    position: relative;
+    top: 35px;
+    color: #ccc;
+    font-size: 3em;
+  }
+  footer{
+    margin:0;
+    font-size: 25px
+    text-align: right;
+    font-style: italic;
+  }
+  li {
+    margin: 0.25em 15em 0.25em 0.25em;
+    padding: 0;
+    } 
+  

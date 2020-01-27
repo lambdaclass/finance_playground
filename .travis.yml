@@ -4,6 +4,8 @@ python:
 
 before_install:
   - sudo apt-get -qq update
+  - wget https://github.com/jgm/pandoc/releases/download/2.9.1.1/pandoc-2.9.1.1-1-amd64.deb
+  - sudo dpkg -i ./pandoc-2.9.1.1-1-amd64.deb
 
 install:
   - sudo apt-get install -y nodejs npm
@@ -11,7 +13,7 @@ install:
   - pipenv install
 
 script:
-  - make html
+  - make
   - cp README.md html/
 
 branches:
@@ -23,6 +25,6 @@ deploy:
   skip_cleanup: true
   github_token: $GITHUB_TOKEN # Set in travis-ci.org dashboard
   verbose: true
-  local_dir: html
+  local_dir: build
   on:
     branch: master
