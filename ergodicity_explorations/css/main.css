@@ -1,0 +1,8 @@
+@media screen and (min-width: 786px) {
+     p {
+         width: 55%;
+    }
+     .chart-container {
+         width: 55%;
+    }
+}
