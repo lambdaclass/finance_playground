@@ -1,8 +1,8 @@
 BUILD_DIR = build
 
 
-.PHONY: default emergence_of_cooperation troubled_markets_and_volatility ergodicity_explorations html
-default: index emergence_of_cooperation troubled_markets_and_volatility ergodicity_explorations html
+.PHONY: default emergence_of_cooperation troubled_markets_and_volatility ergodicity_explorations evaluating_gambles html
+default: index emergence_of_cooperation troubled_markets_and_volatility ergodicity_explorations evaluating_gambles html
 
 
 dev: default
@@ -23,13 +23,20 @@ emergence_of_cooperation:
 	-cp -R ./emergence_of_cooperation/css/* $(BUILD_DIR)/emergence_of_cooperation/css/
 	pandoc ./emergence_of_cooperation/README.md --template ./emergence_of_cooperation/template.tmpl -t html5 --mathjax -o $(BUILD_DIR)/emergence_of_cooperation/index.html --metadata title="Emergence of Cooperation"
 
-
 ergodicity_explorations:
 	mkdir -p build/ergodicity_explorations/img
 	mkdir -p build/ergodicity_explorations/css
 	-cp -R ./ergodicity_explorations/img/* $(BUILD_DIR)/ergodicity_explorations/img/
 	-cp -R ./ergodicity_explorations/css/* $(BUILD_DIR)/ergodicity_explorations/css/
 	pandoc ./ergodicity_explorations/README.md --template ./ergodicity_explorations/template.tmpl -t html5 --mathjax -o $(BUILD_DIR)/ergodicity_explorations/index.html --metadata title="Ergodicity Explorations"
+
+evaluating_gambles:
+	mkdir -p build/evaluating_gambles/img
+	mkdir -p build/evaluating_gambles/css
+	-cp -R ./evaluating_gambles/img/* $(BUILD_DIR)/evaluating_gambles/img/
+	-cp -R ./evaluating_gambles/css/* $(BUILD_DIR)/evaluating_gambles/css/
+	pandoc ./evaluating_gambles/README.md --template ./evaluating_gambles/template.tmpl -t html5 --mathjax -o $(BUILD_DIR)/evaluating_gambles/Evaluating_Gambles.html --metadata title="Evaluating Gambles"
+	pandoc README.md --template ./template.tmpl -t html5 -o $(BUILD_DIR)/index.html --metadata title="LambdaClass Finance Playground"
 
 index:
 	mkdir -p $(BUILD_DIR)
@@ -43,5 +50,3 @@ html:
 	-cp -R ./html/rgbm_animation/* $(BUILD_DIR)/rgbm_animation
 	cd $(BUILD_DIR)/rgbm_animation && npm install && npm run build
 	rm -rf $(BUILD_DIR)/rgbm_animation/node_modules/
-	
-
