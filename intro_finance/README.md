@@ -19,7 +19,7 @@ From [Investopedia](https://www.investopedia.com/terms/s/stock.asp)
 .tg .tg-xp2k{background-color:#fffff8;color:#002b36;border-color:inherit;text-align:center;vertical-align:top}
 .tg .tg-6uqc{background-color:#002b36;color:#fffff8;border-color:inherit;text-align:center;vertical-align:top}
 </style>
-<table class="tg">
+<table class="tg" >
   <tr>
     <th class="tg-6uqc">Date</th>
     <th class="tg-6uqc">Close</th>
@@ -189,7 +189,7 @@ From [Investopedia](https://www.investopedia.com/terms/s/stock.asp)
 .tg .tg-ng9p{background-color:#fffff8;color:#002b36;text-align:center;vertical-align:top}
 .tg .tg-y8gt{background-color:#002b36;color:#fffff8;text-align:center;vertical-align:top}
 </style>
-<table class="tg">
+<table class="tg" style="margin-left:150px;">
   <tr>
     <th class="tg-y8gt">Date</th>
     <th class="tg-y8gt">AAPL</th>
@@ -264,7 +264,7 @@ Where stock $S_t$ is the price of the stock at time $t$ and $\mu$ is the mean re
 .tg .tg-iamc{background-color:#fffff8;color:#002b36;border-color:#000000;text-align:center;vertical-align:top}
 .tg .tg-y8gt{background-color:#002b36;color:#fffff8;text-align:center;vertical-align:top}
 </style>
-<table class="tg">
+<table class="tg" style="margin-left:250px;">
   <tr>
     <th class="tg-y8gt"></th>
     <th class="tg-y8gt">Std<br></th>
@@ -302,7 +302,7 @@ Lets look at the daily returns for each symbol.
 .tg .tg-6uqc{background-color:#002b36;color:#fffff8;border-color:inherit;text-align:center;vertical-align:top}
 .tg .tg-664r{background-color:#fffff8;border-color:inherit;text-align:center;vertical-align:top}
 </style>
-<table class="tg">
+<table class="tg" style="margin-left:150px;">
   <tr>
     <th class="tg-6uqc">Date</th>
     <th class="tg-6uqc">AAPL</th>
@@ -364,7 +364,7 @@ Lets look at the daily returns for each symbol.
 .tg .tg-ng9p{background-color:#fffff8;color:#002b36;text-align:center;vertical-align:top}
 .tg .tg-y8gt{background-color:#002b36;color:#fffff8;text-align:center;vertical-align:top}
 </style>
-<table class="tg">
+<table class="tg" style=" margin-left:250px;">
   <tr>
     <th class="tg-y8gt"></th>
     <th class="tg-y8gt">Std</th>
@@ -489,36 +489,35 @@ $$\text{Profit} \equiv P(K, t, t_0) - max(K - S_t, 0)$$
 ![](img/intro-finance_33_0.png)
 
 
-
 <style type="text/css">
 .tg  {border-collapse:collapse;border-spacing:0;}
 .tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
 .tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
 .tg .tg-ng9p{background-color:#fffff8;color:#002b36;text-align:center;vertical-align:top}
-.tg .tg-y8gt{background-color:#002b36;color:#fffff8;text-align:center;vertical-align:top}
+.tg .tg-ttiq{background-color:#002b36;color:#fffff8;border-color:#fffff8;text-align:center;vertical-align:top}
 </style>
 <table class="tg">
   <tr>
-    <th class="tg-y8gt">underlying</th>
-    <th class="tg-y8gt">underlying_last</th>
-    <th class="tg-y8gt">optionroot</th>
-    <th class="tg-y8gt">type</th>
-    <th class="tg-y8gt">expiration</th>
-    <th class="tg-y8gt">quotedate</th>
-    <th class="tg-y8gt">strike</th>
-    <th class="tg-y8gt">last</th>
-    <th class="tg-y8gt">bid</th>
-    <th class="tg-y8gt">ask</th>
-    <th class="tg-y8gt">volume</th>
-    <th class="tg-y8gt">openinterest</th>
-    <th class="tg-y8gt">impliedvol</th>
-    <th class="tg-y8gt">delta</th>
-    <th class="tg-y8gt">gamma</th>
-    <th class="tg-y8gt">theta</th>
-    <th class="tg-y8gt">vega</th>
-    <th class="tg-y8gt">optionalias</th>
+    <th class="tg-ttiq"></th>
+    <th class="tg-ttiq">underlying</th>
+    <th class="tg-ttiq">underlying_last</th>
+    <th class="tg-ttiq">optionroot</th>
+    <th class="tg-ttiq">type</th>
+    <th class="tg-ttiq">expiration</th>
+    <th class="tg-ttiq">quotedate</th>
+    <th class="tg-ttiq">strike</th>
+    <th class="tg-ttiq">last</th>
+    <th class="tg-ttiq">bid</th>
+    <th class="tg-ttiq">ask</th>
+    <th class="tg-ttiq">openinterest</th>
+    <th class="tg-ttiq">impliedvol</th>
+    <th class="tg-ttiq">delta</th>
+    <th class="tg-ttiq">gamma</th>
+    <th class="tg-ttiq">theta</th>
+    <th class="tg-ttiq">vega</th>
   </tr>
   <tr>
+    <td class="tg-ttiq">13328880</td>
     <td class="tg-ng9p">SPX</td>
     <td class="tg-ng9p">2257.83</td>
     <td class="tg-ng9p">SPX170120C00100000</td>
@@ -529,16 +528,15 @@ $$\text{Profit} \equiv P(K, t, t_0) - max(K - S_t, 0)$$
     <td class="tg-ng9p">2161.5</td>
     <td class="tg-ng9p">2154.3</td>
     <td class="tg-ng9p">2158.7</td>
-    <td class="tg-ng9p">0</td>
     <td class="tg-ng9p">5615</td>
     <td class="tg-ng9p">0.1214</td>
     <td class="tg-ng9p">1.0</td>
     <td class="tg-ng9p">0.0</td>
     <td class="tg-ng9p">-1.0239</td>
     <td class="tg-ng9p">0.0</td>
-    <td class="tg-ng9p">SPX170120C00100000</td>
   </tr>
   <tr>
+    <td class="tg-ttiq">13328881</td>
     <td class="tg-ng9p">SPX</td>
     <td class="tg-ng9p">2257.83</td>
     <td class="tg-ng9p">SPX170120C00200000</td>
@@ -549,16 +547,15 @@ $$\text{Profit} \equiv P(K, t, t_0) - max(K - S_t, 0)$$
     <td class="tg-ng9p">2060.95</td>
     <td class="tg-ng9p">2054.4</td>
     <td class="tg-ng9p">2058.8</td>
-    <td class="tg-ng9p">0</td>
     <td class="tg-ng9p">6355</td>
     <td class="tg-ng9p">0.1214</td>
     <td class="tg-ng9p">1.0</td>
     <td class="tg-ng9p">0.0</td>
     <td class="tg-ng9p">-2.0479</td>
     <td class="tg-ng9p">0.0</td>
-    <td class="tg-ng9p">SPX170120C00200000</td>
   </tr>
   <tr>
+    <td class="tg-ttiq">13328882</td>
     <td class="tg-ng9p">SPX</td>
     <td class="tg-ng9p">2257.83</td>
     <td class="tg-ng9p">SPX170120C00300000</td>
@@ -569,16 +566,15 @@ $$\text{Profit} \equiv P(K, t, t_0) - max(K - S_t, 0)$$
     <td class="tg-ng9p">1960.45</td>
     <td class="tg-ng9p">1954.4</td>
     <td class="tg-ng9p">1958.8</td>
-    <td class="tg-ng9p">0</td>
     <td class="tg-ng9p">2000</td>
     <td class="tg-ng9p">0.1214</td>
     <td class="tg-ng9p">1.0</td>
     <td class="tg-ng9p">0.0</td>
     <td class="tg-ng9p">-3.0718</td>
     <td class="tg-ng9p">0.0</td>
-    <td class="tg-ng9p">SPX170120C00300000</td>
   </tr>
   <tr>
+    <td class="tg-ttiq">13328883</td>
     <td class="tg-ng9p">SPX</td>
     <td class="tg-ng9p">2257.83</td>
     <td class="tg-ng9p">SPX170120C00400000</td>
@@ -589,16 +585,15 @@ $$\text{Profit} \equiv P(K, t, t_0) - max(K - S_t, 0)$$
     <td class="tg-ng9p">1760.55</td>
     <td class="tg-ng9p">1854.6</td>
     <td class="tg-ng9p">1858.9</td>
-    <td class="tg-ng9p">0</td>
     <td class="tg-ng9p">25</td>
     <td class="tg-ng9p">0.1214</td>
     <td class="tg-ng9p">1.0</td>
     <td class="tg-ng9p">0.0</td>
     <td class="tg-ng9p">-4.0957</td>
     <td class="tg-ng9p">0.0</td>
-    <td class="tg-ng9p">SPX170120C00400000</td>
   </tr>
   <tr>
+    <td class="tg-ttiq">13328884</td>
     <td class="tg-ng9p">SPX</td>
     <td class="tg-ng9p">2257.83</td>
     <td class="tg-ng9p">SPX170120C00500000</td>
@@ -609,17 +604,14 @@ $$\text{Profit} \equiv P(K, t, t_0) - max(K - S_t, 0)$$
     <td class="tg-ng9p">1749.33</td>
     <td class="tg-ng9p">1754.6</td>
     <td class="tg-ng9p">1758.9</td>
-    <td class="tg-ng9p">0</td>
     <td class="tg-ng9p">3813</td>
     <td class="tg-ng9p">0.1214</td>
     <td class="tg-ng9p">1.0</td>
     <td class="tg-ng9p">0.0</td>
     <td class="tg-ng9p">-5.1197</td>
     <td class="tg-ng9p">0.0</td>
-    <td class="tg-ng9p">SPX170120C00500000</td>
   </tr>
 </table>
-
 
 - `optionroot` is the name of the contract (think `id`)
 - `underlying_last` is the last seen price for the underlying
@@ -649,12 +641,6 @@ Calculates volatility by averaging the weighted prices of OTM puts and calls usi
 $$\text{VIX} = 100 * \sigma$$
 
 
-
-    <matplotlib.axes._subplots.AxesSubplot at 0x118fdd2b0>
-
-
-
-
 ![](img/intro-finance_41_1.png)
 
 
@@ -667,7 +653,7 @@ $$\text{VIX} = 100 * \sigma$$
 .tg .tg-y8gt{background-color:#002b36;color:#fffff8;text-align:center;vertical-align:top}
 .tg .tg-lkkz{background-color:#fffff8;border-color:#000000;text-align:center;vertical-align:top}
 </style>
-<table class="tg">
+<table class="tg" style="margin-left:250px;">
   <tr>
     <th class="tg-y8gt">Date<br></th>
     <th class="tg-y8gt">Price</th>

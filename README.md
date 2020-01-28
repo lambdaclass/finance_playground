@@ -14,18 +14,16 @@ We started this as a learning tool. As developers, we advocate a hands on approa
 
 Collaboration is welcome: by all means, if you spot a mistake or just want to add an interesting notebook you've been playing with, please submit a pull request.
 
-
 ## Notebooks
 
-- [Introduction to Finance](https://lambdaclass.com/finance_playground/intro-finance.html) -Basic concepts in Finance (stocks, ETFs, options) \[[slides](https://lambdaclass.com/finance_playground/intro-finance.slides.html)\]
-- [The Holy Grail of Investing](https://lambdaclass.com/finance_playground/diversification-dalio-holy-grail.html) - On Ray Dalio's insights into the benefits of [diversification](https://www.investopedia.com/video/play/ray-dalio-his-portfolio-holy-grail/).
-- [Ergodicity Explorations](https://lambdaclass.com/finance_playground/ergodicity/ergodicity-explorations.html) - Based on the [research](https://ergodicityeconomics.com/lecture-notes/) from Professor Ole Peters regarding [insurance](https://arxiv.org/abs/1507.04655) contracts, expectation values and time averages.
-- [Evaluating Gambles](https://lambdaclass.com/finance_playground/ergodicity/evaluating-gambles-presentation.html) - Continuing on our explorations on how to evaluate gambles and optimal betting criteria. \[[slides](https://lambdaclass.com/finance_playground/ergodicity/evaluating-gambles-presentation.slides.html)\]
-- [Emergence of Cooperation in Evolutionary Systems](https://lambdaclass.com/finance_playground/ergodicity/emergence-of-cooperation.html) - An ergodic explanation for the advantage of [cooperation](https://arxiv.org/abs/1506.03414) under evolutionary dynamics.
-- [Re-allocating GBM wealth distribution model](https://lambdaclass.com/finance_playground/ergodicity/RGBM.html) - Model simulation based on a [paper](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2794830) by Adamou, Bernam and Peters 2019. You can also try out this [interactive animation](https://lambdaclass.com/finance_playground/rgbm_animation/index.html).
-- [Troubled Markets](https://lambdaclass.com/finance_playground/options/0.6-troubled-markets-and-volatility.html) - An exploration on Argentina's ADRs recent performance (2019) \[[slides](https://lambdaclass.com/finance_playground/options/0.6-troubled-markets-and-volatility.slides.html)\]
+- [Introduction to Finance](https://lambdaclass.com/finance_playground/intro_finance) -Basic concepts in Finance (stocks, ETFs, options) \[[slides](https://lambdaclass.com/finance_playground/intro-finance.slides.html)\]
+- [The Holy Grail of Investing](https://lambdaclass.com/finance_playground/diversification_dalio_holy_grail) - On Ray Dalio's insights into the benefits of [diversification](https://www.investopedia.com/video/play/ray-dalio-his-portfolio-holy-grail/).
+- [Ergodicity Explorations](https://lambdaclass.com/finance_playground/ergodicity_explorations) - Based on the [research](https://ergodicityeconomics.com/lecture-notes/) from Professor Ole Peters regarding [insurance](https://arxiv.org/abs/1507.04655) contracts, expectation values and time averages.
+- [Evaluating Gambles](https://lambdaclass.com/finance_playground/evaluating_gambles) - Continuing on our explorations on how to evaluate gambles and optimal betting criteria. \[[slides](https://lambdaclass.com/finance_playground/ergodicity/evaluating-gambles-presentation.slides.html)\]
+- [Emergence of Cooperation in Evolutionary Systems](https://lambdaclass.com/finance_playground/emergence_of_cooperation) - An ergodic explanation for the advantage of [cooperation](https://arxiv.org/abs/1506.03414) under evolutionary dynamics.
+- [Re-allocating GBM wealth distribution model](https://lambdaclass.com/finance_playground/rgbm_animation/index.html) - Model simulation based on a [paper](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2794830) by Adamou, Bernam and Peters 2019. 
+- [Troubled Markets](https://lambdaclass.com/finance_playground/troubled_markets_and_volatility) - An exploration on Argentina's ADRs recent performance (2019) \[[slides](https://lambdaclass.com/finance_playground/options/0.6-troubled-markets-and-volatility.slides.html)\]
 - [2019 Metadata Forcasting Competition](https://lambdaclass.com/finance_playground/metadata-2019/soy-price-prediction.html) - Our entry to the 2019 soy price forecasting competition organized by [Fundación Sadosky](http://www.fundacionsadosky.org.ar).
-
 
 ## Data sources
 
