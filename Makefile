@@ -48,8 +48,7 @@ intro_finance:
 	mkdir -p $(BUILD_DIR)/intro_finance/css
 	-cp -R ./intro_finance/img/* $(BUILD_DIR)/intro_finance/img/
 	-cp -R ./intro_finance/css/* $(BUILD_DIR)/intro_finance/css/
-	pandoc ./intro_finance/README.md --template ./intro_finance/template.tmpl -t html5 --mathjax -o $(BUILD_DIR)/intro_finance/Intro_Finance.html --metadata title="Introduction to Finance"
-	pandoc README.md --template ./template.tmpl -t html5 -o $(BUILD_DIR)/index.html --metadata title="LambdaClass Finance Playground"
+	pandoc ./intro_finance/README.md --template ./intro_finance/template.tmpl -t html5 --mathjax -o $(BUILD_DIR)/intro_finance/index.html --metadata title="Introduction to Finance"
 
 index:
 	mkdir -p $(BUILD_DIR)
