@@ -1,8 +1,8 @@
 BUILD_DIR = build
 
 
-.PHONY: default emergence_of_cooperation troubled_markets_and_volatility ergodicity_explorations evaluating_gambles diversification_dalio_holy_grail html
-default: index emergence_of_cooperation troubled_markets_and_volatility ergodicity_explorations evaluating_gambles diversification_dalio_holy_grail html
+.PHONY: default emergence_of_cooperation troubled_markets_and_volatility ergodicity_explorations evaluating_gambles diversification_dalio_holy_grail intro_finance html
+default: index emergence_of_cooperation troubled_markets_and_volatility ergodicity_explorations evaluating_gambles diversification_dalio_holy_grail intro_finance html
 
 dev: default
 	python -m http.server
@@ -42,6 +42,14 @@ diversification_dalio_holy_grail:
 	-cp -R ./diversification_dalio_holy_grail/css/* $(BUILD_DIR)/diversification_dalio_holy_grail/css/
 	-cp -R ./diversification_dalio_holy_grail/img/* $(BUILD_DIR)/diversification_dalio_holy_grail/img/
 	pandoc ./diversification_dalio_holy_grail/README.md --template ./diversification_dalio_holy_grail/template.tmpl -t html5 --mathjax -o $(BUILD_DIR)/diversification_dalio_holy_grail/index.html --metadata title="The Holy Grail of Investing"
+
+intro_finance:
+	mkdir -p $(BUILD_DIR)/intro_finance/img
+	mkdir -p $(BUILD_DIR)/intro_finance/css
+	-cp -R ./intro_finance/img/* $(BUILD_DIR)/intro_finance/img/
+	-cp -R ./intro_finance/css/* $(BUILD_DIR)/intro_finance/css/
+	pandoc ./intro_finance/README.md --template ./intro_finance/template.tmpl -t html5 --mathjax -o $(BUILD_DIR)/intro_finance/Intro_Finance.html --metadata title="Introduction to Finance"
+	pandoc README.md --template ./template.tmpl -t html5 -o $(BUILD_DIR)/index.html --metadata title="LambdaClass Finance Playground"
 
 index:
 	mkdir -p $(BUILD_DIR)
