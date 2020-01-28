@@ -1,8 +1,8 @@
 BUILD_DIR = build
 
 
-.PHONY: default emergence_of_cooperation troubled_markets_and_volatility ergodicity_explorations evaluating_gambles diversification_dalio_holy_grail html
-default: index emergence_of_cooperation troubled_markets_and_volatility ergodicity_explorations evaluating_gambles diversification_dalio_holy_grail html
+.PHONY: default emergence_of_cooperation troubled_markets_and_volatility ergodicity_explorations evaluating_gambles diversification_dalio_holy_grail intro_finance html
+default: index emergence_of_cooperation troubled_markets_and_volatility ergodicity_explorations evaluating_gambles diversification_dalio_holy_grail intro_finance html
 
 dev: default
 	python -m http.server
@@ -64,4 +64,3 @@ html:
 	-cp -R ./html/rgbm_animation/* $(BUILD_DIR)/rgbm_animation
 	cd $(BUILD_DIR)/rgbm_animation && npm install && npm run build
 	rm -rf $(BUILD_DIR)/rgbm_animation/node_modules/
-
