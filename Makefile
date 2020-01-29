@@ -1,8 +1,8 @@
 BUILD_DIR = build
 
 
-.PHONY: default emergence_of_cooperation troubled_markets_and_volatility ergodicity_explorations evaluating_gambles diversification_dalio_holy_grail intro_finance html
-default: index emergence_of_cooperation troubled_markets_and_volatility ergodicity_explorations evaluating_gambles diversification_dalio_holy_grail intro_finance html
+.PHONY: default emergence_of_cooperation troubled_markets_and_volatility ergodicity_explorations evaluating_gambles diversification_dalio_holy_grail references intro_finance html
+default: index emergence_of_cooperation troubled_markets_and_volatility ergodicity_explorations evaluating_gambles diversification_dalio_holy_grail references intro_finance html
 
 dev: default
 	python -m http.server
@@ -49,6 +49,11 @@ intro_finance:
 	-cp -R ./intro_finance/img/* $(BUILD_DIR)/intro_finance/img/
 	-cp -R ./intro_finance/css/* $(BUILD_DIR)/intro_finance/css/
 	pandoc ./intro_finance/README.md --template ./intro_finance/template.tmpl -t html5 --mathjax -o $(BUILD_DIR)/intro_finance/index.html --metadata title="Introduction to Finance"
+
+references:
+	mkdir -p $(BUILD_DIR)/references/css
+	-cp -R ./references/css/* $(BUILD_DIR)/references/css/
+	pandoc ./references/README.md --template ./references/template.tmpl -t html5 --mathjax -o $(BUILD_DIR)/references/index.html --metadata title="References"
 
 index:
 	mkdir -p $(BUILD_DIR)
