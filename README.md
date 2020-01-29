@@ -28,7 +28,7 @@ Collaboration is welcome: by all means, if you spot a mistake or just want to ad
 - [Emergence of Cooperation in Evolutionary Systems](https://lambdaclass.com/finance_playground/emergence_of_cooperation) - An ergodic explanation for the advantage of cooperation under evolutionary dynamics.
 - [Re-allocating GBM wealth distribution model](https://lambdaclass.com/finance_playground/rgbm_animation/index.html) - Model simulation based on a paper by Adamou, Bernam and Peters 2019. 
 - [Troubled Markets](https://lambdaclass.com/finance_playground/troubled_markets_and_volatility) - An exploration on Argentina's ADRs recent performance (2019).
-- [2019 Metadata Forecasting Competition](https://lambdaclass.com/finance_playground/metadata-2019/soy-price-prediction.html) - Our entry to the 2019 soybean futures forecasting competition organized by Fundación Sadosky and MATBA ROFEX, which ranked third.
+- [2019 Metadata Forecasting Competition](https://lambdaclass.com/finance_playground/soy_price_prediction) - Our entry to the 2019 soybean futures forecasting competition organized by Fundación Sadosky and MATBA ROFEX, which ranked third.
  
 <br> 
 
