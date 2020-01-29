@@ -1,7 +1,7 @@
 References 
 ==============================
 <br>
-These are the links to the material we based our proyects on:
+These are the links to the material we based our projects on:
 
 - [Investopedia: Ray Dalio breaks down his "Holy Grail".](https://www.investopedia.com/video/play/ray-dalio-his-portfolio-holy-grail/)
 - [Insurance makes wealth grow faster.](https://arxiv.org/abs/1507.04655) - _Peters & Adamou_
