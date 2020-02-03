@@ -6,24 +6,26 @@
          width: 55%;
     }
 }
-.matrix {
-    position: relative;
+.first-letter {
+  font-size: 55px;
+  line-height: 70px;
 }
-.matrix:before, .matrix:after {
-    content: " ";
-    position: absolute;
-    top: 0;
-    border: 1px solid #000;
-    width: 6px;
-    height: 100%;
+
+.quotation{
+  font-size: 25px;
+  //margin: 0 auto;
+  quotes: "\201C""\201D""\2018""\2019";
+  padding: 10px 20px;
+  line-height: 1.4;
+  font-style: italic;
 }
-.matrix:before {
-    left: -6px;
-    border-right: 0;
-}
-.matrix:after {
-    right: -6px;
-    border-left: 0;
+
+.quotation:before {
+  content: open-quote;
+  display: inline;
+  height: 0;
+  line-height: 0;
+  left: -10px;
 }
 nav {
     position: fixed;
