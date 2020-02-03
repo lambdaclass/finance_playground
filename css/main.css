@@ -10,7 +10,6 @@
   font-size: 55px;
   line-height: 70px;
 }
-
 .quotation{
   font-size: 25px;
   //margin: 0 auto;
@@ -26,7 +25,33 @@
   height: 0;
   line-height: 0;
   left: -10px;
+  position: relative;
+  top: 30px;
+  color: #ccc;
+  font-size: 6em;
 }
+.quotation::after {
+  content: close-quote;
+  display: inline;
+  height: 0;
+  line-height: 0;
+  left: 10px;
+  position: relative;
+  top: 35px;
+  color: #ccc;
+  font-size: 3em;
+}
+footer{
+  margin:0;
+  font-size: 25px
+  text-align: right;
+  font-style: italic;
+}
+li {
+  margin: 0.25em 15em 0.25em 0.25em;
+  padding: 0;
+  } 
+
 nav {
     position: fixed;
     top: 0;
