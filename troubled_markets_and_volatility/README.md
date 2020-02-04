@@ -907,7 +907,7 @@ Let's plot the returns that are at least $3\sigma$ away from the mean. If log re
 </br>
 <label for="imgemergence-of-cooperation_11_0" class="margin-toggle">⊕</label>
 <input type="checkbox" id="imgemergence-of-cooperation_11_0" class="margin-toggle">
-<span class="marginnote">3$\sigma$ putlier daily returns. </span>
+<span class="marginnote">3$\sigma$ outlier daily returns. </span>
 ![](img/0.6-troubled-markets-and-volatility_46_0.png)
 
 
