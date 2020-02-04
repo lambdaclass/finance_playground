@@ -2,6 +2,10 @@
      p {
          width: 55%;
     }
+    li {
+      width: 55%;
+ }
+
      .chart-container {
          width: 55%;
     }

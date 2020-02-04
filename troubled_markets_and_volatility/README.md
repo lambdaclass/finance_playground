@@ -149,7 +149,9 @@ The data is indexed by date, with the `symbol` column holding the ticker name, a
 We'll begin plotting the [`adjusted close`](http://www.crsp.com/products/documentation/crsp-calculations) prices for each symbol (price adjusted for dividends payed and stock splits). The reset of the columns can be safely ingored for our purposes.
 
 </br>
-
+<label for="imgemergence-of-cooperation_11_0" class="margin-toggle">⊕</label>
+<input type="checkbox" id="imgemergence-of-cooperation_11_0" class="margin-toggle">
+<span class="marginnote">Daily ajusted close prices for Argentina's ADRs (USD). </span>
 ![](img/0.6-troubled-markets-and-volatility_13_0.png)
 
 
@@ -157,6 +159,9 @@ Let's zoom in on the 2019 adjusted close prices.
 
 </br>
 
+<label for="imgemergence-of-cooperation_11_0" class="margin-toggle">⊕</label>
+<input type="checkbox" id="imgemergence-of-cooperation_11_0" class="margin-toggle">
+<span class="marginnote">Daily ajusted close prices for Argentina's ADRs (USD) in 2019. </span>
 ![](img/0.6-troubled-markets-and-volatility_15_0.png)
 
 
@@ -799,28 +804,36 @@ $$R_t \equiv \frac{S_t - S_{t-1}}{S_{t-1}}  \%$$
 Let's plot a histogram of the daily returns for each symbol.
 
 </br>
-
+<label for="imgemergence-of-cooperation_11_0" class="margin-toggle">⊕</label>
+<input type="checkbox" id="imgemergence-of-cooperation_11_0" class="margin-toggle">
+<span class="marginnote">Histogram of daily returns. </span>
 ![](img/0.6-troubled-markets-and-volatility_23_0.png)
 
 
 We see most returns cluster around 0, with a few outliers. Since we are interested particularly in the outliers, to see their quantity and magnitude, we can visualize them using a [boxenplot](https://vita.had.co.nz/papers/letter-value-plot.html).
 
 </br>
-
+<label for="imgemergence-of-cooperation_11_0" class="margin-toggle">⊕</label>
+<input type="checkbox" id="imgemergence-of-cooperation_11_0" class="margin-toggle">
+<span class="marginnote">Daily returns per symbol. </span>
 ![](img/0.6-troubled-markets-and-volatility_26_0.png)
 
 
 We can filter the days with 30% or larger movement in prices (either up or down).
 
 </br>
-
+<label for="imgemergence-of-cooperation_11_0" class="margin-toggle">⊕</label>
+<input type="checkbox" id="imgemergence-of-cooperation_11_0" class="margin-toggle">
+<span class="marginnote">Large daily returns(+/-30%). </span>
 ![](img/0.6-troubled-markets-and-volatility_28_0.png)
 
 
 Now if we remove outliers, say discard days where return was higher than 10% or lower than -10%:
 
 </br>
-
+<label for="imgemergence-of-cooperation_11_0" class="margin-toggle">⊕</label>
+<input type="checkbox" id="imgemergence-of-cooperation_11_0" class="margin-toggle">
+<span class="marginnote">Histogram of daily returns (between -10% / +10%). </span>
 ![](img/0.6-troubled-markets-and-volatility_30_0.png)
 
 </br>
@@ -866,7 +879,9 @@ Now we can calculate the [volatility](https://en.wikipedia.org/wiki/Volatility_(
 As a comparison, we'll add the daily volatility (from 2000 to 2019) for four of the so called [blue chip stocks](https://www.investopedia.com/terms/b/bluechipstock.asp), Coca-Cola (\$KO), Goldman Sachs (\$GS), IBM (\$IBM) and Walmart (\$WMT).
 
 </br>
-
+<label for="imgemergence-of-cooperation_11_0" class="margin-toggle">⊕</label>
+<input type="checkbox" id="imgemergence-of-cooperation_11_0" class="margin-toggle">
+<span class="marginnote">Daily volatility for each symbol (std of log returns). </span>
 ![](img/0.6-troubled-markets-and-volatility_37_0.png)
 
 
@@ -875,7 +890,9 @@ We can see that Argentine stocks show much higher volatility than the blue chip 
 Let's plot the mean yearly returns for each symbol. Again, we'll add the mean daily return of the US blue chips.
 
 </br>
-
+<label for="imgemergence-of-cooperation_11_0" class="margin-toggle">⊕</label>
+<input type="checkbox" id="imgemergence-of-cooperation_11_0" class="margin-toggle">
+<span class="marginnote">Mean yearly returns of Argentina's ADRs. </span>
 ![](img/0.6-troubled-markets-and-volatility_41_0.png)
 
 
@@ -888,14 +905,18 @@ As expected, besides increased volatility, Argentine stocks, for the most part, 
 Let's plot the returns that are at least $3\sigma$ away from the mean. If log returns were truly distributed normally, then we should expect this group to represent only $0.3\%$ of the data, while the remaining $99.7\%$ should lie in the interval $(\mu_r - 3\sigma_r, \mu_r + 3\sigma_r)$.
 
 </br>
-
+<label for="imgemergence-of-cooperation_11_0" class="margin-toggle">⊕</label>
+<input type="checkbox" id="imgemergence-of-cooperation_11_0" class="margin-toggle">
+<span class="marginnote">3$\sigma$ putlier daily returns. </span>
 ![](img/0.6-troubled-markets-and-volatility_46_0.png)
 
 
 We see a large number of outlier return days. To put that in perspective, let's calculate the proportion of outlier returns for each symbol in the data, that is the number of days where $3\sigma$ returns where observed over the total number of observations.
 
 </br>
-
+<label for="imgemergence-of-cooperation_11_0" class="margin-toggle">⊕</label>
+<input type="checkbox" id="imgemergence-of-cooperation_11_0" class="margin-toggle">
+<span class="marginnote">Outlier proportion (outlier daily return count / total daily returns). </span>
 ![](img/0.6-troubled-markets-and-volatility_48_0.png)
 
 
@@ -904,7 +925,9 @@ We see many more outliers than the expected $0.3\%$. For example, \$MELI has alm
 Finally, we'll look at the cumulative log returns over time.
 
 </br>
-
+<label for="imgemergence-of-cooperation_11_0" class="margin-toggle">⊕</label>
+<input type="checkbox" id="imgemergence-of-cooperation_11_0" class="margin-toggle">
+<span class="marginnote">Cumulative log returns. </span>
 ![](img/0.6-troubled-markets-and-volatility_51_0.png)
 
 
@@ -1096,7 +1119,9 @@ The volatility smile plots the [implied volatility](https://www.investopedia.com
 We'll plot the IV for puts and calls for each symbol. The dashed line represents the spot price.
 
 </br>
-
+<label for="imgemergence-of-cooperation_11_0" class="margin-toggle">⊕</label>
+<input type="checkbox" id="imgemergence-of-cooperation_11_0" class="margin-toggle">
+<span class="marginnote">Volatility smiles - August 9th 2019. </span>
 ![](img/0.6-troubled-markets-and-volatility_58_0.png)
 
 
@@ -1106,6 +1131,9 @@ Now let's try the same plot for the following Monday (2019-08-12). That day, the
 
 </br>
 
+<label for="imgemergence-of-cooperation_11_0" class="margin-toggle">⊕</label>
+<input type="checkbox" id="imgemergence-of-cooperation_11_0" class="margin-toggle">
+<span class="marginnote">Volatility smiles - August 12th 2019. </span>
 ![](img/0.6-troubled-markets-and-volatility_61_0.png)
 
 
@@ -1120,6 +1148,9 @@ Let's find the 10 most actively traded options (those with the highest open inte
 
 </br>
 
+<label for="imgemergence-of-cooperation_11_0" class="margin-toggle">⊕</label>
+<input type="checkbox" id="imgemergence-of-cooperation_11_0" class="margin-toggle">
+<span class="marginnote">Ask price for most actively traded calls in August 2019. </span>
 ![](img/0.6-troubled-markets-and-volatility_71_0.png)
 
 
@@ -1127,6 +1158,9 @@ Note that the \$BFR plot shows all calls with an `ask` price of 0.0. In June 201
 
 </br>
 
+<label for="imgemergence-of-cooperation_11_0" class="margin-toggle">⊕</label>
+<input type="checkbox" id="imgemergence-of-cooperation_11_0" class="margin-toggle">
+<span class="marginnote">Ask price for most actively traded puts in August 2019. </span>
 ![](img/0.6-troubled-markets-and-volatility_73_0.png)
 
 
@@ -1138,14 +1172,18 @@ This plots reveal a huge drop in prices for the calls, and, conversely, a large 
 
 As a comparison, let's try plotting the option prices for June 2019, a more uneventful month for the Argentine market.
 
-
+<label for="imgemergence-of-cooperation_11_0" class="margin-toggle">⊕</label>
+<input type="checkbox" id="imgemergence-of-cooperation_11_0" class="margin-toggle">
+<span class="marginnote">Ask price for most actively traded calls in June 2019. </span>
 ![](img/0.6-troubled-markets-and-volatility_81_0.png)
 
 
 Next we'll have a look the the actively traded puts for June 2019.
 
 </br>
-
+<label for="imgemergence-of-cooperation_11_0" class="margin-toggle">⊕</label>
+<input type="checkbox" id="imgemergence-of-cooperation_11_0" class="margin-toggle">
+<span class="marginnote">Ask price for most actively traded puts in June 2019. </span>
 ![](img/0.6-troubled-markets-and-volatility_83_0.png)
 
 </br>
@@ -1156,25 +1194,33 @@ Let's have a look at the options data from October, November and December 2015.
 During those months, the Argentine elections took place, which marked the beginning of a bull market. In the following four years, the MERVAL index increased four-fold its value in Pesos.
 
 </br>
-
+<label for="imgemergence-of-cooperation_11_0" class="margin-toggle">⊕</label>
+<input type="checkbox" id="imgemergence-of-cooperation_11_0" class="margin-toggle">
+<span class="marginnote">Ask price for most actively traded calls in October 2015. </span>
 ![](img/0.6-troubled-markets-and-volatility_90_0.png)
 
 
 Now let's plot the actively traded puts for October 2015
 
 </br>
-
+<label for="imgemergence-of-cooperation_11_0" class="margin-toggle">⊕</label>
+<input type="checkbox" id="imgemergence-of-cooperation_11_0" class="margin-toggle">
+<span class="marginnote">Ask price for most actively traded puts in October 2015. </span>
 ![](img/0.6-troubled-markets-and-volatility_92_0.png)
 
 
 **November 2015**
 
 </br>
-
+<label for="imgemergence-of-cooperation_11_0" class="margin-toggle">⊕</label>
+<input type="checkbox" id="imgemergence-of-cooperation_11_0" class="margin-toggle">
+<span class="marginnote">Ask price for most actively traded calls in November 2015. </span>
 ![](img/0.6-troubled-markets-and-volatility_98_0.png)
 
 </br>
-
+<label for="imgemergence-of-cooperation_11_0" class="margin-toggle">⊕</label>
+<input type="checkbox" id="imgemergence-of-cooperation_11_0" class="margin-toggle">
+<span class="marginnote">Ask price for most actively traded puts in November 2015. </span>
 ![](img/0.6-troubled-markets-and-volatility_99_0.png)
 
 </br>
@@ -1182,11 +1228,15 @@ Now let's plot the actively traded puts for October 2015
 **December 2015**
 
 </br>
-
+<label for="imgemergence-of-cooperation_11_0" class="margin-toggle">⊕</label>
+<input type="checkbox" id="imgemergence-of-cooperation_11_0" class="margin-toggle">
+<span class="marginnote">Ask price for most actively traded calls in December 2015. </span>
 ![](img/0.6-troubled-markets-and-volatility_105_0.png)
 
 </br>
-
+<label for="imgemergence-of-cooperation_11_0" class="margin-toggle">⊕</label>
+<input type="checkbox" id="imgemergence-of-cooperation_11_0" class="margin-toggle">
+<span class="marginnote">Ask price for most actively traded puts in December 2015. </span>
 ![](img/0.6-troubled-markets-and-volatility_106_0.png)
 
 </br>
@@ -1196,10 +1246,14 @@ Now let's plot the actively traded puts for October 2015
 We'll examine the Argentine ADR options data for January 2008, the beginning of the US mortgage crisis, which had global effects. We only have data for 3 companies: \$MELI, \$TS and \$TX.
 
 </br>
-
+<label for="imgemergence-of-cooperation_11_0" class="margin-toggle">⊕</label>
+<input type="checkbox" id="imgemergence-of-cooperation_11_0" class="margin-toggle">
+<span class="marginnote">Ask price for most actively traded calls in January 2008. </span>
 ![](img/0.6-troubled-markets-and-volatility_113_0.png)
 
-
+<label for="imgemergence-of-cooperation_11_0" class="margin-toggle">⊕</label>
+<input type="checkbox" id="imgemergence-of-cooperation_11_0" class="margin-toggle">
+<span class="marginnote">Ask price for most actively traded puts in January 2008. </span>
 ![](img/0.6-troubled-markets-and-volatility_114_0.png)
 
 
