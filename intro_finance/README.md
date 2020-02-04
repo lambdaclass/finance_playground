@@ -623,7 +623,9 @@ $$\text{Profit} \equiv P(K, t, t_0) - max(K - S_t, 0)$$
 - `openinterest` the total number of contracts open since it started trading
 
 
-![](img/intro-finance_37_1.png)
+<label for="img1" class="margin-toggle">⊕</label>
+<input type="checkbox" id="img1" class="margin-toggle">
+<span class="marginnote">Number of option contracts.</span>![](img/intro-finance_37_1.png)
 
 
 ## Options pricing
