@@ -1,8 +1,8 @@
 BUILD_DIR = build
 
 
-.PHONY: default emergence_of_cooperation troubled_markets_and_volatility ergodicity_explorations evaluating_gambles diversification_dalio_holy_grail html
-default: index emergence_of_cooperation troubled_markets_and_volatility ergodicity_explorations evaluating_gambles diversification_dalio_holy_grail html
+.PHONY: default emergence_of_cooperation troubled_markets_and_volatility ergodicity_explorations evaluating_gambles diversification_dalio_holy_grail soy_price_prediction references intro_finance html
+default: index emergence_of_cooperation troubled_markets_and_volatility ergodicity_explorations evaluating_gambles diversification_dalio_holy_grail soy_price_prediction references intro_finance html
 
 dev: default
 	python -m http.server
@@ -42,6 +42,25 @@ diversification_dalio_holy_grail:
 	-cp -R ./diversification_dalio_holy_grail/css/* $(BUILD_DIR)/diversification_dalio_holy_grail/css/
 	-cp -R ./diversification_dalio_holy_grail/img/* $(BUILD_DIR)/diversification_dalio_holy_grail/img/
 	pandoc ./diversification_dalio_holy_grail/README.md --template ./diversification_dalio_holy_grail/template.tmpl -t html5 --mathjax -o $(BUILD_DIR)/diversification_dalio_holy_grail/index.html --metadata title="The Holy Grail of Investing"
+
+soy_price_prediction:
+	mkdir -p $(BUILD_DIR)/soy_price_prediction/img
+	mkdir -p $(BUILD_DIR)/soy_price_prediction/css
+	-cp -R ./soy_price_prediction/img/* $(BUILD_DIR)/soy_price_prediction/img/
+	-cp -R ./soy_price_prediction/css/* $(BUILD_DIR)/soy_price_prediction/css/
+	pandoc ./soy_price_prediction/README.md --template ./soy_price_prediction/template.tmpl -t html5 --mathjax -o $(BUILD_DIR)/soy_price_prediction/index.html --metadata title="Soy Price Prediction"
+
+intro_finance:
+	mkdir -p $(BUILD_DIR)/intro_finance/img
+	mkdir -p $(BUILD_DIR)/intro_finance/css
+	-cp -R ./intro_finance/img/* $(BUILD_DIR)/intro_finance/img/
+	-cp -R ./intro_finance/css/* $(BUILD_DIR)/intro_finance/css/
+	pandoc ./intro_finance/README.md --template ./intro_finance/template.tmpl -t html5 --mathjax -o $(BUILD_DIR)/intro_finance/index.html --metadata title="Introduction to Finance"
+
+references:
+	mkdir -p $(BUILD_DIR)/references/css
+	-cp -R ./references/css/* $(BUILD_DIR)/references/css/
+	pandoc ./references/README.md --template ./references/template.tmpl -t html5 --mathjax -o $(BUILD_DIR)/references/index.html --metadata title="References"
 
 index:
 	mkdir -p $(BUILD_DIR)
