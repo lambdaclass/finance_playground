@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Ergodicity Explorations</title>
+
+    <meta property="og:title" content="Ergodicity Explorations">
+
+    <meta property="og:image" content="https://lambdaclass.com/finance_playground/ergodicity_explorations/img/cover_image.png">
+    <meta property="og:url" content="https://lambdaclass.com/finance_playground/ergodicity_explorations/">
+
+    <meta name="twitter:title" content="Ergodicity Explorations">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image:src" content="https://lambdaclass.com/finance_playground/ergodicity_explorations/img/cover_image.png">
+
+    <meta name="description" content="When considering gambles, defined as a set of payouts associated with a probability distribution, intuition would suggest that we should calculate the expected value, understood as taking the average after many (tending to infinity) realizations, and only enter such a gamble if this number is positive. ">
+    <meta name="twitter:creator" content="@unbalancedparen">
+
+    <link rel="stylesheet" type="text/css" href="./css/main.css">
+    <link rel="stylesheet" type="text/css" href="https://edwardtufte.github.io/tufte-css/tufte.css">
+
+     <script type="text/javascript" async
+            src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-155234935-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-155234935-1');
+    </script>
+    <link rel="stylesheet" type="text/css" href="./css/main.css" />
+  <style>
+    /*FOR MOCKUP*/
+    body {
+      height: 150vh;
+    }
+
+    @media screen and (min-width: 786px) {
+      p {
+        width: 55%;
+      }
+
+      .chart-container {
+        width: 55%;
+      }
+    }
+
+    /*END MOCKUP*/
+  </style>
+  <script src="./css/supernav.js"></script>
+  </head>
+  <body>
+
+  <nav id="main-nav">
+    <ul class="nav-links">
+      <li>
+        <a href="https://lambdaclass.com/finance_playground/">
+          <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+            x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+            <g>
+              <g>
+                <path d="M501.333,245.333H36.417l141.792-141.792c4.167-4.167,4.167-10.917,0-15.083c-4.167-4.167-10.917-4.167-15.083,0l-160,160
+        c-4.167,4.167-4.167,10.917,0,15.083l160,160c2.083,2.083,4.813,3.125,7.542,3.125c2.729,0,5.458-1.042,7.542-3.125
+        c4.167-4.167,4.167-10.917,0-15.083L36.417,266.667h464.917c5.896,0,10.667-4.771,10.667-10.667S507.229,245.333,501.333,245.333z
+        " />
+              </g>
+            </g>
+          </svg>
+          <span class="text">back</span>
+        </a>
+      </li>
+      <li>
+        <span class="powered">powered by:</span>
+        <a href="https://lambdaclass.com" target="_blank"><span class="text">Lambdaclass</span></a>
+      </li>
+    </ul>
+    <div class="nav-info">
+      reading: Ergodicity Explorations
+    </div>
+  </nav>
+
+    <article>
+      <h1 id="explorations-on-ergodicity-and-random-processes">Explorations on ergodicity and random processes</h1>
+      <p><br /> Notes for:</p>
+      <ul>
+      <li><a href="https://ergodicityeconomics.com/lecture-notes/">Ergodicity Economics</a> - <em>Peters</em></li>
+      <li><a href="https://www.tandfonline.com/doi/abs/10.1080/14697688.2010.513338">Optimal leverage from non-ergodicity</a> - <em>Peters</em></li>
+      <li><a href="https://arxiv.org/abs/1101.4548">Leverage Efficiency</a>- <em>Peters &amp; Adamou</em></li>
+      <li><a href="https://doi.org/10.1063/1.4940236">Evaluating gambles using dynamics</a> - <em>Peters &amp; Gell-Mann</em></li>
+      <li><a href="https://arxiv.org/abs/1507.04655">Insurance makes wealth grow faster</a> - <em>Peters &amp; Adamou</em></li>
+      </ul>
+      <p>When considering gambles, defined as a set of payouts associated with a probability distribution, intuition would suggest that we should calculate the <a href="https://en.wikipedia.org/wiki/Expected_value">expected value</a>, understood as taking the average after many (tending to infinity) realizations, and only enter such a gamble if this number is positive. Poker players and gamblers refer to this as making <em>positive EV plays</em>. In practice, they seek to optimize their change in wealth <span class="math inline">\(\Delta x = x(t + \Delta t) - x(t)\)</span>.<br />
+      This seems sensible enough, until you consider games such as <a href="https://en.wikipedia.org/wiki/St._Petersburg_paradox">this</a>:</p>
+      <blockquote>
+      <p>A casino offers a game of chance in which a fair coin is tossed at each stage. The initial stake starts at <span class="math inline">\(\$2\)</span> and is doubled every time heads appears. The first time tails appears, the game ends and the player wins whatever is in the pot. Thus the player wins <span class="math inline">\(\$2\)</span> if tails appears on the first toss, <span class="math inline">\(\$4\)</span> if heads appears on the first toss and tails on the second, <span class="math inline">\(\$8\)</span> if heads appears on the first two tosses and tails on the third, and so on.<br />
+      The player wins <span class="math inline">\(\$2^k\)</span> where <span class="math inline">\(k\)</span> is the number of coin tosses. What would be a fair price (i.e. a price at which you would feel indifferent taking the role of the gambler or the casino) to play such a game?</p>
+      </blockquote>
+      <p>The expected value of such a game is</p>
+      <p><span class="math display">\[\mathbb{E} = \frac{1}{2} \cdot 2 + \frac{1}{4} \cdot 4 + \frac{1}{8} \cdot 8 + \dotsb = 1 + 1 + 1 + \dotsb = \infty\]</span></p>
+      <p>Should we be willing to pay any amount for the opportunity to play? Most people would not, even though the game has an infinite expected value.</p>
+      <p>The aforementioned paradox was studied by <a href="https://en.wikipedia.org/wiki/Daniel_Bernoulli">Daniel Bernoulli</a> in a paper published in 1738 in the journal of the Imperial Academy of Science in St. Petersburg. In it, he introduced the <a href="https://en.wikipedia.org/wiki/Expected_utility_hypothesis">expected utility hypothesis</a>, which states that individual preferences concerning such gambles seek to maximise not the expected change in wealth, but the expected change in <em>utility</em>, which is a mathematical concept that captures the subjective value of wealth to the individual. Utility functions could differ between individuals, which gives much (perhaps too much) flexibility to the theory, at the cost of explanatory power. Typical choices for utilities include <span class="math inline">\(\sqrt{x}\)</span> and <em><span class="math inline">\(ln(x)\)</span></em> that explain the fact that the increase in utility provided by a dollar is inversely proportional to the level of wealth.</p>
+      <p>Professor <a href="http://tuvalu.santafe.edu/~ole/">Ole Peters</a>, Fellow at the <a href="http://www.lml.org.uk/">London Mathematical Laboratory</a>, has studied random processes such as this under different dynamics (where wealth changes in additive or multiplicative increments) and has proposed an alternative approach, one that seeks to explain human decision making when faced with such risky propositions. Instead of taking into account the state space average of wealth, this paradigm focuses on the time-average of wealth which are most often <strong>not equal</strong>. This framework is generally useful in evaluating gambles, and delivers insights into questions of optimal leverage, the puzzle of insurance, the emergence of cooperation, and the dynamics of inequality.</p>
+      <p>In a nutshell: People just optimize what happens to their wealth over time.</p>
+      <h2 id="a-motivating-example">A motivating example</h2>
+      <p><br /> Consider the following game</p>
+      <blockquote>
+      <p>Flip a coin:</p>
+      </blockquote>
+      <blockquote>
+      <ul>
+      <li>heads -&gt; increase your wealth by 60%</li>
+      <li>tails -&gt; decrease your wealth by 50%</li>
+      </ul>
+      </blockquote>
+      <p>Let’s define wealth as a function of time <span class="math inline">\(x(t)\)</span>:</p>
+      <p><span class="math display">\[ x(t + \Delta t)=   \left\{
+      \begin{array}{ll}
+            0.5 x(t) \text{ with probability 0.5}\\
+            1.6 x(t) \text{ with probability 0.5}\\
+      \end{array} 
+      \right.\]</span></p>
+      <p>With <span class="math inline">\(t\)</span> being a discrete time variable that grows as we repeat the experiment.</p>
+      <p>We see that the expected value of the game is</p>
+      <p><span class="math display">\[\mathbb{E}(x(t + \Delta t)) = 0.5 \cdot 1.6 x(t) + 0.5 \cdot 0.5 x(t) = 1.05 x(t)\]</span></p>
+      <p>This makes it a positive <strong>EV</strong> game.</p>
+      <p>We’ll generate 100 draws from a uniform distribution <span class="math inline">\([0,1)\)</span>, and call every value greater than 0.5 <em>head</em>, and <em>tail</em> for the rest.<br />
+      With an initial wealth of <span class="math inline">\(x(t) = \$ 1000\)</span>, at the end of the experiment we obtain a final wealth of 0.0028</p>
+      <p>Surpisingly, our wealth goes to 0 as we repeat the experiment, with <span class="math display">\[\lim_{T\to\infty} x(t + T \Delta t) = 0\]</span></p>
+      <p>We can plot the evolution of our wealth with time:</p>
+      <p><label for="imgemergence-of-cooperation_11_0" class="margin-toggle">⊕</label> <input type="checkbox" id="imgemergence-of-cooperation_11_0" class="margin-toggle"> <span class="marginnote">Wealth over time for one simulation.</span> <img src="img/ergodicity-explorations_14_0.png" /></p>
+      <p>Let’s plot more realizations of the experiment:</p>
+      <p><label for="imgemergence-of-cooperation_11_0" class="margin-toggle">⊕</label> <input type="checkbox" id="imgemergence-of-cooperation_11_0" class="margin-toggle"> <span class="marginnote">Wealth over time for more simulations of the experiment.</span><img src="img/ergodicity-explorations_16_0.png" /></p>
+      <p>There is high variance in the short term, but over the long run we see that realizations tend to 0 as <span class="math inline">\(t\)</span> grows. <br> What is happening here is that as <span class="math inline">\(T\)</span> increases:</p>
+      <p><span class="math display">\[\lim_{T \to\infty} x(t + T \Delta t) = 1.6^{T/2} 0.5^{T/2} = (1.6 \cdot 0.5)^{T/2} = 0.8^{T/2} = 0\]</span></p>
+      <p>We see that this game, which has a positive expected value, has a <em>time average</em> value of 0.<br />
+      We say that such systems are <strong>non ergodic</strong>, that is, they behave differently when averaged over time as averaged over the space of all possible states.</p>
+      <p>Professor Steve Keen sums it up clearly in his book <em>Debunking Economics</em>:</p>
+      <blockquote>
+      <p>“Ergodic” is a frequently misunderstood term, especially within economics. It is properly defined by the <a href="https://en.wiktionary.org/wiki/ergodic">Wiktionary</a>, and the Wikipedia entry on <a href="https://en.wikipedia.org/wiki/ergodic_theory">Ergodic Theory</a> makes the important point that “For the special class of ergodic systems, the time average is the same for almost all initial points: statistically speaking, the system that evolves for a long time <em>forgets</em> its initial state.” This is not the case for complex or chaotic models, which show “sensitive dependence on initial conditions” (see <a href="https://en.wikipedia.org/wiki/Butterfly_effect">Butterfly Effect</a> and <a href="https://en.wikipedia.org/wiki/Chaos_theory">Chaos Theory</a>).</p>
+      </blockquote>
+      <h2 id="insurance-makes-wealth-grow-faster"><em>Insurance makes wealth grow faster</em></h2>
+      <p><br /> <a href="https://arxiv.org/abs/1507.04655"><em>Insurance makes wealth grow faster</em></a> Ole Peters &amp; Alexander Adamou. Last revised 13 Jul 2017</p>
+      <p>This paper tries to answer Kenneth Arrow’s observation: <em>why does insurance exist?</em><br />
+      In a world without arbitrage oportunities (assuming buyer and seller of insurance contracts have the same information), the insurer cannot charge more than the net premium (i.e. the expectation value of any future claims made by the buyer of the contract). Likewise, the buyer should not be willing to pay more than the premium.</p>
+      <p>Given that insurance is antisymmetric (what one party gains the other loses) and that the contracts should be priced exactly at the net premium, they should not exist.<br />
+      And yet they do.</p>
+      <h2 id="to-buy-or-not-to-buy-insurance"><em>To buy or not to buy insurance</em></h2>
+      <p><br /> Let’s go through a simple case, considered in <a href="academic.oup.com/qje/article-abstract/90/4/629/1886620">Rothchild &amp; Stiglitz 1976</a>.<br />
+      &gt; A merchant sends a ship from St. Petersburg to Amsterdam. The safe delivery of the ship’s cargo nets him <span class="math inline">\(G = \$ 4,000\)</span>. With probability <span class="math inline">\(p = 0.05\)</span> the ship is sunk, and its replacement cost is <span class="math inline">\(C = \$ 30,000\)</span>. The journey takes <span class="math inline">\(\Delta t = 1\)</span> month and the merchant’s wealth at time <span class="math inline">\(t\)</span> is <span class="math inline">\(W_{mer} = \$ 100,000\)</span>.<br />
+      &gt; An insurer offers a contract that stipulates that, should the ship be lost, the merchant would receive the cost of the ship plus his lost profit <span class="math inline">\(L = G + C\)</span> for a fee of <span class="math inline">\(F = \$ 1,800\)</span>.</p>
+      <p>Should the merchant buy the contract?</p>
+      <p>Under the expected-wealth paradigm, individuals try to maximise the rate of change of the expected value of their wealth.<br />
+      Define the rate of change in wealth as:</p>
+      <p><span class="math display">\[\langle r \rangle = \frac{\langle \Delta W \rangle}{\Delta t} = \frac{\langle W(t + \Delta t) \rangle - W(t)}{\Delta t}\]</span></p>
+      <ul>
+      <li>Merchant’s <span class="math inline">\(\langle r_{mer}^{un} \rangle\)</span> <em>without</em> insurance:</li>
+      </ul>
+      <p><span class="math display">\[\langle r_{mer}^{un} \rangle = (1 - p)G - p C = 0.95 \cdot \$ 4,000 - 0.05 \cdot \$ 30,000 = \$ 2,300\]</span></p>
+      <ul>
+      <li>Merchant’s <span class="math inline">\(\langle r_{mer}^{in} \rangle\)</span> <em>with</em> insurance:</li>
+      </ul>
+      <p><span class="math display">\[\langle r_{mer}^{in} \rangle = (1 - p)(G - F) + p(L - C - F) = G - F = \$ 4,000 - \$ 1,800 = \$ 2,200\]</span></p>
+      <p>The change in <span class="math inline">\(\langle r_{mer} \rangle\)</span> if the merchant were to buy insurance would be:</p>
+      <p><span class="math display">\[\delta \langle r_{mer} \rangle = \langle r_{mer}^{in} \rangle - \langle r_{mer}^{un} \rangle = - \$ 100\]</span></p>
+      <p>A negative expected change in <span class="math inline">\(\langle r_{mer} \rangle\)</span> means the merchant should <strong>not</strong> buy the insurance contract.</p>
+      <p>For the seller of insurances:</p>
+      <ul>
+      <li>Insurer’s <span class="math inline">\(\langle r_{ins}^{un} \rangle\)</span> <em>without</em> selling contract:</li>
+      </ul>
+      <p><span class="math display">\[\langle r_{ins}^{un} \rangle = 0\]</span></p>
+      <ul>
+      <li>Insurer’s <span class="math inline">\(\langle r_{ins}^{in} \rangle\)</span> <em>after</em> selling contract:</li>
+      </ul>
+      <p><span class="math display">\[\langle r_{ins}^{in} \rangle = F - p L = \$ 1,800 - 0.05 \cdot (\$ 30,000 + \$ 4,000)= \$ 100\]</span></p>
+      <p>The change in <span class="math inline">\(\langle r_{ins} \rangle\)</span> is:<br />
+      <span class="math display">\[\delta \langle r_{ins} \rangle = \langle r_{ins}^{in} \rangle - \langle r_{ins}^{un} \rangle = \$ 100\]</span></p>
+      <p>The insurer stands to gain <span class="math inline">\(\$100\)</span> per contract sold. Note that it is the same amount that the merchant would lose if he entered the contract.</p>
+      <p><span class="math display">\[\delta \langle r_{ins} \rangle = - \delta \langle r_{mer} \rangle\]</span> <label for="imgemergence-of-cooperation_11_0" class="margin-toggle">⊕</label> <input type="checkbox" id="imgemergence-of-cooperation_11_0" class="margin-toggle"> <span class="marginnote">Change in rate with linear utility.</span> <img src="img/ergodicity-explorations_27_0.png" /></p>
+      <h2 id="utility-functions-and-the-utility-maximization-paradigm">Utility functions and the utility maximization paradigm</h2>
+      <p><br /> Classical economic theory gets around this problem by introducing non linear <strong>utility functions</strong>, that map wealth to <em>happiness</em> or <em>well being</em> levels. The general idea is that one unit of wealth (i.e. one dollar) does not provide the same level of happiness to a millionaire than to a poor person.<br />
+      Under this framework, rational agents act in a manner that maximizes their rate of change of <em>utility</em>, which could be different for each agent. Thus, it is possible that insurance can provide positive utility for <em>both</em> insurer and buyer.</p>
+      <p>If we stipulate a square root utility <span class="math inline">\(U(W) = \sqrt{W}\)</span> for both insurer and merchant, then the following holds:</p>
+      <ul>
+      <li>Merchant’s <span class="math inline">\(\langle r_{u} \rangle_{mer}^{un}\)</span> <em>without</em> insurance:</li>
+      </ul>
+      <p><span class="math display">\[\langle r_{u} \rangle_{mer}^{un} = (1 - p) U_{mer}(W_{mer} + G) - p U_{mer}(W_{mer} - C) - U_{mer}(W_{mer})\]</span></p>
+      <ul>
+      <li>Merchant’s <span class="math inline">\(\langle r_{u} \rangle_{mer}^{in}\)</span><em>with</em> insurance:</li>
+      </ul>
+      <p><span class="math display">\[\langle r_{u} \rangle_{mer}^{in} = U_{mer}(W_{mer} + G - F) - U_{mer}(W_{mer})\]</span></p>
+      <p>With the change in <span class="math inline">\(\langle r_{mer} \rangle\)</span>:</p>
+      <p><span class="math display">\[\delta \langle r_{u} \rangle_{mer} = \langle r_{u} \rangle_{mer}^{in} - \langle r_{u} \rangle_{mer}^{un}\]</span></p>
+      <p>For the insurer, we assume wealth at time <span class="math inline">\(t\)</span> is <span class="math inline">\(W_{ins} = \$ 1,000,000\)</span>.</p>
+      <ul>
+      <li>Insurer’s <span class="math inline">\(\langle r_{u} \rangle_{ins}^{un}\)</span> <em>without</em> insurance:</li>
+      </ul>
+      <p><span class="math display">\[\langle r_{u} \rangle_{ins}^{un} = 0\]</span></p>
+      <ul>
+      <li>Insurer’s <span class="math inline">\(\langle r_{u} \rangle_{ins}^{in}\)</span> <em>with</em> insurance:</li>
+      </ul>
+      <p><span class="math display">\[\langle r_{u} \rangle_{ins}^{in} = (1 - p) U_{ins}(W_{ins} + F) + p U_{ins}(W_{ins} + F - L) - U_{ins}(W_{ins})\]</span></p>
+      <p>If the merchant were to buy the insurance, then the change in <span class="math inline">\(\langle r_{mer} \rangle\)</span> would result in an expected gain of:</p>
+      <p><span class="math display">\[\delta \langle r_{u} \rangle_{mer} = \langle r_{u} \rangle_{mer}^{in} - \langle r_{u} \rangle_{mer}^{un} = \langle r_{u} \rangle_{mer}^{in}\]</span> <label for="imgemergence-of-cooperation_11_0" class="margin-toggle">⊕</label> <input type="checkbox" id="imgemergence-of-cooperation_11_0" class="margin-toggle"> <span class="marginnote">Change in rate with square root utility.</span> <img src="img/ergodicity-explorations_33_0.png" /></p>
+      <p>Notice that <span class="math inline">\(\langle r_{u} \rangle\)</span> is measured in <em>utility units</em>.</p>
+      <h2 id="time-averageing-perspective">Time averageing perspective</h2>
+      <p><br /> The paradigm discussed in the paper proposes that individuals make decisions that maximize the <em>time-average growth rate</em> of their wealth.<br />
+      From page 17: &gt; The usual procedure for computing such a time average is to first transform wealth in such a way as to generate an ergodic observable and then compute the expectation value of that observable.</p>
+      <p>If we assume multiplicative dynamics, that is, the wealth of the merchant increases (or decreases) by a factor <span class="math inline">\(r(n)\)</span> each month, such that</p>
+      <p><span class="math display">\[W_{mer}(t + T\Delta t) = W_{mer}(t) \prod_{\tau=1}^{T} r(n_{\tau})\]</span></p>
+      <p>or equivalently</p>
+      <p><span class="math display">\[W_{mer}(t + T\Delta t) = W_{mer}(t) \exp \left[ \ln(\sum_{\tau=1}^{T} r(n_{\tau})) \right]\]</span></p>
+      <p>then we can create an <em>ergodic observable</em> by taking into consideration the relative changes in wealth <span class="math inline">\(\frac{W_{mer}(t + \Delta t)}{W_{mer}(t)}\)</span>. The key property of this quantitiy is that the expected value (<em>the ensemble average</em>) is equal to the time-average as time tends to infinity.</p>
+      <p><span class="math display">\[\lim_{T\to\infty} \frac{1}{T \Delta t} \ln \left(\frac{W_{mer}(t + T \Delta t)}{W_{mer}} \right) = \frac{\langle \Delta \ln W_{mer} \rangle}{\Delta t} = \frac{\langle \Delta \ln W_{mer}(t + \Delta t) \rangle - \ln W_{mer}(t)}{\Delta t}\]</span></p>
+      <p>Under this paradigm, merchant and insurer should act in a way that maximizes their rate of change in the <em>log</em> of wealth. Note that this is a particular case of the utility paradigm, where both participants have log utilities.</p>
+      <p>We then have, under multiplicative dynamics, that the growth rate of the merchants wealth when <em>uninsured</em> is</p>
+      <p><span class="math display">\[g_{mer}^{un} = (1 - p) \ln \left( \frac{W_{mer} + G}{W_{mer}} \right) + p \ln \left( \frac{W_{mer} - C}{W_{mer}} \right)\]</span></p>
+      <p><em>With insurance</em>, the growth rate is</p>
+      <p><span class="math display">\[g_{mer}^{in} = \ln \left( \frac{W_{mer} + G - F}{W_{mer}} \right)\]</span></p>
+      <p>For the insurer, without selling</p>
+      <p><span class="math display">\[g_{ins}^{un} = 0\]</span></p>
+      <p><em>With insurance</em></p>
+      <p><span class="math display">\[g_{ins}^{in} = (1 - p) \ln \left( \frac{W_{ins} + F}{W_{ins}} \right) + p \ln \left( \frac{W_{ins} + F - L}{W_{ins}} \right)\]</span></p>
+      <p><label for="imgemergence-of-cooperation_11_0" class="margin-toggle">⊕</label> <input type="checkbox" id="imgemergence-of-cooperation_11_0" class="margin-toggle"> <span class="marginnote">Rate of change for the grow rate.</span> <img src="img/ergodicity-explorations_42_0.png" /></p>
+      <p>Looking at the problem from the time-averaging perspective, we can conclude that both insurer and merchant should enter the contract.</p>
+    </article>
+  </body>
+  <script src="./js/main.js"></script>
+</html>

@@ -1,0 +1,2393 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Troubled Markets and Volatility</title>
+
+    <meta property="og:title" content="Troubled Markets and Volatility">
+
+    <meta property="og:image" content="https://lambdaclass.com/finance_playground/troubled_markets/cover_image.png">
+    <meta property="og:url" content="https://lambdaclass.com/finance_playground/troubled_markets/">
+
+    <meta name="twitter:title" content="Troubled Markets and Volatility">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image:src" content="https://lambdaclass.com/data_etudes/dont_bet_on_an_ev/img/dontbetonanev.png">
+
+    <meta name="description" content=" An exploration on Argentina's ADRs recent performance (2019)">
+    <meta name="twitter:creator" content="@unbalancedparen">
+
+    <link rel="stylesheet" type="text/css" href="./css/main.css">
+    <link rel="stylesheet" type="text/css" href="https://edwardtufte.github.io/tufte-css/tufte.css">
+
+  <script type="text/javascript" async
+            src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-155234935-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-155234935-1');
+    </script>
+    <link rel="stylesheet" type="text/css" href="./css/main.css" />
+  <style>
+    /*FOR MOCKUP*/
+    body {
+      height: 150vh;
+    }
+
+    @media screen and (min-width: 786px) {
+      p {
+        width: 55%;
+      }
+
+      .chart-container {
+        width: 55%;
+      }
+    }
+
+    /*END MOCKUP*/
+  </style>
+  <script src="./css/supernav.js"></script>
+  </head>
+  <body>
+  <nav id="main-nav">
+    <ul class="nav-links">
+      <li>
+        <a href="https://lambdaclass.com/finance_playground/">
+          <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+            x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+            <g>
+              <g>
+                <path d="M501.333,245.333H36.417l141.792-141.792c4.167-4.167,4.167-10.917,0-15.083c-4.167-4.167-10.917-4.167-15.083,0l-160,160
+        c-4.167,4.167-4.167,10.917,0,15.083l160,160c2.083,2.083,4.813,3.125,7.542,3.125c2.729,0,5.458-1.042,7.542-3.125
+        c4.167-4.167,4.167-10.917,0-15.083L36.417,266.667h464.917c5.896,0,10.667-4.771,10.667-10.667S507.229,245.333,501.333,245.333z
+        " />
+              </g>
+            </g>
+          </svg>
+          <span class="text">back</span>
+        </a>
+      </li>
+      <li>
+        <span class="powered">powered by:</span>
+        <a href="https://lambdaclass.com" target="_blank"><span class="text">Lambdaclass</span></a>
+      </li>
+    </ul>
+    <div class="nav-info">
+      reading: Troubled Markets and Volatility
+    </div>
+  </nav>
+
+    <article>
+      <h1 id="troubled-markets-and-volatility">Troubled markets and volatility</h1>
+      <h3 id="challenging-financial-models-through-an-exploration-on-the-crash-of-argentinas-adrs"><em>Challenging financial models through an exploration on the crash of Argentina’s ADRs</em></h3>
+      <p></br></p>
+      <p><a href="https://www.investopedia.com/terms/a/adr.asp">American Depositary Receipts</a> (ADRs) are financial instruments that allow US investors to purchase stocks in foreign companies. Argentina has a number of companies listed in US exchanges through ADRs.</p>
+      <p>In this notebook, we will explore the performance of these ADRs with a focus on the period from January to August 2019, where political uncertainty sent markets into turmoil: the country’s Merval stock index fell 48% in dollar terms in a single day, the second-largest one-day drop in any of the 94 markets tracked by Bloomberg since 1950<sup><a href="https://www.ft.com/content/29764546-c821-11e9-a1f4-3669401ba76f">1</a></sup>, causing a 20% devaluation of the Argentine peso and a sharp drop in bond prices.</p>
+      <p>We will be looking at the end-of-day data of the Argentine ADRs, and their corresponding put and call options, to examine whether the daily log returns of stocks are distributed normally, a conclusion that follows from the standard model due to <a href="en.wikipedia.org/wiki/Louis_Bachelier">Bachelier</a>.</p>
+      <p></br></p>
+      <h2 id="exploration">Exploration</h2>
+      <p>We begin our exploration of the end-of-day (EOD) data for Argentina’s ADRs.</p>
+      </br>
+      <style type="text/css">
+      .tg  {border-collapse:collapse;border-spacing:0;border-color:#93a1a1;}
+      .tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#93a1a1;color:#002b36;background-color:#fdf6e3;}
+      .tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#93a1a1;color:#fdf6e3;background-color:#657b83;}
+      .tg .tg-ttiq{background-color:#002b36;color:#fffff8;border-color:#fffff8;text-align:center;vertical-align:top}
+      .tg .tg-664r{background-color:#fffff8;border-color:inherit;text-align:center;vertical-align:top}
+      .tg .tg-lkkz{background-color:#fffff8;border-color:#000000;text-align:center;vertical-align:top}
+      .tg .tg-zlpi{background-color:#fffff8;border-color:#002b36;text-align:center;vertical-align:top}
+      </style>
+      <table class="tg" style="undefined;table-layout: fixed; width: 896px">
+      <colgroup>
+      <col style="width: 83px">
+      <col style="width: 58px">
+      <col style="width: 47px">
+      <col style="width: 46px">
+      <col style="width: 52px">
+      <col style="width: 46px">
+      <col style="width: 65px">
+      <col style="width: 65px">
+      <col style="width: 62px">
+      <col style="width: 76px">
+      <col style="width: 71px">
+      <col style="width: 81px">
+      <col style="width: 64px">
+      <col style="width: 80px">
+      </colgroup>
+      <tr>
+      <th class="tg-ttiq">
+      Date<br>
+      </th>
+      <th class="tg-ttiq">
+      Symbol
+      </th>
+      <th class="tg-ttiq">
+      Close<br>
+      </th>
+      <th class="tg-ttiq">
+      High<br>
+      </th>
+      <th class="tg-ttiq">
+      Low<br>
+      </th>
+      <th class="tg-ttiq">
+      Open<br>
+      </th>
+      <th class="tg-ttiq">
+      Volume<br>
+      </th>
+      <th class="tg-ttiq">
+      adjClose
+      </th>
+      <th class="tg-ttiq">
+      adjHigh
+      </th>
+      <th class="tg-ttiq">
+      adjLow
+      </th>
+      <th class="tg-ttiq">
+      adjOpen
+      </th>
+      <th class="tg-ttiq">
+      adjVolume
+      </th>
+      <th class="tg-ttiq">
+      divCash
+      </th>
+      <th class="tg-ttiq">
+      splitFactor
+      </th>
+      </tr>
+      <tr>
+      <td class="tg-ttiq">
+      2006-03-27
+      </td>
+      <td class="tg-664r">
+      BMA
+      </td>
+      <td class="tg-664r">
+      <span class="math inline">\(23.05\)</span>
+      </td>
+      <td class="tg-664r">
+      <span class="math inline">\(23.05\)</span><br>
+      </td>
+      <td class="tg-664r">
+      <span class="math inline">\(22.23\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(22.89\)</span><br>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(1065200\)</span><br>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(15.52\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(15.52\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(14.08\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(15.42\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(1065200\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(0\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(1\)</span>
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-ttiq">
+      2006-03-28
+      </td>
+      <td class="tg-lkkz">
+      BMA
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(22.38\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(22.47\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(21.90\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(22.47\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(1556100\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(15.07\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(15.13\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(14.75\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(15.13\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(1556100\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(0\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(1\)</span>
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-ttiq">
+      2006-03-29
+      </td>
+      <td class="tg-lkkz">
+      BMA
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(22.84\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(23.14\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(22.05\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(22.10\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(641300\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(15.38\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(15.59\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(14.85\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(14.88\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(641300\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(0\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(1\)</span>
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-ttiq">
+      2006-03-30
+      </td>
+      <td class="tg-lkkz">
+      BMA
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(22.75\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(23.10\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(22.70\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(23.00\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(293600\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(15.32\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(15.56\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(15.29\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(15.49\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(293600\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(0\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(1\)</span>
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-ttiq">
+      2006-03-31
+      </td>
+      <td class="tg-lkkz">
+      BMA
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(22.93\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(22.93\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(22.35\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(22.83\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(113600\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(15.44\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(15.44\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(15.05\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(15.38\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(113600\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(0\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(1\)</span>
+      </td>
+      </tr>
+      </table>
+      <p></br></p>
+      <p>The data is indexed by date, with the <code>symbol</code> column holding the ticker name, and columns for the <code>open</code> and <code>close</code> prices (the price of the symbol at the start/end of the market day) and the <code>high</code> and <code>low</code> prices seen for the symbol at that date.<br />
+      We’ll begin plotting the <a href="http://www.crsp.com/products/documentation/crsp-calculations"><code>adjusted close</code></a> prices for each symbol (price adjusted for dividends payed and stock splits). The reset of the columns can be safely ingored for our purposes.</p>
+      <p></br> <label for="imgemergence-of-cooperation_11_0" class="margin-toggle">⊕</label> <input type="checkbox" id="imgemergence-of-cooperation_11_0" class="margin-toggle"> <span class="marginnote">Daily ajusted close prices for Argentina’s ADRs (USD). </span> <img src="img/0.6-troubled-markets-and-volatility_13_0.png" /></p>
+      <p>Let’s zoom in on the 2019 adjusted close prices.</p>
+      <p></br></p>
+      <p><label for="imgemergence-of-cooperation_11_0" class="margin-toggle">⊕</label> <input type="checkbox" id="imgemergence-of-cooperation_11_0" class="margin-toggle"> <span class="marginnote">Daily ajusted close prices for Argentina’s ADRs (USD) in 2019. </span> <img src="img/0.6-troubled-markets-and-volatility_15_0.png" /></p>
+      <p>We can see most stocks experienced a sharp decline in August 2019, after a surprise result of the presidential primaries caused a market crash. We also see that $MELI (MercadoLibre) is less vulnerable to the volatility in the Argentine market because it operates in over a dozen countries in Latin America.</p>
+      <p></br></p>
+      <style type="text/css">
+      .tg  {border-collapse:collapse;border-spacing:0;}
+      .tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+      .tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+      .tg .tg-ttiq{background-color:#002b36;color:#fffff8;border-color:#fffff8;text-align:center;vertical-align:top}
+      .tg .tg-664r{background-color:#fffff8;border-color:inherit;text-align:center;vertical-align:top}
+      .tg .tg-lkkz{background-color:#fffff8;border-color:#000000;text-align:center;vertical-align:top}
+      .tg .tg-zlpi{background-color:#fffff8;border-color:#002b36;text-align:center;vertical-align:top}
+      </style>
+      <table class="tg" style="undefined;table-layout: fixed; width: 793px">
+      <colgroup>
+      <col style="width: 125px">
+      <col style="width: 88px">
+      <col style="width: 71px">
+      <col style="width: 70px">
+      <col style="width: 79px">
+      <col style="width: 70px">
+      <col style="width: 98px">
+      <col style="width: 98px">
+      <col style="width: 94px">
+      </colgroup>
+      <tr>
+      <th class="tg-ttiq">
+      Symbol
+      </th>
+      <th class="tg-ttiq">
+      Count
+      </th>
+      <th class="tg-ttiq">
+      Mean<br>
+      </th>
+      <th class="tg-ttiq">
+      Std<br>
+      </th>
+      <th class="tg-ttiq">
+      Min
+      </th>
+      <th class="tg-ttiq">
+      25%
+      </th>
+      <th class="tg-ttiq">
+      50%
+      </th>
+      <th class="tg-ttiq">
+      75%<br>
+      </th>
+      <th class="tg-ttiq">
+      Max<br>
+      </th>
+      </tr>
+      <tr>
+      <td class="tg-ttiq">
+      BFR<br>
+      </td>
+      <td class="tg-664r">
+      <span class="math inline">\(4936\)</span>
+      </td>
+      <td class="tg-664r">
+      <span class="math inline">\(8.28\)</span>
+      </td>
+      <td class="tg-664r">
+      <span class="math inline">\(5.71\)</span>
+      </td>
+      <td class="tg-664r">
+      <span class="math inline">\(0.75\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(3.95\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(5.72\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(12.03\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(25.45\)</span>
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-ttiq">
+      BMA<br>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(3371\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(31.18\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(25.47\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(5.00\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(15.79\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(24.6\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(48.91\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(125.43\)</span>
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-ttiq">
+      CEPU<br>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(386\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(10.99\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(2.89\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(3.46\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(9.06\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(9.97\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(12.28\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(17.92\)</span>
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-ttiq">
+      CRESY
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(4936\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(9.94\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(3.95\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(2.92\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(6.75\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(9.47\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(12.01\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(21.64\)</span>
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-ttiq">
+      EDN<br>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(3099\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(15.31\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(12.47\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(1.71\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(6.33\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(12.11\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(20.25\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(62.55\)</span>
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-ttiq">
+      GGAL
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(4795\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(13.55\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(13.20\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(0.21\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(5.40\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(7.97\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(16.44\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(71.46\)</span>
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-ttiq">
+      IRCP
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(3971\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(15.63\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(14.42\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(1.29\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(4.38\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(10.02\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(21.43\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(62.22\)</span>
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-ttiq">
+      IRS<br>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(4936\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(10.07\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(5.63\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(1.90\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(6.13\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(8.54\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(13.28\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(32.17\)</span>
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-ttiq">
+      LOMA<br>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(449\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(14.07\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(5.36\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(5.40\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(10.34\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(11.74\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(21.12\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(25.02\)</span>
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-ttiq">
+      MELI<br>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(3025\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(138.09\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(126.90\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(8.02\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(59.11\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(93.59\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(153.61\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(69.01\)</span>
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-ttiq">
+      NTL<br>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(4519\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(13.15\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(8.40\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(0.39\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(6.55\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(12.76\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(18.68\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(51.70\)</span>
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-ttiq">
+      PAM
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(2479\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(21.47\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(18.06\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(2.85\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(9.89\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(14.59\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(30.80\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(71.65\)</span>
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-ttiq">
+      PZE
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(4608\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(5.87\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(2.46\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(1.52\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(4.36\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(5.37\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(6.72\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(14.55\)</span>
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-ttiq">
+      SUPV<br>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(816\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(15.18\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(7.34\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(3.16\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(8.92\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(13.91\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(17.84\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(32.37\)</span>
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-ttiq">
+      TEO
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(4936\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(12.20\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(6.37\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(0.38\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(7.64\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(12.43\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(16.01\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(35.96\)</span>
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-ttiq">
+      TGS
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(4936\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(4.00\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(4.34\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(0.29\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(1.62\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(2.46\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(3.51\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(20.52\)</span>
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-ttiq">
+      TS
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(4195\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(25.94\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(10.95\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(2.26\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(21.35\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(28.22\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(34.12\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(55.72\)</span>
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-ttiq">
+      TX<br>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(3408\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(20.25\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(6.30\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(3.27\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(16.04\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(19.85\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(24.57\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(39.30\)</span>
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-ttiq">
+      YPF
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(4936\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(21.58\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(9.67\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(3.16\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(14.03\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(21.59\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(29.67\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(47.31\)</span>
+      </td>
+      </tr>
+      </table>
+      <p></br></p>
+      <h3 id="simple-returns">Simple returns</h3>
+      <p>Next we’ll calculate the daily <em>simple returns</em>.</p>
+      <p></br></p>
+      <p><span class="math display">\[R_t \equiv \frac{S_t - S_{t-1}}{S_{t-1}}  \%\]</span></p>
+      <p></br></p>
+      <style type="text/css">
+      .tg  {border-collapse:collapse;border-spacing:0;border-color:#93a1a1;}
+      .tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#93a1a1;color:#002b36;background-color:#fdf6e3;}
+      .tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#93a1a1;color:#fdf6e3;background-color:#657b83;}
+      .tg .tg-8a3j{background-color:#fffff8;color:#002b36;border-color:#002b36;text-align:center;vertical-align:top}
+      .tg .tg-ttiq{background-color:#002b36;color:#fffff8;border-color:#fffff8;text-align:center;vertical-align:top}
+      .tg .tg-fq4g{background-color:#002b36;color:#fffff8;border-color:#fffff8;text-align:center;vertical-align:top}
+      .tg .tg-664r{background-color:#fffff8;border-color:inherit;text-align:center;vertical-align:top}
+      .tg .tg-lkkz{background-color:#fffff8;border-color:#000000;text-align:center;vertical-align:top}
+      .tg .tg-zlpi{background-color:#fffff8;border-color:#002b36;text-align:center;vertical-align:top}
+      </style>
+      <table class="tg" style="undefined;table-layout: fixed; width: 966px">
+      <colgroup>
+      <col style="width: 83px">
+      <col style="width: 58px">
+      <col style="width: 47px">
+      <col style="width: 46px">
+      <col style="width: 51px">
+      <col style="width: 46px">
+      <col style="width: 65px">
+      <col style="width: 65px">
+      <col style="width: 62px">
+      <col style="width: 74px">
+      <col style="width: 70px">
+      <col style="width: 80px">
+      <col style="width: 64px">
+      <col style="width: 80px">
+      <col style="width: 75px">
+      </colgroup>
+      <tr>
+      <th class="tg-ttiq">
+      Date<br>
+      </th>
+      <th class="tg-ttiq">
+      Symbol
+      </th>
+      <th class="tg-ttiq">
+      Close<br>
+      </th>
+      <th class="tg-ttiq">
+      High<br>
+      </th>
+      <th class="tg-ttiq">
+      Low<br>
+      </th>
+      <th class="tg-ttiq">
+      Open<br>
+      </th>
+      <th class="tg-ttiq">
+      Volume<br>
+      </th>
+      <th class="tg-ttiq">
+      adjClose
+      </th>
+      <th class="tg-ttiq">
+      adjHigh
+      </th>
+      <th class="tg-ttiq">
+      adjLow
+      </th>
+      <th class="tg-ttiq">
+      adjOpen
+      </th>
+      <th class="tg-ttiq">
+      adjVolume
+      </th>
+      <th class="tg-ttiq">
+      divCash
+      </th>
+      <th class="tg-ttiq">
+      splitFactor
+      </th>
+      <th class="tg-fq4g">
+      Return
+      </th>
+      </tr>
+      <tr>
+      <td class="tg-ttiq">
+      2006-03-27
+      </td>
+      <td class="tg-664r">
+      BMA
+      </td>
+      <td class="tg-664r">
+      <span class="math inline">\(23.05\)</span>
+      </td>
+      <td class="tg-664r">
+      <span class="math inline">\(23.05\)</span><br>
+      </td>
+      <td class="tg-664r">
+      <span class="math inline">\(22.23\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(22.89\)</span><br>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(1065200\)</span><br>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(15.52\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(15.52\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(14.08\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(15.42\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(1065200\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(0\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(1\)</span>
+      </td>
+      <td class="tg-8a3j">
+      NaN<br>
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-ttiq">
+      2006-03-28
+      </td>
+      <td class="tg-lkkz">
+      BMA
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(22.38\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(22.47\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(21.90\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(22.47\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(1556100\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(15.07\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(15.13\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(14.75\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(15.13\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(1556100\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(0\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(1\)</span>
+      </td>
+      <td class="tg-8a3j">
+      <span class="math inline">\(-2.91\)</span>
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-ttiq">
+      2006-03-29
+      </td>
+      <td class="tg-lkkz">
+      BMA
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(22.84\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(23.14\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(22.05\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(22.10\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(641300\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(15.38\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(15.59\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(14.85\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(14.88\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(641300\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(0\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(1\)</span>
+      </td>
+      <td class="tg-8a3j">
+      <span class="math inline">\(2.06\)</span>
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-ttiq">
+      2006-03-30
+      </td>
+      <td class="tg-lkkz">
+      BMA
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(22.75\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(23.10\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(22.70\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(23.00\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(293600\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(15.32\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(15.56\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(15.29\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(15.49\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(293600\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(0\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(1\)</span>
+      </td>
+      <td class="tg-8a3j">
+      <span class="math inline">\(-0.39\)</span>
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-ttiq">
+      2006-03-31
+      </td>
+      <td class="tg-lkkz">
+      BMA
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(22.93\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(22.93\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(22.35\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(22.83\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(113600\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(15.44\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(15.44\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(15.05\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(15.38\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(113600\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(0\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(1\)</span>
+      </td>
+      <td class="tg-8a3j">
+      <span class="math inline">\(0.79\)</span>
+      </td>
+      </tr>
+      </table>
+      </br>
+      <style type="text/css">
+      .tg  {border-collapse:collapse;border-spacing:0;}
+      .tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+      .tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+      .tg .tg-ttiq{background-color:#002b36;color:#fffff8;border-color:#fffff8;text-align:center;vertical-align:top}
+      .tg .tg-664r{background-color:#fffff8;border-color:inherit;text-align:center;vertical-align:top}
+      .tg .tg-lkkz{background-color:#fffff8;border-color:#000000;text-align:center;vertical-align:top}
+      .tg .tg-zlpi{background-color:#fffff8;border-color:#002b36;text-align:center;vertical-align:top}
+      </style>
+      <table class="tg" style="undefined;table-layout: fixed; width: 804px">
+      <colgroup>
+      <col style="width: 126.166667px">
+      <col style="width: 89.166667px">
+      <col style="width: 72.166667px">
+      <col style="width: 71.166667px">
+      <col style="width: 80.166667px">
+      <col style="width: 71.166667px">
+      <col style="width: 99.166667px">
+      <col style="width: 99.166667px">
+      <col style="width: 95.166667px">
+      </colgroup>
+      <tr>
+      <th class="tg-ttiq">
+      Symbol
+      </th>
+      <th class="tg-ttiq">
+      Count
+      </th>
+      <th class="tg-ttiq">
+      Mean<br>
+      </th>
+      <th class="tg-ttiq">
+      Std<br>
+      </th>
+      <th class="tg-ttiq">
+      Min
+      </th>
+      <th class="tg-ttiq">
+      25%
+      </th>
+      <th class="tg-ttiq">
+      50%
+      </th>
+      <th class="tg-ttiq">
+      75%<br>
+      </th>
+      <th class="tg-ttiq">
+      Max<br>
+      </th>
+      </tr>
+      <tr>
+      <td class="tg-ttiq">
+      BFR<br>
+      </td>
+      <td class="tg-664r">
+      <span class="math inline">\(4936\)</span>
+      </td>
+      <td class="tg-664r">
+      <span class="math inline">\(0.053\)</span>
+      </td>
+      <td class="tg-664r">
+      <span class="math inline">\(3.67\)</span>
+      </td>
+      <td class="tg-664r">
+      <span class="math inline">\(-55.85\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(-1.73\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(0\)</span><br>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(1.69\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(46.76\)</span>
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-ttiq">
+      BMA<br>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(3371\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(0.08\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(3.28\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(-52.67\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(-1.49\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(0\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(1.65\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(27.01\)</span>
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-ttiq">
+      CEPU<br>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(386\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(-0.26\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(4.31\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(-55.92\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(-1.91\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(-0.32\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(1.58\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(16.88\)</span>
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-ttiq">
+      CRESY
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(4936\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(0.038\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(2.77\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(-38.09\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(-1.25\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(0\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(1.184\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(27.19\)</span>
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-ttiq">
+      EDN<br>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(3099\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(0.051\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(3.88\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(-58.98\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(-1.69\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(-0.031\)</span>
+      </td>
+      <td class="tg-lkkz">
+      <span class="math inline">\(1.63\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(27.55\)</span>
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-ttiq">
+      GGAL
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(4795\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(0.095\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(4.63\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(-56.12\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(-1.63\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(0\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(1.69\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(153.6\)</span>
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-ttiq">
+      IRCP
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(3971\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(0.14\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(4.23\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(-32.42\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(-0.68\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(0\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(0.85\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(36.99\)</span>
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-ttiq">
+      IRS<br>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(4936\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(0.016\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(2.68\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(-38.29\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(-1.25\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(0\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(1.21\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(18.08\)</span>
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-ttiq">
+      LOMA<br>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(449\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(-0.166\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(4.53\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(-57.30\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(-1.88\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(-0.087\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(1.51\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(22.65\)</span>
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-ttiq">
+      MELI<br>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(3025\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(0.16\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(3.57\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(-21.20\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(-1.40\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(0.084\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(1.59\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(36.00\)</span>
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-ttiq">
+      NTL<br>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(4519\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(0.082\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(3.34\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(-46.19\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(-1.32\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(0\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(1.37\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(30.00\)</span>
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-ttiq">
+      PAM
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(2479\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(0.06\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(2.96\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(-53.82\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(-1.42\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(0\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(1.41\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(16.94\)</span>
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-ttiq">
+      PZE
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(4608\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(0.066\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(3.91\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(-19.22\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(-1.46\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(0\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(1.42\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(179.84\)</span>
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-ttiq">
+      SUPV<br>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(816\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(-0.025\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(4.18\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(-58.75\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(-1.41\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(0\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(1.49\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(28.33\)</span>
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-ttiq">
+      TEO
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(4936\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(0.035\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(3.08\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(-33.38\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(-1.42\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(0\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(1.45\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(23.07\)</span>
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-ttiq">
+      TGS
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(4936\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(0.078\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(3.39\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(-48.03\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(-1.49\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(0\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(1.62\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(25.20\)</span>
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-ttiq">
+      TS
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(4195\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(0.085\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(2.53\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(-21.31\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(-1.18\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(0.11\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(1.35\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(21.57\)</span>
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-ttiq">
+      TX<br>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(3408\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(0.047\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(3.02\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(-19.68\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(-1.35\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(0.037\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(1.41\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(49.09\)</span>
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-ttiq">
+      YPF
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(4936\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(0.033\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(2.56\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(-34.05\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(-1.12\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(0\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(1.12\)</span>
+      </td>
+      <td class="tg-zlpi">
+      <span class="math inline">\(37.25\)</span>
+      </td>
+      </tr>
+      </table>
+      <p></br></p>
+      <p>Let’s plot a histogram of the daily returns for each symbol.</p>
+      <p></br> <label for="imgemergence-of-cooperation_11_0" class="margin-toggle">⊕</label> <input type="checkbox" id="imgemergence-of-cooperation_11_0" class="margin-toggle"> <span class="marginnote">Histogram of daily returns. </span> <img src="img/0.6-troubled-markets-and-volatility_23_0.png" /></p>
+      <p>We see most returns cluster around 0, with a few outliers. Since we are interested particularly in the outliers, to see their quantity and magnitude, we can visualize them using a <a href="https://vita.had.co.nz/papers/letter-value-plot.html">boxenplot</a>.</p>
+      <p></br> <label for="imgemergence-of-cooperation_11_0" class="margin-toggle">⊕</label> <input type="checkbox" id="imgemergence-of-cooperation_11_0" class="margin-toggle"> <span class="marginnote">Daily returns per symbol. </span> <img src="img/0.6-troubled-markets-and-volatility_26_0.png" /></p>
+      <p>We can filter the days with 30% or larger movement in prices (either up or down).</p>
+      <p></br> <label for="imgemergence-of-cooperation_11_0" class="margin-toggle">⊕</label> <input type="checkbox" id="imgemergence-of-cooperation_11_0" class="margin-toggle"> <span class="marginnote">Large daily returns(+/-30%). </span> <img src="img/0.6-troubled-markets-and-volatility_28_0.png" /></p>
+      <p>Now if we remove outliers, say discard days where return was higher than 10% or lower than -10%:</p>
+      <p></br> <label for="imgemergence-of-cooperation_11_0" class="margin-toggle">⊕</label> <input type="checkbox" id="imgemergence-of-cooperation_11_0" class="margin-toggle"> <span class="marginnote">Histogram of daily returns (between -10% / +10%). </span> <img src="img/0.6-troubled-markets-and-volatility_30_0.png" /></p>
+      <p></br></p>
+      <h3 id="log-returns">Log returns</h3>
+      <p>In finance, it is common to look at the <em>log returns</em> of an asset. They are defined as follows:</p>
+      <p></br></p>
+      <p><span class="math display">\[r_t \equiv \ln{\frac{S_t}{S_{t-1}}} = \ln{S_t} - \ln{S_{t-1}}\]</span></p>
+      <p></br></p>
+      <p>There is an equivalence between simple and log returns:</p>
+      <p></br></p>
+      <p><span class="math display">\[\begin{align}
+      r_t &amp;= \ln{(R_t + 1)} \
+      R_t &amp;= \exp{r_t} - 1
+      \end{align}\]</span></p>
+      <p></br></p>
+      <p>You can find further information on the two return types in this <a href="https://www.portfolioprobe.com/2010/10/04/a-tale-of-two-returns/">post</a>.</p>
+      <p>Stock prices are assumed to follow a <a href="https://en.wikipedia.org/wiki/Log-normal_distribution">log-normal</a> distribution, hence we should expect log returns to be distributed <a href="https://en.wikipedia.org/wiki/Normal_distribution">normally</a>.</p>
+      <p></br></p>
+      <p><span class="math display">\[ln(S_T)\sim N\big[ln(S_0)+(\mu-\frac{\sigma^2}{2})T,\;\sigma^2T\big] \
+      ln(\frac{S_T}{S_0})\sim N\big[(\mu-\frac{\sigma^2}{2})T, \;\sigma^2T\big]\]</span></p>
+      <p></br></p>
+      <p>Where <span class="math inline">\(S_T\)</span> is the price of the underlying at time <span class="math inline">\(T\)</span>.<br />
+      For a more detailed discussion on the assumptions of the <a href="https://en.wikipedia.org/wiki/Black–Scholes_model">Black-Scholes-Merton</a> model, see chapter 15 of <em>Options, Futures and Other Derivatives</em> (9th Ed) by John Hull.<br />
+      You can read more on the distribution of prices and returns <a href="https://www.investopedia.com/articles/investing/102014/lognormal-and-normal-distribution.asp">here</a>.</p>
+      <p>Now we can calculate the <a href="https://en.wikipedia.org/wiki/Volatility_(finance)">volatility</a> <span class="math inline">\(\sigma\)</span> for each symbol, defined as the <a href="https://en.wikipedia.org/wiki/Standard_deviation">standard deviation</a> of log returns.<br />
+      As a comparison, we’ll add the daily volatility (from 2000 to 2019) for four of the so called <a href="https://www.investopedia.com/terms/b/bluechipstock.asp">blue chip stocks</a>, Coca-Cola ($KO), Goldman Sachs ($GS), IBM ($IBM) and Walmart ($WMT).</p>
+      <p></br> <label for="imgemergence-of-cooperation_11_0" class="margin-toggle">⊕</label> <input type="checkbox" id="imgemergence-of-cooperation_11_0" class="margin-toggle"> <span class="marginnote">Daily volatility for each symbol (std of log returns). </span> <img src="img/0.6-troubled-markets-and-volatility_37_0.png" /></p>
+      <p>We can see that Argentine stocks show much higher volatility than the blue chip stocks.</p>
+      <p>Let’s plot the mean yearly returns for each symbol. Again, we’ll add the mean daily return of the US blue chips.</p>
+      <p></br> <label for="imgemergence-of-cooperation_11_0" class="margin-toggle">⊕</label> <input type="checkbox" id="imgemergence-of-cooperation_11_0" class="margin-toggle"> <span class="marginnote">Mean yearly returns of Argentina’s ADRs. </span> <img src="img/0.6-troubled-markets-and-volatility_41_0.png" /></p>
+      <p>As expected, besides increased volatility, Argentine stocks, for the most part, exhibit higher yearly returns than the chosen US stocks.</p>
+      <p></br></p>
+      <h3 id="a-closer-look-at-outliers">A closer look at outliers</h3>
+      <p>Let’s plot the returns that are at least <span class="math inline">\(3\sigma\)</span> away from the mean. If log returns were truly distributed normally, then we should expect this group to represent only <span class="math inline">\(0.3\%\)</span> of the data, while the remaining <span class="math inline">\(99.7\%\)</span> should lie in the interval <span class="math inline">\((\mu_r - 3\sigma_r, \mu_r + 3\sigma_r)\)</span>.</p>
+      <p></br> <label for="imgemergence-of-cooperation_11_0" class="margin-toggle">⊕</label> <input type="checkbox" id="imgemergence-of-cooperation_11_0" class="margin-toggle"> <span class="marginnote">3<span class="math inline">\(\sigma\)</span> outlier daily returns. </span> <img src="img/0.6-troubled-markets-and-volatility_46_0.png" /></p>
+      <p>We see a large number of outlier return days. To put that in perspective, let’s calculate the proportion of outlier returns for each symbol in the data, that is the number of days where <span class="math inline">\(3\sigma\)</span> returns where observed over the total number of observations.</p>
+      <p></br> <label for="imgemergence-of-cooperation_11_0" class="margin-toggle">⊕</label> <input type="checkbox" id="imgemergence-of-cooperation_11_0" class="margin-toggle"> <span class="marginnote">Outlier proportion (outlier daily return count / total daily returns). </span> <img src="img/0.6-troubled-markets-and-volatility_48_0.png" /></p>
+      <p>We see many more outliers than the expected <span class="math inline">\(0.3\%\)</span>. For example, $MELI has almost 7 times more outlier return days than expected if we assumed normal log returns.</p>
+      <p>Finally, we’ll look at the cumulative log returns over time.</p>
+      <p></br> <label for="imgemergence-of-cooperation_11_0" class="margin-toggle">⊕</label> <input type="checkbox" id="imgemergence-of-cooperation_11_0" class="margin-toggle"> <span class="marginnote">Cumulative log returns. </span> <img src="img/0.6-troubled-markets-and-volatility_51_0.png" /></p>
+      <p>If you had invested in $MELI’s IPO in 2007, you’ve had have over 25 times your initial investment by August 2019. You would also have to stomach losing close to 60% at the end of 2008.</p>
+      <p></br></p>
+      <h3 id="adr-options-and-the-volatility-smile">ADR options and the volatility smile</h3>
+      <p>We’ve observed ADRs experienced a very high volatility, and this leads us to question wether the prices of financial derivatives such as options were affected.</p>
+      <p>We will explore how volatility in the prices of the underlying assests impacted option prices during the crash.</p>
+      <p>To this end, we will examine the options end-of-day data for the ADRs. <a href="https://www.investopedia.com/terms/o/option.asp">Options</a> are derivative contracts based on an underlying asset such as stocks. They offer the buyer the opportunity to buy or sell the underlying asset at a given price (or <em>strike price</em>). You can find more information on options in <a href="../intro-finance.index.html">this article</a>.</p>
+      </br>
+      <style type="text/css">
+      .tg  {border-collapse:collapse;border-spacing:0;border-color:#93a1a1;}
+      .tg td{font-family:Arial, sans-serif;font-size:12px;padding:8px 4px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#93a1a1;color:#002b36;background-color:#fdf6e3;}
+      .tg th{font-family:Arial, sans-serif;font-size:12px;font-weight:normal;padding:8px 4px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#93a1a1;color:#fdf6e3;background-color:#657b83;}
+      .tg .tg-ttiq{background-color:#002b36;color:#fffff8;border-color:#fffff8;text-align:center;vertical-align:top}
+      .tg .tg-6uqc{background-color:#002b36;color:#fffff8;border-color:inherit;text-align:center;vertical-align:top}
+      .tg .tg-664r{background-color:#fffff8;border-color:inherit;text-align:center;vertical-align:top}
+      .tg .tg-lkkz{background-color:#fffff8;border-color:#000000;text-align:center;vertical-align:top}
+      .tg .tg-zlpi{background-color:#fffff8;border-color:#002b36;text-align:center;vertical-align:top}
+      </style>
+      <table class="tg" style="undefined;table-layout: fixed; width: 1185px">
+      <colgroup>
+      <col style="width: 80px">
+      <col style="width: 65px">
+      <col style="width: 80px">
+      <col style="width: 54px">
+      <col style="width: 120px">
+      <col style="width: 35px">
+      <col style="width: 80px">
+      <col style="width: 46px">
+      <col style="width: 35px">
+      <col style="width: 30px">
+      <col style="width: 30px">
+      <col style="width: 41px">
+      <col style="width: 44px">
+      <col style="width: 64px">
+      <col style="width: 60px">
+      <col style="width: 52px">
+      <col style="width: 61px">
+      </colgroup>
+      <tr>
+      <th class="tg-ttiq">
+      quotedate
+      </th>
+      <th class="tg-ttiq">
+      underlying
+      </th>
+      <th class="tg-ttiq">
+      underlying_last
+      </th>
+      <th class="tg-ttiq">
+      exchange
+      </th>
+      <th class="tg-ttiq">
+      optionroot
+      </th>
+      <th class="tg-ttiq">
+      type
+      </th>
+      <th class="tg-ttiq">
+      expiration
+      </th>
+      <th class="tg-ttiq">
+      strike
+      </th>
+      <th class="tg-ttiq">
+      last
+      </th>
+      <th class="tg-ttiq">
+      net
+      </th>
+      <th class="tg-ttiq">
+      bid
+      </th>
+      <th class="tg-ttiq">
+      ask
+      </th>
+      <th class="tg-ttiq">
+      volume
+      </th>
+      <th class="tg-ttiq">
+      openinterest
+      </th>
+      <th class="tg-6uqc">
+      impliedvol
+      </th>
+      <th class="tg-6uqc">
+      delta
+      </th>
+      <th class="tg-6uqc">
+      gamma
+      </th>
+      </tr>
+      <tr>
+      <td class="tg-ttiq">
+      2019-07-03
+      </td>
+      <td class="tg-664r">
+      TEO
+      </td>
+      <td class="tg-664r">
+      17.79
+      </td>
+      <td class="tg-664r">
+      CBOE
+      </td>
+      <td class="tg-664r">
+      TEO190719C00002500
+      </td>
+      <td class="tg-lkkz">
+      call
+      </td>
+      <td class="tg-lkkz">
+      2019-07-19
+      </td>
+      <td class="tg-lkkz">
+      2.5
+      </td>
+      <td class="tg-lkkz">
+      0
+      </td>
+      <td class="tg-lkkz">
+      0
+      </td>
+      <td class="tg-zlpi">
+      13.0
+      </td>
+      <td class="tg-zlpi">
+      17.8
+      </td>
+      <td class="tg-zlpi">
+      0
+      </td>
+      <td class="tg-zlpi">
+      0
+      </td>
+      <td class="tg-664r">
+      0.02
+      </td>
+      <td class="tg-664r">
+      1.28
+      </td>
+      <td class="tg-664r">
+      0.0000
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-ttiq">
+      2019-07-03
+      </td>
+      <td class="tg-lkkz">
+      TEO
+      </td>
+      <td class="tg-lkkz">
+      17.79
+      </td>
+      <td class="tg-lkkz">
+      CBOE
+      </td>
+      <td class="tg-lkkz">
+      TEO190719C00005000
+      </td>
+      <td class="tg-lkkz">
+      call
+      </td>
+      <td class="tg-lkkz">
+      2019-07-19
+      </td>
+      <td class="tg-lkkz">
+      5.0
+      </td>
+      <td class="tg-lkkz">
+      0
+      </td>
+      <td class="tg-lkkz">
+      0
+      </td>
+      <td class="tg-zlpi">
+      10.5
+      </td>
+      <td class="tg-zlpi">
+      15.2
+      </td>
+      <td class="tg-zlpi">
+      0
+      </td>
+      <td class="tg-zlpi">
+      0
+      </td>
+      <td class="tg-664r">
+      6.32
+      </td>
+      <td class="tg-664r">
+      0.94
+      </td>
+      <td class="tg-664r">
+      0.0045
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-ttiq">
+      2019-07-03
+      </td>
+      <td class="tg-lkkz">
+      TEO
+      </td>
+      <td class="tg-lkkz">
+      17.79
+      </td>
+      <td class="tg-lkkz">
+      CBOE
+      </td>
+      <td class="tg-lkkz">
+      TEO190719C00007500
+      </td>
+      <td class="tg-lkkz">
+      call
+      </td>
+      <td class="tg-lkkz">
+      2019-07-19
+      </td>
+      <td class="tg-lkkz">
+      7.5
+      </td>
+      <td class="tg-lkkz">
+      0
+      </td>
+      <td class="tg-lkkz">
+      0
+      </td>
+      <td class="tg-zlpi">
+      8.0
+      </td>
+      <td class="tg-zlpi">
+      12.8
+      </td>
+      <td class="tg-zlpi">
+      0
+      </td>
+      <td class="tg-zlpi">
+      0
+      </td>
+      <td class="tg-664r">
+      3.57
+      </td>
+      <td class="tg-664r">
+      0.93
+      </td>
+      <td class="tg-664r">
+      0.0093
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-ttiq">
+      2019-07-03
+      </td>
+      <td class="tg-lkkz">
+      TEO
+      </td>
+      <td class="tg-lkkz">
+      17.79
+      </td>
+      <td class="tg-lkkz">
+      CBOE
+      </td>
+      <td class="tg-lkkz">
+      TEO190719C00010000
+      </td>
+      <td class="tg-lkkz">
+      call
+      </td>
+      <td class="tg-lkkz">
+      2019-07-19
+      </td>
+      <td class="tg-lkkz">
+      10
+      </td>
+      <td class="tg-lkkz">
+      0
+      </td>
+      <td class="tg-lkkz">
+      0
+      </td>
+      <td class="tg-zlpi">
+      5.5
+      </td>
+      <td class="tg-zlpi">
+      10.2
+      </td>
+      <td class="tg-zlpi">
+      0
+      </td>
+      <td class="tg-zlpi">
+      1
+      </td>
+      <td class="tg-664r">
+      2.04
+      </td>
+      <td class="tg-664r">
+      0.94
+      </td>
+      <td class="tg-664r">
+      0.0156
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-ttiq">
+      2019-07-03
+      </td>
+      <td class="tg-lkkz">
+      TEO
+      </td>
+      <td class="tg-lkkz">
+      17.79
+      </td>
+      <td class="tg-lkkz">
+      CBOE
+      </td>
+      <td class="tg-lkkz">
+      TEO190719C00012500
+      </td>
+      <td class="tg-lkkz">
+      call
+      </td>
+      <td class="tg-lkkz">
+      2019-07-19
+      </td>
+      <td class="tg-lkkz">
+      12.5
+      </td>
+      <td class="tg-lkkz">
+      0
+      </td>
+      <td class="tg-lkkz">
+      0
+      </td>
+      <td class="tg-zlpi">
+      3.0
+      </td>
+      <td class="tg-zlpi">
+      7.8
+      </td>
+      <td class="tg-zlpi">
+      0
+      </td>
+      <td class="tg-zlpi">
+      199
+      </td>
+      <td class="tg-664r">
+      1.28
+      </td>
+      <td class="tg-664r">
+      0.92
+      </td>
+      <td class="tg-664r">
+      0.0297
+      </td>
+      </tr>
+      </table>
+      <p></br></p>
+      <p>The options data is also indexed by date. These are the most important columns:</p>
+      <ul>
+      <li><p><code>underlying</code>: The ticker of the underlying asset.</p></li>
+      <li><p><code>underlying_last</code>: The last quoted price of the underlying asset.</p></li>
+      <li><p><code>optionroot</code>: The name of the contract.</p></li>
+      <li><p><code>type</code>: Contract type (<em>put</em> or <em>call</em>)</p></li>
+      <li><p><code>strike</code>: The price at which owner can execute (buy/sell underlying).</p></li>
+      <li><p><code>expiration</code>: Date of expiration of the option.</p></li>
+      <li><p><code>bid</code>: The price at which investor can <em>sell</em> this contract.</p></li>
+      <li><p><code>ask</code>: The price at which investor can <em>buy</em> this contract.</p></li>
+      <li><p><code>openinterest</code>: The total number of contract outstanding.</p></li>
+      <li><p><code>impliedvol</code>: Volatility of the underlying as implied by the option price (according to BSM model)</p></li>
+      </ul>
+      <p>Let’s plot the <a href="https://www.investopedia.com/terms/v/volatilitysmile.asp">volatility smile</a> for each symbol at 2019-08-09, the Friday before the primaries.<br />
+      The volatility smile plots the <a href="https://www.investopedia.com/terms/i/iv.asp">implied volatility</a> (IV, a measure of the volatility of an underlying security as <em>implied</em> by the option prices) at the different strike levels.<br />
+      We’ll plot the IV for puts and calls for each symbol. The dashed line represents the spot price.</p>
+      <p></br> <label for="imgemergence-of-cooperation_11_0" class="margin-toggle">⊕</label> <input type="checkbox" id="imgemergence-of-cooperation_11_0" class="margin-toggle"> <span class="marginnote">Volatility smiles - August 9th 2019. </span> <img src="img/0.6-troubled-markets-and-volatility_58_0.png" /></p>
+      <p>We see that as options move more <a href="https://www.investopedia.com/terms/a/atthemoney.asp">at the money</a> (ATM) their implied volatility drops. In contrast, options that are further <a href="https://www.investopedia.com/terms/o/outofthemoney.asp">out of the money</a> (OTM) or in the money (ITM) have higher IVs.</p>
+      <p>Now let’s try the same plot for the following Monday (2019-08-12). That day, the <a href="https://en.wikipedia.org/wiki/MERVAL">MERVAL</a> (an index that tracks the biggest companies listed in the Buenos Aires Stock Exchange) crashed and lost close to 50% of its USD value.</p>
+      <p></br></p>
+      <p><label for="imgemergence-of-cooperation_11_0" class="margin-toggle">⊕</label> <input type="checkbox" id="imgemergence-of-cooperation_11_0" class="margin-toggle"> <span class="marginnote">Volatility smiles - August 12th 2019. </span> <img src="img/0.6-troubled-markets-and-volatility_61_0.png" /></p>
+      <p>As stock prices droped sharply, we find less put contracts were being offered. Again, we see IV getting higher as the strike priced moves away from the spot price.</p>
+      <p></br></p>
+      <h3 id="option-price-evolution">Option price evolution</h3>
+      <p>Next, we’ll analyze how option prices changed during the month of August, 2019. Let’s find the 10 most actively traded options (those with the highest open interest) for each symbol at the start of the month.</p>
+      <p></br></p>
+      <p><label for="imgemergence-of-cooperation_11_0" class="margin-toggle">⊕</label> <input type="checkbox" id="imgemergence-of-cooperation_11_0" class="margin-toggle"> <span class="marginnote">Ask price for most actively traded calls in August 2019. </span> <img src="img/0.6-troubled-markets-and-volatility_71_0.png" /></p>
+      <p>Note that the $BFR plot shows all calls with an <code>ask</code> price of 0.0. In June 2019, Banco Francés SA <a href="https://finance.yahoo.com/news/bbva-banco-franc-change-ticker-165400264.html">announced</a> it would change its ticker symbol from $BFR to $BBAR. We will update the plots when we get the correct data for the missing months.</p>
+      <p></br></p>
+      <p><label for="imgemergence-of-cooperation_11_0" class="margin-toggle">⊕</label> <input type="checkbox" id="imgemergence-of-cooperation_11_0" class="margin-toggle"> <span class="marginnote">Ask price for most actively traded puts in August 2019. </span> <img src="img/0.6-troubled-markets-and-volatility_73_0.png" /></p>
+      <p>This plots reveal a huge drop in prices for the calls, and, conversely, a large increase in the price of puts, between Friday 9th and Monday 12th.</p>
+      <p></br></p>
+      <p><strong>June 2019</strong></p>
+      <p>As a comparison, let’s try plotting the option prices for June 2019, a more uneventful month for the Argentine market.</p>
+      <p><label for="imgemergence-of-cooperation_11_0" class="margin-toggle">⊕</label> <input type="checkbox" id="imgemergence-of-cooperation_11_0" class="margin-toggle"> <span class="marginnote">Ask price for most actively traded calls in June 2019. </span> <img src="img/0.6-troubled-markets-and-volatility_81_0.png" /></p>
+      <p>Next we’ll have a look the the actively traded puts for June 2019.</p>
+      <p></br> <label for="imgemergence-of-cooperation_11_0" class="margin-toggle">⊕</label> <input type="checkbox" id="imgemergence-of-cooperation_11_0" class="margin-toggle"> <span class="marginnote">Ask price for most actively traded puts in June 2019. </span> <img src="img/0.6-troubled-markets-and-volatility_83_0.png" /></p>
+      <p></br></p>
+      <p><strong>October 2015</strong></p>
+      <p>Let’s have a look at the options data from October, November and December 2015.<br />
+      During those months, the Argentine elections took place, which marked the beginning of a bull market. In the following four years, the MERVAL index increased four-fold its value in Pesos.</p>
+      <p></br> <label for="imgemergence-of-cooperation_11_0" class="margin-toggle">⊕</label> <input type="checkbox" id="imgemergence-of-cooperation_11_0" class="margin-toggle"> <span class="marginnote">Ask price for most actively traded calls in October 2015. </span> <img src="img/0.6-troubled-markets-and-volatility_90_0.png" /></p>
+      <p>Now let’s plot the actively traded puts for October 2015</p>
+      <p></br> <label for="imgemergence-of-cooperation_11_0" class="margin-toggle">⊕</label> <input type="checkbox" id="imgemergence-of-cooperation_11_0" class="margin-toggle"> <span class="marginnote">Ask price for most actively traded puts in October 2015. </span> <img src="img/0.6-troubled-markets-and-volatility_92_0.png" /></p>
+      <p><strong>November 2015</strong></p>
+      <p></br> <label for="imgemergence-of-cooperation_11_0" class="margin-toggle">⊕</label> <input type="checkbox" id="imgemergence-of-cooperation_11_0" class="margin-toggle"> <span class="marginnote">Ask price for most actively traded calls in November 2015. </span> <img src="img/0.6-troubled-markets-and-volatility_98_0.png" /></p>
+      <p></br> <label for="imgemergence-of-cooperation_11_0" class="margin-toggle">⊕</label> <input type="checkbox" id="imgemergence-of-cooperation_11_0" class="margin-toggle"> <span class="marginnote">Ask price for most actively traded puts in November 2015. </span> <img src="img/0.6-troubled-markets-and-volatility_99_0.png" /></p>
+      <p></br></p>
+      <p><strong>December 2015</strong></p>
+      <p></br> <label for="imgemergence-of-cooperation_11_0" class="margin-toggle">⊕</label> <input type="checkbox" id="imgemergence-of-cooperation_11_0" class="margin-toggle"> <span class="marginnote">Ask price for most actively traded calls in December 2015. </span> <img src="img/0.6-troubled-markets-and-volatility_105_0.png" /></p>
+      <p></br> <label for="imgemergence-of-cooperation_11_0" class="margin-toggle">⊕</label> <input type="checkbox" id="imgemergence-of-cooperation_11_0" class="margin-toggle"> <span class="marginnote">Ask price for most actively traded puts in December 2015. </span> <img src="img/0.6-troubled-markets-and-volatility_106_0.png" /></p>
+      <p></br></p>
+      <p><strong>January 2008</strong></p>
+      <p>We’ll examine the Argentine ADR options data for January 2008, the beginning of the US mortgage crisis, which had global effects. We only have data for 3 companies: $MELI, $TS and $TX.</p>
+      <p></br> <label for="imgemergence-of-cooperation_11_0" class="margin-toggle">⊕</label> <input type="checkbox" id="imgemergence-of-cooperation_11_0" class="margin-toggle"> <span class="marginnote">Ask price for most actively traded calls in January 2008. </span> <img src="img/0.6-troubled-markets-and-volatility_113_0.png" /></p>
+      <p><label for="imgemergence-of-cooperation_11_0" class="margin-toggle">⊕</label> <input type="checkbox" id="imgemergence-of-cooperation_11_0" class="margin-toggle"> <span class="marginnote">Ask price for most actively traded puts in January 2008. </span> <img src="img/0.6-troubled-markets-and-volatility_114_0.png" /></p>
+      <p>As the market went bearish, calls decreased in value and puts became more expensive.</p>
+      <p></br></p>
+      <h2 id="final-notes">Final notes</h2>
+      <p>Countries such as Argentina exhibit high <a href="https://www.fa-mag.com/news/political-beta-44530.html">political beta</a>: stocks show extreme sensitivity to political events. The MERVAL index nearly quadrupled its value in Pesos since December 2015, only to drop by 40% in a single day in August 2019.<br />
+      Investors tend to exacerbate bull runs, discounting future growth in the current stock prices. At the prospect of regulatory changes and political turnover, they panic sell and seek less risky assets. There remains to be seen whether savvy traders can exploit both the overconfident bulls and the panicking bears, buying volatility from the former to sell it at a profit to the latter.</p>
+    </article>
+  </body>
+  <script src="./js/main.js"></script>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Emergence of Cooperation</title>
+
+    <meta property="og:title" content="Emergency of Cooperation">
+
+    <meta property="og:image" content="https://lambdaclass.com/finance_playground/emergency_of_cooperation/cover_image.png">
+    <meta property="og:url" content="https://lambdaclass.com/finance_playground/emergency_of_cooperation/">
+
+    <meta name="twitter:title" content="Emergence of Cooperation">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image:src" content="https://lambdaclass.com/finance_playground/emergency_of_cooperation/cover_image.png">
+
+    <meta name="description" content="This paper tackles the apparently paradoxical emergence of cooperation patterns under evolutionary dynamics.
+Why do we observe seemingly altruistic behavior in systems where organisms compete for resources and only the fittest thrive (the so called survival of the fittest)?
+Classical solutions propose a net fitness gain from colaboration. The authors seek to explain this gain through the analysis of the time average growth rate for the fitness of the collaborating organisms.">
+    <meta name="twitter:creator" content="@unbalancedparen">
+
+    <link rel="stylesheet" type="text/css" href="./css/main.css">
+    <link rel="stylesheet" type="text/css" href="https://edwardtufte.github.io/tufte-css/tufte.css">
+
+    <script type="text/javascript" async
+            src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-155234935-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-155234935-1');
+    </script>
+    <link rel="stylesheet" type="text/css" href="./css/main.css" />
+  <style>
+    /*FOR MOCKUP*/
+    body {
+      height: 150vh;
+    }
+
+    @media screen and (min-width: 786px) {
+      p {
+        width: 55%;
+      }
+
+      .chart-container {
+        width: 55%;
+      }
+    }
+
+    /*END MOCKUP*/
+  </style>
+  <script src="./css/supernav.js"></script>
+  </head>
+  <body>
+
+  <nav id="main-nav">
+    <ul class="nav-links">
+      <li>
+        <a href="https://lambdaclass.com/finance_playground/">
+          <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+            x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+            <g>
+              <g>
+                <path d="M501.333,245.333H36.417l141.792-141.792c4.167-4.167,4.167-10.917,0-15.083c-4.167-4.167-10.917-4.167-15.083,0l-160,160
+        c-4.167,4.167-4.167,10.917,0,15.083l160,160c2.083,2.083,4.813,3.125,7.542,3.125c2.729,0,5.458-1.042,7.542-3.125
+        c4.167-4.167,4.167-10.917,0-15.083L36.417,266.667h464.917c5.896,0,10.667-4.771,10.667-10.667S507.229,245.333,501.333,245.333z
+        " />
+              </g>
+            </g>
+          </svg>
+          <span class="text">back</span>
+        </a>
+      </li>
+      <li>
+        <span class="powered">powered by:</span>
+        <a href="https://lambdaclass.com" target="_blank"><span class="text">Lambdaclass</span></a>
+      </li>
+    </ul>
+    <div class="nav-info">
+      reading: Emergence of Cooperation
+    </div>
+  </nav>
+
+
+    <article>
+      <h1 id="the-emergence-of-cooperation-in-evolutionary-systems">The emergence of cooperation in evolutionary systems</h1>
+      <p><br /> Notes for Peters and Adamou (2018) <a href="https://arxiv.org/abs/1506.03414"><em>An evolutionary advantage of cooperation</em></a></p>
+      <p>This paper tackles the apparently paradoxical emergence of cooperation patterns under evolutionary dynamics.<br />
+      Why do we observe seemingly <em>altruistic</em> behavior in systems where organisms compete for resources and only the fittest thrive (the so called <em>survival of the fittest</em>)?<br />
+      Classical solutions propose a net fitness gain from collaboration. The authors seek to explain this gain through the analysis of the time-average growth rate for the fitness of the collaborating organisms.</p>
+      <p>Consider a species in their transition from single cell to multicellular organisms. This change occurs when cells agglomerate and begin sharing nutrients through common membranes, increasing their biomass. Entities with more biomass come to dominate the environment and generate more of themselves.</p>
+      <p>The paper proposes the following dynamics for the system: - entities gain biomass according to an <a href="https://en.wikipedia.org/wiki/Itô_diffusion">Itô diffusion</a> process, where the change in biomass for entity <span class="math inline">\(x_i\)</span> is:</p>
+      <p><span class="math display">\[d x_i = x_i(\mu dt + \sigma d \mathit{W_i})\]</span></p>
+      <p>where <span class="math inline">\(\mu\)</span> is the drift, <span class="math inline">\(\sigma\)</span> the volatility and <span class="math inline">\(\mathit{W_i}\)</span> is a <a href="https://en.wikipedia.org/wiki/Wiener_process">Wiener process</a>. - the growth rate over time <span class="math inline">\(T\)</span> is defined as</p>
+      <p><span class="math display">\[g(x_i, T) \equiv \frac{1}{T} \ln{\Big( \frac{x_i(T)}{x_i(0)} \Big)}\]</span></p>
+      <h2 id="cooperation-protocol">Cooperation protocol</h2>
+      <p><br /> The baseline model consists of <span class="math inline">\(N\)</span> non-cooperating entities <span class="math inline">\(x_i\)</span>. This system is compared to one where a mutation is introduced that hardwires cooperation into the entities. The <em>cooperators</em>, hence referred to as <span class="math inline">\(y_i\)</span>, pool resources and then share them equally.</p>
+      <p>The growth phase is the same for all entities in both systems (cooperators and non-cooperators)</p>
+      <p><span class="math display">\[ \Delta x_i(t) = x_i(t)(\mu \Delta t + \sigma \xi_i \sqrt{\Delta t})\]</span></p>
+      <p>where <span class="math inline">\(\xi_i\)</span> are iid variates with <span class="math inline">\(\xi_{i} \sim \mathcal{N}(0,1)\)</span></p>
+      <p>Then there is a cooperating phase, and the cooperators’ biomass at time <span class="math inline">\(t + \Delta t\)</span> is given by</p>
+      <p><span class="math display">\[ y_{i}(t+\Delta t)=\frac{1}{N} \sum_{j=1}^{N}\left(y_{j}(t)+\Delta y_{j}(t)\right)=y_{i}(t)+\frac{1}{N} \sum_{j=1}^{N} \Delta y_{j}(t) \]</span></p>
+      <h2 id="analysis-of-the-system">Analysis of the system</h2>
+      <p><br /> From the point of view of ensamble averaging, given identical initial biomasses <span class="math inline">\(x_i(0) = y_i(0)\)</span> we have</p>
+      <p><span class="math display">\[\left\langle x_{i}(t)\right\rangle = \left\langle y_{i}(t)\right\rangle = x_{i}(0) \exp (\mu t)\]</span></p>
+      <p>Moreover, in a cooperating pair, the entity with higher initial biomass could increase its expectation value by breaking off the cooperation.</p>
+      <p>The answer to the paradox comes when the system is viewed from the time-averaging perspective. The authors show that non-cooperators grow at</p>
+      <p><span class="math display">\[\overline{g}\left(x_{i}\right)=\mu-\sigma^{2} / 2\]</span></p>
+      <p>whereas cooperators grow at</p>
+      <p><span class="math display">\[\overline{g}\left(y^{(N)}\right)=\mu-\frac{\sigma^{2}}{2 N}\]</span></p>
+      <p>where</p>
+      <p><span class="math display">\[\begin{equation}
+      \overline{g}\left(y^{(N)}\right)-\overline{g}\left(x_{i}\right)=\frac{\sigma^{2}}{2}\left(1-\frac{1}{N}\right) \\
+      \overline{g}\left(y^{(N)}\right) &gt; \overline{g}\left(x_{i}\right) ,\, N &gt; 1
+      \end{equation}\]</span></p>
+      <h2 id="plots">Plots</h2>
+      <p><br /> Figure 2 from Peters’ and Adamou’s paper shows the expectation value and growth rate for non colaborating and for <span class="math inline">\(N = 2\)</span> colaborating entities. <label for="imgemergence-of-cooperation_11_0" class="margin-toggle">⊕</label> <input type="checkbox" id="imgemergence-of-cooperation_11_0" class="margin-toggle"> <span class="marginnote">Typical trajectories for two non-cooperating (green) entities and for the corresponding cooperating unit (blue) on a logarithmic vertical scal (Peters &amp; Adamou, 2018).</span><img src="img/emergence-of-cooperation_11_0.png" /></p>
+      <p>As the authors point out:</p>
+      <blockquote>
+      <p>In a very literal mathematical sense the whole, <span class="math inline">\(y_1(t)+y_2(t)\)</span>, is more than the sum of its parts, <span class="math inline">\(x_1(t) + x_2(t)\)</span>. The algebra of cooperation is not merely that of summation.</p>
+      </blockquote>
+      <p>Next we’ll visualize how the total biomass grows for systems of cooperating vs non-cooperating entities with populations <span class="math inline">\(N \in \{2, 3, 4, 5\}\)</span>.</p>
+      <p>For this, we’ll build generators that produce an array of biomasses for each time step.</p>
+      <p>
+      <label for="imgbiomass-growth" class="margin-toggle">⊕</label> <input type="checkbox" id="imgbiomass-growth" class="margin-toggle"> <span class="marginnote">Simulation of the total biomass growth for cooperating vs non-cooperating entities with different populations.</span>
+      </p>
+      <div>
+      <video width="50%" class="bordered" controls>
+      <source src="img/biomass-growth.mp4" type="video/mp4">
+      Your browser does not support the video tag. </video>
+      </div>
+    </article>
+  </body>
+  <script src="./js/main.js"></script>
+</html>

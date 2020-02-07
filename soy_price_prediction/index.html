@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Soy Price Prediction</title>
+
+    <meta property="og:title" content="Emergency of Cooperation">
+
+    <meta property="og:image" content="https://lambdaclass.com/data_etudes/dont_bet_on_an_ev/img/dontbetonanev.png">
+    <meta property="og:url" content="https://lambdaclass.com/finance_playground/emergency_of_cooperation/">
+
+    <meta name="twitter:title" content="Soy Price Prediction">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image:src" content="https://lambdaclass.com/data_etudes/dont_bet_on_an_ev/img/dontbetonanev.png">
+
+    <meta name="description" content="This paper tackles the apparently paradoxical emergence of cooperation patterns under evolutionary dynamics.
+Why do we observe seemingly altruistic behavior in systems where organisms compete for resources and only the fittest thrive (the so called survival of the fittest)?
+Classical solutions propose a net fitness gain from colaboration. The authors seek to explain this gain through the analysis of the time average growth rate for the fitness of the collaborating organisms.">
+    <meta name="twitter:creator" content="@unbalancedparen">
+
+    <link rel="stylesheet" type="text/css" href="./css/main.css">
+    <link rel="stylesheet" type="text/css" href="https://edwardtufte.github.io/tufte-css/tufte.css">
+
+ <script type="text/javascript" async
+            src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-155234935-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-155234935-1');
+    </script>
+    <link rel="stylesheet" type="text/css" href="./css/main.css" />
+  <style>
+    /*FOR MOCKUP*/
+    body {
+      height: 150vh;
+    }
+
+    @media screen and (min-width: 786px) {
+      p {
+        width: 55%;
+      }
+
+      .chart-container {
+        width: 55%;
+      }
+    }
+
+    /*END MOCKUP*/
+  </style>
+  <script src="./css/supernav.js"></script>
+  </head>
+  <body>
+  <nav id="main-nav">
+    <ul class="nav-links">
+      <li>
+        <a href="https://lambdaclass.com/finance_playground/">
+          <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+            x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+            <g>
+              <g>
+                <path d="M501.333,245.333H36.417l141.792-141.792c4.167-4.167,4.167-10.917,0-15.083c-4.167-4.167-10.917-4.167-15.083,0l-160,160
+        c-4.167,4.167-4.167,10.917,0,15.083l160,160c2.083,2.083,4.813,3.125,7.542,3.125c2.729,0,5.458-1.042,7.542-3.125
+        c4.167-4.167,4.167-10.917,0-15.083L36.417,266.667h464.917c5.896,0,10.667-4.771,10.667-10.667S507.229,245.333,501.333,245.333z
+        " />
+              </g>
+            </g>
+          </svg>
+          <span class="text">back</span>
+        </a>
+      </li>
+      <li>
+        <span class="powered">powered by:</span>
+        <a href="https://lambdaclass.com" target="_blank"><span class="text">Lambdaclass</span></a>
+      </li>
+    </ul>
+    <div class="nav-info">
+      reading: Soy Price Prediction
+  </nav>
+
+    <article>
+      <h1 id="proyectando-el-comportamiento-de-la-soja">Proyectando el comportamiento de la soja</h1>
+      <p><br> <em>Competencia Metadata 2019</em><br />
+      <em>https://metadata.fundacionsadosky.org.ar/competition/11/</em></p>
+      <h2 id="objetivos">Objetivos</h2>
+      <ol type="1">
+      <li>Lograr el mejor fit para la serie de retornos simples diarios <span class="math inline">\(\frac{p_1 - p_0}{p_0}\)</span>. Serie desde la Fecha de Cierre del Concurso (FCC 29/9/2019) + 10 días hábiles.</li>
+      <li>Lograr la mejor proyección para el último valor de la serie contínua de la soja al fin del concurso. Cierra a la FCC + 10 días hábiles.</li>
+      <li>Lograr el mejor fit para la serie de retornos simples diarios de 4 semanas. Desde FCC - 10 días hábiles, hasta FCC + 10 días hábiles.</li>
+      </ol>
+      <h2 id="dataset-oficial">Dataset oficial</h2>
+      <p><a href="https://drive.google.com/file/d/1r0DWiUIQ_N13HeervqrUhbV3TjUlEe4Q/view?usp=sharing">Dataset</a> la información que contiene este archivo es hasta el día 29/8/2019. Por ende para calcular el score circunstancial se entiende que usted está proyectando hasta el día 12/9/2019. Esta información se irá actualizando todas las semanas hasta la última actualización que será el día 27/9/2019.</p>
+      <h2 id="descripción">Descripción</h2>
+      <ul>
+      <li><code>Fecha</code> Fecha de referencia para el precio.</li>
+      <li><code>Open</code> Precio de apertura del día.</li>
+      <li><code>High</code> Precio máximo del día.</li>
+      <li><code>Low</code> Precio mínimo del día.</li>
+      <li><code>Last</code> Precio último operado del día.</li>
+      <li><code>Cierre</code> Precio de ajuste del día. <strong>Ésta es la serie a proyectarse.</strong></li>
+      <li><code>Aj.Dif.</code> Diferencia nominal respecto del día anterior.</li>
+      <li><code>Mon</code> Moneda de denominación del contrato.</li>
+      <li><code>Oi.Vol</code> Interés abierto del contrato.</li>
+      <li><code>Oi.Dif.</code> Diferencia del interés abierto respecto del día anterior.</li>
+      <li><code>Vol.Ope.</code> Volumen Operado medido en contratos.</li>
+      <li><code>Unidad</code> Unidad en que se miden los contratos.</li>
+      <li><code>DolarB.N.</code> Precio del dólar del Banco de la Nación Argentina.</li>
+      <li><code>DolarItau</code> Precio del dólar del Banco Itaú.</li>
+      <li><code>Diff.Sem</code> Diferencia Semanal.</li>
+      </ul>
+      <h2 id="métrica">Métrica</h2>
+      <p>La calificación de la solución propuesta se hace con el error absoluto medio (<a href="https://en.wikipedia.org/wiki/Mean_absolute_error">MAE</a> por su sigla en inglés) y se calcula como el promedio de las diferencias (en valor absoluto) entre las respuestas enviadas y las correctas:</p>
+      <p><span class="math display">\[ MAE = \frac{1}{n} \sum_{j=1}^{n} |y_j - \hat{y_j} | \]</span></p>
+      <h2 id="formato-de-respuesta">Formato de respuesta</h2>
+      <p>Debe enviarse un archivo en formato <code>csv</code> sin encabezado con 4 columnas y 20 filas.</p>
+      <ul>
+      <li>Primer columna debe contener al número de fila (int).</li>
+      <li>Segunda columna debe contener las fechas correspondientes en formato “dd/mm/YYYY.”</li>
+      <li>Tercer columna debe contener los retornos (float).</li>
+      <li>Cuarta columna debe contener el precio (cierre del día) del contrato (float).</li>
+      </ul>
+      <p>Las filas 1 a 10 corresponden a FCC - 10 días hábiles y las filas 11 a 20 corresponden a la proyección futura.</p>
+      <h2 id="exploración">Exploración</h2>
+      <p>Empezamos con un plot del precio de cierre en cada día.</p>
+      <p><img src="img/soy-price-prediction_13_0.png" /></p>
+      <p>El gráfico sugiere que se trata de una serie no <a href="https://es.wikipedia.org/wiki/Proceso_estacionario">estacionaria</a>, con un <em>trend</em> marcado. Podemos confirmar esto con un gáfico de <a href="https://otexts.com/fpp2/autocorrelation.html">autocorrelación</a>. Más aún, con el plot de <a href="https://es.wikipedia.org/wiki/Función_de_autocorrelación_parcial">autocorrelacion parcial</a>, podemos ver que la maxima autocorrelacion esta en el primer lag.</p>
+      <p><img src="img/soy-price-prediction_15_0.png" /></p>
+      <p>Si la serie fuera estacionaria, uno esperaría que la autocorrelación decreciera rápidamente al aumentar el <em>lag</em>, pero esto no es así. Nuestro objetivo, sin embargo, no es predecir el precio de cierre sino el retorno diario, que es (casi) la serie diferenciada. Veamos la autocorrelación de estos retornos.</p>
+      <p><label for="imgbiomass-growth" class="margin-toggle">⊕</label> <input type="checkbox" id="imgbiomass-growth" class="margin-toggle"> <span class="marginnote">Frecuencia de retornos simples diarios.</span> <img src="img/soy-price-prediction_18_0.png" /></p>
+      <p><label for="imgbiomass-growth" class="margin-toggle">⊕</label> <input type="checkbox" id="imgbiomass-growth" class="margin-toggle"> <span class="marginnote">Retornos diarios.</span> <img src="img/soy-price-prediction_19_0.png" /></p>
+      <p>Repetimos los plots de autocorrelación para la serie de retornos diarios.</p>
+      <p><label for="imgbiomass-growth" class="margin-toggle">⊕</label> <input type="checkbox" id="imgbiomass-growth" class="margin-toggle"> <span class="marginnote">Autocorrelación y correlación parcial para retornos diarios.</span> <img src="img/soy-price-prediction_21_0.png" /></p>
+      <p>Se ve claramente que al tomar retornos, la autocorrelación baja muy rápido al aumentar el lag, lo que nos dice que estamos en presencia de un proceso más estacionario.</p>
+      <h2 id="preliminares">Preliminares</h2>
+      <p>Para determinar el grado de estacionaridad de la serie, calculamos el <a href="https://en.wikipedia.org/wiki/Hurst_exponent">exponente de Hurst</a>, una medida que caracteriza el grado de <em>memoria</em> de la serie.<br />
+      La idea es considerar la varianza de la serie de lags. Para un lag de orden <span class="math inline">\(\tau\)</span>, tenemos:</p>
+      <p><span class="math display">\[{\rm Var}(\tau) = \sum [\log(t+\tau)-\log(t)]^2\]</span></p>
+      <p>El exponente de Hurst <span class="math inline">\(H\)</span> queda definido como:</p>
+      <p><span class="math display">\[{\rm Var}(\tau) = \tau^{2H}\]</span></p>
+      <p>De acuerdo al valor de dicho exponente, la serie en cuestión es:</p>
+      <ul>
+      <li><span class="math inline">\(H &lt; 0.5\)</span> - la serie revierte a la media</li>
+      <li><span class="math inline">\(H = 0.5\)</span> - la serie es un <a href="https://es.wikipedia.org/wiki/Movimiento_browniano">movimiento browniano geométrico</a></li>
+      <li><span class="math inline">\(H &gt; 0.5\)</span> - la serie tiene una tendencia</li>
+      </ul>
+      <p>Para una explicación mas detallada, consultar el siguiente <a href="https://www.quantstart.com/articles/Basics-of-Statistical-Mean-Reversion-Testing">post</a>.</p>
+      <p>Husrt de cierres = 0.51</p>
+      <p>Hurst de retornos = -0.00084</p>
+      <p>Vemos que la serie de precios diarios se aproxima a un movimiento browniano, mientras que la serie de retornos presenta una reversión a la media.</p>
+      <h2 id="método-arima">Método ARIMA</h2>
+      <p>Nuestra herramienta principal para la predicción de los retornos será el método ARIMA, que explicamos brevemente a continuación.</p>
+      <p><a href="https://en.wikipedia.org/wiki/Autoregressive_integrated_moving_average">ARIMA</a> (<em>Autoregressive integrated moving average</em>) es un modelo aplicado a series de tiempo que considera al valor actual de la serie como una regresión sobre valores previos y al error de regresión como una combinación lineal de errores previos. Más precisamente, si la serie la notamos <span class="math inline">\(\{Y_t\}_{t \in \mathbb{N}}\)</span>, el valor a tiempo <span class="math inline">\(t\)</span> se modela por</p>
+      <p><span class="math display">\[Y_t = \phi_0 + \sum_{i=1}^{p}{\phi_i Y_{t-i}} + \sum_{i=1}^{q}{\theta_i \varepsilon_{t-i}} + \varepsilon_t\]</span></p>
+      <p>donde los <span class="math inline">\(\varepsilon_i\)</span> con <span class="math inline">\(i\neq t\)</span> son errores de regresión, <span class="math inline">\(\varepsilon_t\)</span> es <a href="https://es.wikipedia.org/wiki/Ruido_blanco">ruido blanco</a> y los coeficientes <span class="math inline">\(\phi_i\)</span> y <span class="math inline">\(\theta_i\)</span> se ajustan típicamente a través de métodos estadísticos. La cantidad de pasos en el pasado que se consideran forma un par de hiperparámetros del modelo (los números <span class="math inline">\(p\)</span> y <span class="math inline">\(q\)</span>), con un tercero (generalmente notado <span class="math inline">\(d\)</span>) que determina cuántas veces diferenciar la serie antes de aplicarle lo anterior. Todo esto da un método <span class="math inline">\(ARIMA(p,d,q)\)</span>. En nuestro caso tomamos <span class="math inline">\(d=0\)</span> porque aplicamos el método a los retornos, que ya son lo suficientemente estacionarios. Si lo quisiéramos aplicar al precio de cierre tomaríamos <span class="math inline">\(d=1\)</span> para diferenciarlo, obteniendo una serie muy similar a los retornos pero a otra escala (porque en cada paso no estaríamos diviendo por el precio del día anterior).</p>
+      <p>Una vez obtenido el fit por ARIMA, usamos el método GARCH para hacernos una idea de la volatilidad de los residuos y corroborar que ésta es (aproximadamente) constante.</p>
+      <p><a href="https://en.wikipedia.org/wiki/Autoregressive_conditional_heteroskedasticity">GARCH</a> (<em>Generalized autoregressive conditional heteroskedasticity</em>) es otro modelo aplicado a series de tiempo para describir la varianza del error entre el valor observado y el que se había previsto (en nuestro caso, el término <span class="math inline">\(\varepsilon_t\)</span> que se consideraba ruido blanco). Típicamente esta varianza se escribe como combinación lineal de sus valores previos, como en un método ARMA (la <span class="math inline">\(i\)</span> de ARIMA refiere al proceso de diferenciar la serie para volverla estacionaria).</p>
+      <p>Para decidir qué hiperparámetros de ARIMA tomar usamos el método auto_arima de la librería <em>pmdarima</em>, que ajusta el método para diferentes valores de <span class="math inline">\(p\)</span> y <span class="math inline">\(q\)</span>, los compara usando el <a href="https://es.wikipedia.org/wiki/Criterio_de_informaci%C3%B3n_de_Akaike">criterio de información de Akaike</a> y el <a href="https://es.wikipedia.org/wiki/Criterio_de_informaci%C3%B3n_bayesiano">criterio de información bayesiano</a> y arroja el mejor fit.</p>
+      <table class="simpletable">
+      <tr>
+      <td>
+      </td>
+      <th>
+      coef
+      </th>
+      <th>
+      std err
+      </th>
+      <th>
+      z
+      </th>
+      <th>
+      P&gt;|z|
+      </th>
+      <th>
+      [0.025
+      </th>
+      <th>
+      0.975]
+      </th>
+      </tr>
+      <tr>
+      <th>
+      const
+      </th>
+      <td>
+      0.0001
+      </td>
+      <td>
+      0.000
+      </td>
+      <td>
+      0.525
+      </td>
+      <td>
+      0.599
+      </td>
+      <td>
+      -0.000
+      </td>
+      <td>
+      0.001
+      </td>
+      </tr>
+      <tr>
+      <th>
+      ar.L1.y
+      </th>
+      <td>
+      -0.3447
+      </td>
+      <td>
+      0.191
+      </td>
+      <td>
+      -1.806
+      </td>
+      <td>
+      0.071
+      </td>
+      <td>
+      -0.719
+      </td>
+      <td>
+      0.029
+      </td>
+      </tr>
+      <tr>
+      <th>
+      ma.L1.y
+      </th>
+      <td>
+      0.3950
+      </td>
+      <td>
+      0.186
+      </td>
+      <td>
+      2.118
+      </td>
+      <td>
+      0.034
+      </td>
+      <td>
+      0.029
+      </td>
+      <td>
+      0.760
+      </td>
+      </tr>
+      </table>
+      <table class="simpletable">
+      <caption>
+      Roots
+      </caption>
+      <tr>
+      <td>
+      </td>
+      <th>
+      Real
+      </th>
+      <th>
+      Imaginary
+      </th>
+      <th>
+      Modulus
+      </th>
+      <th>
+      Frequency
+      </th>
+      </tr>
+      <tr>
+      <th>
+      AR.1
+      </th>
+      <td>
+      -2.9014
+      </td>
+      <td>
+      +0.0000j
+      </td>
+      <td>
+      2.9014
+      </td>
+      <td>
+      0.5000
+      </td>
+      </tr>
+      <tr>
+      <th>
+      MA.1
+      </th>
+      <td>
+      -2.5319
+      </td>
+      <td>
+      +0.0000j
+      </td>
+      <td>
+      2.5319
+      </td>
+      <td>
+      0.5000
+      </td>
+      </tr>
+      </table>
+      <p>Graficamos las predicciones de ARIMA, primero en los retornos y después en el precio de cierre.</p>
+      <p><label for="imgbiomass-growth" class="margin-toggle">⊕</label> <input type="checkbox" id="imgbiomass-growth" class="margin-toggle"> <span class="marginnote">Predicciones ARIMA en los retornos.</span> <img src="img/soy-price-prediction_39_0.png" /></p>
+      <p><label for="imgbiomass-growth" class="margin-toggle">⊕</label> <input type="checkbox" id="imgbiomass-growth" class="margin-toggle"> <span class="marginnote">Predicciones ARIMA en el precio de cierre.</span> <img src="img/soy-price-prediction_40_0.png" /></p>
+      <p><img src="img/soy-price-prediction_43_0.png" /></p>
+      <p><img src="img/soy-price-prediction_44_0.png" /></p>
+      <p>Comparamos ahora las predicciones obtenidas con los valores reales del período 30/08 - 17/09, los 13 días hábiles inmediatamente posteriores a nuestra serie.</p>
+      <p>Error en los retornos usando ARIMA: 0.00744</p>
+      <p>Error en los retornos si se predice con el último valor: 0.0074</p>
+      <p>Error en el precio de cierre usando sólo ARIMA: 1.86</p>
+      <p>Error en el precio de cierre si se predice con el último valor: 1.85</p>
+      <p>Al aplicar ARIMA sobre la serie de retornos el resultado es prácticamente cero, lo cual es esperable ya que la idea es que el método capture la <a href="https://en.wikipedia.org/wiki/Conditional_expectation">media condicional</a> del proceso, y se ve claramente que ésta es (aproximadamente) cero en el gráfico.</p>
+      <p>En estas condiciones, la predicción a la que llegamos no es muy diferente a tomar el último valor de precio de cierre. De hecho, si comparamos el error absoluto medio (MAE) de ambas predicciones para las dos semanas posteriores a nuestros datos, la predicción que toma el último valor es un poco más precisa que ARIMA en este caso. Vemos también que GARCH nos da un valor de la volatilidad condicional estable, como buscábamos.</p>
+      <h4 id="últimos-siete-meses">Últimos siete meses</h4>
+      <p>Hacemos ahora las mismas predicciones pero restringiendo nuestros datos (la serie de tiempo de retornos) a los últimos siete meses. Esto se corresponde al período febrero-agosto, complementario a la siembra en Argentina (septiembre-enero).</p>
+      <p><label for="imgbiomass-growth" class="margin-toggle">⊕</label> <input type="checkbox" id="imgbiomass-growth" class="margin-toggle"> <span class="marginnote">Cierre por año, ciclo Febrero-Agosto.</span> <img src="img/soy-price-prediction_56_0.png" /></p>
+      <p><img src="img/soy-price-prediction_58_0.png" /></p>
+      <p>Nuevamente graficamos las predicciones de ARIMA de los retornos y el precio de cierre.</p>
+      <p><img src="img/soy-price-prediction_63_0.png" /></p>
+      <p><img src="img/soy-price-prediction_64_0.png" /></p>
+      <p><img src="img/soy-price-prediction_67_0.png" /></p>
+      <p><img src="img/soy-price-prediction_68_0.png" /></p>
+      <p>Error en los retornos usando ARIMA 0.0074</p>
+      <p>Error en los retornos si se predice con el último valor: 0.0074</p>
+      <p>Error en el precio de cierre usando ARIMA: 1.824</p>
+      <p>Error en el precio de cierre si se predice con el último valor: 1.846</p>
+      <h3 id="facebook-prophet">Facebook Prophet</h3>
+      <p>Entre los métodos alternativos que probamos, se encuentra la libreria <a href="https://facebook.github.io/prophet/">Prophet</a> de Facebook, que implementa un modelo de decomposición aditiva con tres componentes: trend (<span class="math inline">\(g(t)\)</span>), estacionalidad (<span class="math inline">\(s(t)\)</span>) y feriados (<em>holidays</em>, <span class="math inline">\(h(t)\)</span>).</p>
+      <p><span class="math display">\[y(t) = g(t) + s(t) + h(t) + \epsilon_t\]</span></p>
+      <p>Siendo <span class="math inline">\(\epsilon_t\)</span> un término de error que no ajusta el modelo. Este modelo es en esencia a un <a href="https://es.wikipedia.org/wiki/Modelo_lineal_generalizado#Modelos_de_aditivos_generalizados">modelo aditivo generalizado</a> que utiliza el tiempo como regresor.<br />
+      Para más información, se puede consultar el <a href="https://peerj.com/preprints/3190/">paper original</a>.</p>
+      <p><img src="img/soy-price-prediction_77_0.png" /></p>
+      <p><label for="imgbiomass-growth" class="margin-toggle">⊕</label> <input type="checkbox" id="imgbiomass-growth" class="margin-toggle"> <span class="marginnote">Cierre de Soja.</span> <img src="img/soy-price-prediction_78_0.png" /></p>
+      <p>Calculamos a continuación, el <a href="https://otexts.com/fpp2/selecting-predictors.html">AIC</a> para el forecast de Prophet.</p>
+      <pre><code>Prophet AIC = 22965.4
+
+      Prophet forecast MAE = 0.0081</code></pre>
+      <p><label for="imgbiomass-growth" class="margin-toggle">⊕</label> <input type="checkbox" id="imgbiomass-growth" class="margin-toggle"> <span class="marginnote">Cierre de Soja.</span> <img src="img/soy-price-prediction_85_0.png" /></p>
+      <h3 id="autoregresiones-bayesianas">Autoregresiones Bayesianas</h3>
+      <p>También probamos modelos autoregresivos Bayesianos, donde los coeficientes de los términos de la regresión se aproximan mediante <a href="https://en.wikipedia.org/wiki/Markov_chain_Monte_Carlo">MCMC</a>.<br />
+      Hicimos uso del módulo te series temporales de la librería <a href="https://docs.pymc.io/api/distributions/timeseries.html">PyMC3</a>, una potente framework de modelado Bayesiano y programación probabilística.</p>
+      <p><strong>AR(1) sobre precio de cierre</strong></p>
+      <p>Probamos inicialmente modelando la serie de precios como un proceso <span class="math inline">\(AR(1)\)</span>:</p>
+      <p><span class="math display">\[p_t = \phi_1 p_{t-1} + \epsilon_t\]</span></p>
+      <p><img src="img/soy-price-prediction_90_1.png" /></p>
+      <p>Como era esperable según lo visto en los plots de autocorrelación, el modelo asigna un valor cercano a <span class="math inline">\(1\)</span> para el coeficiente del primer término de lag.<br />
+      A continuación, hacemos un plot de la predicción del modelo para los próximos 100 días.</p>
+      <p><label for="imgbiomass-growth" class="margin-toggle">⊕</label> <input type="checkbox" id="imgbiomass-growth" class="margin-toggle"> <span class="marginnote">Cierre de la Soja.</span> <img src="img/soy-price-prediction_95_0.png" /></p>
+      <p><strong>AR(2) sobre precio de cierre</strong></p>
+      <p>Probamos ahora un modelo <span class="math inline">\(AR(2)\)</span>, sabiendo que la autocorrelación parcial con los lags de mayor orden es cercana a 0.</p>
+      <p><span class="math display">\[p_t = \phi_1 p_{t-1} + \phi_2 p_{t-2} + \epsilon_t\]</span></p>
+      <p><label for="imgbiomass-growth" class="margin-toggle">⊕</label> <input type="checkbox" id="imgbiomass-growth" class="margin-toggle"> <span class="marginnote">Cierre de Soja.</span> <img src="img/soy-price-prediction_97_1.png" /></p>
+      <p>Vemos que el coeficiente del segundo término de lag es cercano a <span class="math inline">\(0\)</span>, como era previsible. Veamos el plot de predicciones.</p>
+      <p><label for="imgbiomass-growth" class="margin-toggle">⊕</label> <input type="checkbox" id="imgbiomass-growth" class="margin-toggle"> <span class="marginnote">Cierre de Soja.</span> <img src="img/soy-price-prediction_102_0.png" /></p>
+      <h4 id="ar1-sobre-retornos"><em><span class="math inline">\(AR(1)\)</span> sobre retornos</em></h4>
+      <p>Probamos a continuación modelando los retornos como un proceso <span class="math inline">\(AR(1)\)</span></p>
+      <p><span class="math display">\[r_t = \phi_1 r_{t-1} + \epsilon_t\]</span></p>
+      <p><label for="imgbiomass-growth" class="margin-toggle">⊕</label> <input type="checkbox" id="imgbiomass-growth" class="margin-toggle"> <span class="marginnote">Cierre de Soja.</span> <img src="img/soy-price-prediction_104_1.png" /></p>
+      <p>Como era esperable, el coeficiente del primer lag de los retornos es aproximadamente <span class="math inline">\(0\)</span></p>
+      <p><label for="imgbiomass-growth" class="margin-toggle">⊕</label> <input type="checkbox" id="imgbiomass-growth" class="margin-toggle"> <span class="marginnote">Cierre de Soja.</span> <img src="img/soy-price-prediction_108_0.png" /></p>
+      <h3 id="bayesian-structural-time-series">Bayesian Structural Time Series</h3>
+      <p>Otro enfoque más moderno en el análisis de series temporales es el que desarrolan Scott y Varian en el paper <a href="http://people.ischool.berkeley.edu/~hal/Papers/2013/pred-present-with-bsts.pdf"><em>Predicting the Present with Bayesian Structural Time Series</em></a> (2014).<br />
+      A grandes rasgos, el modelo es un ensamble de predictores: combina la descomposición de series en diferentes variables de estado (tendencia, estacionalidad) con componentes regresivos.</p>
+      <p>Para la implementación, usamos <a href="https://www.tensorflow.org/probability/">Tensorflow Probability</a>, una librería para programación probabilística creada sobre <a href="https://www.tensorflow.org">Tensorflow</a>.</p>
+      <p><label for="imgbiomass-growth" class="margin-toggle">⊕</label> <input type="checkbox" id="imgbiomass-growth" class="margin-toggle"> <span class="marginnote">Cierre de Soja.</span> <img src="img/soy-price-prediction_119_0.png" /></p>
+      <p>Construimos a continuación un modelo que incorpora estacionalidad mensual y semanal a una tendencia lineal.</p>
+      <p>Y ploteamos las predicciones con el nuevo modelo.</p>
+      <p><label for="imgbiomass-growth" class="margin-toggle">⊕</label> <input type="checkbox" id="imgbiomass-growth" class="margin-toggle"> <span class="marginnote">Cierre de Soja.</span> <img src="img/soy-price-prediction_128_0.png" /></p>
+      <p>La complejidad de este modelo hace que aquí lo estemos presentando como una <a href="https://en.wikipedia.org/wiki/Black_box">caja negra</a>. Aclarado esto, vemos que las predicciones de este modelo coinciden con los resultados vistos anteriormente: el mejor predictor del precio futuro es el último precio de cierre.</p>
+      <h3 id="modelo-final">Modelo final</h3>
+      <p>Predecir el comportamiento de los futuros de commodities ha sido motivo de estudio desde mediados del siglo pasado. En <a href="https://arxiv.org/abs/1309.1492"><em>Commodity futures and market efficiency</em></a> (2013, Kristoufek, Vosvrda), los autores señalan que los mercados de futuros de commodities (en particular, las relacionadas a la energía) muestran un alto grado de eficiencia, dada la multitud de actores que participan y hacen que el precio refleje toda la información disponible. Esto elimina cualquier tendencia observable en el precio.<br />
+      Después de evaluar los distintos modelos observamos que todos coinciden en las predicciones: el mejor predictor del precio de cierrre en el período <span class="math inline">\(t\)</span> es el precio de cierre en el período <span class="math inline">\(t-1\)</span>.<br />
+      Para nuestra entrada a la competencia, nos inclinamos por un modelo ARIMA(1,0,1) sobre los retornos diarios. Siendo que este modelo es el mas simple e interpretable de todos los que pudimos evaluar, la <a href="https://es.wikipedia.org/wiki/Navaja_de_Ockham">navaja de Ockham</a> nos llevo a elegirlo.</p>
+    </article>
+  </body>
+  <script src="./js/main.js"></script>
+</html>

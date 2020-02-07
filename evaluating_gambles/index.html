@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Evaluating Gambles</title>
+
+    <meta property="og:title" content="Evaluating Gambles">
+
+    <meta property="og:image" content="https://lambdaclass.com/finance_playground/evaluating_gambles/img/cover_image.png">
+    <meta property="og:url" content="https://lambdaclass.com/finance_playground/evaluating_gambles/">
+
+    <meta name="twitter:title" content="Evaluating Gambles">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image:src" content="https://lambdaclass.com/finance_playground/evaluating_gambles/img/cover_image.png">
+
+    <meta name="description" content="Evaluating gambles: An exploration of expected values and time average. Some question we try to answer are: Why do we choose to enter or avoid gambles?, Is the expected value telling us all we need to know? or is there a criterion that works for every concievable game?.">
+    <meta name="twitter:creator" content="@unbalancedparen">
+
+    <link rel="stylesheet" type="text/css" href="./css/main.css">
+    <link rel="stylesheet" type="text/css" href="https://edwardtufte.github.io/tufte-css/tufte.css">
+
+     <script type="text/javascript" async
+            src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-155234935-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-155234935-1');
+    </script>
+    <link rel="stylesheet" type="text/css" href="./css/main.css" />
+  <style>
+    /*FOR MOCKUP*/
+    body {
+      height: 150vh;
+    }
+
+    @media screen and (min-width: 786px) {
+      p {
+        width: 55%;
+      }
+
+      .chart-container {
+        width: 55%;
+      }
+    }
+
+    /*END MOCKUP*/
+  </style>
+  <script src="./css/supernav.js"></script>
+  </head>
+  <body>
+  
+  <nav id="main-nav">
+    <ul class="nav-links">
+      <li>
+        <a href="https://lambdaclass.com/finance_playground/">
+          <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+            x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+            <g>
+              <g>
+                <path d="M501.333,245.333H36.417l141.792-141.792c4.167-4.167,4.167-10.917,0-15.083c-4.167-4.167-10.917-4.167-15.083,0l-160,160
+        c-4.167,4.167-4.167,10.917,0,15.083l160,160c2.083,2.083,4.813,3.125,7.542,3.125c2.729,0,5.458-1.042,7.542-3.125
+        c4.167-4.167,4.167-10.917,0-15.083L36.417,266.667h464.917c5.896,0,10.667-4.771,10.667-10.667S507.229,245.333,501.333,245.333z
+        " />
+              </g>
+            </g>
+          </svg>
+          <span class="text">back</span>
+        </a>
+      </li>
+      <li>
+        <span class="powered">powered by:</span>
+        <a href="https://lambdaclass.com" target="_blank"><span class="text">Lambdaclass</span></a>
+      </li>
+    </ul>
+    <div class="nav-info">
+      reading: Evaluating Gambles
+    </div>
+  </nav>
+
+    <article>
+      <h1 id="evaluating-gambles">Evaluating gambles</h1>
+      <h3 id="an-exploration-of-expected-values-and-time-averages"><em>An exploration of expected values and time averages</em></h3>
+      <h2 id="general-concepts-and-mandatory-coin-flipping">General concepts and mandatory coin flipping</h2>
+      <p>We define a <em>gamble</em> <span class="math inline">\(G\)</span> as a set of payouts <span class="math inline">\(D\)</span> associated with a probability distribution <span class="math inline">\(\mathbf{P}\)</span>.</p>
+      <p>As an example, consider a game where a fair coin is tossed. If heads comes up, you win <span class="math inline">\(\$3\)</span>, you lose <span class="math inline">\(\$1\)</span> otherwise.<br />
+      Here the gamble has payouts <span class="math inline">\(D = \{3, -1\}\)</span> where <span class="math inline">\(P(d) = 0.5 \, \, \forall \, d \in D\)</span><br />
+      Would it be profitable to play such a game?</p>
+      <p>Our intuition suggests we should take the average of the payouts weighted by their probalility : 3 * 0.5 + -1 * 0.5 = 1.</p>
+      <p>This number is known as the <strong>expected value</strong> of the game (we also refer to <span class="math inline">\(G\)</span> as a <a href="https://en.wikipedia.org/wiki/Random_variable">random variable</a>).</p>
+      <p>What does this number mean? Should we expect to win <span class="math inline">\(\$1\)</span> <em>every time</em> we play? Perhaps it says something about our long term winnigs if we play many times over?</p>
+      <p>Conceptually, it helps to think about expected values as taking the average of the payouts over many (tending to infinity) plays (<em>realizations</em>) of the game.<br />
+      Think of <span class="math inline">\(n\)</span> individuals playing simultaneously. We then take the average of their winnings by summing over all the payouts and dividing over <span class="math inline">\(n\)</span>. Simulating 100 realizations, we obtained an average value of <span class="math inline">\(0.88\)</span>.</p>
+      <p>In fact, by the <a href="https://en.wikipedia.org/wiki/Central_limit_theorem#Classical_CLT">central limit theorem</a>, as <span class="math inline">\(n\)</span> increases this average will tend towards the expected value. With <span class="math inline">\(n=1,000,000\)</span>, the average value obtained was <span class="math inline">\(1.0021\)</span> and the histogram shown below. <label for="img1" class="margin-toggle">⊕</label> <input type="checkbox" id="img1" class="margin-toggle"> <span class="marginnote">Histogram of the simulations with <span class="math inline">\(n=1,000,000\)</span>.</span> <img src="img/evaluating-gambles-presentation_13_0.png" /></p>
+      <h2 id="games-people-play-or-avoid">Games people play (or avoid)</h2>
+      <h3 id="some-questions-to-ponder">Some questions to ponder</h3>
+      <ul>
+      <li>Why do we choose to enter or avoid such gambles?</li>
+      <li>Is the expected value telling us all we need to know?</li>
+      <li>Is there a criterion that works for every concievable game?</li>
+      </ul>
+      <p>Our intuition suggests we should try to maximise the change in our wealth <span class="math inline">\(\Delta x = x(t + \Delta t) - x(t)\)</span>.</p>
+      <p>However, consider the following <a href="https://en.wikipedia.org/wiki/St._Petersburg_paradox">game</a>:</p>
+      <ol type="1">
+      <li>A casino offers a game of chance in which a fair coin is tossed at each stage.</li>
+      <li>The initial stake starts at <span class="math inline">\(\$2\)</span> and is doubled every time heads appears.</li>
+      <li>The first time tails appears, the game ends and the player wins whatever is in the pot.</li>
+      <li>The player wins <span class="math inline">\(\$2^k\)</span> where <span class="math inline">\(k\)</span> is the number of coin tosses.</li>
+      </ol>
+      <p>What would be a fair price (i.e. a price at which you would feel indifferent taking the role of the gambler or the casino) to play such a game?</p>
+      <p>The expected value of such a game is</p>
+      <p><span class="math display">\[\mathbb{E} = \frac{1}{2} \cdot 2 + \frac{1}{4} \cdot 4 + \frac{1}{8} \cdot 8 + \dotsb = 1 + 1 + 1 + \dotsb = \infty\]</span></p>
+      <p>Should we be willing to pay any amount for the opportunity to play?<br />
+      Most people would not, even though the game has an infinite expected value.</p>
+      <h3 id="expected-utility-hypothesis">Expected utility hypothesis</h3>
+      <p>The aforementioned paradox was studied by <a href="https://en.wikipedia.org/wiki/Daniel_Bernoulli">Daniel Bernoulli</a>. He introduced the <a href="https://en.wikipedia.org/wiki/Expected_utility_hypothesis">expected utility hypothesis</a>, which states that individual preferences concerning such gambles aim to maximize not the expected change in wealth, but the <strong>expected change in utility</strong>, which is a mathematical concept that captures the subjective value of wealth to the individual.</p>
+      <p><strong>Key points</strong></p>
+      <ul>
+      <li>Utility functions could differ between individuals.</li>
+      <li>Any arbitrary function could be used to model utility. This makes the theory very flexibile, at the cost of explanatory power.</li>
+      <li>Typical choices for utilities include <span class="math inline">\(\sqrt{x}\)</span> and <span class="math inline">\(\ln{x}\)</span>.</li>
+      </ul>
+      <p><label for="img2" class="margin-toggle">⊕</label> <input type="checkbox" id="img2" class="margin-toggle"> <span class="marginnote">Plot of the functions <span class="math inline">\(f(x)=\sqrt{x}\)</span> and <span class="math inline">\(f(x)=log(x)\)</span>.</span> <img src="img/evaluating-gambles-presentation_22_0.png" /></p>
+      <h3 id="a-different-approach">A different approach</h3>
+      <p>Let’s consider one more coin game.</p>
+      <blockquote>
+      <ul>
+      <li>Heads -&gt; increase your wealth by 60%</li>
+      <li>Tails -&gt; decrease your wealth by 50%</li>
+      </ul>
+      </blockquote>
+      <p>If your initial wealth is <span class="math inline">\(x(0)\)</span>, then the expected value of one play is:</p>
+      <p><span class="math display">\[\mathbb{E}(x(1)) = 0.5 \cdot 1.6 x(0) + 0.5 \cdot 0.5 x(0) = 1.05 x(0)\]</span></p>
+      <ul>
+      <li>Would you play this game?</li>
+      <li>Once? Many times?</li>
+      </ul>
+      <p>Running a simulation of 100 flips, we obtain the wealth over time shown below, starting with an initial wealth of <span class="math inline">\(\$100\)</span>.</p>
+      <p><label for="img3" class="margin-toggle">⊕</label> <input type="checkbox" id="img3" class="margin-toggle"> <span class="marginnote">Wealth over time for a simulation of 100 flips with a initial wealth of $100.</span> <img src="img/evaluating-gambles-presentation_25_0.png" /></p>
+      <p>Then, we run more simulations, each one starting from a different initial wealth, obtaining: <label for="img3" class="margin-toggle">⊕</label> <input type="checkbox" id="img3" class="margin-toggle"> <span class="marginnote">Wealth over time for simulations starting from different initial wealth.</span> <img src="img/evaluating-gambles-presentation_26_0.png" /></p>
+      <p>There is high variance in the short term, but over the long run we see that realizations tend to 0 as <span class="math inline">\(t\)</span> grows. <br> What is happening here is that as <span class="math inline">\(t\)</span> increases:</p>
+      <p><span class="math display">\[\lim_{t \to\infty} x(t) = 1.6^{t/2} 0.5^{t/2} = (1.6 \cdot 0.5)^{t/2} = 0.8^{t/2} = 0\]</span></p>
+      <p>We see that this game, which has a positive expected value, has a <em>time average</em> value of 0.<br />
+      We say that such systems are <strong>non ergodic</strong>, that is, they behave differently when averaged over time as averaged over the space of all possible states.</p>
+      <h2 id="optimal-growth-and-gamblers-ruin">Optimal growth and gambler’s ruin</h2>
+      <p>Now suppose we could play a game infinitely many times where a coin is flipped, coming up heads with probability <span class="math inline">\(p &gt; 0.5\)</span>, tails with probalility <span class="math inline">\(q = 1 - p\)</span>.<br />
+      You win an amount equal to your stake: if you bet <span class="math inline">\(\$1\)</span> you would earn <span class="math inline">\(\$2\)</span> if heads show up, <span class="math inline">\(-\$1\)</span> otherwise.</p>
+      <p>Running a simulation for <span class="math inline">\(p = 0.6\)</span>, <span class="math inline">\(n = 1000000\)</span> and a stake of 100, we obtain an average payout of <span class="math inline">\(\$79.98\)</span>. We’re making money! Let’s plot some more runs:</p>
+      <p><label for="img4" class="margin-toggle">⊕</label> <input type="checkbox" id="img4" class="margin-toggle"> <span class="marginnote">Histogram of the average payouts for <span class="math inline">\(p=0.6\)</span> and a stake of <span class="math inline">\(\$100\)</span>.</span> <img src="img/evaluating-gambles-presentation_34_0.png" /></p>
+      <p>An interesting question:</p>
+      <ul>
+      <li>How should we choose our stakes in order to maximize the rate at which our wealth grows?</li>
+      </ul>
+      <p>Since the expected value of this game is positive, should we bet all our wealth each time? A fraction?</p>
+      <p>Given our initial wealth <span class="math inline">\(x(0) = \$1000\)</span>, we have after <span class="math inline">\(t\)</span> plays, an stake equal to the wealth:</p>
+      <p><label for="img5" class="margin-toggle">⊕</label> <input type="checkbox" id="img5" class="margin-toggle"> <span class="marginnote">Wealth over time for a stake equal to the wealth.</span> <img src="img/evaluating-gambles-presentation_39_0.png" /></p>
+      <p>If we try to maximize the rate of growth by betting all our wealth each time, we will inevitably go broke.</p>
+      <p>Perhaps we should bet the minimum amount, and avoid bankrupcy, then we run the simulation with a stake equal to 0.001 of the wealth:</p>
+      <p><label for="img5" class="margin-toggle">⊕</label> <input type="checkbox" id="img5" class="margin-toggle"> <span class="marginnote">Wealth over time for a stake equal to 0.001 of the wealth.</span> <img src="img/evaluating-gambles-presentation_41_0.png" /></p>
+      <p>We’re not broke, but our earnings are growing timidly.<br />
+      Is there a better approach?</p>
+      <p>Let’s look at how our wealth changes each time we play. We’ll bet a fraction <span class="math inline">\(f\)</span> of our current wealth each time.</p>
+      <p><span class="math display">\[x(t) = x(0)(1 + f)^\text{H}(1 - f)^\text{T}\]</span></p>
+      <p>Where <span class="math inline">\(\text{H}\)</span> is the number of times heads comes up, <span class="math inline">\(\text{T}\)</span> the number of tails.</p>
+      <p>The quantity <span class="math inline">\(\frac{x(t)}{x(0)}\)</span> can be rewritten as</p>
+      <p><span class="math display">\[\frac{x(t)}{x(0)} = e^{t \log{\left[ \frac{x(t)}{x(0)} \right]}^{\frac{1}{t}}}\]</span></p>
+      <p>Let’s focus on this part:</p>
+      <p><span class="math display">\[G_{t}(f) = \log{\left[ \frac{x(t)}{x(0)} \right]}^{\frac{1}{t}} = \frac{H}{t}(1 + f) + \frac{T}{t}(1 - f)\]</span></p>
+      <p>We want to find <span class="math inline">\(f^\ast\)</span> that maximizes</p>
+      <p><span class="math display">\[g(f) = \mathbb{E} \Bigg \{ \frac{1}{t} \log{\left[ \frac{x(t)}{x(0)} \right]} \Bigg \}\]</span></p>
+      <p><span class="math display">\[g(f) = \mathbb{E} \Big \{ \frac{1}{t} \log{x(t)} - \frac{1}{t} \log{x(0)} \Big \}\]</span></p>
+      <p>Since <span class="math inline">\(\frac{1}{t} \log{x(0)}\)</span> is a constant, maximizing <span class="math inline">\(g(f)\)</span> is the same as maximizing <span class="math inline">\(\mathbb{E} \Big \{ \frac{1}{t} \log{x(t)} \Big \}\)</span></p>
+      <p><span class="math display">\[\begin{align}
+      g(f) &amp; = \mathbb{E} \Big \{ \frac{H}{t} \log{(1 + f)} + \frac{T}{t} \log{(1 - f)} \Big \} \\
+      g(f) &amp; = p \log{(1 + f)} + q \log{(1 - f)} \\
+      \end{align}\]</span></p>
+      <p>Let’s plot <span class="math inline">\(g(t)\)</span></p>
+      <p><label for="img5" class="margin-toggle">⊕</label> <input type="checkbox" id="img5" class="margin-toggle"> <span class="marginnote">Plot of <span class="math inline">\(g(t)\)</span>.</span> <img src="img/evaluating-gambles-presentation_49_0.png" /></p>
+      <p><label for="img5" class="margin-toggle">⊕</label> <input type="checkbox" id="img5" class="margin-toggle"> <span class="marginnote">Plot of <span class="math inline">\(g(t)\)</span> in log scale.</span> <img src="img/evaluating-gambles-presentation_50_0.png" /></p>
+      <p>We can calculate the maximum by taking the derivative.</p>
+      <p><span class="math display">\[\begin{align}
+      g^{\ast\prime} = \frac{p}{1+f} - \frac{q}{1+f} = \frac{p-q-f}{(1+f)(1-f)} = 0 \\
+      \end{align}\]</span></p>
+      <p>It follows then that <span class="math inline">\(f^\ast = p - q\)</span></p>
+      <p>This was first discovered by mathematician John Kelly in 1956. Known as <em>Kelly’s criterion</em> or <em>Kelly’s formula</em>, it is used widely in gambling, finance and risk management.</p>
+      <p>Let’s see how our wealth grows using Kelly’s optimal betting strategy.</p>
+      <p><label for="img5" class="margin-toggle">⊕</label> <input type="checkbox" id="img5" class="margin-toggle"> <span class="marginnote">Wealth over time with optimal betting.</span> <img src="img/evaluating-gambles-presentation_54_0.png" /></p>
+      <p><label for="img5" class="margin-toggle">⊕</label> <input type="checkbox" id="img5" class="margin-toggle"> <span class="marginnote">Wealth over time with optimal betting in log scale.</span> <img src="img/evaluating-gambles-presentation_55_0.png" /></p>
+    </article>
+  </body>
+  <script src="./js/main.js"></script>
+</html>

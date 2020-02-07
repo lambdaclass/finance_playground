@@ -1,0 +1,37 @@
+{
+  "name": "rgbm_animations",
+  "version": "1.0.0",
+  "description": "Re-allocating GBM wealth model",
+  "main": "index.js",
+  "scripts": {
+    "build": "browserify -p tinyify src/index.js -o assets/js/bundle.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/metdinov/RGBM_animations.git"
+  },
+  "author": "@metdinov",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/metdinov/RGBM_animations/issues"
+  },
+  "homepage": "https://github.com/metdinov/RGBM_animations#readme",
+  "browserify": {
+    "transform": [
+      "cwise"
+    ]
+  },
+  "devDependencies": {
+    "browserify": "^16.5.0",
+    "tinyify": "^2.5.2",
+    "transform-loader": "^0.2.4"
+  },
+  "dependencies": {
+    "static-eval": ">=2.0.0",
+    "chart.js": "^2.9.3",
+    "cwise": "^1.0.10",
+    "ndarray": "^1.0.18",
+    "ndarray-ops": "^1.2.2"
+  }
+}

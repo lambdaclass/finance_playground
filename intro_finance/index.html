@@ -1,0 +1,1399 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Introduction to Finance</title>
+
+    <meta property="og:title" content="Emergency of Cooperation">
+
+    <meta property="og:image" content="https://lambdaclass.com/finance_playground/intro_finance/cover_image.png">
+    <meta property="og:url" content="https://lambdaclass.com/finance_playground/intro_finance/">
+
+    <meta name="twitter:title" content="Introduction to Finance">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image:src" content="https://lambdaclass.com/inance_playground/intro_finance/cover_image.png">
+
+    <meta name="description" content="Basic concepts in Finance (stocks, ETFs, options).">
+    <meta name="twitter:creator" content="@unbalancedparen">
+
+    <link rel="stylesheet" type="text/css" href="./css/main.css">
+    <link rel="stylesheet" type="text/css" href="https://edwardtufte.github.io/tufte-css/tufte.css">
+
+     <script type="text/javascript" async
+            src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-155234935-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-155234935-1');
+    </script>
+    <link rel="stylesheet" type="text/css" href="./css/main.css" />
+  <style>
+    /*FOR MOCKUP*/
+    body {
+      height: 150vh;
+    }
+
+    @media screen and (min-width: 786px) {
+      p {
+        width: 55%;
+      }
+
+      .chart-container {
+        width: 55%;
+      }
+    }
+
+    /*END MOCKUP*/
+  </style>
+  <script src="./css/supernav.js"></script>
+  </head>
+  <body>
+  
+  <nav id="main-nav">
+    <ul class="nav-links">
+      <li>
+        <a href="https://lambdaclass.com/finance_playground/">
+          <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+            x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+            <g>
+              <g>
+                <path d="M501.333,245.333H36.417l141.792-141.792c4.167-4.167,4.167-10.917,0-15.083c-4.167-4.167-10.917-4.167-15.083,0l-160,160
+        c-4.167,4.167-4.167,10.917,0,15.083l160,160c2.083,2.083,4.813,3.125,7.542,3.125c2.729,0,5.458-1.042,7.542-3.125
+        c4.167-4.167,4.167-10.917,0-15.083L36.417,266.667h464.917c5.896,0,10.667-4.771,10.667-10.667S507.229,245.333,501.333,245.333z
+        " />
+              </g>
+            </g>
+          </svg>
+          <span class="text">back</span>
+        </a>
+      </li>
+      <li>
+        <span class="powered">powered by:</span>
+        <a href="https://lambdaclass.com" target="_blank"><span class="text">Lambdaclass</span></a>
+      </li>
+    </ul>
+    <div class="nav-info">
+      reading: Introduction to Finance
+    </div>
+  </nav>
+
+    <article>
+      <h1 id="intro-finance">Intro Finance</h1>
+      <hr />
+      <h2 id="stocks">1. Stocks</h2>
+      <p>From <a href="https://www.investopedia.com/terms/s/stock.asp">Investopedia</a> - A stock is a form of security that indicates the holder has proportionate ownership in the issuing corporation. - Corporations issue (sell) stock to raise funds to operate their businesses. There are two main types of stock: common and preferred. - Stocks are bought and sold predominantly on stock exchanges, though there can be private sales as well, and they are the foundation of nearly every portfolio. - Historically, they have outperformed most other investments over the long run. - Stocks are quoted on exchanges. The current market price is referred to as the <strong>spot price</strong> of the stock. - A good primer on finance and the stock market is Malkiel’s <em>A Random Walk Down Wall Street</em>.</p>
+      <style type="text/css">
+      .tg  {border-collapse:collapse;border-spacing:0;}
+      .tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+      .tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+      .tg .tg-xp2k{background-color:#fffff8;color:#002b36;border-color:inherit;text-align:center;vertical-align:top}
+      .tg .tg-6uqc{background-color:#002b36;color:#fffff8;border-color:inherit;text-align:center;vertical-align:top}
+      </style>
+      <table class="tg">
+      <tr>
+      <th class="tg-6uqc">
+      Date
+      </th>
+      <th class="tg-6uqc">
+      Close
+      </th>
+      <th class="tg-6uqc">
+      High
+      </th>
+      <th class="tg-6uqc">
+      Low
+      </th>
+      <th class="tg-6uqc">
+      Open
+      </th>
+      <th class="tg-6uqc">
+      volume
+      </th>
+      <th class="tg-6uqc">
+      adjClose
+      </th>
+      <th class="tg-6uqc">
+      adjHigh
+      </th>
+      <th class="tg-6uqc">
+      adjLow
+      </th>
+      <th class="tg-6uqc">
+      adjOpen
+      </th>
+      <th class="tg-6uqc">
+      adjVolume
+      </th>
+      <th class="tg-6uqc">
+      divCash
+      </th>
+      <th class="tg-6uqc">
+      splitFactor
+      </th>
+      </tr>
+      <tr>
+      <td class="tg-6uqc">
+      2020-01-23
+      </td>
+      <td class="tg-xp2k">
+      1486.65
+      </td>
+      <td class="tg-xp2k">
+      1495.52
+      </td>
+      <td class="tg-xp2k">
+      1482.1
+      </td>
+      <td class="tg-xp2k">
+      1487.64
+      </td>
+      <td class="tg-xp2k">
+      1351354
+      </td>
+      <td class="tg-xp2k">
+      1486.65
+      </td>
+      <td class="tg-xp2k">
+      1495.52
+      </td>
+      <td class="tg-xp2k">
+      1482.1
+      </td>
+      <td class="tg-xp2k">
+      1487.64
+      </td>
+      <td class="tg-xp2k">
+      1351354
+      </td>
+      <td class="tg-xp2k">
+      0.0
+      </td>
+      <td class="tg-xp2k">
+      1.0
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-6uqc">
+      2020-01-22
+      </td>
+      <td class="tg-xp2k">
+      1485.95
+      </td>
+      <td class="tg-xp2k">
+      1503.21
+      </td>
+      <td class="tg-xp2k">
+      1484.93
+      </td>
+      <td class="tg-xp2k">
+      1491.0
+      </td>
+      <td class="tg-xp2k">
+      1610846
+      </td>
+      <td class="tg-xp2k">
+      1485.95
+      </td>
+      <td class="tg-xp2k">
+      1503.21
+      </td>
+      <td class="tg-xp2k">
+      1484.93
+      </td>
+      <td class="tg-xp2k">
+      1491.0
+      </td>
+      <td class="tg-xp2k">
+      1610846
+      </td>
+      <td class="tg-xp2k">
+      0.0
+      </td>
+      <td class="tg-xp2k">
+      1.0
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-6uqc">
+      2020-01-21
+      </td>
+      <td class="tg-xp2k">
+      1484.4
+      </td>
+      <td class="tg-xp2k">
+      1491.85
+      </td>
+      <td class="tg-xp2k">
+      1471.2
+      </td>
+      <td class="tg-xp2k">
+      1479.12
+      </td>
+      <td class="tg-xp2k">
+      2008830
+      </td>
+      <td class="tg-xp2k">
+      1484.4
+      </td>
+      <td class="tg-xp2k">
+      1491.85
+      </td>
+      <td class="tg-xp2k">
+      1471.2
+      </td>
+      <td class="tg-xp2k">
+      1479.12
+      </td>
+      <td class="tg-xp2k">
+      2008830
+      </td>
+      <td class="tg-xp2k">
+      0.0
+      </td>
+      <td class="tg-xp2k">
+      1.0
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-6uqc">
+      2020-01-17
+      </td>
+      <td class="tg-xp2k">
+      1480.39
+      </td>
+      <td class="tg-xp2k">
+      1481.3
+      </td>
+      <td class="tg-xp2k">
+      1458.22
+      </td>
+      <td class="tg-xp2k">
+      1462.91
+      </td>
+      <td class="tg-xp2k">
+      2396215
+      </td>
+      <td class="tg-xp2k">
+      1480.39
+      </td>
+      <td class="tg-xp2k">
+      1481.3
+      </td>
+      <td class="tg-xp2k">
+      1458.22
+      </td>
+      <td class="tg-xp2k">
+      1462.91
+      </td>
+      <td class="tg-xp2k">
+      2396215
+      </td>
+      <td class="tg-xp2k">
+      0.0
+      </td>
+      <td class="tg-xp2k">
+      1.0
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-6uqc">
+      2020-01-16
+      </td>
+      <td class="tg-xp2k">
+      1451.7
+      </td>
+      <td class="tg-xp2k">
+      1451.99
+      </td>
+      <td class="tg-xp2k">
+      1440.92
+      </td>
+      <td class="tg-xp2k">
+      1447.44
+      </td>
+      <td class="tg-xp2k">
+      1173688
+      </td>
+      <td class="tg-xp2k">
+      1451.7
+      </td>
+      <td class="tg-xp2k">
+      1451.99
+      </td>
+      <td class="tg-xp2k">
+      1440.92
+      </td>
+      <td class="tg-xp2k">
+      1447.44
+      </td>
+      <td class="tg-xp2k">
+      1173688
+      </td>
+      <td class="tg-xp2k">
+      0.0
+      </td>
+      <td class="tg-xp2k">
+      1.0
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-6uqc">
+      2020-01-15
+      </td>
+      <td class="tg-xp2k">
+      1439.2
+      </td>
+      <td class="tg-xp2k">
+      1441.39
+      </td>
+      <td class="tg-xp2k">
+      1430.21
+      </td>
+      <td class="tg-xp2k">
+      1430.21
+      </td>
+      <td class="tg-xp2k">
+      1282685
+      </td>
+      <td class="tg-xp2k">
+      1439.2
+      </td>
+      <td class="tg-xp2k">
+      1441.39
+      </td>
+      <td class="tg-xp2k">
+      1430.21
+      </td>
+      <td class="tg-xp2k">
+      1430.21
+      </td>
+      <td class="tg-xp2k">
+      1282685
+      </td>
+      <td class="tg-xp2k">
+      0.0
+      </td>
+      <td class="tg-xp2k">
+      1.0
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-6uqc">
+      2020-01-14
+      </td>
+      <td class="tg-xp2k">
+      1430.88
+      </td>
+      <td class="tg-xp2k">
+      1441.8
+      </td>
+      <td class="tg-xp2k">
+      1428.37
+      </td>
+      <td class="tg-xp2k">
+      1439.01
+      </td>
+      <td class="tg-xp2k">
+      1560453
+      </td>
+      <td class="tg-xp2k">
+      1430.88
+      </td>
+      <td class="tg-xp2k">
+      1441.8
+      </td>
+      <td class="tg-xp2k">
+      1428.37
+      </td>
+      <td class="tg-xp2k">
+      1439.01
+      </td>
+      <td class="tg-xp2k">
+      1560453
+      </td>
+      <td class="tg-xp2k">
+      0.0
+      </td>
+      <td class="tg-xp2k">
+      1.0
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-6uqc">
+      2020-01-13
+      </td>
+      <td class="tg-xp2k">
+      1439.23
+      </td>
+      <td class="tg-xp2k">
+      1440.52
+      </td>
+      <td class="tg-xp2k">
+      1426.02
+      </td>
+      <td class="tg-xp2k">
+      1436.13
+      </td>
+      <td class="tg-xp2k">
+      1378286
+      </td>
+      <td class="tg-xp2k">
+      1439.23
+      </td>
+      <td class="tg-xp2k">
+      1440.52
+      </td>
+      <td class="tg-xp2k">
+      1426.02
+      </td>
+      <td class="tg-xp2k">
+      1436.13
+      </td>
+      <td class="tg-xp2k">
+      1378286
+      </td>
+      <td class="tg-xp2k">
+      0.0
+      </td>
+      <td class="tg-xp2k">
+      1.0
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-6uqc">
+      2020-01-10
+      </td>
+      <td class="tg-xp2k">
+      1429.73
+      </td>
+      <td class="tg-xp2k">
+      1434.93
+      </td>
+      <td class="tg-xp2k">
+      1418.35
+      </td>
+      <td class="tg-xp2k">
+      1427.56
+      </td>
+      <td class="tg-xp2k">
+      1821566
+      </td>
+      <td class="tg-xp2k">
+      1429.73
+      </td>
+      <td class="tg-xp2k">
+      1434.93
+      </td>
+      <td class="tg-xp2k">
+      1418.35
+      </td>
+      <td class="tg-xp2k">
+      1427.56
+      </td>
+      <td class="tg-xp2k">
+      1821566
+      </td>
+      <td class="tg-xp2k">
+      0.0
+      </td>
+      <td class="tg-xp2k">
+      1.0
+      </td>
+      </tr>
+      </table>
+      <ul>
+      <li><code>close</code> is the end-of-day (EOD) price</li>
+      <li><code>open</code> is the first price for the day</li>
+      <li><code>volume</code> is the number of stocks traded</li>
+      <li><code>adj*</code> columns are adjusted prices for stock splits/dividend disbursements</li>
+      </ul>
+      <p><img src="img/intro-finance_7_1.png" /></p>
+      <style type="text/css">
+      .tg  {border-collapse:collapse;border-spacing:0;}
+      .tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+      .tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+      .tg .tg-ng9p{background-color:#fffff8;color:#002b36;text-align:center;vertical-align:top}
+      .tg .tg-y8gt{background-color:#002b36;color:#fffff8;text-align:center;vertical-align:top}
+      </style>
+      <table class="tg" style="margin-left:150px;">
+      <tr>
+      <th class="tg-y8gt">
+      Date
+      </th>
+      <th class="tg-y8gt">
+      AAPL
+      </th>
+      <th class="tg-y8gt">
+      GOOG
+      </th>
+      <th class="tg-y8gt">
+      IBM
+      </th>
+      <th class="tg-y8gt">
+      MSFT
+      </th>
+      <th class="tg-y8gt">
+      TSLA
+      </th>
+      </tr>
+      <tr>
+      <td class="tg-y8gt">
+      2020-01-16
+      </td>
+      <td class="tg-ng9p">
+      315.24
+      </td>
+      <td class="tg-ng9p">
+      1451.7
+      </td>
+      <td class="tg-ng9p">
+      137.98
+      </td>
+      <td class="tg-ng9p">
+      166.17
+      </td>
+      <td class="tg-ng9p">
+      513.49
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-y8gt">
+      2020-01-17
+      </td>
+      <td class="tg-ng9p">
+      318.73
+      </td>
+      <td class="tg-ng9p">
+      1480.39
+      </td>
+      <td class="tg-ng9p">
+      138.31
+      </td>
+      <td class="tg-ng9p">
+      167.1
+      </td>
+      <td class="tg-ng9p">
+      510.5
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-y8gt">
+      2020-01-21
+      </td>
+      <td class="tg-ng9p">
+      316.57
+      </td>
+      <td class="tg-ng9p">
+      1484.4
+      </td>
+      <td class="tg-ng9p">
+      139.17
+      </td>
+      <td class="tg-ng9p">
+      166.5
+      </td>
+      <td class="tg-ng9p">
+      547.2
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-y8gt">
+      2020-01-22
+      </td>
+      <td class="tg-ng9p">
+      317.7
+      </td>
+      <td class="tg-ng9p">
+      1485.95
+      </td>
+      <td class="tg-ng9p">
+      143.89
+      </td>
+      <td class="tg-ng9p">
+      165.7
+      </td>
+      <td class="tg-ng9p">
+      569.56
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-y8gt">
+      2020-01-23
+      </td>
+      <td class="tg-ng9p">
+      319.23
+      </td>
+      <td class="tg-ng9p">
+      1486.65
+      </td>
+      <td class="tg-ng9p">
+      142.87
+      </td>
+      <td class="tg-ng9p">
+      166.72
+      </td>
+      <td class="tg-ng9p">
+      572.2
+      </td>
+      </tr>
+      </table>
+      <p><img src="img/intro-finance_10_1.png" /></p>
+      <h3 id="key-concepts">Key concepts</h3>
+      <ul>
+      <li><p><em>Return</em> <br> <span class="math display">\[R(S, t, t_0) = \dfrac{S_t - S_0}{S_0} = \dfrac{S_t}{S_0} - 1\]</span></p></li>
+      <li><p><em>Volatility</em> <br> <span class="math display">\[\sigma = \sqrt{\frac{\sum\limits_{i=0}^t (S_i -\mu)^2}{t}}\]</span> <br> Where stock <span class="math inline">\(S_t\)</span> is the price of the stock at time <span class="math inline">\(t\)</span> and <span class="math inline">\(\mu\)</span> is the mean return.</p></li>
+      </ul>
+      <style type="text/css">
+      .tg  {border-collapse:collapse;border-spacing:0;}
+      .tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+      .tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+      .tg .tg-iamc{background-color:#fffff8;color:#002b36;border-color:#000000;text-align:center;vertical-align:top}
+      .tg .tg-y8gt{background-color:#002b36;color:#fffff8;text-align:center;vertical-align:top}
+      </style>
+      <table class="tg" style="margin-left:250px;">
+      <tr>
+      <th class="tg-y8gt">
+      </th>
+      <th class="tg-y8gt">
+      Std<br>
+      </th>
+      </tr>
+      <tr>
+      <td class="tg-y8gt">
+      AAPL
+      </td>
+      <td class="tg-iamc">
+      48.92
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-y8gt">
+      GOOG
+      </td>
+      <td class="tg-iamc">
+      233.32
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-y8gt">
+      IBM
+      </td>
+      <td class="tg-iamc">
+      10.55
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-y8gt">
+      MSFT
+      </td>
+      <td class="tg-iamc">
+      34.19
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-y8gt">
+      TSLA
+      </td>
+      <td class="tg-iamc">
+      61.32
+      </td>
+      </tr>
+      </table>
+      <p>Lets look at the daily returns for each symbol.</p>
+      <style type="text/css">
+      .tg  {border-collapse:collapse;border-spacing:0;}
+      .tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+      .tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+      .tg .tg-6uqc{background-color:#002b36;color:#fffff8;border-color:inherit;text-align:center;vertical-align:top}
+      .tg .tg-664r{background-color:#fffff8;border-color:inherit;text-align:center;vertical-align:top}
+      </style>
+      <table class="tg" style="margin-left:150px;">
+      <tr>
+      <th class="tg-6uqc">
+      Date
+      </th>
+      <th class="tg-6uqc">
+      AAPL
+      </th>
+      <th class="tg-6uqc">
+      GOOG
+      </th>
+      <th class="tg-6uqc">
+      IBM
+      </th>
+      <th class="tg-6uqc">
+      MSFT
+      </th>
+      <th class="tg-6uqc">
+      TSLA
+      </th>
+      </tr>
+      <tr>
+      <td class="tg-6uqc">
+      2020-01-16
+      </td>
+      <td class="tg-664r">
+      0.0125
+      </td>
+      <td class="tg-664r">
+      0.0087
+      </td>
+      <td class="tg-664r">
+      0.0099
+      </td>
+      <td class="tg-664r">
+      0.0183
+      </td>
+      <td class="tg-664r">
+      -0.0097
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-6uqc">
+      2020-01-17
+      </td>
+      <td class="tg-664r">
+      0.0111
+      </td>
+      <td class="tg-664r">
+      0.0198
+      </td>
+      <td class="tg-664r">
+      0.0024
+      </td>
+      <td class="tg-664r">
+      0.0056
+      </td>
+      <td class="tg-664r">
+      -0.0058
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-6uqc">
+      2020-01-21
+      </td>
+      <td class="tg-664r">
+      -0.0068
+      </td>
+      <td class="tg-664r">
+      0.0027
+      </td>
+      <td class="tg-664r">
+      0.0062
+      </td>
+      <td class="tg-664r">
+      -0.0036
+      </td>
+      <td class="tg-664r">
+      0.0719
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-6uqc">
+      2020-01-22
+      </td>
+      <td class="tg-664r">
+      0.0036
+      </td>
+      <td class="tg-664r">
+      0.0010
+      </td>
+      <td class="tg-664r">
+      0.0339
+      </td>
+      <td class="tg-664r">
+      -0.0048
+      </td>
+      <td class="tg-664r">
+      0.0409
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-6uqc">
+      2020-01-23
+      </td>
+      <td class="tg-664r">
+      0.0048
+      </td>
+      <td class="tg-664r">
+      0.0005
+      </td>
+      <td class="tg-664r">
+      -0.0071
+      </td>
+      <td class="tg-664r">
+      0.0062
+      </td>
+      <td class="tg-664r">
+      0.0046
+      </td>
+      </tr>
+      </table>
+      <p><img src="img/intro-finance_15_1.png" /></p>
+      <style type="text/css">
+      .tg  {border-collapse:collapse;border-spacing:0;}
+      .tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+      .tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+      .tg .tg-ng9p{background-color:#fffff8;color:#002b36;text-align:center;vertical-align:top}
+      .tg .tg-y8gt{background-color:#002b36;color:#fffff8;text-align:center;vertical-align:top}
+      </style>
+      <table class="tg" style=" margin-left:250px;">
+      <tr>
+      <th class="tg-y8gt">
+      </th>
+      <th class="tg-y8gt">
+      Std
+      </th>
+      </tr>
+      <tr>
+      <td class="tg-y8gt">
+      AAPL
+      </td>
+      <td class="tg-ng9p">
+      0.0156
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-y8gt">
+      GOOG
+      </td>
+      <td class="tg-ng9p">
+      0.0151
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-y8gt">
+      IBM
+      </td>
+      <td class="tg-ng9p">
+      0.0129
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-y8gt">
+      MSFT
+      </td>
+      <td class="tg-ng9p">
+      0.0147
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-y8gt">
+      TSLA
+      </td>
+      <td class="tg-ng9p">
+      0.0285
+      </td>
+      </tr>
+      </table>
+      <h2 id="indeces-and-etfs">Indeces and ETFs</h2>
+      <h3 id="index">Index</h3>
+      <ul>
+      <li>An <a href="https://www.investopedia.com/terms/i/index.asp">index</a> consists of a hypothetical portfolio of securities representing a particular market or a segment of it.</li>
+      <li>Common examples: S&amp;P500, FTSE100, Russell 2000, US Aggregate Bond Index.</li>
+      <li>S&amp;P500 is a commonly used benchmark for the stock market. It aggregates 500 of the largest US publicly traded companies weighted by market cap. It includes 75% of the total stocks traded in the US.</li>
+      </ul>
+      <h3 id="etf">ETF</h3>
+      <ul>
+      <li>An <a href="https://www.investopedia.com/terms/e/etf.asp">exchange traded fund</a> is is a marketable security that tracks a stock index, a commodity, bonds, or a basket of assets.</li>
+      <li>Benefits: Low fees, lower taxes.</li>
+      <li>They allow investors to trade a portfolio of stocks with lower capital margin.</li>
+      <li>Common examples: SPDR (<em>Spider</em>, tracks S&amp;P500), VOO (Vanguard S&amp;P500 Index Fund), iShares Russell 2000, BLV (Vanguard Long-Term Bond)</li>
+      </ul>
+      <h2 id="options">2. Options</h2>
+      <p>From <a href="https://www.investopedia.com/terms/o/option.asp">Investopedia</a></p>
+      <ul>
+      <li>Options are financial derivatives that give buyers the right, but not obligation, to buy or sell an underlying asset at an agreed upon price during a certain period of time.</li>
+      <li>Two exercise types: <em>European</em> (may exercise <strong>at</strong> expiration) and <em>American</em> (may exercise at any moment <strong>prior</strong> to expiration)</li>
+      <li>Basic options come in two types: <em>Calls</em> and <em>Puts</em></li>
+      <li>Calls and puts form the basis for a wide range of option strategies designed for hedging, protection and speculation.</li>
+      <li>They are also used as a leveraging tool. Option contracts represent (in general) 100 shares of the underlying stock while costing only a fraction of the price.</li>
+      <li>For more information on options, a good source is Natenberg’s <em>Option Volatility and Pricing</em>. Also, Hull’s <em>Options, Futures, and Other Derivatives</em> is a comprehensive textbook on the subject of financial derivatives.</li>
+      </ul>
+      <p>Option contracts specify the following parts:</p>
+      <p><span class="math inline">\(S\)</span> - Underlying asset<br />
+      <span class="math inline">\(K\)</span> - Strike price<br />
+      <span class="math inline">\(\text{Expiration}\)</span> - Days to expiration (dte)<br />
+      <span class="math inline">\(\text{Price}\)</span> - Price of the option, also called <strong>premium</strong></p>
+      <h3 id="key-concepts-1">Key concepts</h3>
+      <ul>
+      <li><strong>OTM</strong>, Out of the money : <span class="math inline">\(K &lt; S_t\)</span> for puts, <span class="math inline">\(K &gt; S_t\)</span> for calls</li>
+      <li><strong>ATM</strong>, At the money : When <span class="math inline">\(K \approx S_t\)</span></li>
+      <li><strong>ITM</strong>, In the money : <span class="math inline">\(K &gt; S_t\)</span> for puts, <span class="math inline">\(K &lt; S_t\)</span> for calls</li>
+      <li>Cash-settled options are payed in cash, no physical delivery of the underlying asset takes place. The amount payed is the difference between the strike price of the option and the value of the asset at exercise date.</li>
+      </ul>
+      <h3 id="calls">Calls</h3>
+      <ul>
+      <li>Give the bearer the right to <em>buy</em> the underlying asset at a given date for an agreed upon price.</li>
+      <li>Can be thought of as an insurance against <em>asset price increases</em>. <br> <br> <span class="math display">\[\text{Payoff} \equiv max(S_t - K, 0)\]</span> <br> <span class="math display">\[\text{Profit} \equiv max(S_t - K, 0) - C(K, t, t_0)\]</span> <br> Where <span class="math inline">\(S_t\)</span> is the price of the asset at the day of expiration <span class="math inline">\(t\)</span> and <span class="math inline">\(C(K, t, t_0)\)</span> is the premium payed for the call purchased at time <span class="math inline">\(t_0\)</span> with strike price <span class="math inline">\(K\)</span>.</li>
+      </ul>
+      <p><img src="img/intro-finance_23_0.png" /></p>
+      <h3 id="puts">Puts</h3>
+      <ul>
+      <li>Give the bearer the right to <em>sell</em> the underlying asset at a given date for an agreed upon price.</li>
+      <li>Can be thought of as an insurance against <em>asset price decreases</em>. <br> <br> <span class="math display">\[\text{Payoff} \equiv max(K - S_t, 0)\]</span> <br> <span class="math display">\[\text{Profit} \equiv max(K - S_t, 0) - P(K, t, t_0)\]</span> <br> Where <span class="math inline">\(S_t\)</span> is the price of the asset at the day of expiration <span class="math inline">\(t\)</span> and <span class="math inline">\(P(K, t, t_0)\)</span> is the premium payed for the put purchased at time <span class="math inline">\(t_0\)</span> with strike price <span class="math inline">\(K\)</span>.</li>
+      </ul>
+      <p><img src="img/intro-finance_26_0.png" /></p>
+      <h2 id="selling-options">Selling options</h2>
+      <ul>
+      <li>A trader can choose to sell options, also referred as <strong>writing</strong> options.</li>
+      <li>Investor earns the option premium and must settle at expiration date or cover the position by buying the contract.</li>
+      </ul>
+      <h3 id="selling-calls">Selling calls</h3>
+      <ul>
+      <li>Also known as <em>naked call selling</em></li>
+      <li>Exposed to price increases of the underlying. Unlimited risk. <br> <br> <span class="math display">\[\text{Profit} \equiv C(K, t, t_0) - max(S_t - K, 0)\]</span></li>
+      </ul>
+      <p><img src="img/intro-finance_30_0.png" /></p>
+      <h3 id="selling-puts">Selling puts</h3>
+      <ul>
+      <li>Less risky than selling calls.</li>
+      <li>Exposed to price decreases of the underlying.</li>
+      <li>Max loss capped at <span class="math inline">\(K - P\)</span>. <br> <br> <span class="math display">\[\text{Profit} \equiv P(K, t, t_0) - max(K - S_t, 0)\]</span></li>
+      </ul>
+      <p><img src="img/intro-finance_33_0.png" /></p>
+      <style type="text/css">
+      .tg  {border-collapse:collapse;border-spacing:0;}
+      .tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+      .tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+      .tg .tg-ng9p{background-color:#fffff8;color:#002b36;text-align:center;vertical-align:top}
+      .tg .tg-ttiq{background-color:#002b36;color:#fffff8;border-color:#fffff8;text-align:center;vertical-align:top}
+      </style>
+      <table class="tg">
+      <tr>
+      <th class="tg-ttiq">
+      </th>
+      <th class="tg-ttiq">
+      underlying
+      </th>
+      <th class="tg-ttiq">
+      underlying_last
+      </th>
+      <th class="tg-ttiq">
+      optionroot
+      </th>
+      <th class="tg-ttiq">
+      type
+      </th>
+      <th class="tg-ttiq">
+      expiration
+      </th>
+      <th class="tg-ttiq">
+      quotedate
+      </th>
+      <th class="tg-ttiq">
+      strike
+      </th>
+      <th class="tg-ttiq">
+      last
+      </th>
+      <th class="tg-ttiq">
+      bid
+      </th>
+      <th class="tg-ttiq">
+      ask
+      </th>
+      <th class="tg-ttiq">
+      openinterest
+      </th>
+      <th class="tg-ttiq">
+      impliedvol
+      </th>
+      <th class="tg-ttiq">
+      delta
+      </th>
+      <th class="tg-ttiq">
+      gamma
+      </th>
+      <th class="tg-ttiq">
+      theta
+      </th>
+      <th class="tg-ttiq">
+      vega
+      </th>
+      </tr>
+      <tr>
+      <td class="tg-ttiq">
+      13328880
+      </td>
+      <td class="tg-ng9p">
+      SPX
+      </td>
+      <td class="tg-ng9p">
+      2257.83
+      </td>
+      <td class="tg-ng9p">
+      SPX170120C00100000
+      </td>
+      <td class="tg-ng9p">
+      call
+      </td>
+      <td class="tg-ng9p">
+      2017-01-20
+      </td>
+      <td class="tg-ng9p">
+      2017-01-03
+      </td>
+      <td class="tg-ng9p">
+      100.0
+      </td>
+      <td class="tg-ng9p">
+      2161.5
+      </td>
+      <td class="tg-ng9p">
+      2154.3
+      </td>
+      <td class="tg-ng9p">
+      2158.7
+      </td>
+      <td class="tg-ng9p">
+      5615
+      </td>
+      <td class="tg-ng9p">
+      0.1214
+      </td>
+      <td class="tg-ng9p">
+      1.0
+      </td>
+      <td class="tg-ng9p">
+      0.0
+      </td>
+      <td class="tg-ng9p">
+      -1.0239
+      </td>
+      <td class="tg-ng9p">
+      0.0
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-ttiq">
+      13328881
+      </td>
+      <td class="tg-ng9p">
+      SPX
+      </td>
+      <td class="tg-ng9p">
+      2257.83
+      </td>
+      <td class="tg-ng9p">
+      SPX170120C00200000
+      </td>
+      <td class="tg-ng9p">
+      call
+      </td>
+      <td class="tg-ng9p">
+      2017-01-20
+      </td>
+      <td class="tg-ng9p">
+      2017-01-03
+      </td>
+      <td class="tg-ng9p">
+      200.0
+      </td>
+      <td class="tg-ng9p">
+      2060.95
+      </td>
+      <td class="tg-ng9p">
+      2054.4
+      </td>
+      <td class="tg-ng9p">
+      2058.8
+      </td>
+      <td class="tg-ng9p">
+      6355
+      </td>
+      <td class="tg-ng9p">
+      0.1214
+      </td>
+      <td class="tg-ng9p">
+      1.0
+      </td>
+      <td class="tg-ng9p">
+      0.0
+      </td>
+      <td class="tg-ng9p">
+      -2.0479
+      </td>
+      <td class="tg-ng9p">
+      0.0
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-ttiq">
+      13328882
+      </td>
+      <td class="tg-ng9p">
+      SPX
+      </td>
+      <td class="tg-ng9p">
+      2257.83
+      </td>
+      <td class="tg-ng9p">
+      SPX170120C00300000
+      </td>
+      <td class="tg-ng9p">
+      call
+      </td>
+      <td class="tg-ng9p">
+      2017-01-20
+      </td>
+      <td class="tg-ng9p">
+      2017-01-03
+      </td>
+      <td class="tg-ng9p">
+      300.0
+      </td>
+      <td class="tg-ng9p">
+      1960.45
+      </td>
+      <td class="tg-ng9p">
+      1954.4
+      </td>
+      <td class="tg-ng9p">
+      1958.8
+      </td>
+      <td class="tg-ng9p">
+      2000
+      </td>
+      <td class="tg-ng9p">
+      0.1214
+      </td>
+      <td class="tg-ng9p">
+      1.0
+      </td>
+      <td class="tg-ng9p">
+      0.0
+      </td>
+      <td class="tg-ng9p">
+      -3.0718
+      </td>
+      <td class="tg-ng9p">
+      0.0
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-ttiq">
+      13328883
+      </td>
+      <td class="tg-ng9p">
+      SPX
+      </td>
+      <td class="tg-ng9p">
+      2257.83
+      </td>
+      <td class="tg-ng9p">
+      SPX170120C00400000
+      </td>
+      <td class="tg-ng9p">
+      call
+      </td>
+      <td class="tg-ng9p">
+      2017-01-20
+      </td>
+      <td class="tg-ng9p">
+      2017-01-03
+      </td>
+      <td class="tg-ng9p">
+      400.0
+      </td>
+      <td class="tg-ng9p">
+      1760.55
+      </td>
+      <td class="tg-ng9p">
+      1854.6
+      </td>
+      <td class="tg-ng9p">
+      1858.9
+      </td>
+      <td class="tg-ng9p">
+      25
+      </td>
+      <td class="tg-ng9p">
+      0.1214
+      </td>
+      <td class="tg-ng9p">
+      1.0
+      </td>
+      <td class="tg-ng9p">
+      0.0
+      </td>
+      <td class="tg-ng9p">
+      -4.0957
+      </td>
+      <td class="tg-ng9p">
+      0.0
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-ttiq">
+      13328884
+      </td>
+      <td class="tg-ng9p">
+      SPX
+      </td>
+      <td class="tg-ng9p">
+      2257.83
+      </td>
+      <td class="tg-ng9p">
+      SPX170120C00500000
+      </td>
+      <td class="tg-ng9p">
+      call
+      </td>
+      <td class="tg-ng9p">
+      2017-01-20
+      </td>
+      <td class="tg-ng9p">
+      2017-01-03
+      </td>
+      <td class="tg-ng9p">
+      500.0
+      </td>
+      <td class="tg-ng9p">
+      1749.33
+      </td>
+      <td class="tg-ng9p">
+      1754.6
+      </td>
+      <td class="tg-ng9p">
+      1758.9
+      </td>
+      <td class="tg-ng9p">
+      3813
+      </td>
+      <td class="tg-ng9p">
+      0.1214
+      </td>
+      <td class="tg-ng9p">
+      1.0
+      </td>
+      <td class="tg-ng9p">
+      0.0
+      </td>
+      <td class="tg-ng9p">
+      -5.1197
+      </td>
+      <td class="tg-ng9p">
+      0.0
+      </td>
+      </tr>
+      </table>
+      <ul>
+      <li><code>optionroot</code> is the name of the contract (think <code>id</code>)</li>
+      <li><code>underlying_last</code> is the last seen price for the underlying</li>
+      <li><code>type</code> either call or put</li>
+      <li><code>strike</code> is the strike price</li>
+      <li><code>bid</code> price offered by the market maker for the contract</li>
+      <li><code>ask</code> price wanted by the market maker for the contract</li>
+      <li><code>volume</code> the number of contracts traded that day</li>
+      <li><code>openinterest</code> the total number of contracts open since it started trading</li>
+      </ul>
+      <p><label for="img1" class="margin-toggle">⊕</label> <input type="checkbox" id="img1" class="margin-toggle"> <span class="marginnote">Number of option contracts.</span><img src="img/intro-finance_37_1.png" /></p>
+      <h2 id="options-pricing">Options pricing</h2>
+      <p>Options and financial derivatives in general are notoriously difficult to price.<br />
+      They are related to the volatility of the underlying; that is, options for <em>low volatility</em> assets are <em>less expensive</em> than their counterparts, all else being equal. They also suffer time decay. As they approach expiration, OTM options tend to 0 and ATM and ITM options tend to <span class="math inline">\(S_t\)</span>.</p>
+      <h2 id="vix-index">VIX index</h2>
+      <p>Market volatility is measured by the <a href="https://www.investopedia.com/articles/active-trading/070213/tracking-volatility-how-vix-calculated.asp">CBOE VIX index</a>. It’s a benchmark index designed specifically to track S&amp;P 500 volatility.<br />
+      Calculates volatility by averaging the weighted prices of OTM puts and calls using options that expire in 16 and 44 days.</p>
+      <p><span class="math display">\[\text{VIX} = 100 * \sigma\]</span></p>
+      <p><img src="img/intro-finance_41_1.png" /></p>
+      <style type="text/css">
+      .tg  {border-collapse:collapse;border-spacing:0;}
+      .tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+      .tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+      .tg .tg-ng9p{background-color:#fffff8;color:#002b36;text-align:center;vertical-align:top}
+      .tg .tg-y8gt{background-color:#002b36;color:#fffff8;text-align:center;vertical-align:top}
+      .tg .tg-lkkz{background-color:#fffff8;border-color:#000000;text-align:center;vertical-align:top}
+      </style>
+      <table class="tg" style="margin-left:250px;">
+      <tr>
+      <th class="tg-y8gt">
+      Date<br>
+      </th>
+      <th class="tg-y8gt">
+      Price
+      </th>
+      </tr>
+      <tr>
+      <td class="tg-ng9p">
+      1990-01-02
+      </td>
+      <td class="tg-lkkz">
+      359.69
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-ng9p">
+      1990-01-03
+      </td>
+      <td class="tg-lkkz">
+      358.76
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-ng9p">
+      1990-01-04
+      </td>
+      <td class="tg-lkkz">
+      355.66
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-ng9p">
+      1990-01-05
+      </td>
+      <td class="tg-lkkz">
+      352.20
+      </td>
+      </tr>
+      <tr>
+      <td class="tg-ng9p">
+      1990-01-08
+      </td>
+      <td class="tg-lkkz">
+      353.79
+      </td>
+      </tr>
+      </table>
+      <p><img src="img/intro-finance_43_1.png" /></p>
+      <h2 id="option-combinations">3. Option combinations</h2>
+      <ul>
+      <li>Options trading strategies involve buying and selling a combination of options.</li>
+      <li>Common ones include: straddles, strangles, calendar spreads, butterflies, condors.</li>
+      <li>An approachable introduction to the subject is Passarelli’s <em>Trading Options Greeks</em>. For a more in depth treatment, see <em>Volatility trading</em> by Sinclair.</li>
+      </ul>
+      <h3 id="straddle">Straddle</h3>
+      <ul>
+      <li>Buy <span class="math inline">\(n\)</span> calls and <span class="math inline">\(n\)</span> puts with the same expiration and strike price close to the underlying’s spot price</li>
+      <li>This strategy is direction indifferent, the trader expects movement in the underlying but is indifferent as to whether that movement is up or down.</li>
+      <li>This is an example of being <em>long volatility</em>. The trader is <em>buying volatility</em>. <br> <br> <span class="math display">\[\text{Profit} \equiv max(K - S_t, S_t - K, 0) - P(K, t, t_0) - C(K, t, t_0)\]</span></li>
+      </ul>
+      <p><img src="img/intro-finance_47_0.png" /></p>
+      <p>In the following chart, we buy straddles on SPX using options with 60 dte (with a tolerance level of 10%) and exit the trade 2 days before expiration.</p>
+      <p><img src="img/straddle_profits.png" /></p>
+      <h3 id="strangle">Strangle</h3>
+      <ul>
+      <li>The opposite of a straddle.</li>
+      <li>Sell <span class="math inline">\(n\)</span> calls and <span class="math inline">\(n\)</span> puts with the same expiration and strike price close to the underlying’s spot price</li>
+      <li>The trader expects little or (ideally) no movement in the underlying.</li>
+      <li>This strategy profits from the premiums, with price movements in the underlying cutting into the trader’s profit.</li>
+      <li>Since the trader is selling options, there is potential for severe loss. This can be mitigated by buying out calls or puts when certain loss level is reached.</li>
+      <li>This is an example of being <em>short volatility</em>. The trader is <em>selling volatility</em>. <br> <br> <span class="math display">\[\text{Profit} \equiv P(K, t, t_0) + C(K, t, t_0) - max(K - S_t, S_t - K, 0)\]</span></li>
+      </ul>
+      <p><img src="img/intro-finance_51_0.png" /></p>
+    </article>
+  </body>
+  <script src="./js/main.js"></script>
+</html>
