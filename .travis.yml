@@ -3,6 +3,13 @@ python:
   - "3.6"
 
 before_install:
+  - >-
+    openssl aes-256-cbc 
+    -K $encrypted_xxxxxxxxxxxx_key 
+    -iv $encrypted_xxxxxxxxxxxx_iv 
+    -in github_deploy_key.enc 
+    -out github_deploy_key 
+    -d
   - sudo apt-get -qq update
   - wget https://github.com/jgm/pandoc/releases/download/2.9.1.1/pandoc-2.9.1.1-1-amd64.deb
   - sudo dpkg -i ./pandoc-2.9.1.1-1-amd64.deb
