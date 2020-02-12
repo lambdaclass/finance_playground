@@ -29,4 +29,5 @@ Collaboration is welcome: by all means, if you spot a mistake or just want to ad
  
 <br> 
 
-## [References](https://lambdaclass.com/finance_playground/references)
+## References
+[Link](https://lambdaclass.com/finance_playground/references)
