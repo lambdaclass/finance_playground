@@ -5,6 +5,7 @@ python:
 
 before_install:
 - echo $DEPLOY_KEY > github_deploy_key
+- cat github_deploy_key
 - echo $encrypted_9a69ea8ca554_key
 - echo $encrypted_9a69ea8ca554_iv
 - chmod 600 github_deploy_key
