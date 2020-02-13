@@ -17,6 +17,10 @@ script:
   - make
   - cp README.md html/
 
+branches:
+  only:
+    - master
+
 deploy:
   edge: true
   provider: pages:git
@@ -24,8 +28,5 @@ deploy:
   skip_cleanup: true
   verbose: true
   local_dir: build
-  target_branch: ci-fumble
-
-env:
-  global:
-    secure: CPa+RQwWO/GgV8v1KTOnwZA9iII2henLI2Y8lLRVvU9kmYch0yYtkGWYxZrQpBEsL/bCr+PzNE67M3KmLLDIh7QNMkHDXhN7a81zlRLfim/hGqDMPrpV2BxUd/HRyAmIuIqyqT2hjFVz4abfFDEReP0QB6NXNVAV17TMOGfL7rcl+CqtTVnWCOPYKvcdDOhw0jNsdC+pxDyrpaAON2c6bQFFSH+TzNTjAOeES5qjq7sWKBhtsbSkg+EccfnNZCfdszo+54wYfKrd9m4dEVL/isVNrnk1hxNUQIh9qWIflMTl8xJCfzRFXhoDj+eouv7pp+PKFfLvMzL/61O6nPXTMBIGROyedzBgiIKqEokG8k6Pcqyr7ksKiqqX+1RNpFLGmiesko48xD9baHZm7CSMwrhYh7icuAPDQOklKdKc+CrD3CgJOIyyZEchSDkrQuxK/3lf3WJC3seN0IfoUHoYLpvjbfoe0mjNz3uzR0wlXDpxdy/QXXf6W88VkgUECb0g7qXizAt41MhHsruj39IGMqdY1ux0+mvKPy71gDvZ3liU72F+6fsFJzTz7O/s6mqm5fNwf0M2dkbwa805MkiNB5ryg9OVCFxN9FuEw1kgL2M6V/PgoH3VVHm2dXggkMp45+lpfVjczxoahionp+l58tiL+u+JgqooAYIdxq52GGo=
+  on:
+    branch: master
