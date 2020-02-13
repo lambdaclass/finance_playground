@@ -1,27 +1,27 @@
 language: python
 
 python:
-  - "3.6"
+- '3.6'
 
 before_install:
-  - echo $encrypted_9a69ea8ca554_key
-  - echo $encrypted_9a69ea8ca554_iv
-  - openssl aes-256-cbc -v -K $encrypted_9a69ea8ca554_key -iv $encrypted_9a69ea8ca554_iv -in github_deploy_key.enc -out github_deploy_key -d
-  - chmod 600 github_deploy_key
-  - eval $(ssh-agent -s)
-  - ssh-add github_deploy_key
-  - sudo apt-get -qq update
-  - wget https://github.com/jgm/pandoc/releases/download/2.9.1.1/pandoc-2.9.1.1-1-amd64.deb
-  - sudo dpkg -i ./pandoc-2.9.1.1-1-amd64.deb
+- echo $DEPLOY_KEY > github_deploy_key
+- echo $encrypted_9a69ea8ca554_key
+- echo $encrypted_9a69ea8ca554_iv
+- chmod 600 github_deploy_key
+- eval $(ssh-agent -s)
+- ssh-add github_deploy_key
+- sudo apt-get -qq update
+- wget https://github.com/jgm/pandoc/releases/download/2.9.1.1/pandoc-2.9.1.1-1-amd64.deb
+- sudo dpkg -i ./pandoc-2.9.1.1-1-amd64.deb
 
 install:
-  - sudo apt-get install -y nodejs npm
-  - pip install pipenv
-  - pipenv install
+- sudo apt-get install -y nodejs npm
+- pip install pipenv
+- pipenv install
 
 script:
-  - make
-  - cp README.md html/
+- make
+- cp README.md html/
 
 deploy:
   provider: pages
@@ -30,3 +30,8 @@ deploy:
   local_dir: build
   on:
     branch: master
+
+env:
+  global:
+  - secure: Q/cjvT/063Bqkif58R6PaL97ZkhcwBzwpTlDaiLofhYLwG3B1lENMHhyEIFl6Bj9yOWpmmC/DQuUCLTF0tMGOaHLzOeLUCTizJzuwiwgf1OXkVgvzJ7ptmNhoe3Fdym6cijlJ/aiWKS734aDYhCwnBCvG+wCNfNLeQsCrJnYHmNe3u7pBeM7NJwcPhXr1gRc1+rark+0tY4Id+ESZUZYSymo9+dKxEk0gxkGmdCJTqyzk++m3DWYrNJTQOKA3M32u/WKpFJZ8OaKng7UCBrRxaW7rAsVPtKaOaDiuvvo8lhsqf9rjudKEFFVZnwLJAxBlQpCA2/TwE1A65EAuW2m8KD3llWIezCFpodeL28JfoPv1BxMkk9t+ocIk0HlahhjJs90yhHd9QWN8xBhBIpcZegf0uiybSyGMUzq3iD3UOVRXPHSOIAO32a1denvmgspkV/ZB8Lz1WmFo29LGwmcHfKBL6syNpMN7QxeVk6sVM4gvRDerFOrxCHF2kudMRjEwC26gLoIoL50IoIS8Z5u6k6FHnMYpZOrMxHr+hiwUZ5SCNPk+LnlfIjoKcODusAEQN/5g2C0Nu0vJlgAth+Vklr0IoHqTZSF3dgb42VZsMbeGuuVoIdnqIuOZj6rKXYQqH3W1rbpOcmef+YSBJTUbM+Vqvp8/6RTgqO2QefYCKQ=
+  - secure: djYYX+Jpt3iDGbwzR+eKuDBhNP+UscQIS3GLgVMV8ooL9L5TVab/SX3lyD9VLgOpBhtnC49WNG5f7H0Eek2q/kEXLGe5Xepr8UkmnsOYC45mhp6pDbMoW0vCawHBUbTHuUXzD83Y4o/09FEGpYU7/GLBvIbGGdlH/BCoKPI+Ii2IIdfCO9vAXzG2GsHaE0pz7ws/fYNYkmFNV6TNGeWcSmG2AxBXc15VCK+cFAtgbiA59a29QFU4LvatJ9N1pm9EM1akQ29Wtj+WQZihE7vfIpyty3qKRGOFfowACKMYk99lMPdb6Xt21PYgaMbuItoT4ex3kf10u71rJj1TE5/3oahbacIX/N0zfo9LrOfiqUGV/b9YlVNOVULMyjw/xCnX8flcQogw2KbITCa3NoRflV5lz+qphpKhtK/TGukV5n7L7TvHoNS/O3xsTJYIIutz1FUuiTTPr5UBSILHkpmoVgGQo8lVBTaRMripmfZZXJbMbFCn83bq5VQn3rey5YGnrl71Ce2YxrjvygG3NLc4hFW+N0aAKUuYKeybDraGwKoqC5nv3TM2bvEFrMA/FdmCAwPlA+7iUQoGPyeCEbFVykVPHeuxoT+hlB1JJ6OYIDDg+dFD5uTejFpyW1BjVlfMsW8r7GSHarRwng19VF0rHl/DwBH3FvNpUTeG8YYGvt8=
