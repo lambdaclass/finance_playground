@@ -1,18 +1,29 @@
-@media screen and (min-width: 786px) {
-     p {
-         width: 55%;
-    }
-     .chart-container {
-         width: 55%;
-    }
+body {
+  overflow-x: hidden;
 }
+
+body * {
+  box-sizing: border-box;
+}
+
+@media screen and (min-width: 786px) {
+  p {
+    width: 55%;
+  }
+
+  .chart-container {
+    width: 55%;
+  }
+}
+
 .first-letter {
   font-size: 55px;
   line-height: 70px;
 }
-.quotation{
+
+.quotation {
   font-size: 25px;
-  //margin: 0 auto;
+  /*margin: 0 auto;*/
   quotes: "\201C""\201D""\2018""\2019";
   padding: 10px 20px;
   line-height: 1.4;
@@ -30,6 +41,7 @@
   color: #ccc;
   font-size: 6em;
 }
+
 .quotation::after {
   content: close-quote;
   display: inline;
@@ -41,126 +53,130 @@
   color: #ccc;
   font-size: 3em;
 }
-footer{
-  margin:0;
-  font-size: 25px
+
+footer {
+  margin: 0;
+  font-size: 25px;
   text-align: right;
   font-style: italic;
 }
-li {
-  margin: 0.25em 15em 0.25em 0.25em;
-  padding: 0;
-  } 
 
-nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    padding: 2rem 0 1rem 13.5%;
-    display: flex;
-    flex-direction: column;
-    border-bottom: 1px solid transparent;
-    -webkit-transition: all 0.3s ease;
-    -moz-transition: all 0.3s ease;
-    -o-transition: all 0.3s ease;
-    transition: all 0.3s ease;
-    z-index: 99999;
-  }
-  
-  nav.sticky {
-    background: #f8f8ed;
-    border-color: #e1e0cf;
-    padding: 1rem 0 1rem 13.5%;
-  }
-  
-  nav,
-  nav ul,
-  nav a {
-    font-size: 1.3rem;
-    color: #111;
-  }
-  
-  nav * {
-    font-family: et-book, Palatino, "Palatino Linotype", "Palatino LT STD",
-      "Book Antiqua", Georgia, serif;
-  }
-  
-  nav .nav-links {
-    display: flex;
-    align-items: center;
-  }
-  
-  nav ul {
-    margin: 0;
+@media screen and (min-width: 786px) {
+  li {
+    margin: 0.25em 15em 0.25em 0.25em;
     padding: 0;
   }
-  
-  nav li {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    margin: 0 !important;
-  }
-  
-  nav li a {
-    display: inline-flex;
-    align-items: center;
-    background: none !important;
-    text-shadow: none !important;
-  }
-  
-  nav li a .text {
-    position: relative;
-  }
-  
-  nav li a .text:after {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 1px;
-    bottom: 0.35rem;
-    background: transparent;
-    left: 0;
-    -webkit-transition: all 0.3s ease;
-    -moz-transition: all 0.3s ease;
-    -o-transition: all 0.3s ease;
-    transition: all 0.3s ease;
-  }
-  
-  nav li a:hover .text:after {
-    background: #111;
-  }
-  
-  nav li ~ li:before {
-    content: "";
-    position: relative;
-    display: inline-block;
-    background: #d8d8b5;
-    width: 2.4rem;
-    height: 1px;
-    margin: 0 1rem;
-  }
-  
-  nav li span.powered {
-    margin-right: 0.4rem;
-  }
-  
-  nav svg {
-    width: 1.2rem;
-    margin-right: 0.5rem;
-    -webkit-transition: transform 0.3s ease;
-    -moz-transition: transform 0.3s ease;
-    -o-transition: transform 0.3s ease;
-    transition: transform 0.3s ease;
-  }
-  
-  nav li:hover svg {
-    transform: translateX(-0.3rem);
-  }
-  
-  nav .nav-info {
-    margin-top: 0.3rem;
-    opacity: 0.5;
-  }
-  
+}
+
+nav {
+  position: fixed;
+  width: 84%;
+  padding-left: 8%;
+  padding-right: 8%;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid transparent;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  z-index: 99999;
+}
+
+nav.sticky {
+  background: #f8f8ed;
+  border-color: #e1e0cf;
+  padding: 1rem 0 1rem 13.5%;
+}
+
+nav,
+nav ul,
+nav a {
+  font-size: 1.3rem;
+  color: #111;
+}
+
+nav * {
+  font-family: et-book, Palatino, "Palatino Linotype", "Palatino LT STD",
+    "Book Antiqua", Georgia, serif;
+}
+
+nav .nav-links {
+  display: flex;
+  align-items: center;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+}
+
+nav li {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  margin: 0 !important;
+}
+
+nav li a {
+  display: inline-flex;
+  align-items: center;
+  background: none !important;
+  text-shadow: none !important;
+}
+
+nav li a .text {
+  position: relative;
+}
+
+nav li a .text:after {
+  width: 100%;
+  content: "";
+  position: absolute;
+  height: 1px;
+  bottom: 0.35rem;
+  background: transparent;
+  left: 0;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+nav li a:hover .text:after {
+  background: #111;
+}
+
+nav li~li:before {
+  content: "";
+  position: relative;
+  display: inline-block;
+  background: #d8d8b5;
+  width: 2.4rem;
+  height: 1px;
+  margin: 0 1rem;
+}
+
+nav li span.powered {
+  margin-right: 0.4rem;
+}
+
+nav svg {
+  width: 1.2rem;
+  margin-right: 0.5rem;
+  -webkit-transition: transform 0.3s ease;
+  -moz-transition: transform 0.3s ease;
+  -o-transition: transform 0.3s ease;
+  transition: transform 0.3s ease;
+}
+
+nav li:hover svg {
+  transform: translateX(-0.3rem);
+}
+
+nav .nav-info {
+  margin-top: 0.3rem;
+  opacity: 0.5;
+}
