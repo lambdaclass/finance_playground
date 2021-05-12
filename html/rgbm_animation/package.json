@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "static-eval": ">=2.0.0",
-    "chart.js": "^2.9.3",
+    "chart.js": "^2.9.4",
     "cwise": "^1.0.10",
     "ndarray": "^1.0.18",
     "ndarray-ops": "^1.2.2"
