@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  push:
+    branches: [master, main]
+  pull_request:
+    branches: [master, main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v4
+
+      - name: Set up Python
+        run: uv python install 3.11
+
+      - name: Install dependencies
+        run: uv sync
+
+      - name: Validate notebook JSON
+        run: |
+          find notebooks -name '*.ipynb' | while read nb; do
+            echo "Validating $nb..."
+            python -c "import json; json.load(open('$nb'))" || exit 1
+          done
+          echo "All notebooks are valid JSON."

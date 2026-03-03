@@ -93,3 +93,6 @@ target/
 
 # JS dependencies
 node_modules/
+
+# uv
+.venv/
