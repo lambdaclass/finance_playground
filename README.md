@@ -63,10 +63,6 @@ Each topic lives in its own directory under `research/` with a `run.py` that rep
 - [Soy Futures Forecasting](research/soy_futures_forecasting/) — 2019 Metadata competition (3rd place). ARIMA, Prophet, Bayesian AR, and BSTS models.
 - [Rainfall Forecasting](research/rainfall_forecasting/) — 2020 Metadata competition. LSTM, wavelet, and correlation analysis.
 
-### Archived
-
-- [Archive](archive/) — Notebooks that require unavailable private data or API keys.
-
 <br>
 
 ## References
