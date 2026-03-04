@@ -90,6 +90,10 @@ target/
 
 # direnv
 .envrc
+.direnv/
+
+# Nix
+result
 
 # JS dependencies
 node_modules/

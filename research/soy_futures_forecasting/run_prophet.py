@@ -4,8 +4,6 @@
 import os
 import sys
 import warnings
-from datetime import datetime
-
 warnings.filterwarnings("ignore")
 
 import matplotlib
@@ -28,25 +26,18 @@ apply_style()
 
 
 def load_data():
-    date_parser = lambda x: datetime.strptime(x, "%d/%m/%Y 12:00:00 a.m.")
-    df = pd.read_csv(
-        os.path.join(DATA, "datasetRofex2.csv"),
-        parse_dates=["Fecha"],
-        index_col="Fecha",
-        date_parser=date_parser,
-    )
+    df = pd.read_csv(os.path.join(DATA, "datasetRofex2.csv"))
+    df["Fecha"] = pd.to_datetime(df["Fecha"].str.replace(r" 12:00:00 a\.m\.", "", regex=True), format="%d/%m/%Y")
+    df = df.set_index("Fecha")
     df["retorno"] = df["Cierre"].pct_change()
     return df
 
 
 def load_futures():
-    date_parser = lambda x: datetime.strptime(x, "%d/%m/%Y 12:00:00 a.m.")
-    return pd.read_csv(
-        os.path.join(DATA, "Futuros.csv"),
-        parse_dates=["Fecha"],
-        index_col="Fecha",
-        date_parser=date_parser,
-    )
+    df = pd.read_csv(os.path.join(DATA, "Futuros.csv"))
+    df["Fecha"] = pd.to_datetime(df["Fecha"].str.replace(r" 12:00:00 a\.m\.", "", regex=True), format="%d/%m/%Y")
+    df = df.set_index("Fecha")
+    return df
 
 
 def AIC(ts, forecast, k):

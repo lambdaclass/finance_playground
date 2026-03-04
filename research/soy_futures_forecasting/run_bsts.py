@@ -11,8 +11,6 @@ Time Series" (2014).
 import os
 import sys
 import warnings
-from datetime import datetime
-
 warnings.filterwarnings("ignore")
 
 import matplotlib
@@ -35,13 +33,9 @@ apply_style()
 
 
 def load_data():
-    date_parser = lambda x: datetime.strptime(x, "%d/%m/%Y 12:00:00 a.m.")
-    df = pd.read_csv(
-        os.path.join(DATA, "datasetRofex2.csv"),
-        parse_dates=["Fecha"],
-        index_col="Fecha",
-        date_parser=date_parser,
-    )
+    df = pd.read_csv(os.path.join(DATA, "datasetRofex2.csv"))
+    df["Fecha"] = pd.to_datetime(df["Fecha"].str.replace(r" 12:00:00 a\.m\.", "", regex=True), format="%d/%m/%Y")
+    df = df.set_index("Fecha")
     return df
 
 
@@ -80,6 +74,9 @@ def main():
 
     print("  Loading data...")
     df = load_data()
+    # TFP STS requires regularly spaced observations; resample to business-day
+    # frequency, forward-filling gaps (holidays, etc.)
+    df = df.asfreq("B").ffill()
     steps = 200
     last_day = df.index[-1]
     forecast_period = pd.date_range(start=last_day + pd.DateOffset(1), periods=steps, freq="B")

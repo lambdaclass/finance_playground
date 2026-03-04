@@ -18,18 +18,26 @@ Collaboration is welcome: by all means, if you spot a mistake or just want to ad
 
 ## Setup
 
-Requires Python >= 3.11. We use [uv](https://docs.astral.sh/uv/) for dependency management.
+Requires Python >= 3.11. We use [Nix](https://nixos.org/) for the dev environment and [uv](https://docs.astral.sh/uv/) for Python dependencies.
 
 ```bash
-# Install uv (if you haven't already)
-curl -LsSf https://astral.sh/uv/install.sh | sh
+# Enter the dev shell (provides Python 3.13, uv, make)
+nix develop
 
 # Install core dependencies
-uv sync
+make setup
 
 # Install competition dependencies (ML, Bayesian, deep learning)
-uv sync --extra competitions
+make sync-all
+
+# Run all self-contained analyses
+make run
+
+# Compile-check all Python files
+make check
 ```
+
+Without Nix, install Python >= 3.11 and uv manually, then use `uv sync` / `uv sync --extra competitions`.
 
 <br>
 

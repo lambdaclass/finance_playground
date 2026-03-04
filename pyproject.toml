@@ -20,10 +20,10 @@ competitions = [
     "pmdarima",
     # Deep learning
     "tensorflow>=2.15",
-    "tensorflow-probability",
+    "tensorflow-probability[tf]",
     # Bayesian
     "pymc>=5",
-    "arviz",
+    "arviz<1.0",
     # Prophet
     "prophet>=1.1",
     # GARCH

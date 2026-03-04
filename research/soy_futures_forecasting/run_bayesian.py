@@ -8,8 +8,6 @@ using PyMC for MCMC inference.
 import os
 import sys
 import warnings
-from datetime import datetime
-
 warnings.filterwarnings("ignore")
 
 import matplotlib
@@ -32,13 +30,9 @@ apply_style()
 
 
 def load_data():
-    date_parser = lambda x: datetime.strptime(x, "%d/%m/%Y 12:00:00 a.m.")
-    df = pd.read_csv(
-        os.path.join(DATA, "datasetRofex2.csv"),
-        parse_dates=["Fecha"],
-        index_col="Fecha",
-        date_parser=date_parser,
-    )
+    df = pd.read_csv(os.path.join(DATA, "datasetRofex2.csv"))
+    df["Fecha"] = pd.to_datetime(df["Fecha"].str.replace(r" 12:00:00 a\.m\.", "", regex=True), format="%d/%m/%Y")
+    df = df.set_index("Fecha")
     df["retorno"] = df["Cierre"].pct_change()
     return df
 
@@ -86,7 +80,7 @@ def main():
     print("  Fitting AR(1) on prices...")
     with pm.Model() as ar1:
         phi1 = pm.Normal("phi_1", mu=0, sigma=sigma_prior)
-        data = pm.AR("p", rho=[phi1], constant=True, observed=df["Cierre"])
+        data = pm.AR("p", rho=[phi1], constant=False, observed=df["Cierre"])
         trace = pm.sample(10000, tune=4000, progressbar=False)
         map_ar1 = pm.find_MAP(progressbar=False)
 
@@ -104,7 +98,7 @@ def main():
     with pm.Model() as ar2:
         phi1 = pm.Normal("phi_1", mu=0, sigma=sigma_prior)
         phi2 = pm.Normal("phi_2", mu=0, sigma=sigma_prior)
-        data = pm.AR("p", rho=[phi1, phi2], constant=True, observed=df["Cierre"])
+        data = pm.AR("p", rho=[phi1, phi2], constant=False, observed=df["Cierre"])
         trace = pm.sample(10000, tune=4000, progressbar=False)
         map_ar2 = pm.find_MAP(progressbar=False)
 
@@ -124,7 +118,7 @@ def main():
     print("  Fitting AR(1) on returns...")
     with pm.Model() as ar1_ret:
         phi1 = pm.Normal("phi_1", mu=0, sigma=sigma_prior)
-        data = pm.AR("r", rho=[phi1], constant=True, observed=df["retorno"].dropna())
+        data = pm.AR("r", rho=[phi1], constant=False, observed=df["retorno"].dropna())
         trace = pm.sample(10000, tune=4000, progressbar=False)
         map_ar1_ret = pm.find_MAP(progressbar=False)
 

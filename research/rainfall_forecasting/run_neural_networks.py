@@ -98,7 +98,7 @@ def wavelet_arima_forecast(dataset):
         print("  pywt/pmdarima not installed, skipping wavelet+ARIMA")
         return None
 
-    cA, cD = pywt.dwt(dataset, "db2")
+    cA, cD = pywt.dwt(np.array(dataset, copy=True), "db2")
     long_trend = pywt.idwt(None, cD, "db2", "smooth")
     seasonal = pywt.idwt(cA, None, "db2", "smooth")
 
@@ -141,7 +141,7 @@ def plot_wavelet_decomposition(dataset):
     except ImportError:
         return
 
-    cA, cD = pywt.dwt(dataset, "db2")
+    cA, cD = pywt.dwt(np.array(dataset, copy=True), "db2")
     long_trend = pywt.idwt(None, cD, "db2", "smooth")
     seasonal = pywt.idwt(cA, None, "db2", "smooth")
 

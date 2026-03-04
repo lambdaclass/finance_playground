@@ -21,17 +21,7 @@ jobs:
         run: uv sync
 
       - name: Compile-check all Python files
-        run: |
-          find scripts research -name '*.py' | while read f; do
-            echo "Checking $f..."
-            python -m py_compile "$f" || exit 1
-          done
-          echo "All .py files compile successfully."
+        run: make check
 
-      - name: Run self-contained ergodicity scripts
-        run: |
-          uv run python research/ergodicity_and_insurance/run.py
-          uv run python research/evaluating_gambles/run.py
-          uv run python research/cooperation_and_ergodicity/run.py
-          uv run python research/wealth_redistribution_rgbm/run.py
-          uv run python research/diversification_holy_grail/run.py
+      - name: Run self-contained scripts
+        run: make run

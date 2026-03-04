@@ -51,7 +51,7 @@ def load_blue_chip():
         index_col=["date", "symbol"],
         parse_dates=["date"],
     )
-    df["log_return"] = df.groupby("symbol")["adjClose"].apply(
+    df["log_return"] = df.groupby(level="symbol")["adjClose"].transform(
         lambda x: np.log(x) - np.log(x.shift(1))
     )
     return df
@@ -107,18 +107,18 @@ def plot_return_histograms(adrs_df):
 
 def plot_return_boxen(adrs_df):
     fig, ax = plt.subplots(figsize=(14, 8))
-    sns.boxenplot(y="symbol", x="return", data=adrs_df, orient="h", ax=ax)
+    sns.boxenplot(y="symbol", x="return", data=adrs_df.reset_index(), orient="h", ax=ax)
     ax.set_title("Daily returns per symbol", size=14)
     savefig(fig, os.path.join(CHARTS, "return_boxenplot.png"))
 
 
 def plot_large_movements(adrs_df):
-    large = adrs_df.loc[adrs_df["return"].abs() >= 30]
+    large = adrs_df.loc[adrs_df["return"].abs() >= 30].reset_index()
     if len(large) == 0:
         print("  No movements >= 30%, skipping plot")
         return
     fig, ax = plt.subplots()
-    sns.scatterplot(x=large.index, y="return", hue="symbol", data=large, ax=ax)
+    sns.scatterplot(x="date", y="return", hue="symbol", data=large, ax=ax)
     ax.set_title("Large daily returns (+/- 30%)", size=14)
     savefig(fig, os.path.join(CHARTS, "large_movements.png"))
 
@@ -147,19 +147,17 @@ def plot_volatility(adrs_df, blue_chip):
 
 def plot_outliers(adrs_df):
     adr_vol = adrs_df.groupby("symbol")["log_return"].std()
+    adr_mean = adrs_df.groupby("symbol")["log_return"].mean()
 
-    def outlier_filter(symbol_df):
-        symbol = symbol_df["symbol"].iloc[0]
-        return symbol_df.loc[
-            (symbol_df["log_return"] - symbol_df["log_return"].mean()).abs()
-            >= 3 * adr_vol[symbol]
-        ]
-
-    outliers = adrs_df.groupby("symbol").apply(outlier_filter).reset_index(level=0, drop=True)
+    outlier_rows = []
+    for symbol, group in adrs_df.groupby("symbol"):
+        mask = (group["log_return"] - adr_mean[symbol]).abs() >= 3 * adr_vol[symbol]
+        outlier_rows.append(group.loc[mask])
+    outliers = pd.concat(outlier_rows).reset_index()
 
     # Scatter plot
     fig, ax = plt.subplots()
-    sns.scatterplot(x=outliers.index, y="log_return", hue="symbol", data=outliers, ax=ax)
+    sns.scatterplot(x="date", y="log_return", hue="symbol", data=outliers, ax=ax)
     ax.set_title(r"$3\sigma$ outlier daily returns", size=14)
     savefig(fig, os.path.join(CHARTS, "outlier_returns.png"))
 
@@ -178,7 +176,9 @@ def plot_outliers(adrs_df):
 
 
 def plot_cumulative_returns(adrs_df):
-    pivoted = adrs_df.pivot(columns="symbol", values="log_return")
+    pivoted = adrs_df.pivot_table(
+        index="date", columns="symbol", values="log_return", aggfunc="first"
+    )
     fig, ax = plt.subplots()
     pivoted.cumsum().apply(np.exp).plot(ax=ax, colormap="Set1")
     ax.set_title("Cumulative log returns", size=14)
@@ -225,10 +225,12 @@ def plot_option_prices(options_df, month_str, title_month):
     start_date = month_data.index.min()
     first_day = month_data.loc[start_date]
 
-    active_calls = first_day.groupby("underlying").apply(filter_active).reset_index(level=0, drop=True)
-    active_puts = first_day.groupby("underlying").apply(
-        lambda df: filter_active(df, "put")
-    ).reset_index(level=0, drop=True)
+    active_calls = pd.concat(
+        [filter_active(g) for _, g in first_day.groupby("underlying")]
+    )
+    active_puts = pd.concat(
+        [filter_active(g, "put") for _, g in first_day.groupby("underlying")]
+    )
 
     for label, contracts_df, option_type in [
         ("calls", active_calls, "call"),
@@ -253,8 +255,9 @@ def plot_option_prices(options_df, month_str, title_month):
 # ── Yearly returns ─────────────────────────────────────────────────────
 
 def plot_mean_yearly_returns(adrs_df, blue_chip):
+    adr = adrs_df.reset_index().set_index("date")
     yearly = np.exp(
-        adrs_df.groupby("symbol")["log_return"].resample("YE", label="right").sum()
+        adr.groupby("symbol")["log_return"].resample("YE", label="right").sum()
     ) - 1
     yearly = yearly.reset_index()
     yearly["return %"] = yearly["log_return"] * 100
