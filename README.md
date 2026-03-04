@@ -56,7 +56,6 @@ Each topic lives in its own directory under `research/` with a `run.py` that rep
 
 - [Diversification — Holy Grail](research/diversification_holy_grail/) — Ray Dalio's insight on uncorrelated return streams.
 - [Argentina ADR Volatility](research/argentina_adr_volatility/) — The August 2019 crash, return distributions, and volatility smiles.
-- [Options Strategies](research/options_strategies/) — Straddle and iron butterfly backtests on SPX data.
 
 ### Competition Entries
 
