@@ -1,7 +1,7 @@
 [project]
 name = "finance-playground"
 version = "0.1.0"
-description = "Exploring and analyzing financial instruments with Jupyter notebooks"
+description = "Exploring and analyzing financial instruments"
 requires-python = ">=3.11"
 dependencies = [
     # Core
@@ -10,17 +10,14 @@ dependencies = [
     "scipy",
     "matplotlib",
     "seaborn",
-    "altair>=5",
-    "jupyterlab>=4",
-    # Data
-    "pandas-datareader",
-    "ipywidgets",
-    "tables",
+]
+
+[project.optional-dependencies]
+competitions = [
     # ML/Stats
     "scikit-learn",
     "statsmodels",
     "pmdarima",
-    "dask[dataframe]",
     # Deep learning
     "tensorflow>=2.15",
     "tensorflow-probability",
@@ -31,8 +28,12 @@ dependencies = [
     "prophet>=1.1",
     # GARCH
     "arch>=6.0",
-    # Geo
+    # Geo (rainfall forecasting)
     "geopy",
     "folium",
     "PyWavelets",
+    # HDF5
+    "tables",
+    # openpyxl for xlsx reading
+    "openpyxl",
 ]

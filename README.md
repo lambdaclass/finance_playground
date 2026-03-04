@@ -12,7 +12,7 @@ Our aim with the Finance Playground is to explore and analyze financial instrume
 
 We started this as a learning tool. As developers, we advocate a hands-on approach, we like trying out ideas and tinkering with models.
 
-Collaboration is welcome: by all means, if you spot a mistake or just want to add an interesting notebook you've been playing with, please submit a pull request to the project's [Github repository](https://github.com/lambdaclass/finance_playground/).
+Collaboration is welcome: by all means, if you spot a mistake or just want to add an interesting analysis you've been playing with, please submit a pull request to the project's [Github repository](https://github.com/lambdaclass/finance_playground/).
 
 <br>
 
@@ -24,37 +24,40 @@ Requires Python >= 3.11. We use [uv](https://docs.astral.sh/uv/) for dependency 
 # Install uv (if you haven't already)
 curl -LsSf https://astral.sh/uv/install.sh | sh
 
-# Install dependencies
+# Install core dependencies
 uv sync
 
-# Launch JupyterLab
-uv run jupyter lab
+# Install competition dependencies (ML, Bayesian, deep learning)
+uv sync --extra competitions
 ```
 
 <br>
 
-## Notebooks
+## Research
 
-- [Introduction to Finance](notebooks/intro-finance.ipynb) - Basic concepts in Finance (stocks, ETFs, options)
-- [The Holy Grail of Investing](notebooks/diversification-dalio-holy-grail.ipynb) - On Ray Dalio's insights into the benefits of diversification.
-- [Ergodicity Explorations](notebooks/ergodicity/ergodicity-explorations.ipynb) - Based on a research by Professor Ole Peters regarding insurance contracts, expectation values and time averages.
-- [Evaluating Gambles](notebooks/ergodicity/evaluating-gambles-presentation.ipynb) - Continuing on our explorations on how to evaluate gambles and optimal betting criteria.
-- [Emergence of Cooperation in Evolutionary Systems](notebooks/ergodicity/emergence-of-cooperation.ipynb) - An ergodic explanation for the advantage of cooperation under evolutionary dynamics.
-- [Re-allocating GBM wealth distribution model](notebooks/ergodicity/RGBM.ipynb) - Model simulation based on a paper by Adamou, Berman and Peters 2019.
-- [Troubled Markets](notebooks/options/0.6-troubled-markets-and-volatility.ipynb) - An exploration on Argentina's ADRs recent performance (2019).
-- [2019 Metadata Forecasting Competition](notebooks/metadata-2019/soy-price-prediction.ipynb) - Our entry to the 2019 soybean futures forecasting competition organized by Fundación Sadosky and MATBA ROFEX, which ranked third.
+Each topic lives in its own directory under `research/` with a `run.py` that reproduces all charts.
 
-### Options
-- [Exploring Visualizations](notebooks/options/0.1-exploring-visualizations.ipynb)
-- [Exploring Options Strategies](notebooks/options/0.2-exploring-options-strategies.ipynb)
-- [HDF5 Store](notebooks/options/0.3-hdf5-store.ipynb)
-- [Dask DataFrames](notebooks/options/0.4-dask-dataframes.ipynb)
-- [Iron Butterfly](notebooks/options/0.5-iron-butterfly.ipynb)
+### Ergodicity Economics
 
-### Rain Forecast
-- [Rain Forecast](notebooks/metadata-2020/rain-forecast/rain-forecast.ipynb)
-- [Neural Networks](notebooks/metadata-2020/rain-forecast/neural_networks.ipynb)
-- [Model Analysis](notebooks/metadata-2020/rain-forecast/model_analysis.ipynb)
+- [Ergodicity and Insurance](research/ergodicity_and_insurance/) — Non-ergodic dynamics, the insurance puzzle, and time-average growth rates.
+- [Evaluating Gambles](research/evaluating_gambles/) — Expected values, the St. Petersburg paradox, utility functions, and Kelly criterion.
+- [Cooperation and Ergodicity](research/cooperation_and_ergodicity/) — Why cooperation emerges under evolutionary dynamics.
+- [Wealth Redistribution (RGBM)](research/wealth_redistribution_rgbm/) — Wealth inequality simulation under re-allocating GBM.
+
+### Portfolio & Options
+
+- [Diversification — Holy Grail](research/diversification_holy_grail/) — Ray Dalio's insight on uncorrelated return streams.
+- [Argentina ADR Volatility](research/argentina_adr_volatility/) — The August 2019 crash, return distributions, and volatility smiles.
+- [Options Strategies](research/options_strategies/) — Straddle and iron butterfly backtests on SPX data.
+
+### Competition Entries
+
+- [Soy Futures Forecasting](research/soy_futures_forecasting/) — 2019 Metadata competition (3rd place). ARIMA, Prophet, Bayesian AR, and BSTS models.
+- [Rainfall Forecasting](research/rainfall_forecasting/) — 2020 Metadata competition. LSTM, wavelet, and correlation analysis.
+
+### Archived
+
+- [Archive](archive/) — Notebooks that require unavailable private data or API keys.
 
 <br>
 

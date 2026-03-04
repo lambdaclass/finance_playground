@@ -20,10 +20,18 @@ jobs:
       - name: Install dependencies
         run: uv sync
 
-      - name: Validate notebook JSON
+      - name: Compile-check all Python files
         run: |
-          find notebooks -name '*.ipynb' | while read nb; do
-            echo "Validating $nb..."
-            python -c "import json; json.load(open('$nb'))" || exit 1
+          find scripts research -name '*.py' | while read f; do
+            echo "Checking $f..."
+            python -m py_compile "$f" || exit 1
           done
-          echo "All notebooks are valid JSON."
+          echo "All .py files compile successfully."
+
+      - name: Run self-contained ergodicity scripts
+        run: |
+          uv run python research/ergodicity_and_insurance/run.py
+          uv run python research/evaluating_gambles/run.py
+          uv run python research/cooperation_and_ergodicity/run.py
+          uv run python research/wealth_redistribution_rgbm/run.py
+          uv run python research/diversification_holy_grail/run.py
